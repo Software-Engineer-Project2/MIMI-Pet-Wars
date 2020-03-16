@@ -5,7 +5,7 @@ class Customer(db.Model):
     Cid = db.Column(db.Integer, primary_key=True)
     Cname = db.Column(db.String(70), index=True, unique=True)
     Cpassword = db.Column(db.Integer, unique=True)
-    Cphone = db.Column(db.String(64, index = True))
+    Cphone = db.Column(db.String(64), index = True)
     Cemail = db.Column(db.String(255))
     Order = db.relationship('Order', backref='author', lazy='dynamic')#
     Pet = db.relationship('Pet', backref='owner', lazy='dynamic')#
@@ -107,8 +107,8 @@ class Employee(db.Model):
     EIDcard = db.Column(db.String(10), index=True)
     Epassword = db.Column(db.String(10), index=True)
     Ehiredate = db.Column(db.DateTime)
-    Ephone = db.Column(db.String(64, index = True))
-    Eemail = db.Column(db.Strin(120))
+    Ephone = db.Column(db.String(64), index = True)
+    Eemail = db.Column(db.String(120))
 
 
 class Medicine(db.Model):
