@@ -80,6 +80,7 @@ def post():
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
     form = AddProductForm()
+    if not session.get("USERNAME") is None:#
         if form.validate_on_submit():
             id = form.Gid.data
             name = form.Gname.data
@@ -93,6 +94,9 @@ def addproduct():
             flash("Add product successfully")
             return redirect(url_for('shoppage'))
         render_template('addproduct.html', title='addproduct', form=form)
+    else:
+        flash("User needs to either login or signup first")#
+        return redirect(url_for('login'))#
             
 @app.route('/order')
 def order():
