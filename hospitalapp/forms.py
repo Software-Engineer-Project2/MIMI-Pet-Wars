@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import *
+from wtforms import StringField, FileField, SubmitField, PasswordField, BooleanField, IntegerField
 from wtforms.validators import DataRequired
 
 class LoginForm(FlaskForm):
@@ -29,6 +29,17 @@ class ArrangeAppointmentForm(FlaskForm):
 	Ecost = IntegerField('Cost',validators=[DataRequired()])
 	Esubmit = SubmitField('Register')
 
+class AddProductForm(FlaskForm):
+        Gid = IntegerField('Good id', validators=[DataRequired()])
+        Gname = StringField('Good name', validators=[DataRequired()])
+        Ginfo = StringField('Information', validators=[DataRequired()])
+        Gimage = FileField('File', validators=[DataRequired()])
+        Gprice = IntegerField('Good id', validators=[DataRequired()])
+        Gadddate = DateField('AddDate',validators=[DataRequired()])
+        Gsubmit = SubmitField('AddProduct')
+
+class OrderForm(FlaskForm):
+        Ordersubmit = SubmitField('Buy')
 
 
 

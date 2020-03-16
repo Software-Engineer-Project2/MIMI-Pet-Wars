@@ -68,7 +68,7 @@ class Good(db.Model):
     Gid = db.Column(db.Integer, primary_key=True)
     Gname = db.Column(db.String(70), index=True, unique=True)
     Ginfo = db.Column(db.String(1600), index=True, unique=True)
-    Gimage = db.Column(db.Integer)
+    Gimage = db.Column(db.LargeBinary(length=2048))
     Gprice = db.Column(db.Integer)
     Gadddate = db.Column(db.DateTime, index=True)
     Order = db.relationship('Order', backref='author', lazy='dynamic')

@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, session
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from hospitalapp import app
-from hospitalapp.forms import LoginForm, SignupForm,ArrangeAppointmentForm
+from hospitalapp.forms import LoginForm, SignupForm, ArrangeAppointmentForm, AddProductForm, OrderForm
 from hospitalapp.models import *
 
 
@@ -76,3 +76,30 @@ def post():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
+
+@app.route('/addproduct', methods=['GET', 'POST'])
+def addproduct():
+    form = AddProductForm()
+        if form.validate_on_submit():
+            id = form.Gid.data
+            name = form.Gname.data
+            information = form.Ginfo.data
+            image = request.files['file'].read()
+            price = form.Gprice.data
+            adddate = form.Gadddate.data
+            good = Good(Gid=id, Gname=name, Ginfo=information, Gimage=image, Gprice=price, Gadddate=date)
+            db.session.add(good)
+            db.session.commit()
+            flash("Add product successfully")
+            return redirect(url_for('shoppage'))
+        render_template('addproduct.html', title='addproduct', form=form)
+            
+@app.route('/order')
+def order():
+    form = OrderForm()
+    if form.validate_on_submit():
+        return redirect(url_for('paypage'))
+    render_template('order.html', title='order', form=form)
+
+
+
