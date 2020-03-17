@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_mainpage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_mainpage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pet.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/login.html" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -23,53 +32,48 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1YzNL7iw84QFVand2jkubXd0XMG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\hospitalapp" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\flaskenv" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\petapp\template" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\petapp" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\PycharmProjects\MIMI-Pet-Wars\hospitalapp" />
+      <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet" />
+    </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.__init__">
-    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.flask run">
+    <configuration name="flask run" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pet" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/petapp" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_HOME" value="C:\Users\Administrator\.virtualenvs\Administrator-S9WHhKuh\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/petapp/__init__.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="SCRIPT_NAME" value="flask" />
+      <option name="PARAMETERS" value="run" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
+      <option name="MODULE_MODE" value="true" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
@@ -81,29 +85,43 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Administrator\.virtualenvs\Administrator-S9WHhKuh\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pet.py" />
+      <option name="SCRIPT_NAME" value="flask" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
+      <option name="MODULE_MODE" value="true" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.flask run" />
+      <item itemvalue="Python.pet" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.__init__" />
+        <item itemvalue="Python.flask run" />
         <item itemvalue="Python.pet" />
       </list>
     </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="" />
+      <created>1584431664073</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584431664073</updated>
+    </task>
+    <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -117,5 +135,59 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="617" y="179" key="#Notifications" timestamp="1584432877323">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="617" y="179" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1584432877323" />
+    <state x="740" y="153" key="#__init__" timestamp="1584432362368">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="153" key="#__init__/0.0.1920.1040@0.0.1920.1040" timestamp="1584432362368" />
+    <state x="479" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584434883802">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="479" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584434883802" />
+    <state x="767" y="326" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584444919865">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="767" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584444919865" />
+    <state x="805" y="225" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1584432098101">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="805" y="225" key="#com.intellij.ide.macro.MacrosDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584432098101" />
+    <state x="754" y="306" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584431705523">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="754" y="306" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584431705523" />
+    <state x="759" y="281" key="EnvironmentVariablesDialog" timestamp="1584432092098">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="759" y="281" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584432092098" />
+    <state x="805" y="275" key="FileChooserDialogImpl" timestamp="1584444109593">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="805" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584444109593" />
+    <state width="1360" height="265" key="GridCell.Tab.0.bottom" timestamp="1584446788474">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1360" height="265" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
+    <state width="1360" height="265" key="GridCell.Tab.0.center" timestamp="1584446788474">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1360" height="265" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
+    <state width="1360" height="265" key="GridCell.Tab.0.left" timestamp="1584446788473">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1360" height="265" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788473" />
+    <state width="1360" height="265" key="GridCell.Tab.0.right" timestamp="1584446788474">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1360" height="265" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
+    <state x="528" y="162" key="SettingsEditor" timestamp="1584432378881">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="528" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584432378881" />
   </component>
 </project>

@@ -1,17 +1,20 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, Form
 from wtforms import StringField, FileField, SubmitField, PasswordField, BooleanField, IntegerField, RadioField, \
     DateField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
 
-class LoginForm(FlaskForm):
+
+class LoginFormEmployee(FlaskForm):
     Eusername = StringField('Username', validators=[DataRequired()])
     Epassword = PasswordField('Password', validators=[DataRequired()])
     Eremember_me = BooleanField('Remember Me')
     Esubmit = SubmitField('Sign In')
 
-class SignupForm(FlaskForm):
+
+class SignupFormEmployee(FlaskForm):
     Eusername = StringField('Username', validators=[DataRequired()])
     Eidcard = StringField('id',validators=[DataRequired()])
+    Ephone = StringField('phone', validators=[DataRequired()])
     Egender = RadioField('Gender',validators=[DataRequired()])
     Eemail = StringField('Email', validators=[DataRequired()])
     Ehiredate = DateField('Date of employment (format: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
@@ -20,7 +23,8 @@ class SignupForm(FlaskForm):
     Eaccept_rules = BooleanField('I accept the site rules', validators=[DataRequired()])
     Esubmit = SubmitField('Register')
 
-class ArrangeAppointmentForm(FlaskForm):
+
+class ArrangeAppointmentFormEmployee(FlaskForm):
     Epet = IntegerField('Pet id', validators=[DataRequired()])
     Etype = RadioField('type',validators=[DataRequired()])
     Edoc = IntegerField('Doctor id',validators=[DataRequired()])
@@ -29,6 +33,7 @@ class ArrangeAppointmentForm(FlaskForm):
     Edate = DateField('Date',validators=[DataRequired()])
     Ecost = IntegerField('Cost',validators=[DataRequired()])
     Esubmit = SubmitField('Register')
+
 
 class AddProductForm(FlaskForm):
     Gid = IntegerField('Good id', validators=[DataRequired()])
@@ -39,8 +44,32 @@ class AddProductForm(FlaskForm):
     Gadddate = DateField('AddDate',validators=[DataRequired()])
     Gsubmit = SubmitField('AddProduct')
 
+
 class OrderForm(FlaskForm):
         Ordersubmit = SubmitField('Buy')
+
+
+class LoginFormCustomer(Form):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(8,128)])
+    remember = BooleanField('Remember me')
+    submit = SubmitField('Log in')
+
+
+class SignupCustomer(Form):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
+    phone = StringField('Phone', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
+    submit = SubmitField('Sign up')
+
+
+class AddAppointment(Form):
+    ownername = StringField('OwnerName', validators=[DataRequired()])
+    ownerphone = StringField('OwnerPhone', validators=[DataRequired()])
+    pettype = StringField('PetType', validators=[DataRequired()])
+    otherdescription = StringField('OtherDescription', validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
 
 

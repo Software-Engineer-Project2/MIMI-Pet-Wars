@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet_Wars system signup</title>
+</head>
+<body>
+<form method="post">
+    {{ form.csrf_token}} <!-- render hidden token -->
+    {{ form.Eusername.label }}<br>{{ form.Eusername }}<br>
+    {{ form.Epassword.label }}<br>{{ form.Epassword }}<br>
+    {{ form.Ephone.label }}<br>{{ form.Ephone }}<br>
+    {{ form.Eemail.label}}<br>{{ form.Eemail }}<br>
+    {{ form.Esubmit.label }}<br>{{ form.Esubmit }}<br>
+</form>>
+</body>
+</html>

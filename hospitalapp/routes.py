@@ -1,17 +1,27 @@
-from flask import render_template, flash, redirect, url_for, session
+from datetime import date
+
+from flask import render_template, flash, redirect, url_for, session, request
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from hospitalapp import app
-from hospitalapp.forms import LoginForm, SignupForm, ArrangeAppointmentForm, AddProductForm, OrderForm
+from hospitalapp.forms import LoginFormEmployee, LoginFormCustomer, SignupFormEmployee, SignupCustomer,\
+    ArrangeAppointmentFormEmployee, AddProductForm, OrderForm
 from hospitalapp.models import *
 
 
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'username': 'Viola'}
-    return render_template('index.html', title='Home', user=user)
+    return render_template('index.html', title='Home')
 
+
+@app.route('/customer_mainpage')
+def customer_mainpage():
+    return render_template('customer_mainpage.html', title='Home')
+
+@app.route('/employee_mainpage')
+def employee_mainpage():
+    return render_template('employee_mainpage.html', title='Home')
 
 @app.route('/loggedin_home')
 def loggedin_home():
@@ -23,9 +33,9 @@ def loggedin_home():
         return redirect(url_for('login'))
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
+@app.route('/loginEmployee', methods=['GET', 'POST'])
+def loginEmployee():
+    form = LoginFormEmployee()
     if form.validate_on_submit():
         user_in_db = Employee.query.filter(Employee.Ename == form.Eusername.data).first()
         if not user_in_db:
@@ -40,9 +50,9 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 
 
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    form = SignupForm()
+@app.route('/signupEmployee', methods=['GET', 'POST'])
+def signupEmployee():
+    form = SignupFormEmployee()
     if form.validate_on_submit():
         if form.password.data != form.password2.data:
             flash('Passwords do not match!')
@@ -56,9 +66,10 @@ def signup():
         return redirect(url_for("loggedin_home"))
     return render_template('signup.html', title='Register a new user', form=form)
 
-@app.route('/arrangeappointment', methods=['GET', 'POST'])
+
+@app.route('/arrangeappointmentEmployee', methods=['GET', 'POST'])
 def post():
-    form = ArrangeAppointmentForm()
+    form = ArrangeAppointmentFormEmployee()
     if not session.get("USERNAME") is None:
         if form.validate_on_submit():
             pet = form.Epet.data
@@ -76,6 +87,7 @@ def post():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
+
 
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
@@ -104,6 +116,35 @@ def order():
     if form.validate_on_submit():
         return redirect(url_for('paypage'))
     render_template('order.html', title='order', form=form)
+
+
+@app.route('/signupCustomer')
+def signupCustomer():
+    form = SignupCustomer()
+    if request.method == 'POST' and form.validate():
+        flash("Welcome come to Pet Wars")
+    passw_hash = generate_password_hash(form.Cpassword.data)
+    customer = Customer(Ename=form.Eusername.data, Eemail=form.Eemail.data, password_hash=passw_hash)
+    db.session.add(customer)
+    db.session.commit()
+    session["USERNAME"] = customer.Cname
+    # handle...
+    return render_template('signup.html', form=form)
+
+
+@app.route('/loginCustomer', methods=['GET', 'POST'])
+def loginCustomer():
+    form = LoginFormCustomer()
+    user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
+    if not user_in_db:
+        flash('No user found with username: {}'.format(form.Cusername.data))
+        return redirect(url_for('login'))
+    if request.method == 'POST' and check_password_hash(user_in_db.password_hash, form.Cpassword.data): #handle yes
+        flash('Login success!')
+        session["USERNAME"] = user_in_db.username
+        return redirect(url_for('loggedin_home'))
+    flash('Incorrect Password')
+    return render_template('login.html', form=form)
 
 
 
