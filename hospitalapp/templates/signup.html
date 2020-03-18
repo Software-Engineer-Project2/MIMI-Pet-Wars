@@ -5,12 +5,80 @@
     <title>Pet_Wars system signup</title>
 </head>
 <body>
-<form method="post">
-    {{ form.csrf_token}} <!-- render hidden token -->
-    {{ form.Eusername.label }}<br>{{ form.Eusername }}<br>
-    {{ form.Epassword.label }}<br>{{ form.Epassword }}<br>
-    {{ form.Ephone.label }}<br>{{ form.Ephone }}<br>
-    {{ form.Eemail.label}}<br>{{ form.Eemail }}<br>
+    <form action="" method="post" novalidate id="signupForm">
+        {{ form.hidden_tag() }}
+        <p>
+            <div id="Eusername">
+            {{ form.Eusername.label }}<br>{{ form.Eusername(size=32) }}</div>
+			{% for error in form.Eusername.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+
+        <p>
+            <div id="Eidcard">
+                {{ form.Eidcard.lable }}<br>{{form.Eidcard}}</div>
+                {% for error in form.Eidcard.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+        </p>
+
+        <p>
+            <div id="Ephone">
+                {{ form.Ephone.label }}<br>{{ form.Ephone }}</div>
+                {% for error in form.Ephone.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+        </p>
+
+        <p>
+            <div id="Egender">
+                {% for choice in form.Egender %}
+                    <tr>
+                        <td>{{ choice }}</td>
+                        <td>{{ choice.label }}</td>
+                    </tr>
+                {% endfor %}
+        </div>
+                {% for error in form.Egender.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+        </p>
+
+        <p>
+            <div id="Eemail">
+                {{ form.Eemail.label}}<br>{{ form.Eemail }}</div>
+                {% for error in form.Eemail.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+        </p>
+
+        <p>
+            <div id="hiredate">
+
+                {{ form.Ehiredate.label }}<br>
+                {{ form.Ehiredate(size=32) }}
+                {% for error in form.Ehiredate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+        </p>
+        <p>
+            <div id="Epassword">
+                {{ form.Epassword.label }}<br>{{ form.Epassword(size=35) }}</div>
+                {% for error in form.Epassword.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+        </p>
+
+        <p>
+            <div id="EpasswordRepeat">
+                {{ form.Epassword2.label }}<br>{{ form.Epassword2(size=35) }}</div>
+                {% for error in form.Epassword2.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+        </p>
+
+
     {{ form.Esubmit.label }}<br>{{ form.Esubmit }}<br>
 </form>>
 </body>

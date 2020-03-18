@@ -13,14 +13,13 @@ class LoginFormEmployee(FlaskForm):
 
 class SignupFormEmployee(FlaskForm):
     Eusername = StringField('Username', validators=[DataRequired()])
-    Eidcard = StringField('id',validators=[DataRequired()])
+    Eidcard = StringField('id', validators=[DataRequired()])
     Ephone = StringField('phone', validators=[DataRequired()])
-    Egender = RadioField('Gender',validators=[DataRequired()])
+    Egender = RadioField('Gender', choices=[('0', 'Male'), ('1', 'Female')], validators=[DataRequired()])
     Eemail = StringField('Email', validators=[DataRequired()])
     Ehiredate = DateField('Date of employment (format: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
     Epassword = PasswordField('Password', validators=[DataRequired()])
     Epassword2 = PasswordField('Repeat Password', validators=[DataRequired()])
-    Eaccept_rules = BooleanField('I accept the site rules', validators=[DataRequired()])
     Esubmit = SubmitField('Register')
 
 

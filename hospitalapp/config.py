@@ -8,3 +8,5 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CSRF_ENABLED = True
     SECRET_KEY = 'you-will-never-guess'
+
+

@@ -54,16 +54,16 @@ def loginEmployee():
 def signupEmployee():
     form = SignupFormEmployee()
     if form.validate_on_submit():
-        if form.password.data != form.password2.data:
+        if form.Epassword.data != form.Epassword2.data:
             flash('Passwords do not match!')
-            return redirect(url_for('signup'))
+            return redirect(url_for('signupEmployee'))
 
         passw_hash = generate_password_hash(form.Epassword.data)
-        employee = Employee(Ename=form.Eusername.data, Eemail=form.Eemail.data, password_hash=passw_hash)
+        employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=form.Ephone.data,Egender=form.Egender, Eemail=form.Eemail.data, Ehiredate=form.Ehiredate.data, Epassword=passw_hash)
         db.session.add(employee)
         db.session.commit()
         session["USERNAME"] = employee.Ename
-        return redirect(url_for("loggedin_home"))
+        return redirect(url_for("loginEmployee"))
     return render_template('signup.html', title='Register a new user', form=form)
 
 
@@ -110,7 +110,7 @@ def addproduct():
         flash("User needs to either login or signup first")#
         return redirect(url_for('login'))#
             
-@app.route('/order')
+@app.route('/order',methods=['GET', 'POST'])
 def order():
     form = OrderForm()
     if form.validate_on_submit():
@@ -118,7 +118,7 @@ def order():
     render_template('order.html', title='order', form=form)
 
 
-@app.route('/signupCustomer')
+@app.route('/signupCustomer',methods=['GET', 'POST'])
 def signupCustomer():
     form = SignupCustomer()
     if request.method == 'POST' and form.validate():
