@@ -26,8 +26,8 @@ def employee_mainpage():
 @app.route('/loggedin_home')
 def loggedin_home():
     if not session.get("USERNAME") is None:
-        user_in_db = Employee.query.filter(Employee.Eusername == session.get("USERNAME")).first()
-        return render_template('loggedin_home.html', Eusername=user_in_db.username)
+        user_in_db = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
+        return render_template('loggedin_home.html', Eusername=user_in_db.Ename)
     else:
         flash("Employee needs to either login or signup first")
         return redirect(url_for('login'))
@@ -41,9 +41,9 @@ def loginEmployee():
         if not user_in_db:
             flash('No user found with username: {}'.format(form.Eusername.data))
             return redirect(url_for('login'))
-        if check_password_hash(user_in_db.password_hash, form.Epassword.data):
+        if check_password_hash(user_in_db.Epassword, form.Epassword.data):
             flash('Login success!')
-            session["USERNAME"] = user_in_db.username
+            session["USERNAME"] = user_in_db.Ename
             return redirect(url_for('loggedin_home'))
         flash('Incorrect Password')
         return redirect(url_for('login'))
@@ -59,7 +59,7 @@ def signupEmployee():
             return redirect(url_for('signupEmployee'))
 
         passw_hash = generate_password_hash(form.Epassword.data)
-        employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=form.Ephone.data,Egender=form.Egender, Eemail=form.Eemail.data, Ehiredate=form.Ehiredate.data, Epassword=passw_hash)
+        employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=form.Ephone.data,Egender=form.Egender.data, Eemail=form.Eemail.data, Ehiredate=form.Ehiredate.data, Epassword=passw_hash)
         db.session.add(employee)
         db.session.commit()
         session["USERNAME"] = employee.Ename

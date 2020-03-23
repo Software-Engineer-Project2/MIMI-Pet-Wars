@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pet.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/Loggedin_home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/signup.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,15 +39,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\PycharmProjects\MIMI-Pet-Wars\hospitalapp" />
+      <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\MIMI-Pet-Wars\hospitalapp\templates" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\hospitalapp" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\flaskenv" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\petapp\template" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\petapp" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\PycharmProjects\MIMI-Pet-Wars\hospitalapp" />
-      <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet" />
     </key>
   </component>
   <component name="RunDashboard">

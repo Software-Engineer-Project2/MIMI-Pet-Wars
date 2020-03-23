@@ -10,8 +10,8 @@ class Customer(db.Model):
     Cpassword = db.Column(db.Integer)
     Cphone = db.Column(db.String(64))
     Cemail = db.Column(db.String(255))
-    Cpet = db.relationship('pet_pet', backref='owner', lazy='dynamic')#
-    Corder = db.relationship('pet_order', backref='author', lazy='dynamic')#
+    Corder = db.relationship('Order', backref='ocustomer', lazy='dynamic')#
+    Cpet = db.relationship('Pet', backref='owner', lazy='dynamic')#
 
 
 
@@ -51,9 +51,9 @@ class Appointment(db.Model):
     Ainfo = db.Column(db.String(1048))
     Adate = db.Column(db.Date)
     Acost = db.Column(db.Integer)
-    prescription = db.relationship('pet_prescription', backref='Pappointment', lazy='dynamic')#
-    Hospitalization  = db.relationship('pet_hospitalization', backref='Happointment', lazy='dynamic')#
-    Operation = db.relationship('pet_operation', backref='Oappointment', lazy='dynamic')#
+    prescription = db.relationship('Prescription', backref='pappointment', lazy='dynamic')#
+    Hospitalization  = db.relationship('Hospitalization', backref='happointment', lazy='dynamic')#
+    Operation = db.relationship('Operation', backref='oappointment', lazy='dynamic')#
     def __repr__(self):
         return '<Appointment {}>'.format(Appointment)
 
@@ -76,7 +76,7 @@ class Good(db.Model):
     Gimage = db.Column(db.LargeBinary(length=2048))
     Gprice = db.Column(db.Integer)
     Gadddate = db.Column(db.DateTime, index=True)
-    Order = db.relationship('pet_order', backref='author', lazy='dynamic')
+    Order = db.relationship('Order', backref='author', lazy='dynamic')
 
     def  __repr__(self):
             return '<Good is {}>'.format(self.Gname)
@@ -107,7 +107,7 @@ class Employee(db.Model):
     __tablename__ = 'pet_employee'
     id = db.Column(db.Integer, primary_key=True)
     Ename = db.Column(db.String(64), index=True, unique=True)
-    Egender = db.Column(db.Integer)
+    Egender = db.Column(db.String(10), index=True)
     EIDcard = db.Column(db.String(10))
     Epassword = db.Column(db.String(10))
     Ehiredate = db.Column(db.DateTime, index=True)
@@ -121,19 +121,19 @@ class Medicine(db.Model):
     Mname = db.Column(db.String(64), index=True, unique=True)
     Minf = db.Column(db.String(512))
     Mquantity = db.Column(db.Integer)
-    prescription = db.relationship('pet_prescription', backref='medicine', lazy='dynamic')
+    prescription = db.relationship('Prescription', backref='medicine', lazy='dynamic')
 
 
-class hospital(db.Model):
+class Hospital(db.Model):
     __tablename__ = 'pet_hospital'
     id = db.Column(db.Integer, primary_key=True)
     Hname = db.Column(db.String(64))
     Hposition = db.Column(db.String(512))
     Hinf = db.Column(db.String(512))
-    doctor = db.relationship('pet_doctor', backref='hospital', lazy='dynamic')
+    doctor = db.relationship('Doctor', backref='hospital', lazy='dynamic')
 
 
-class doctor(db.Model):
+class Doctor(db.Model):
     __tablename__ = 'pet_doctor'
     id = db.Column(db.Integer, primary_key=True)
     Dname = db.Column(db.String(64))
@@ -142,6 +142,6 @@ class doctor(db.Model):
     Dlevel = db.Column(db.Integer)
     Dinf = db.Column(db.String(512))
     Dhospital = db.Column(db.Integer, db.ForeignKey('pet_hospital.id'))
-    hospitalization = db.relationship('pet_hospitalization', backref='Sdoctor', lazy='dynamic')
-    appointment = db.relationship('pet_appointment', backref='Adoctor', lazy='dynamic')
-    operation = db.relationship('pet_operation', backref='Odoctor', lazy='dynamic')
+    hospitalization = db.relationship('Hospitalization', backref='sdoctor', lazy='dynamic')
+    appointment = db.relationship('Appointment', backref='adoctor', lazy='dynamic')
+    operation = db.relationship('Operation', backref='odoctor', lazy='dynamic')
