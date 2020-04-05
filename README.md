@@ -1,1 +1,1 @@
-# MIMI-Pet-Wars
+# MINI-Pet-Wars
