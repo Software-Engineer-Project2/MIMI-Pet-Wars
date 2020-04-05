@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet_Wars system arrange appointment</title>
+</head>
+<body>
+    <form action="" method="post" novalidate id="PrescriptionForm">
+        {{ form.hidden_tag() }}
+        <p>
+            <div id="Pmed">
+            {{ form.Pmed.label }}<br>{{ form.Pmed(size=32) }}</div>
+			{% for error in form.Pmed.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+
+
+        <p>
+            <div id="Pnumber">
+                {{ form.Pnumber.label }}<br>{{ form.Pnumber }}</div>
+                {% for error in form.Pnumber.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+        </p>
+        <p>
+            <div id="Pappointment">
+                {{ form.Pappointment.label }}<br>{{ form.Pappointment }}</div>
+                {% for error in form.Pappointment.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+        </p>
+
+
+    {{ form.submit.label }}<br>{{ form.submit }}<br>
+</form>>
+</body>
+</html>

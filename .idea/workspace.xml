@@ -2,17 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/Loggedin_home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/AppointmentDetail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/DisplayAppointmentEmployee.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/Hospitalization.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/Prescription.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/arr_appointment_emp.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_employee.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/loggedin_index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_mainpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_mainpage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/signup.html" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -35,6 +60,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -51,18 +77,6 @@
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\petapp" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Python.flask run">
     <configuration name="flask run" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pet" />
@@ -76,6 +90,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="flask" />
       <option name="PARAMETERS" value="run" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -97,6 +112,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="flask" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -127,8 +143,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1584431664073</updated>
+      <workItem from="1585995446665" duration="15920000" />
+      <workItem from="1586054615420" duration="3060000" />
+      <workItem from="1586058482701" duration="2984000" />
+      <workItem from="1586069514337" duration="14256000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -172,9 +195,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="759" y="281" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584432092098" />
-    <state x="805" y="275" key="FileChooserDialogImpl" timestamp="1584444109593">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="644" y="220" key="FileChooserDialogImpl" timestamp="1585999662041">
+      <screen x="0" y="0" width="1536" height="832" />
     </state>
+    <state x="644" y="220" key="FileChooserDialogImpl/0.0.1536.832@0.0.1536.832" timestamp="1585999662041" />
     <state x="805" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584444109593" />
     <state width="1360" height="265" key="GridCell.Tab.0.bottom" timestamp="1584446788474">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -192,9 +216,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1360" height="265" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
+    <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1586058659733">
+      <screen x="0" y="0" width="1536" height="832" />
+    </state>
+    <state width="212" height="477" key="HiddenNamespacesPopup/0.0.1536.832@0.0.1536.832" timestamp="1586058659733" />
     <state x="528" y="162" key="SettingsEditor" timestamp="1584432378881">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="528" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584432378881" />
+    <state x="425" y="70" width="672" height="676" key="search.everywhere.popup" timestamp="1586018815328">
+      <screen x="0" y="0" width="1536" height="832" />
+    </state>
+    <state x="425" y="70" width="672" height="676" key="search.everywhere.popup/0.0.1536.832@0.0.1536.832" timestamp="1586018815328" />
   </component>
 </project>

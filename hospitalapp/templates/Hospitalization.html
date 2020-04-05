@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet_Wars system arrange appointment</title>
+</head>
+<body>
+    <form action="" method="post" novalidate id="HospitalizationForm">
+        {{ form.hidden_tag() }}
+        <p>
+            <div id="appointment">
+            {{ form.appointment.label }}<br>{{ form.appointment(size=32) }}</div>
+			{% for error in form.appointment.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+
+
+        <p>
+            <div id="doc">
+                {{ form.doc.label }}<br>{{ form.doc }}</div>
+                {% for error in form.doc.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+        </p>
+        <p>
+            <div id="room">
+                {{ form.room.label }}<br>{{ form.room }}</div>
+                {% for error in form.room.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+        </p>
+        <p>
+            <div id="startdate">
+
+                {{ form.startdate.label }}<br>
+                {{ form.startdate(size=32) }}
+                {% for error in form.startdate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}</div>
+        </p>
+        <p>
+            <div id="enddate">
+
+                {{ form.enddate.label }}<br>
+                {{ form.enddate(size=32) }}
+                {% for error in form.enddate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}</div>
+        </p>
+        <p>
+            <div id="cost">
+                {{ form.cost.label }}<br>{{ form.cost }}</div>
+                {% for error in form.cost.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+        </p>
+
+    {{ form.submit.label }}<br>{{ form.submit }}<br>
+</form>>
+</body>
+</html>

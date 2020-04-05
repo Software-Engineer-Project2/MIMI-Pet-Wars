@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome back</title>
+</head>
+<body>
+
+
+
+{% extends "loggedin_index.html" %}
+{% block content %}
+
+
+	<div align="center">
+    <br><br><br>
+    <a href="{{url_for('arrangeappointmentemployee')}}">Arrange Appointments</a>
+    <br><br><br>
+    <a href="{{url_for('Prescription')}}">Manage Prescription</a>
+    <br><br><br>
+    <a href="{{url_for('Hospitalization')}}">Manage Hospitalization</a>
+        <br><br><br>
+        <a href="{{url_for('DisplayAppointmentEmployee')}}">Display Appointment</a>
+
+</div>
+
+
+
+
+{% endblock %}
+
+</body>
+</html>

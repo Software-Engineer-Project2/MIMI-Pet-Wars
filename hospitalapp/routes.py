@@ -1,12 +1,11 @@
 from datetime import date
 
-from flask import render_template, flash, redirect, url_for, session, request
+from flask import render_template, flash, redirect, url_for, session, request, abort
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from hospitalapp import app
-from hospitalapp.forms import LoginFormEmployee, LoginFormCustomer, SignupFormEmployee, SignupCustomer,\
-    ArrangeAppointmentFormEmployee, AddProductForm, OrderForm
-from hospitalapp.models import *
+from hospitalapp import app, db
+from hospitalapp.forms import *
+from hospitalapp.models import Customer,Employee,Pet,Medicine,Hospitalization,Hospital,Good,Operation,Order,Doctor,Prescription,Appointment
 
 
 @app.route('/')
@@ -14,6 +13,9 @@ from hospitalapp.models import *
 def index():
     return render_template('index.html', title='Home')
 
+@app.route('/about')
+def about():
+    return render_template('about_us.html', title='about')
 
 @app.route('/customer_mainpage')
 def customer_mainpage():
@@ -23,14 +25,14 @@ def customer_mainpage():
 def employee_mainpage():
     return render_template('employee_mainpage.html', title='Home')
 
-@app.route('/loggedin_home')
-def loggedin_home():
+@app.route('/loggedin_home_employee')
+def loggedin_home_employee():
     if not session.get("USERNAME") is None:
         user_in_db = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
-        return render_template('loggedin_home.html', Eusername=user_in_db.Ename)
+        return render_template('loggedin_home_employee.html', Eusername=user_in_db.Ename)
     else:
         flash("Employee needs to either login or signup first")
-        return redirect(url_for('login'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/loginEmployee', methods=['GET', 'POST'])
@@ -44,10 +46,10 @@ def loginEmployee():
         if check_password_hash(user_in_db.Epassword, form.Epassword.data):
             flash('Login success!')
             session["USERNAME"] = user_in_db.Ename
-            return redirect(url_for('loggedin_home'))
+            return redirect(url_for('loggedin_home_employee'))
         flash('Incorrect Password')
         return redirect(url_for('login'))
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('login_employee.html', title='Sign In', form=form)
 
 
 @app.route('/signupEmployee', methods=['GET', 'POST'])
@@ -64,11 +66,11 @@ def signupEmployee():
         db.session.commit()
         session["USERNAME"] = employee.Ename
         return redirect(url_for("loginEmployee"))
-    return render_template('signup.html', title='Register a new user', form=form)
+    return render_template('signup_employee.html', title='Register a new user', form=form)
 
 
 @app.route('/arrangeappointmentEmployee', methods=['GET', 'POST'])
-def post():
+def arrangeappointmentemployee():
     form = ArrangeAppointmentFormEmployee()
     if not session.get("USERNAME") is None:
         if form.validate_on_submit():
@@ -79,15 +81,90 @@ def post():
             infomation = form.Einf.data
             date = form.Edate.data
             cost = form.Ecost.data
-            appointment = Appointment(Apet=pet,Atype=type,Adoctor=doctor,Acomplete=complete,Ainf=infomation,Adate=date,Acost=cost)
+            appointment = Appointment(Apet=pet,Atype=type,Adoc=doctor,Acomplete=complete,Ainfo=infomation,Adate=date,Acost=cost)
             db.session.add(appointment)
             db.session.commit()
-            return redirect(url_for('displayappointment'))
-        render_template('arrangeappointment.html',title='arrangeappointment',form=form)
+            return redirect(url_for('loggedin_home_employee'))
+        return render_template('arr_appointment_emp.html',title='arrangeappointment',form=form)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('login'))
+        return redirect(url_for('employee_mainpage'))
 
+@app.route('/Prescription', methods=['GET', 'POST'])
+def Prescription():
+    form = PrescriptionForm()
+    if not session.get("USERNAME") is None:
+        if form.validate_on_submit():
+            medicine = form.Pmed.data
+            number = form.Pnumber.data
+            appointment = form.Pappointment.data
+            prescription = Prescription(Pmedicine=medicine,Pnumber=number,Pappointment=appointment)
+            db.session.add(prescription)
+            db.session.commit()
+            return redirect(url_for('loggedin_home_employee'))
+        return render_template('Prescription.html',title='Prescription',form=form)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/Hospitalization', methods=['GET', 'POST'])
+def Hospitalization():
+    form = ArrangeAppointmentFormEmployee()
+    if not session.get("USERNAME") is None:
+        if form.validate_on_submit():
+            appointment = form.appointment.data
+            doc = form.doc.data
+            room = form.room.data
+            startdate = form.startdate.data
+            enddate = form.enddate.data
+            cost = form.cost.data
+            hospitalization = Hospitalization(Sappointment=appointment,Sdoc=doc,Sroom=room,Sstartdate=startdate,Senddate=enddate,Scost=cost)
+            db.session.add(hospitalization)
+            db.session.commit()
+            return redirect(url_for('loggedin_home_employee'))
+        return render_template('Hospitalization.html',title='Hospitalization',form=form)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/DisplayAppointmentEmployee', methods=['GET', 'POST'])
+def DisplayAppointmentEmployee():
+    form = ArrangeAppointmentFormEmployee
+    if not session.get("USERNAME") is None:
+        standard_appointments = Appointment.query.filter(Appointment.Atype=='1').all()
+        emergency_appointments = Appointment.query.filter(Appointment.Atype=='0').all()
+        return render_template('DisplayAppointmentEmployee.html', title='Display Appointment Employee', standard_appointments=standard_appointments,emergency_appointments=emergency_appointments,form=form)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/ModifyAppointmentEmployee/<id>', methods=['GET', 'POST'])
+def ModifyAppointmentEmployee(id):
+    if not session.get("USERNAME") is None:
+        appo_obj = Appointment.query.filter_by(id=id).first()
+        if not appo_obj:
+            abort(404)
+        form = ModyAppointmentFormEmployee(obj=appo_obj)
+        if form.validate_on_submit():
+            appo_obj.Apet = form.data['Epet']
+            appo_obj.Atype = form.data['Etype']
+            appo_obj.Adoc = form.data['Edoc']
+            appo_obj.Acomplete = form.data['Ecomplete']
+            appo_obj.Ainfo = form.data['Einf']
+            appo_obj.Adate = form.data['Edate']
+            appo_obj.Acost = form.data['Ecost']
+            db.session.add(appo_obj)
+            db.session.commit()
+            flash('Modify successfully', 'success')
+            return redirect(url_for('loggedin_home_employee'))
+        else:
+            print(form.errors)
+        return render_template('AppointmentDetail.html', title='Modify Appointment', form=form, id = id)
+
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
 
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
@@ -147,4 +224,7 @@ def loginCustomer():
     return render_template('login.html', form=form)
 
 
-
+@app.route('/logoutEmployee')
+def logoutEmployee():
+    session.pop("USERNAME", None)
+    return redirect(url_for('employee_mainpage'))

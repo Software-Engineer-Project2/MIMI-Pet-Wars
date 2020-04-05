@@ -33,9 +33,9 @@ class Pet(db.Model):
 class Prescription(db.Model):
     __tablename__ = 'pet_prescription'
     id = db.Column(db.Integer, primary_key=True)
-    Pmedicine = db.Column(db.Integer, db.ForeignKey('pet_medicine.id'))#G
-    Pnumber = db.Column(db.Integer, unique=True)
-    Pappointment = db.Column(db.Integer, db.ForeignKey('pet_appointment.id'))#G
+    Pmedicine = db.Column(db.String(64), db.ForeignKey('pet_medicine.id'))#G
+    Pnumber = db.Column(db.String(64))
+    Pappointment = db.Column(db.String(64), db.ForeignKey('pet_appointment.id'))#G
 
     def __repr__(self):
         return '<Prescription {}>'.format(Prescription)
@@ -44,13 +44,13 @@ class Prescription(db.Model):
 class Appointment(db.Model):
     __tablename__ = 'pet_appointment'
     id = db.Column(db.Integer, primary_key=True)
-    Apet = db.Column(db.Integer, db.ForeignKey('pet_pet.id'))#
-    Atype = db.Column(db.String(64))
-    Adoc = db.Column(db.Integer, db.ForeignKey('pet_doctor.id'))#
-    Acomplete = db.Column(db.Boolean)
+    Apet = db.Column(db.String(64), db.ForeignKey('pet_pet.id'))#
+    Atype = db.Column(db.String(10), index=True)
+    Adoc = db.Column(db.String(64), db.ForeignKey('pet_doctor.id'))#
+    Acomplete = db.Column(db.String(10), index=True)
     Ainfo = db.Column(db.String(1048))
-    Adate = db.Column(db.Date)
-    Acost = db.Column(db.Integer)
+    Adate = db.Column(db.DateTime, index=True)
+    Acost = db.Column(db.String(64))
     prescription = db.relationship('Prescription', backref='pappointment', lazy='dynamic')#
     Hospitalization  = db.relationship('Hospitalization', backref='happointment', lazy='dynamic')#
     Operation = db.relationship('Operation', backref='oappointment', lazy='dynamic')#
@@ -84,12 +84,12 @@ class Good(db.Model):
 class Hospitalization(db.Model):
     __tablename__ = 'pet_hospitalization'
     id = db.Column(db.Integer, primary_key=True)
-    Sappointment = db.Column(db.Integer, db.ForeignKey('pet_appointment.id'))
-    Sdoc = db.Column(db.Integer, db.ForeignKey('pet_doctor.id'))
-    Sroom = db.Column(db.Integer)
+    Sappointment = db.Column(db.String(64), db.ForeignKey('pet_appointment.id'))
+    Sdoc = db.Column(db.String(64), db.ForeignKey('pet_doctor.id'))
+    Sroom = db.Column(db.String(64))
     Sstartdate = db.Column(db.DateTime, index=True)
     Senddate = db.Column(db.DateTime, index=True)
-    Scost = db.Column(db.Integer)
+    Scost = db.Column(db.String(64))
 
 
 class Operation(db.Model):
