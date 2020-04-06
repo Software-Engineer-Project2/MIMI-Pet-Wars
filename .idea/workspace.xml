@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/AppointmentDetail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/DisplayAppointmentEmployee.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/Hospitalization.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/Prescription.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/arr_appointment_emp.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_employee.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/loggedin_index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_mainpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_mainpage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +47,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MIMI-Pet-Wars8" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -147,6 +133,7 @@
       <workItem from="1586054615420" duration="3060000" />
       <workItem from="1586058482701" duration="2984000" />
       <workItem from="1586069514337" duration="14256000" />
+      <workItem from="1586162312820" duration="1298000" />
     </task>
     <servers />
   </component>
@@ -195,10 +182,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="759" y="281" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584432092098" />
-    <state x="644" y="220" key="FileChooserDialogImpl" timestamp="1585999662041">
+    <state x="644" y="220" key="FileChooserDialogImpl" timestamp="1586162613910">
       <screen x="0" y="0" width="1536" height="832" />
     </state>
-    <state x="644" y="220" key="FileChooserDialogImpl/0.0.1536.832@0.0.1536.832" timestamp="1585999662041" />
+    <state x="644" y="220" key="FileChooserDialogImpl/0.0.1536.832@0.0.1536.832" timestamp="1586162613910" />
     <state x="805" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584444109593" />
     <state width="1360" height="265" key="GridCell.Tab.0.bottom" timestamp="1584446788474">
       <screen x="0" y="0" width="1920" height="1040" />

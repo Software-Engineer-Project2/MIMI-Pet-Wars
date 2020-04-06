@@ -52,7 +52,7 @@ def loginEmployee():
         user_in_db = Employee.query.filter(Employee.Ename == form.Eusername.data).first()
         if not user_in_db:
             flash('No user found with username: {}'.format(form.Eusername.data))
-            return redirect(url_for('login'))
+            return redirect(url_for('loginEmployee'))
         if check_password_hash(user_in_db.Epassword, form.Epassword.data):
             flash('Login success!')
             session["USERNAME"] = user_in_db.Ename
@@ -119,7 +119,7 @@ def Prescription():
 
 @app.route('/Hospitalization', methods=['GET', 'POST'])
 def Hospitalization():
-    form = ArrangeAppointmentFormEmployee()
+    form = HospitalizationForm()
     if not session.get("USERNAME") is None:
         if form.validate_on_submit():
             appointment = form.appointment.data
