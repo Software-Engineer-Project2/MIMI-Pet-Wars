@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm, Form
 from wtforms import StringField, FileField, SubmitField, PasswordField, BooleanField, IntegerField, RadioField, \
-    DateField,TextField
+    DateField, TextField, SelectField
 from wtforms.validators import DataRequired, Length
 
 
@@ -92,22 +92,25 @@ class OrderForm(FlaskForm):
         Ordersubmit = SubmitField('Buy')
 
 
-class LoginFormCustomer(Form):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(8,128)])
-    remember = BooleanField('Remember me')
-    submit = SubmitField('Log in')
+class LoginFormCustomer(FlaskForm):
+    Cusername = StringField('Username', validators=[DataRequired()])
+    Cpassword = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
+    Cremember_me = BooleanField('Remember me')
+    Csubmit = SubmitField('Log in')
 
 
-class SignupCustomer(Form):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
-    phone = StringField('Phone', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired()])
-    submit = SubmitField('Sign up')
+class SignupCustomer(FlaskForm):
+    Cusername = StringField('Username', validators=[DataRequired()])
+    Cpassword = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
+    Cpassword2 = PasswordField('Repeat Your Password', validators=[DataRequired(), Length(8, 128)])
+    Cgender = RadioField('Gender', choices=[('1', 'Male'), ('2', 'Female')], default=1, validators=[DataRequired()])
+    Cphone = StringField('Phone', validators=[DataRequired()])
+    Cemail = StringField('Email', validators=[DataRequired()])
+    Caccept_rules = BooleanField('I accept the site rules', validators=[DataRequired()])
+    Csubmit = SubmitField('Sign up')
 
 
-class AddAppointment(Form):
+class AddAppointment(FlaskForm):
     ownername = StringField('OwnerName', validators=[DataRequired()])
     ownerphone = StringField('OwnerPhone', validators=[DataRequired()])
     pettype = StringField('PetType', validators=[DataRequired()])

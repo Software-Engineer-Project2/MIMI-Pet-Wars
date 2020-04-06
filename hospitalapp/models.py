@@ -10,6 +10,7 @@ class Customer(db.Model):
     Cpassword = db.Column(db.Integer)
     Cphone = db.Column(db.String(64))
     Cemail = db.Column(db.String(255))
+    Cgender = db.Column(db.String(10), index=True)
     Corder = db.relationship('Order', backref='ocustomer', lazy='dynamic')#
     Cpet = db.relationship('Pet', backref='owner', lazy='dynamic')#
 

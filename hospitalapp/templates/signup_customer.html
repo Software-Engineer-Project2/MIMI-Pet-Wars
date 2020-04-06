@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet_Wars system signup</title>
+</head>
+<body>
+<form method="post">
+    {{ form.csrf_token}} <!-- render hidden token -->
+    <p>
+            <div id="Cusername">
+            {{ form.Cusername.label }}<br>{{ form.Cusername(size=32) }}</div>
+			{% for error in form.Cusername.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+    <p>
+            <div id="Cphone">
+                {{ form.Cphone.label }}<br>{{ form.Cphone }}</div>
+                {% for error in form.Cphone.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+        </p>
+
+   <p>
+        <div id="Cgender">
+                {% for choice in form.Cgender %}
+                    <tr>
+                        <td>{{ choice }}</td>
+                        <td>{{ choice.label }}</td>
+                    </tr>
+                {% endfor %}
+        </div>
+                {% for error in form.Cgender.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+        </p>
+
+    <p>
+            <div id="Cemail">
+                {{ form.Cemail.label}}<br>{{ form.Cemail }}</div>
+                {% for error in form.Cemail.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+        </p>
+    <p>
+            <div id="Cpassword">
+                {{ form.Cpassword.label}}<br>{{ form.Cpassword }}</div>
+                {% for error in form.Cpassword.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+        </p>
+    <p>
+            <div id="Cpassword2">
+                {{ form.Cpassword2.label}}<br>{{ form.Cpassword2 }}</div>
+                {% for error in form.Cpassword2.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+        </p>
+    {{ form.Caccept_rules.label }}<br>{{ form.Caccept_rules }}<br>
+    {{ form.Csubmit.label }}<br>{{ form.Csubmit }}<br>
+
+</form>
+</body>
+</html>

@@ -25,6 +25,16 @@ def customer_mainpage():
 def employee_mainpage():
     return render_template('employee_mainpage.html', title='Home')
 
+@app.route('/loggedin_home_customer',methods=['GET', 'POST'])
+def loggedin_home_customer():
+    if not session.get("USERNAME") is None:
+        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        return render_template('loggedin_home_customer.html', Cusername=user_in_db.Cname)
+    else:
+        flash("Customer needs to either login or signup first")
+        return redirect(url_for('customer_mainpage'))
+
+
 @app.route('/loggedin_home_employee')
 def loggedin_home_employee():
     if not session.get("USERNAME") is None:
@@ -198,33 +208,54 @@ def order():
 @app.route('/signupCustomer',methods=['GET', 'POST'])
 def signupCustomer():
     form = SignupCustomer()
-    if request.method == 'POST' and form.validate():
-        flash("Welcome come to Pet Wars")
-    passw_hash = generate_password_hash(form.Cpassword.data)
-    customer = Customer(Ename=form.Eusername.data, Eemail=form.Eemail.data, password_hash=passw_hash)
-    db.session.add(customer)
-    db.session.commit()
-    session["USERNAME"] = customer.Cname
-    # handle...
-    return render_template('signup.html', form=form)
+    if form.validate_on_submit():
+        print("888888")
+        if form.Cpassword.data != form.Cpassword2.data:
+            flash('Passwords do not match!')
+            print("99999")
+            return redirect(url_for('signupCustomer'))
+        passw_hash = generate_password_hash(form.Cpassword.data)
+        #customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data, password_hash=passw_hash)
+        customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data, Cgender=form.Cgender.data, Cpassword=passw_hash)
+        db.session.add(customer)
+        db.session.commit()
+        session["USERNAME"] = customer.Cname
+        flash('Welcome home, %s ! , you need sign in again' % customer.Cname)
+        print("666666")
+        return redirect(url_for('loginCustomer'))
+    return render_template('signup_customer.html', title='Register a new user', form=form)
 
 
 @app.route('/loginCustomer', methods=['GET', 'POST'])
 def loginCustomer():
     form = LoginFormCustomer()
-    user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
-    if not user_in_db:
-        flash('No user found with username: {}'.format(form.Cusername.data))
-        return redirect(url_for('login'))
-    if request.method == 'POST' and check_password_hash(user_in_db.password_hash, form.Cpassword.data): #handle yes
-        flash('Login success!')
-        session["USERNAME"] = user_in_db.username
-        return redirect(url_for('loggedin_home'))
-    flash('Incorrect Password')
-    return render_template('login.html', form=form)
+    if form.validate_on_submit():
+        user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
+        if not user_in_db:
+            flash('No user found with username: {}'.format(form.Cusername.data))
+            return redirect(url_for('loginCustomer'))
+        if check_password_hash(user_in_db.Cpassword, form.Cpassword.data):
+            flash('Login success!')
+            session["USERNAME"] = user_in_db.Cname
+            return redirect(url_for('loggedin_home_customer'))
+        flash('Incorrect Password')
+        return redirect(url_for('loginCustomer'))
+    return render_template('login_customer.html', title='Login In', form=form)
 
 
 @app.route('/logoutEmployee')
 def logoutEmployee():
     session.pop("USERNAME", None)
     return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/Make Appointment')
+def make_appointment():
+
+    return '<h1>Make Appointment</h1>'
+
+
+@app.route('/Track State')
+def track_state():
+
+    return '<h1>Track State</h1>'

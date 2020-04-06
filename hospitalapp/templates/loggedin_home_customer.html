@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "base.html" %}
+{% block content %}
+
+
+	<a class="link1" href="{{ url_for('make_appointment')}}">Make Appointment</a>
+    <a class="link1" href="{{ url_for('track_state')}}">Keep Track Of State</a>
+
+
+
+
+{% endblock %}
+</body>
+</html>
