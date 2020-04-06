@@ -110,7 +110,7 @@ class SignupCustomer(FlaskForm):
     Csubmit = SubmitField('Sign up')
 
 
-class AddAppointment(FlaskForm):
+class MakeAppointment(FlaskForm):
     ownername = StringField('OwnerName', validators=[DataRequired()])
     ownerphone = StringField('OwnerPhone', validators=[DataRequired()])
     pettype = StringField('PetType', validators=[DataRequired()])

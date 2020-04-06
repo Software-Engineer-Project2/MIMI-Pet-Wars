@@ -249,10 +249,10 @@ def logoutEmployee():
     return redirect(url_for('employee_mainpage'))
 
 
-@app.route('/Make Appointment')
+@app.route('/Make Appointment', methods=['GET', 'POST'])
 def make_appointment():
-
-    return '<h1>Make Appointment</h1>'
+    form = MakeAppointment()
+    return render_template('make_appointment_customer.html', title='Make Appointment', form=form)
 
 
 @app.route('/Track State')

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make Appointment</title>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <h1 align="center">Please Fill Out Some Information</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            <div id="ownername">
+            {{ form.ownername.label }}<br>{{ form.ownername(size=32) }}</div>
+			{% for error in form.ownername.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+
+        <p>
+            <div id="ownerphone">
+            {{ form.ownerphone.label }}<br>{{form.ownerphone}}</div>
+            {% for error in form.ownerphone.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>
+            <div id="pettype">
+            {{ form.pettype.label }}<br>{{ form.pettype }}</div>
+            {% for error in form.pettype.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+        <p>
+            <div id="otherdescription">
+            {{ form.otherdescription.label }}<br>{{ form.otherdescription }}</div>
+            {% for error in form.otherdescription.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+        {{ form.submit.label }}<br>{{ form.submit }}<br>
+    </form>
+    {% endblock %}
+</body>
+</html>
