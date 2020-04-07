@@ -2,6 +2,9 @@ from flask_wtf import FlaskForm, Form
 from wtforms import StringField, FileField, SubmitField, PasswordField, BooleanField, IntegerField, RadioField, \
     DateField, TextField, SelectField
 from wtforms.validators import DataRequired, Length
+from wtforms.ext.sqlalchemy.fields import QuerySelectField 
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from hospitalapp import photos
 
 
 class LoginFormEmployee(FlaskForm):
@@ -68,10 +71,11 @@ class AddProductForm(FlaskForm):
     Gid = IntegerField('Good id', validators=[DataRequired()])
     Gname = StringField('Good name', validators=[DataRequired()])
     Ginfo = StringField('Information', validators=[DataRequired()])
-    Gimage = FileField('File', validators=[DataRequired()])
-    Gprice = IntegerField('Good id', validators=[DataRequired()])
+    photo = FileField('File', validators=[FileRequired(),
+    FileAllowed(photos, "images only")])
+    Gprice = IntegerField('Good price', validators=[DataRequired()])
     Gadddate = DateField('AddDate',validators=[DataRequired()])
-    Gsubmit = SubmitField('AddProduct')
+    submit = SubmitField('AddProduct')
 
 class PrescriptionForm(FlaskForm):
     Pmed = StringField('Medicine', validators=[DataRequired()])

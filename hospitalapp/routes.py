@@ -1,3 +1,5 @@
+import os
+
 from datetime import date
 
 from flask import render_template, flash, redirect, url_for, session, request, abort
@@ -6,6 +8,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from hospitalapp import app, db
 from hospitalapp.forms import *
 from hospitalapp.models import Customer,Employee,Pet,Medicine,Hospitalization,Hospital,Good,Operation,Order,Doctor,Prescription,Appointment
+from hospitalapp import photos
+from flask_uploads import UploadSet, IMAGES, configure_uploads
+
+photos = UploadSet('products', IMAGES)
+configure_uploads(app, photos)
+
 
 
 @app.route('/')
@@ -176,26 +184,49 @@ def ModifyAppointmentEmployee(id):
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+@app.route('/listproduct', methods=['GET', 'POST'])
+def listproduct():
+    goods = Good.query.all()
+    return render_template('adminproduct.html',title='Shop', goods = goods)
+    
+
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
     form = AddProductForm()
-    if not session.get("USERNAME") is None:#
+    if not session.get("USERNAME") is None:
         if form.validate_on_submit():
-            id = form.Gid.data
-            name = form.Gname.data
-            information = form.Ginfo.data
-            image = request.files['file'].read()
-            price = form.Gprice.data
-            adddate = form.Gadddate.data
-            good = Good(Gid=id, Gname=name, Ginfo=information, Gimage=image, Gprice=price, Gadddate=date)
-            db.session.add(good)
-            db.session.commit()
-            flash("Add product successfully")
-            return redirect(url_for('shoppage'))
-        render_template('addproduct.html', title='addproduct', form=form)
+            if request.method == 'POST' and 'photo' in request.files:
+                filename = photos.save(request.files['photo'])
+                file_url = photos.get_basename(filename)
+                id = form.Gid.data
+                name = form.Gname.data
+                info = form.Ginfo.data
+                price = form.Gprice.data
+                adddate = form.Gadddate.data
+                good = Good(id=id, Gname=name, Ginfo=info, Gimage=file_url, Gprice=price, Gadddate=adddate)
+                db.session.add(good)
+                db.session.commit()
+                flash("Add product successfully")
+            return redirect(url_for('listproduct'))
+        return render_template('addproduct.html', title='addproduct', form=form)
     else:
-        flash("User needs to either login or signup first")#
-        return redirect(url_for('login'))#
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/deleteproduct',methods=['GET', 'POST'])
+def deleteproduct(id):
+    good = Good.query.get_or_404(id)
+    db.session.delete(good)
+    db.session.commit()
+    flash("Delete Product")
+    return redirect(url_for('adminproduct'), id=id)
+
+@app.route('/editproduct',methods=['GET', 'POST'])
+def editproduct():
+    form = AddProductForm()
+    return render_template('addproduct.html', form=form)
+
+    
             
 @app.route('/order',methods=['GET', 'POST'])
 def order():
