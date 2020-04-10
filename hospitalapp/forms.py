@@ -128,7 +128,7 @@ class AddProductForm(FlaskForm):
     FileAllowed(photos, "images only")])
     Gprice = IntegerField('Good price', validators=[DataRequired()])
     Gadddate = DateField('AddDate',validators=[DataRequired()])
-    submit = SubmitField('AddProduct')
+    submit = SubmitField('submit')
 
 class PrescriptionForm(FlaskForm):
     Pmed = StringField('Medicine', validators=[DataRequired()])

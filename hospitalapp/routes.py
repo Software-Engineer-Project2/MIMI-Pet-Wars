@@ -439,7 +439,7 @@ def addproduct():
                 good = Good(id=id, Gname=name, Ginfo=info, Gimage=file_url, Gprice=price, Gadddate=adddate)
                 db.session.add(good)
                 db.session.commit()
-                flash("Add product successfully")
+                #flash("Add product successfully")
             return redirect(url_for('listproduct'))
         return render_template('addproduct.html', title='addproduct', form=form)
     else:
@@ -447,19 +447,33 @@ def addproduct():
         return redirect(url_for('employee_mainpage'))
 
 
-@app.route('/deleteproduct', methods=['GET', 'POST'])
+@app.route('/deleteproduct/<id>', methods=['GET', 'POST'])
 def deleteproduct(id):
     good = Good.query.get_or_404(id)
     db.session.delete(good)
     db.session.commit()
-    flash("Delete Product")
-    return redirect(url_for('adminproduct'), id=id)
+    #flash("Delete Product")
+    return redirect(url_for('listproduct'))
 
 
-@app.route('/editproduct', methods=['GET', 'POST'])
-def editproduct():
+@app.route('/editproduct/<id>', methods=['GET', 'POST'])
+def editproduct(id):
     form = AddProductForm()
-    return render_template('addproduct.html', form=form)
+    good = Good.query.get_or_404(id)
+    form.Gid.data=good.id
+    if form.validate_on_submit():
+        if request.method == 'POST' and 'photo' in request.files:
+            filename = photos.save(request.files['photo'])
+            file_url = photos.get_basename(filename)
+            good.Gname = form.Gname.data
+            good.Ginfo = form.Ginfo.data
+            good.Gprice = form.Gprice.data
+            good.Gadddate = form.Gadddate.data
+            good.Gimage = file_url
+            db.session.commit()
+            #flash("Add product successfully")
+        return redirect(url_for('listproduct'))
+    return render_template('editproduct.html', form=form)
 
 
 @app.route('/order', methods=['GET', 'POST'])
