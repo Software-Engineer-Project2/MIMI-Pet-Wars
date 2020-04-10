@@ -2,9 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/AddHospitalization.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/AddOperation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/AddPrescription.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/ApplyingHospitalizationPermission.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/ApplyingOperationPermission.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/ArrAppEmployeeND.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/ArrAppEmployeeYD.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/Arr_Main_Emp.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/CompleteOperationConfirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/CompletedOperation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/HospitalizationMain.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/InHospitalization.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/OperationMain.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/ReleaseHos.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/UnderOperation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_employee.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_employee.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pet.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,6 +154,10 @@
       <workItem from="1586058482701" duration="2984000" />
       <workItem from="1586069514337" duration="14256000" />
       <workItem from="1586162312820" duration="1298000" />
+      <workItem from="1586448168009" duration="1924000" />
+      <workItem from="1586477838715" duration="17283000" />
+      <workItem from="1586498719762" duration="2838000" />
+      <workItem from="1586502420289" duration="7328000" />
     </task>
     <servers />
   </component>
@@ -211,9 +235,24 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="528" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584432378881" />
+    <state x="461" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1586502425587">
+      <screen x="0" y="0" width="1536" height="832" />
+    </state>
+    <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832@0.0.1536.832" timestamp="1586502425587" />
     <state x="425" y="70" width="672" height="676" key="search.everywhere.popup" timestamp="1586018815328">
       <screen x="0" y="0" width="1536" height="832" />
     </state>
     <state x="425" y="70" width="672" height="676" key="search.everywhere.popup/0.0.1536.832@0.0.1536.832" timestamp="1586018815328" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hospitalapp/routes.py</url>
+          <line>392</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

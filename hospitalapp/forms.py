@@ -67,6 +67,59 @@ class ModyAppointmentFormEmployee(FlaskForm):
     },validators=[DataRequired()])
     Esubmit = SubmitField('Submit')
 
+
+class AddOperationForm(FlaskForm):
+    Odate= DateField(label='Date of appointment (format: YYYY-MM-DD)', format='%Y-%m-%d',render_kw={
+        'class':"form-control",
+        'placeholder':'Please enter date'
+        }, validators=[DataRequired()])
+    Oinf= StringField(label='Information',render_kw={
+        'class':"form-control",
+        'placeholder':'Please enter the information'
+        }, validators=[DataRequired()])
+    Ocost= StringField(label='Cost',render_kw={
+        'class':"form-control",
+        'placeholder':'Please enter the Cost'
+        }, validators=[DataRequired()])
+    Osubmit = SubmitField('Submit')
+
+class AddHospitalizationForm(FlaskForm):
+    room = StringField(label='Room', render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter the Room'
+    }, validators=[DataRequired()])
+    startdate= DateField(label='Date of appointment (format: YYYY-MM-DD)', format='%Y-%m-%d',render_kw={
+        'class':"form-control",
+        'placeholder':'Please enter start date'
+        }, validators=[DataRequired()])
+    enddate = DateField(label='Date of appointment (format: YYYY-MM-DD)', format='%Y-%m-%d', render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter end date'
+    }, validators=[DataRequired()])
+    cost= StringField(label='Cost',render_kw={
+        'class':"form-control",
+        'placeholder':'Please enter the Cost'
+        }, validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class AddPrescriptionForm(FlaskForm):
+    medicine = StringField(label='Medicine', render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter the Medicine'
+    }, validators=[DataRequired()])
+    number= StringField(label='Number',render_kw={
+        'class':"form-control",
+        'placeholder':'Please enter the Number'
+        }, validators=[DataRequired()])
+    submit = SubmitField('Confirm')
+
+class CompleteOperationConfirmForm(FlaskForm):
+    complete = RadioField(label='Complete', choices=[('0', 'Complete'), ('1', 'Not Complete')], render_kw={
+        'class':"form-control",
+        'placeholder':'Please choose complete status'
+    },validators=[DataRequired()])
+    submit = SubmitField('Confirm')
+
 class AddProductForm(FlaskForm):
     Gid = IntegerField('Good id', validators=[DataRequired()])
     Gname = StringField('Good name', validators=[DataRequired()])

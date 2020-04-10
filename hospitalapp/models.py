@@ -52,6 +52,17 @@ class Appointment(db.Model):
     Ainfo = db.Column(db.String(1048))
     Adate = db.Column(db.DateTime, index=True)
     Acost = db.Column(db.String(64))
+    AneedOperation = db.Column(db.String(10), nullable=True)
+    AneedHospitalization = db.Column(db.String(10), nullable=True)
+    AneedPrescription = db.Column(db.String(10), nullable=True)
+    OperationPer= db.Column(db.String(10), nullable=True)
+    HospitalizationPer= db.Column(db.String(10), nullable=True)
+    ReleasePer= db.Column(db.String(10), nullable=True)
+    OperationEnd = db.Column(db.String(10), nullable=True)
+    HospitalizationEnd= db.Column(db.String(10), nullable=True)
+    OperationStatus = db.Column(db.String(10), nullable=True)
+    HospitalizationStatus = db.Column(db.String(10), nullable=True)
+    PrescriptionStatus = db.Column(db.String(10), nullable=True)
     prescription = db.relationship('Prescription', backref='pappointment', lazy='dynamic')#
     Hospitalization  = db.relationship('Hospitalization', backref='happointment', lazy='dynamic')#
     Operation = db.relationship('Operation', backref='oappointment', lazy='dynamic')#
@@ -101,6 +112,7 @@ class Operation(db.Model):
     Odate = db.Column(db.DateTime, index=True)
     Oinf = db.Column(db.String(1600))
     Ocost = db.Column(db.Integer)
+
 
 
 

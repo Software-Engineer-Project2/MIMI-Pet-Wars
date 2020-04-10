@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from hospitalapp import app, db
 from hospitalapp.forms import *
-from hospitalapp.models import Customer,Employee,Pet,Medicine,Hospitalization,Hospital,Good,Operation,Order,Doctor,Prescription,Appointment
+from hospitalapp.models import *
 from hospitalapp import photos
 from flask_uploads import UploadSet, IMAGES, configure_uploads
 
@@ -15,25 +15,28 @@ photos = UploadSet('products', IMAGES)
 configure_uploads(app, photos)
 
 
-
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html', title='Home')
 
+
 @app.route('/about')
 def about():
     return render_template('about_us.html', title='about')
+
 
 @app.route('/customer_mainpage')
 def customer_mainpage():
     return render_template('customer_mainpage.html', title='Home')
 
+
 @app.route('/employee_mainpage')
 def employee_mainpage():
     return render_template('employee_mainpage.html', title='Home')
 
-@app.route('/loggedin_home_customer',methods=['GET', 'POST'])
+
+@app.route('/loggedin_home_customer', methods=['GET', 'POST'])
 def loggedin_home_customer():
     if not session.get("USERNAME") is None:
         user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
@@ -79,7 +82,9 @@ def signupEmployee():
             return redirect(url_for('signupEmployee'))
 
         passw_hash = generate_password_hash(form.Epassword.data)
-        employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=form.Ephone.data,Egender=form.Egender.data, Eemail=form.Eemail.data, Ehiredate=form.Ehiredate.data, Epassword=passw_hash)
+        employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=form.Ephone.data,
+                            Egender=form.Egender.data, Eemail=form.Eemail.data, Ehiredate=form.Ehiredate.data,
+                            Epassword=passw_hash)
         db.session.add(employee)
         db.session.commit()
         session["USERNAME"] = employee.Ename
@@ -87,7 +92,17 @@ def signupEmployee():
     return render_template('signup_employee.html', title='Register a new user', form=form)
 
 
-@app.route('/arrangeappointmentEmployee', methods=['GET', 'POST'])
+@app.route('/ArrMainEmp')
+def ArrMainEmp():
+    if not session.get("USERNAME") is None:
+        user_in_db = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
+        return render_template('Arr_Main_Emp.html', Eusername=user_in_db.Ename)
+    else:
+        flash("Employee needs to either login or signup first")
+        return redirect(url_for('loginEmployee'))
+
+
+@app.route('/arraarrangeappointmentEmployee', methods=['GET', 'POST'])
 def arrangeappointmentemployee():
     form = ArrangeAppointmentFormEmployee()
     if not session.get("USERNAME") is None:
@@ -99,59 +114,276 @@ def arrangeappointmentemployee():
             infomation = form.Einf.data
             date = form.Edate.data
             cost = form.Ecost.data
-            appointment = Appointment(Apet=pet,Atype=type,Adoc=doctor,Acomplete=complete,Ainfo=infomation,Adate=date,Acost=cost)
+            appointment = Appointment(Apet=pet, Atype=type, Adoc=doctor, Acomplete=complete, Ainfo=infomation,
+                                      Adate=date, Acost=cost, AneedHospitalization='1', AneedOperation='1',
+                                      AneedPrescription='1')
             db.session.add(appointment)
             db.session.commit()
             return redirect(url_for('loggedin_home_employee'))
-        return render_template('arr_appointment_emp.html',title='arrangeappointment',form=form)
+        return render_template('arr_appointment_emp.html', title='arrangeappointment', form=form)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
-@app.route('/Prescription', methods=['GET', 'POST'])
-def Prescription():
-    form = PrescriptionForm()
-    if not session.get("USERNAME") is None:
-        if form.validate_on_submit():
-            medicine = form.Pmed.data
-            number = form.Pnumber.data
-            appointment = form.Pappointment.data
-            prescription = Prescription(Pmedicine=medicine,Pnumber=number,Pappointment=appointment)
-            db.session.add(prescription)
-            db.session.commit()
-            return redirect(url_for('loggedin_home_employee'))
-        return render_template('Prescription.html',title='Prescription',form=form)
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
 
-@app.route('/Hospitalization', methods=['GET', 'POST'])
-def Hospitalization():
-    form = HospitalizationForm()
+# @app.route('/Prescription', methods=['GET', 'POST'])
+# def Prescription():
+#     form = PrescriptionForm()
+#     if not session.get("USERNAME") is None:
+#         if form.validate_on_submit():
+#             medicine = form.Pmed.data
+#             number = form.Pnumber.data
+#             appointment = form.Pappointment.data
+#             prescription = Prescription(Pmedicine=medicine,Pnumber=number,Pappointment=appointment)
+#             db.session.add(prescription)
+#             db.session.commit()
+#             return redirect(url_for('loggedin_home_employee'))
+#         return render_template('Prescription.html',title='Prescription',form=form)
+#     else:
+#         flash("User needs to either login or signup first")
+#         return redirect(url_for('employee_mainpage'))
+
+
+
+
+@app.route('/AddHospitalization/<id>', methods=['GET', 'POST'])
+def AddHospitalization(id):
+    form = AddHospitalizationForm()
     if not session.get("USERNAME") is None:
+        appo_obj = Appointment.query.filter_by(id=id).first()
+        if not appo_obj:
+            abort(404)
         if form.validate_on_submit():
-            appointment = form.appointment.data
-            doc = form.doc.data
-            room = form.room.data
-            startdate = form.startdate.data
-            enddate = form.enddate.data
-            cost = form.cost.data
-            hospitalization = Hospitalization(Sappointment=appointment,Sdoc=doc,Sroom=room,Sstartdate=startdate,Senddate=enddate,Scost=cost)
+            appo_obj.AneedHospitalization = '0'  # this appointment need an hospitalization
+            appo_obj.HospitalizationPer = '1'  # customer not permit the hospitalization
+            hospitalization = Hospitalization(Sdoc=appo_obj.Adoc, Sappointment=id, Sroom=form.room.data,
+                                              Sstartdate=form.startdate.data, Senddate=form.enddate.data,
+                                              Scost=form.cost.data)
             db.session.add(hospitalization)
             db.session.commit()
-            return redirect(url_for('loggedin_home_employee'))
-        return render_template('Hospitalization.html',title='Hospitalization',form=form)
+            flash('Add hospitalization successfully', 'success')
+            return redirect(url_for('ArrAppEmployeeYD'))
+        else:
+            print(form.errors)
+        return render_template('AddHospitalization.html', title='Add Hospitalization', form=form, id=id)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
-@app.route('/DisplayAppointmentEmployee', methods=['GET', 'POST'])
-def DisplayAppointmentEmployee():
-    form = ArrangeAppointmentFormEmployee
+@app.route('/AddPrescription/<id>', methods=['GET', 'POST'])
+def AddPrescription(id):
+    form1 = AddPrescriptionForm()
+    form2 = AddPrescriptionForm()
+    form3 = AddPrescriptionForm()
     if not session.get("USERNAME") is None:
-        standard_appointments = Appointment.query.filter(Appointment.Atype=='1').all()
-        emergency_appointments = Appointment.query.filter(Appointment.Atype=='0').all()
-        return render_template('DisplayAppointmentEmployee.html', title='Display Appointment Employee', standard_appointments=standard_appointments,emergency_appointments=emergency_appointments,form=form)
+        appo_obj = Appointment.query.filter_by(id=id).first()
+        if not appo_obj:
+            abort(404)
+        if form1.submit.data and form1.validate():
+            appo_obj.AneedPrescription = '0'  # this appointment need an prescription
+            prescription1 = Prescription(Pmedicine=form1.medicine.data, Pnumber=form1.number.data, Pappointment=id)
+            db.session.add(prescription1)
+            db.session.commit()
+            flash('Add hospitalization successfully', 'success')
+            return redirect(url_for('AddPrescription', id=id))
+        else:
+            print(form1.errors)
+        if form2.submit.data and form2.validate():
+            appo_obj.AneedPrescription = '0'  # this appointment need an prescription
+            prescription2 = Prescription(Pmedicine=form2.medicine.data, Pnumber=form2.number.data, Pappointment=id)
+            db.session.add(prescription2)
+            db.session.commit()
+            flash('Add hospitalization successfully', 'success')
+            return redirect(url_for('AddPrescription', id=id))
+        else:
+            print(form2.errors)
+        if form3.submit.data and form3.validate():
+            appo_obj.AneedPrescription = '0'  # this appointment need an prescription
+            prescription3 = Prescription(Pmedicine=form3.medicine.data, Pnumber=form3.number.data, Pappointment=id)
+            db.session.add(prescription3)
+            db.session.commit()
+            flash('Add hospitalization successfully', 'success')
+            return redirect(url_for('AddPrescription', id=id))
+        else:
+            print(form3.errors)
+        return render_template('AddPrescription.html', title='Add Prescription', form1=form1, form2=form2, form3=form3,
+                               id=id)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/OperationMain', methods=['GET', 'POST'])
+def OperationMain():
+    if not session.get("USERNAME") is None:
+        user_in_db = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
+        return render_template('OperationMain.html', Eusername=user_in_db.Ename)
+    else:
+        flash("Employee needs to either login or signup first")
+        return redirect(url_for('loginEmployee'))
+
+@app.route('/HospitalizationMain', methods=['GET', 'POST'])
+def HospitalizationMain():
+    if not session.get("USERNAME") is None:
+        user_in_db = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
+        return render_template('HospitalizationMain.html', Eusername=user_in_db.Ename)
+    else:
+        flash("Employee needs to either login or signup first")
+        return redirect(url_for('loginEmployee'))
+
+@app.route('/ApplyingOperationPermission', methods=['GET', 'POST'])
+# Arrange confirmed appointments
+def ApplyingOperationPermission():
+    if not session.get("USERNAME") is None:
+        standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
+                                                         Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='1').all()
+        emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
+                                                          Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='1').all()
+        return render_template('ApplyingOperationPermission.html', title='Displays procedures for which customer approval is being sought',
+                               standard_appointments=standard_appointments,
+                               emergency_appointments=emergency_appointments)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/UnderOperation', methods=['GET', 'POST'])
+# Arrange confirmed appointments
+def UnderOperation():
+    if not session.get("USERNAME") is None:
+        standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
+                                                         Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='0',Appointment.OperationEnd=='1').all()
+        emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
+                                                          Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='0',Appointment.OperationEnd=='1').all()
+        return render_template('UnderOperation.html', title='Preparing for operation',
+                               standard_appointments=standard_appointments,
+                               emergency_appointments=emergency_appointments)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/AddOperation/<id>', methods=['GET', 'POST'])
+def AddOperation(id):
+    form = AddOperationForm()
+    if not session.get("USERNAME") is None:
+        appo_obj = Appointment.query.filter_by(id=id).first()
+        if not appo_obj:
+            abort(404)
+        if form.validate_on_submit():
+            appo_obj.AneedOperation = '0'  # this appointment need an operation
+            appo_obj.OperationPer = '1'  # customer not permit the operation
+            operation = Operation(Oappiiontment=id, Odoc=appo_obj.Adoc, Odate=form.Odate.data, Oinf=form.Oinf.data,
+                                  Ocost=form.Ocost.data)
+            db.session.add(operation)
+            db.session.commit()
+            flash('Add operation successfully', 'success')
+            return redirect(url_for('ArrAppEmployeeYD'))
+        else:
+            print(form.errors)
+        return render_template('AddOperation.html', title='Add Operation', form=form, id=id)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/CompleteOpeConfirm/<id>', methods=['GET', 'POST'])
+# Arrange confirmed appointments
+def CompleteOpeConfirm(id):
+    form = CompleteOperationConfirmForm()
+    if not session.get("USERNAME") is None:
+        appointment = Appointment.query.filter(id == id).first()
+        if form.validate_on_submit():
+            appointment.OperationEnd=form.complete.data
+            db.session.commit()
+            flash('Confirm successfully', 'success')
+            return redirect(url_for('UnderOperation'))
+        return render_template('CompleteOperationConfirm.html', title='Preparing for operation',form=form,id=id)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/CompletedOperation', methods=['GET', 'POST'])
+# Arrange confirmed appointments
+def CompletedOperation():
+    if not session.get("USERNAME") is None:
+        standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
+                                                         Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='0',Appointment.OperationEnd=='0').all()
+        emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
+                                                          Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='0',Appointment.OperationEnd=='0').all()
+        return render_template('CompletedOperation.html', title='Completed Operation',
+                               standard_appointments=standard_appointments,
+                               emergency_appointments=emergency_appointments)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/ApplyingHospitalizationPermission', methods=['GET', 'POST'])
+# 9. The customer's permission for hospitalization is being sought
+def ApplyingHospitalizationPermission():
+    if not session.get("USERNAME") is None:
+        standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
+                                                         Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='1').all()
+        emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
+                                                          Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='1').all()
+        return render_template('ApplyingHospitalizationPermission.html', title='Displays procedures for which customer approval is being sought',
+                               standard_appointments=standard_appointments,
+                               emergency_appointments=emergency_appointments)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/InHospitalization', methods=['GET', 'POST'])
+# 10. The pet is in hospital
+def InHospitalization():
+    if not session.get("USERNAME") is None:
+        standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
+                                                         Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='0',Appointment.HospitalizationEnd=='1').all()
+        emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
+                                                          Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='0',Appointment.HospitalizationEnd=='1').all()
+        return render_template('InHospitalization.html', title='Displays procedures for which customer approval is being sought',
+                               standard_appointments=standard_appointments,
+                               emergency_appointments=emergency_appointments)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/ReleaseHos', methods=['GET', 'POST'])
+# 7. Have been discharged from hospital
+def ReleaseHos():
+    if not session.get("USERNAME") is None:
+        standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
+                                                         Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='0',Appointment.HospitalizationEnd=='0').all()
+        emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
+                                                          Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='0',Appointment.HospitalizationEnd=='0').all()
+        return render_template('ReleaseHos.html', title='Displays procedures for which customer approval is being sought',
+                               standard_appointments=standard_appointments,
+                               emergency_appointments=emergency_appointments)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/ArrAppEmployeeYD', methods=['GET', 'POST'])
+# Arrange confirmed appointments
+def ArrAppEmployeeYD():
+    if not session.get("USERNAME") is None:
+        standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
+                                                         Appointment.Acomplete == '0').all()  # 0 : has been diagnosed
+        emergency_appointments = Appointment.query.filter(Appointment.Atype == '0', Appointment.Acomplete == '0').all()
+        return render_template('ArrAppEmployeeYD.html', title='Display appointment has completed diagnosis',
+                               standard_appointments=standard_appointments,
+                               emergency_appointments=emergency_appointments)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/ArrAppEmployeeND', methods=['GET', 'POST'])
+def ArrAppEmployeeND():
+    if not session.get("USERNAME") is None:
+        standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
+                                                         Appointment.Acomplete == '1').all()  # 1 : not diagnosis yet
+        emergency_appointments = Appointment.query.filter(Appointment.Atype == '0', Appointment.Acomplete == '1').all()
+        return render_template('ArrAppEmployeeND.html', title='Display Appointment Employee',
+                               standard_appointments=standard_appointments,
+                               emergency_appointments=emergency_appointments)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -178,17 +410,18 @@ def ModifyAppointmentEmployee(id):
             return redirect(url_for('loggedin_home_employee'))
         else:
             print(form.errors)
-        return render_template('AppointmentDetail.html', title='Modify Appointment', form=form, id = id)
+        return render_template('AppointmentDetail.html', title='Modify Appointment', form=form, id=id)
 
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+
 @app.route('/listproduct', methods=['GET', 'POST'])
 def listproduct():
     goods = Good.query.all()
-    return render_template('adminproduct.html',title='Shop', goods = goods)
-    
+    return render_template('adminproduct.html', title='Shop', goods=goods)
+
 
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
@@ -213,7 +446,8 @@ def addproduct():
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
-@app.route('/deleteproduct',methods=['GET', 'POST'])
+
+@app.route('/deleteproduct', methods=['GET', 'POST'])
 def deleteproduct(id):
     good = Good.query.get_or_404(id)
     db.session.delete(good)
@@ -221,14 +455,14 @@ def deleteproduct(id):
     flash("Delete Product")
     return redirect(url_for('adminproduct'), id=id)
 
-@app.route('/editproduct',methods=['GET', 'POST'])
+
+@app.route('/editproduct', methods=['GET', 'POST'])
 def editproduct():
     form = AddProductForm()
     return render_template('addproduct.html', form=form)
 
-    
-            
-@app.route('/order',methods=['GET', 'POST'])
+
+@app.route('/order', methods=['GET', 'POST'])
 def order():
     form = OrderForm()
     if form.validate_on_submit():
@@ -236,7 +470,7 @@ def order():
     render_template('order.html', title='order', form=form)
 
 
-@app.route('/signupCustomer',methods=['GET', 'POST'])
+@app.route('/signupCustomer', methods=['GET', 'POST'])
 def signupCustomer():
     form = SignupCustomer()
     if form.validate_on_submit():
@@ -246,8 +480,9 @@ def signupCustomer():
             print("99999")
             return redirect(url_for('signupCustomer'))
         passw_hash = generate_password_hash(form.Cpassword.data)
-        #customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data, password_hash=passw_hash)
-        customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data, Cgender=form.Cgender.data, Cpassword=passw_hash)
+        # customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data, password_hash=passw_hash)
+        customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data,
+                            Cgender=form.Cgender.data, Cpassword=passw_hash)
         db.session.add(customer)
         db.session.commit()
         session["USERNAME"] = customer.Cname
@@ -288,5 +523,4 @@ def make_appointment():
 
 @app.route('/Track State')
 def track_state():
-
     return '<h1>Track State</h1>'

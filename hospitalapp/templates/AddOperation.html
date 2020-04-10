@@ -1,0 +1,46 @@
+{% extends 'loggedin_index.html' %}
+{% block title %}
+    <title>Modify Appointment</title>
+{% endblock %}
+{% block content %}
+
+   <form action="{{ url_for('AddOperation',id=id) }}" method="post" enctype="multipart/form-data">
+   {{ form.csrf_token }}
+         {{ form.hidden_tag() }}
+      <p>
+         <div class="form-group">
+            {{ form.Odate.label }}<br>
+            {{ form.Odate(size=32) }}
+         </div>
+			{% for error in form.Odate.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+      </p>
+
+
+      <p>
+         <div class="form-group">
+                {{ form.Oinf.label }}<br>
+                {{ form.Oinf }}
+         </div>
+                {% for error in form.Oinf.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+      </p>
+
+
+
+      <p>
+         <div class="form-group">
+                {{ form.Ocost.label}}<br>
+                {{ form.Ocost }}
+         </div>
+                {% for error in form.Ocost.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+      </p>
+
+
+    {{ form.Osubmit.label }}<br>{{ form.Osubmit }}<br>
+    </form>
+{% endblock %}

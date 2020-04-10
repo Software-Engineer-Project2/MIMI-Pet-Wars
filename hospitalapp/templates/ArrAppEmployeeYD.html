@@ -1,0 +1,52 @@
+{% extends "loggedin_index.html" %}
+{% block content %}
+    {% if emergency_appointments %}
+		Emergency Appointments:(Click to edit)<br><hr>
+		<ul>
+		{% for ea in emergency_appointments %}
+			<li>
+				Pet Number: {{ ea.Apet }}
+                Type:{{ea.Atype}}
+                Doctor: {{ea.Adoc}}
+                Complete: {{ea.Acomplete}}
+                Information:{{ea.Ainfo}}
+                Dat:{{ea.Adate}}
+                  <button><a href={{url_for('AddPrescription',id=sa.id)}}>Prescription</a> </button>
+                <button><a href={{url_for('AddOperation',id=sa.id)}}>Operation</a> </button>
+                <button><a href={{url_for('AddHospitalization',id=sa.id)}}>Hospitalization</a> </button>
+
+            </li>
+		{% endfor %}
+		</ul>
+		<hr>
+	{% else %}
+		<p>No emergency appointments!</p>
+	{% endif %}
+
+	{% if standard_appointments %}
+		Standard Appointments:(Click to edit)<br><hr>
+		<ul>
+		{% for sa in standard_appointments %}
+			<li>
+				Pet Number: {{ sa.Apet }}
+                Type:{{sa.Atype}}
+                Doctor: {{sa.Adoc}}
+                Complete: {{sa.Acomplete}}
+                Information:{{sa.Ainfo}}
+                Date:{{sa.Adate}}
+                <button><a href={{url_for('AddPrescription',id=sa.id)}}>Prescription</a> </button>
+                <button><a href={{url_for('AddOperation',id=sa.id)}}>Operation</a> </button>
+                <button><a href={{url_for('AddHospitalization',id=sa.id)}}>Hospitalization</a> </button>
+
+
+            </li>
+		{% endfor %}
+		</ul>
+		<hr>
+	{% else %}
+		<p>No standard appointments!</p>
+	{% endif %}
+
+
+
+{% endblock %}
