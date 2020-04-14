@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>About us</title>
+    <link rel="stylesheet" type="text/css" href="../static/style/home.css">
 </head>
 <body>
-<h1>Pet Hospital</h1>
-<div align="right">
-    <a href="">Log in</a>
-    <a href="">Log up</a>
-</div>
-<div aria-orientation="horizontal" align="center">
-    <a href="">Pets Tips</a>
-    <a href="">Pets Shop</a>
-    <a href="{{ url_for('about')}}">About Us</a>
-</div>
+    <div id="bg">
+        <div class="navi"><h1>Healing Paws <br>Veterinary Hospital</h1></div>
+        <div class="navibar">
+        
+        <ul aria-orientation="horizontal">
+            <li><a id="cus" href="{{ url_for('customer_mainpage') }}">Customer </a></li>
+            <li><a id="emp" href="{{ url_for('employee_mainpage') }}">Employee </a></li>
+        </ul>
+        <ul id="bar" aria-orientation="horizontal">
+            <!-- <div id="navibar" aria-orientation="horizontal" align="center"> -->
+            <li><a href="pets_tips.html">Pets Tips</a></li>
+            <li><a href="pet_shop.html">Pets Shop</a></li>
+            <li><a href="about_us.html">About Us</a></li>
+            <li ><a id="homebtn" href="home_default.html">Home</a></li>
+            <!-- </div> -->
+        </ul>
+        
+        </div>
+    </div>
 
 <div align="center">
     <p>There will be textsssssssss</p>

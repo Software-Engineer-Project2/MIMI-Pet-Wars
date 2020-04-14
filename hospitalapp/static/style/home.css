@@ -1,0 +1,95 @@
+body {
+    background-color: whitesmoke;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#bg h1 {
+    color: rgb(9, 151, 151);
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.navi {
+    
+    float: left;
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.navibar {
+    
+    float: left;
+    margin-left: 18%;
+    margin-top: 8%;
+    margin-bottom: 10%;
+}
+
+#bg {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+}
+
+
+
+li {
+    list-style: none;
+    display: inline;
+}
+
+#cus {
+    display: inline;
+    text-decoration: none;
+    color: rgba(248, 143, 0, 0.7);    
+    border-style: solid;
+    border-width: 1.5px ;
+    border-color: rgba(248, 143, 0, 0.7);
+    padding: 10px 15px 10px 15px;
+    margin-left: 185px;
+}
+
+#emp {
+    display: inline;
+    text-decoration: none;
+    color: rgba(7, 112, 112, 0.7);
+    border-style: solid;
+    border-width: 1.5px ;
+    border-color: rgba(7, 112, 112, 0.7);
+    padding: 10px 15px 10px 15px;
+    margin-left: 20px;
+}
+
+#cus:hover {
+    color: white ;   
+    background-color: rgba(248, 143, 0, 0.255);
+}
+
+#emp:hover {
+    color: white ;   
+    background-color: rgba(7, 112, 112, 0.255);
+
+}
+
+#bar a {
+    text-decoration: none;
+    font-weight: 800;
+    color: teal;
+    
+    margin: 15px;
+}
+
+ul {
+    margin-top: 28px;
+}
+
+#bar #homebtn {
+    color: rgb(219, 127, 6);
+    margin-left: 30px;
+}
+
+img {
+    display: inline;
+    align-self: start;
+}

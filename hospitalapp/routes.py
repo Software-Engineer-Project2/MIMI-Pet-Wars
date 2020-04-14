@@ -5,6 +5,7 @@ from datetime import date
 from flask import render_template, flash, redirect, url_for, session, request, abort
 from werkzeug.security import check_password_hash, generate_password_hash
 
+
 from hospitalapp import app, db
 from hospitalapp.forms import *
 from hospitalapp.models import *

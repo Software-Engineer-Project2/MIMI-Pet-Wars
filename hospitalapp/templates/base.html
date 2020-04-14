@@ -1,5 +1,7 @@
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="../static/style/home.css">
+
         {% if title %}
         <title>{{ title }} - microblog</title>
         {% else %}
@@ -7,12 +9,26 @@
         {% endif %}
     </head>
     <body>
-        <div>
-            Pet Wars Index:
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{url_for('about')}}">about us</a>
+        <div id="bg">
+            <div class="navi"><h1>Healing Paws <br>Veterinary Hospital</h1></div>
+            <div class="navibar">
+            
+            <ul aria-orientation="horizontal">
+                <li><a id="cus" href="{{ url_for('customer_mainpage') }}">Customer </a></li>
+                <li><a id="emp" href="{{ url_for('employee_mainpage') }}">Employee </a></li>
+            </ul>
+            <ul id="bar" aria-orientation="horizontal">
+                <!-- <div id="navibar" aria-orientation="horizontal" align="center"> -->
+                <li><a href="pets_tips.html">Pets Tips</a></li>
+                <li><a href="pet_shop.html">Pets Shop</a></li>
+                <li><a href="about_us.html">About Us</a></li>
+                <li ><a id="homebtn" href="home_default.html">Home</a></li>
+                <!-- </div> -->
+            </ul>
+            
+            </div>
         </div>
-        <hr>
+        
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
