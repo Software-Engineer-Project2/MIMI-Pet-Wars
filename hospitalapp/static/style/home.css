@@ -35,6 +35,7 @@ body {
 
 
 li {
+    margin: auto;
     list-style: none;
     display: inline;
 }
@@ -91,5 +92,7 @@ ul {
 
 img {
     display: inline;
-    align-self: start;
+    margin: auto;
+    align-self: center;
+    align-items: center;
 }

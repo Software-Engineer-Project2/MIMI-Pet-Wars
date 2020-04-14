@@ -1,0 +1,41 @@
+body {
+    background-image: url('empSignin.jpg');
+    background-repeat:no-repeat;
+    background-size: 100% 150%;
+    
+}
+
+form {
+    background-color: rgba(245, 245, 245, 0.6);
+    border-radius: 20px;
+    width: 50%;
+    
+     
+    margin: auto;
+    align-self: center;
+    margin-top: 8%;
+}
+
+form div {
+    margin-left: 100px;
+    font-size: large;
+}
+
+.kuang {
+    float: right;
+    margin-right: 100px;
+    border-radius: 20px;
+}
+
+#sub {
+    float: right;
+    margin-right: 100px;
+    border-radius: 20px;
+    
+    
+
+}
+
+button {
+    background-color: orange;
+}

@@ -20,19 +20,33 @@
             <li><a href="pets_tips.html">Pets Tips</a></li>
             <li><a href="pet_shop.html">Pets Shop</a></li>
             <li><a href="about_us.html">About Us</a></li>
-            <li ><a id="homebtn" href="home_default.html">Home</a></li>
+            <li ><a id="homebtn" href="{{ url_for('index') }}">Home</a></li>
             <!-- </div> -->
         </ul>
         
         </div>
     </div>
 </div>
-{% block content %}
-<h1>Employee, Welcome to Pet Wars
-     </h1>
-     <a href="{{ url_for('loginEmployee') }}">Log in </a>>
-     <p>If not register click here</p>
-     <a href="{{ url_for('signupEmployee') }}">Sign up </a>>
-{% endblock %}
+<h1 style="color: orange;">Employee, Welcome Back!</h1>
+<div >
+<ul style="display: inline-block; margin-left: 20%;">
+    <li><img src="../static/style/inIcon.png" width="200px" height="200px"></li>
+    <br/>
+    <li> 
+    <a href="{{ url_for('loginEmployee') }}" 
+     style="text-decoration: none; font-size: x-large; float: right;">
+        Log in </a>
+    </li>    
+</ul>
+<ul style="display: inline-block; margin-left: 20%;">     
+    <li><img src="../static/style/upIcon.svg"width="200px" height="200px"></li>
+    <br/>
+    <li> 
+    <a href="{{ url_for('signupEmployee') }}" 
+     style="text-decoration: none; font-size: x-large; float: right;">
+        Sign up </a>
+    </li>    
+</ul>
+</div>
 </body>
 </html>

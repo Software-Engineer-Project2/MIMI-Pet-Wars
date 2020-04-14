@@ -16,11 +16,11 @@ class LoginFormEmployee(FlaskForm):
 
 class SignupFormEmployee(FlaskForm):
     Eusername = StringField('Username', validators=[DataRequired()])
-    Eidcard = StringField('id', validators=[DataRequired()])
-    Ephone = StringField('phone', validators=[DataRequired()])
+    Eidcard = StringField('Id', validators=[DataRequired()])
+    Ephone = StringField('Phone', validators=[DataRequired()])
     Egender = RadioField('Gender', choices=[('0', 'Male'), ('1', 'Female')], validators=[DataRequired()])
     Eemail = StringField('Email', validators=[DataRequired()])
-    Ehiredate = DateField('Date of employment (format: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
+    Ehiredate = DateField('Join in Date(YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
     Epassword = PasswordField('Password', validators=[DataRequired()])
     Epassword2 = PasswordField('Repeat Password', validators=[DataRequired()])
     Esubmit = SubmitField('Register')
