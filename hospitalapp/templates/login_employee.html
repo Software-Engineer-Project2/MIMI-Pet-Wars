@@ -1,8 +1,9 @@
-{% extends 'loggedin_index.html' %}
+{% extends "loggedin_index.html" %}
 
 {% block content %}
     <h1>Sign In</h1>
-    <form action="" method="post" novalidate>
+    <form style="margin-left: 500px;"
+    action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
             {{ form.Eusername.label }}<br>

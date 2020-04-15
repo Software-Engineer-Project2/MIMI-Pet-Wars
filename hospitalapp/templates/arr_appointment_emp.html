@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pet_Wars system arrange appointment</title>
-</head>
-<body>
-    <form action="" method="post" novalidate id="ArrangeAppointmentFormEmployee">
+{% extends 'loggedin_index.html' %}
+{% block title %}
+    <title>Modify Appointment</title>
+{% endblock %}
+{% block content %}
+<h1>test</h1>
+<h1>test</h1>
+
+    <form style="margin-left: 500px;" 
+    action="" method="post" novalidate id="ArrangeAppointmentFormEmployee">
         {{ form.hidden_tag() }}
         <p>
             <div id="Epet">
             {{ form.Epet.label }}<br>{{ form.Epet(size=32) }}</div>
 			{% for error in form.Epet.errors %}
             <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
+            {% endfor %}
         </p>
 
         <p>
@@ -34,7 +36,7 @@
                 {{ form.Edoc.label }}<br>{{ form.Edoc }}</div>
                 {% for error in form.Edoc.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}<br>
+                {% endfor %}
         </p>
 
         <p>
@@ -78,6 +80,5 @@
 
 
     {{ form.Esubmit.label }}<br>{{ form.Esubmit }}<br>
-</form>>
-</body>
-</html>
+</form>
+{% endblock %}

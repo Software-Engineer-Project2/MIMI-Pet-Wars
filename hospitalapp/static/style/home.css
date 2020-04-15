@@ -96,3 +96,26 @@ img {
     align-self: center;
     align-items: center;
 }
+
+#bottom {
+   
+    margin-left: 300px;
+}
+
+#bottom p {
+    display: inline;
+    float: left;
+    margin-left: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: gray;
+}
+
+Strong {
+    color: teal;
+    font-size: x-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+
+

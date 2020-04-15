@@ -12,27 +12,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 style="color: orange;">Customer, Welcome Back!</h1>
-<div >
-<ul style="display: inline-block; margin-left: 20%;">
-    <li><img src="../static/style/inIcon.png" width="200px" height="200px"></li>
-    <br/>
-    <li> 
-    <a href="{{ url_for('loginCustomer') }}" 
-     style="text-decoration: none; font-size: x-large; float: right;">
-        Log in </a>
-    </li>    
-</ul>
-<ul style="display: inline-block; margin-left: 20%;">     
-    <li><img src="../static/style/upIcon.svg"width="200px" height="200px"></li>
-    <br/>
-    <li> 
-    <a href="{{ url_for('signupCustomer') }}" 
-     style="text-decoration: none; font-size: x-large; float: right;">
-        Sign up </a>
-    </li>    
-</ul>
-</div>
+
+<div id="main">
+    <ul style="display: inline-block; ">
+        <li><img src="../static/style/inIcon.png" width="150px" height="150px"></li>
+        <br/>
+        <li> 
+        <a href="{{ url_for('loginCustomer') }}" 
+         style="text-decoration: none; font-size: x-large; float: right;">
+            Log in </a>
+        </li>    
+    </ul>
+    <ul style="display: inline-block;">     
+        <li><img src="../static/style/upIcon.png" width="150px" height="150px"></li>
+        <br/>
+        <li> 
+        <a href="{{ url_for('signupCustomer') }}" 
+         style="text-decoration: none; font-size: x-large; float: right;">
+            Sign up </a>
+        </li> 
+    </ul>
+    
+    </div>
+<br><br><br>
 {% endblock %}
 </body>
 </html>

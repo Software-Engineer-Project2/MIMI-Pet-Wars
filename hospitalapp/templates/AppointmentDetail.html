@@ -3,8 +3,10 @@
     <title>Modify Appointment</title>
 {% endblock %}
 {% block content %}
-
-   <form action="{{ url_for('ModifyAppointmentEmployee',id=id) }}" method="post" enctype="multipart/form-data">
+       <h1>test</h1>
+       <h1>test</h1>
+   <form style="margin-left: 500px;"
+   action="{{ url_for('ModifyAppointmentEmployee',id=id) }}" method="post" enctype="multipart/form-data">
    {{ form.csrf_token }}
          {{ form.hidden_tag() }}
       <p>
@@ -89,4 +91,5 @@
 
     {{ form.Esubmit.label }}<br>{{ form.Esubmit }}<br>
     </form>
+       
 {% endblock %}
