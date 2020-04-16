@@ -4,7 +4,7 @@ from datetime import date
 
 from flask import render_template, flash, redirect, url_for, session, request, abort
 from werkzeug.security import check_password_hash, generate_password_hash
-
+from werkzeug.utils import secure_filename
 
 from hospitalapp import app, db
 from hospitalapp.forms import *
@@ -12,7 +12,7 @@ from hospitalapp.models import *
 from hospitalapp import photos
 from flask_uploads import UploadSet, IMAGES, configure_uploads
 
-photos = UploadSet('products', IMAGES)
+photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
 
 
@@ -476,6 +476,10 @@ def editproduct(id):
         return redirect(url_for('listproduct'))
     return render_template('editproduct.html', form=form)
 
+@app.route('/shoppage', methods=['GET', 'POST'])
+def shoppage():
+    goods = Good.query.all()
+    return render_template('shoppage.html',goods=goods)
 
 @app.route('/order', methods=['GET', 'POST'])
 def order():

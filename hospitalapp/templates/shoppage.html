@@ -1,0 +1,17 @@
+<h1>Shoppage</h1>
+<table>
+	<tr>
+		<th>Image</th>
+		<th>Name</th>
+		<th>Price</th>
+	</tr>
+	{% for Good in goods %}
+	<tr>
+		<td>
+			<img src="{{ url_for('static', filename= './img/photos/' + Good.Gimage) }}" width="100" height="100">
+		</td>
+		<td>{{ Good.Gname }}</td>
+		<td>{{ Good.Gprice }}</td>
+	</tr>
+	{% endfor %}
+</table>
