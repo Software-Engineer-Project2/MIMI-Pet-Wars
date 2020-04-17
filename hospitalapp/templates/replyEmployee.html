@@ -1,0 +1,49 @@
+{% extends 'loggedin_index.html' %}
+{% block title %}
+    <title>Reply</title>
+{% endblock %}
+{% block content %}
+
+   <form style="margin-left: 500px;"
+   action="{{ url_for('replyEmployee',id=id) }}" method="post" enctype="multipart/form-data">
+   {{ form.csrf_token }}
+         {{ form.hidden_tag() }}
+      <p>
+         <div class="form-group">
+            {{ form.reply.label }}<br>
+            {{ form.reply(size=32) }}
+         </div>
+			{% for error in form.reply.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+      </p>
+        <p>
+         <div class="form-group">
+
+                {{ form.replydate.label }}<br>
+                {{ form.replydate(size=32) }}
+         </div>
+                {% for error in form.replydate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+      </p>
+      <p>
+         <div class="form-group">
+                {% for choice in form.read %}
+                    <tr>
+                        <td>{{ choice }}</td>
+                        <td>{{ choice.label }}</td>
+                    </tr>
+                {% endfor %}
+        </div>
+                {% for error in form.read.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+      </p>
+
+
+
+    {{ form.submit.label }}<br>{{ form.submit }}<br>
+    </form>
+       
+{% endblock %}

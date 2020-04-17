@@ -1,0 +1,26 @@
+{% extends "loggedin_index.html" %}
+{% block content %}
+
+    {% if post %}
+		Post:(Click to edit)<br><hr>
+		<ul>
+		{% for p in post %}
+			<li><a href="{{ url_for('replyEmployee',id=p.id)}}" >
+				Content : {{ p.Pcontent }}
+                Date:{{p.Pdate}}
+                Customer: {{p.Pcustomer}}
+                </a>
+
+            </li>
+		{% endfor %}
+		</ul>
+		<hr>
+	{% else %}
+		<p>No message!</p>
+	{% endif %}
+
+
+
+
+
+{% endblock %}
