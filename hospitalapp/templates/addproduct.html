@@ -1,12 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>upload</title>
-</head>
-<body>
-    <h1>Addproduct</h1>
-    <form method="post" enctype="multipart/form-data">
+{% extends "base.html" %}
+{% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+    <h1 style="color: teal; margin-left: 500px;">Add product</h1>
+    <form 
+ style="margin-left: 500px;"
+ method="post" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
  		<p>
  			{{ form.Gid.label }}<br>
@@ -40,5 +39,5 @@
     {% if img_url %}
         <img src="{{ img_url }}" />
     {% endif %}
-</body>
-</html>
+
+ {% endblock %}

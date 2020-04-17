@@ -7,10 +7,10 @@
 </head>
 <body>
 <div id="bg">
-    <div class="navi"><h1>Healing Paws <br>Veterinary Hospital</h1></div>
-    <div class="navibar">
+    <div id="navi"><h1>Healing Paws <br>Veterinary Hospital</h1></div>
+    <div id="navibar">
     
-    <ul aria-orientation="horizontal">
+    <ul id="barr" aria-orientation="horizontal">
         <li><a id="cus" href="{{ url_for('customer_mainpage') }}">Customer </a></li>
         <li><a id="emp" href="{{ url_for('employee_mainpage') }}">Employee </a></li>
     </ul>
@@ -22,20 +22,18 @@
         <li ><a id="homebtn" href="{{ url_for('index') }}">Home</a></li>
         <!-- </div> -->
     </ul>
-    
     </div>
 </div>
 
-<div>
-    <ul id="image">
-    <li id="img1"><img  src="../static/style/left.png" width="4%" height="4%" ></li>
-    <li id="img0"><img  src="../static/style/main1.jpg" width="60%" height="40%"></li>
-    <li id="img2"><img  src="../static/style/right.png" width="4%" height="4%"></li>
-    </ul>
-</div>
 
 
+    <!-- <ul id="image"> -->
+    <!-- <li id="img1"><img  src="../static/style/left.png" width="4%" height="4%" ></li> -->
+    <!-- <li id="img0"><img  src="../static/style/main1.jpg" width="70%" height="40%"></li> -->
+    <!-- <li id="img2"><img  src="../static/style/right.png" width="4%" height="4%"></li> -->
+    <!-- </ul> -->
 
+    <img id="img0" src="../static/style/main1.jpg" width="70%" >
 
 <div id="bottom">
     <br><br><br><br><br>

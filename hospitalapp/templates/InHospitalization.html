@@ -1,10 +1,14 @@
 {% extends "loggedin_index.html" %}
 {% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+<div style="background-color: white; width: 70%; margin-left: 200px; box-shadow: gainsboro 2px 2px;
+	padding: 20px;">
     {% if emergency_appointments %}
-		Emergency Appointments:(Click to edit)<br><hr>
+	<h2 style="color: teal;">Emergency Appointments:(Click to edit)</h2><br>
 		<ul>
 		{% for ea in emergency_appointments %}
-			<li>
+			<li style="padding: 10px;">
 				Pet Number: {{ ea.Apet }}
                 Type:{{ea.Atype}}
                 Doctor: {{ea.Adoc}}
@@ -18,14 +22,17 @@
 		</ul>
 		<hr>
 	{% else %}
-		<p>No emergency appointments!</p>
+	<h4>No emergency appointments!</h4>
 	{% endif %}
+	</div>
 
+	<div style="background-color: white; width: 70%; margin-left: 200px; box-shadow: gainsboro 2px 2px;
+	padding: 20px;">
 	{% if standard_appointments %}
 		Standard Appointments:(Click to edit)<br><hr>
 		<ul>
 		{% for sa in standard_appointments %}
-			<li><a href="{{ url_for('ModifyAppointmentEmployee',id=sa.id)}}" >
+			<li style="padding: 10px;"><a href="{{ url_for('ModifyAppointmentEmployee',id=sa.id)}}" >
 				Pet Number: {{ sa.Apet }}
                 Type:{{sa.Atype}}
                 Doctor: {{sa.Adoc}}
@@ -39,9 +46,9 @@
 		</ul>
 		<hr>
 	{% else %}
-		<p>No standard appointments!</p>
+	<h4>No Standard Appointments!</h4>
 	{% endif %}
-
+	</div>
 
 
 {% endblock %}

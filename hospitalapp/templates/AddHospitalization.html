@@ -3,8 +3,11 @@
     <title>Modify Appointment</title>
 {% endblock %}
 {% block content %}
-
-   <form action="{{ url_for('AddHospitalization',id=id) }}" method="post" enctype="multipart/form-data">
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+   <form
+   style="margin-left: 500px;"
+   action="{{ url_for('AddHospitalization',id=id) }}" method="post" enctype="multipart/form-data">
    {{ form.csrf_token }}
          {{ form.hidden_tag() }}
       <p>

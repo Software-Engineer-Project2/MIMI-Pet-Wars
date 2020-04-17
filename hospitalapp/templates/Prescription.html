@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pet_Wars system arrange appointment</title>
-</head>
-<body>
+{% extends 'loggedin_index.html' %}
+{% block contents %}
     <form action="" method="post" novalidate id="PrescriptionForm">
         {{ form.hidden_tag() }}
         <p>
@@ -34,5 +29,4 @@
 
     {{ form.submit.label }}<br>{{ form.submit }}<br>
 </form>>
-</body>
-</html>
+{% endblock %}

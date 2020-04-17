@@ -1,10 +1,14 @@
-
+{% extends "loggedin_index.html" %}
 {% block title %}
     <title>Modify Appointment</title>
 {% endblock %}
 {% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
 
-   <form1 action="{{ url_for('AddPrescription',id=id) }}" method="post" enctype="multipart/form-data">
+   <form
+   style="margin-left: 500px;"
+    action="{{ url_for('AddPrescription',id=id) }}" method="post" enctype="multipart/form-data">
    {{ form1.csrf_token }}
          {{ form1.hidden_tag() }}
       <p>
@@ -26,8 +30,10 @@
             {% endfor %}<br>
       </p><br>
  {{ form1.submit.label }}<br>{{ form1.submit }}<br>
-    </form1>
-<form2 action="{{ url_for('AddPrescription',id=id) }}" method="post" enctype="multipart/form-data">
+    </form>
+<form 
+style="margin-left: 500px;"
+action="{{ url_for('AddPrescription',id=id) }}" method="post" enctype="multipart/form-data">
    {{ form2.csrf_token }}
          {{ form2.hidden_tag() }}
       <p>
@@ -50,8 +56,10 @@
       </p><br>
  {{ form2.submit.label }}<br>{{ form2.submit }}<br>
 
-    </form2>
-<form3 action="{{ url_for('AddPrescription',id=id) }}" method="post" enctype="multipart/form-data">
+    </form>
+<form
+style="margin-left: 500px;"
+action="{{ url_for('AddPrescription',id=id) }}" method="post" enctype="multipart/form-data">
    {{ form3.csrf_token }}
          {{ form3.hidden_tag() }}
       <p>
@@ -74,5 +82,5 @@
       </p><br>
  {{ form3.submit.label }}<br>{{ form3.submit }}<br>
 
-    </form3>
+    </form>
 {% endblock %}

@@ -1,10 +1,13 @@
-<h1>Shoppage</h1>
-<table>
+{% extends 'base.html' %}
+{% block content %}
+
+<table style="width: 30%; margin-left: 400px; font-size: larger; color: teal; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 	<tr>
 		<th>Image</th>
 		<th>Name</th>
 		<th>Price</th>
 	</tr>
+	<br><br><br><br>
 	{% for Good in goods %}
 	<tr>
 		<td>
@@ -13,5 +16,7 @@
 		<td>{{ Good.Gname }}</td>
 		<td>{{ Good.Gprice }}</td>
 	</tr>
-	{% endfor %}
+	{% endfor %}	
 </table>
+
+{% endblock %}

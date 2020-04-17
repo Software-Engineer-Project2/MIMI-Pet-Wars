@@ -10,7 +10,7 @@ body {
     margin-bottom: 10%;
 }
 
-.navi {
+#navi {
     
     float: left;
     margin-left: 10%;
@@ -18,7 +18,7 @@ body {
     margin-bottom: 10%;
 }
 
-.navibar {
+#navibar {
     
     float: left;
     margin-left: 18%;
@@ -81,7 +81,11 @@ li {
     margin: 15px;
 }
 
-ul {
+#bar {
+    margin-top: 28px;
+}
+
+#barr {
     margin-top: 28px;
 }
 
@@ -90,12 +94,7 @@ ul {
     margin-left: 30px;
 }
 
-img {
-    display: inline;
-    margin: auto;
-    align-self: center;
-    align-items: center;
-}
+
 
 #bottom {
    
@@ -117,5 +116,7 @@ Strong {
     
 }
 
-
+#img0 {
+    margin-left: 185px;
+}
 
