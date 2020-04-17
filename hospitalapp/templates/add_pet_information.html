@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Pet Information</title>
+</head>
+<body>
+    {% extends "base.html" %}
+
+ {% block content %}
+    {% from 'macros.html' import form_field %}
+    <h2 align="center">{{ mes }}</h2>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+    <p>
+            <div id="Pname">
+            {{ form.Pname.label }}<br>{{ form.Pname(size=32) }}</div>
+			{% for error in form.Pname.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+    </p>
+    <p>
+            <div id="Page">
+            {{ form.Page.label }}<br>{{ form.Page(size=32) }}</div>
+			{% for error in form.Page.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+    </p>
+    <p>
+            <div id="Psex ">
+            {{ form.Psex .label }}<br>{{ form.Psex (size=32) }}</div>
+			{% for error in form.Psex .errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+    </p>
+    <p>
+            <div id="Pspecies ">
+            {{ form.Pspecies.label }}<br>{{ form.Pspecies(size=32) }}</div>
+			{% for error in form.Pspecies.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+    </p>
+    <p>
+            <div id="Pinfo">
+            {{ form.Pinfo.label }}<br>{{ form.Pinfo(size=32) }}</div>
+            </div>
+			{% for error in form.Pinfo.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+    </p>
+    <br>{{ form.submit }}<br>
+    </form>
+    {% endblock %}
+</body>
+</html>

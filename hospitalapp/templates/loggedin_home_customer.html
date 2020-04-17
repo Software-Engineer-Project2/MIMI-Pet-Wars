@@ -7,17 +7,17 @@
 <body>
 {% extends "base.html" %}
 {% block content %}
-
-
+	<a class="link1" href="{{ url_for('add_pet_information')}}">Add Pet Information</a>
+    <br>
+    <br>
+    <a class="link1" href="{{ url_for('my_pets_information')}}">My Pets</a>
+    <br>
+    <br>
 	<a href="{{ url_for('shoppage') }}">View product</a>><br>
 	<a class="link1" href="{{ url_for('make_appointment')}}">Make Appointment</a>
     <br>
     <br>
     <a class="link1" href="{{ url_for('track_state')}}">Keep Track Of State</a>
-
-
-
-
 {% endblock %}
 </body>
 </html>

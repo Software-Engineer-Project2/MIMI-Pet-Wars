@@ -565,9 +565,39 @@ def logoutEmployee():
 @app.route('/Make Appointment', methods=['GET', 'POST'])
 def make_appointment():
     form = MakeAppointment()
-    return render_template('make_appointment_customer.html', title='Make Appointment', form=form)
+    if form.validate_on_submit():
+        appointment = Appointment(Apet=form.pet.data, Aownerphone=form.ownerphone.data, Atype=form.pettype.data,
+                                  Adoc=form.doctor.data, Adate=form.datetime.data, Ainfo=form.otherdescription.data,
+                                  Acomplete='Not complete' )
+        db.session.add(appointment)
+        db.session.commit()
+        return redirect(url_for('track_state'))
 
+    return render_template('make_appointment_customer.html', title='Make Appointment', form=form)
 
 @app.route('/Track State')
 def track_state():
     return '<h1>Track State</h1>'
+
+
+@app.route('/Add Pet information',methods=['GET', 'POST'])
+def add_pet_information():
+    form = Addpetinformation()
+    user = session["USERNAME"]
+    user_in_db = Customer.query.filter(Customer.Cname == user).first()
+    mes = 'Hello, %s ! , you can add your pet information here' % user
+    if form.validate_on_submit():
+        pet = Pet(Pname=form.Pname.data, Page=form.Page.data, Psex=form.Psex.data, Pspecies=form.Pspecies.data, Pinfo=form.Pinfo.data, Powner=user_in_db.id)
+        db.session.add(pet)
+        db.session.commit()
+        flash('Save Pet Information Successfully !!!')
+        return redirect(url_for('my_pets_information'))
+    return render_template('add_pet_information.html', title='Add Pet Information', form=form, mes=mes)
+
+
+@app.route('/My Pets')
+def my_pets_information():
+    pets = Pet.query.all()
+    user = session["USERNAME"]
+    mes = 'Hello, %s ! , Here are your pets information' % user
+    return render_template('my_pets_information.html', pets=pets, mes=mes)
