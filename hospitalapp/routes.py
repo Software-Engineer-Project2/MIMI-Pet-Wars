@@ -70,7 +70,7 @@ def loginEmployee():
             session["USERNAME"] = user_in_db.Ename
             return redirect(url_for('loggedin_home_employee'))
         flash('Incorrect Password')
-        return redirect(url_for('login'))
+        return redirect(url_for('loginEmployee'))
     return render_template('login_employee.html', title='Sign In', form=form)
 
 
@@ -101,6 +101,34 @@ def ArrMainEmp():
     else:
         flash("Employee needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
+
+
+@app.route('/PostEmployee', methods=['GET', 'POST'])
+# Displays unanswered messages
+def PostEmployee():
+    if not session.get("USERNAME") is None:
+        post = Post.query.filter(Post.Pread != '0').all()
+        return render_template('PostEmployee.html',title='Post Employee',post=post)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/replyEmployee/<id>', methods=['GET', 'POST'])
+def replyEmployee(id):
+    form = PostEmployeeForm()
+    if not session.get("USERNAME") is None:
+        post_obj = Post.query.filter(id == id).first()
+        if form.validate_on_submit():
+            post_obj.Preply = form.reply.data
+            post_obj.Preplydate = form.replydate.data
+            post_obj.Pread = form.read.data
+            db.session.commit()
+            flash('Reply successfully', 'success')
+            return redirect(url_for('PostEmployee'))
+        return render_template('replyEmployee.html', title='Fill in the reply', form=form, id=id)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
 
 
 @app.route('/arraarrangeappointmentEmployee', methods=['GET', 'POST'])

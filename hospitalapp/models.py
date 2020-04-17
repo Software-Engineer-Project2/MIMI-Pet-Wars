@@ -40,7 +40,15 @@ class Prescription(db.Model):
 
     def __repr__(self):
         return '<Prescription {}>'.format(Prescription)
-
+class Post(db.Model):
+    __tablename__ = 'pet_post'
+    id = db.Column(db.Integer, primary_key=True)
+    Pcontent = db.Column(db.String(1048), index=True)
+    Pdate = db.Column(db.DateTime, index=True)
+    Pcustomer = db.Column(db.Integer, db.ForeignKey('pet_customer.id'))
+    Preply = db.Column(db.String(64), index=True,nullable=True)
+    Preplydate = db.Column(db.DateTime, index=True,nullable=True)
+    Pread = db.Column(db.String(10), index=True)
 
 class Appointment(db.Model):
     __tablename__ = 'pet_appointment'

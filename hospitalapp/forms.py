@@ -113,6 +113,22 @@ class AddPrescriptionForm(FlaskForm):
         }, validators=[DataRequired()])
     submit = SubmitField('Confirm')
 
+class PostEmployeeForm(FlaskForm):
+    reply = StringField(label='Reply', render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter your reply'
+    }, validators=[DataRequired()])
+
+    replydate = DateField(label='Date (format: YYYY-MM-DD)', format='%Y-%m-%d',  render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter your reply'
+    }, validators=[DataRequired()])
+    read = RadioField(label='Read', choices=[('0', 'Read'), ('1', 'Not Read')], render_kw={
+        'class':"form-control",
+        'placeholder':'Please choose read status'
+    },validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
 class CompleteOperationConfirmForm(FlaskForm):
     complete = RadioField(label='Complete', choices=[('0', 'Complete'), ('1', 'Not Complete')], render_kw={
         'class':"form-control",
