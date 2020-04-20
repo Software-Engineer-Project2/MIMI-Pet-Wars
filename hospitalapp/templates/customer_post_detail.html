@@ -1,0 +1,24 @@
+{% extends"base.html" %}
+
+{% block content %}
+
+
+<h2>{{post.Ptopic}}</h2>
+
+<h3>{{post.Pcontent}}</h3><small>{{post.Pdate}}</small>
+    {% if answer %}
+        <h2>Answer</h2>
+    {% for a in answer %}
+        <h3>{{a.Acontent}}</h3><small>{{a.Adate}}</small>
+    {% endfor %}
+
+
+
+
+
+    {% else %}
+
+        <h3 >Please wait for the answer.</h3>
+
+    {% endif %}
+{% endblock %}

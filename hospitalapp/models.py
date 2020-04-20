@@ -13,6 +13,7 @@ class Customer(db.Model):
     Cgender = db.Column(db.String(10), index=True)
     Corder = db.relationship('Order', backref='ocustomer', lazy='dynamic')#
     Cpet = db.relationship('Pet', backref='owner', lazy='dynamic')#
+    Cpost = db.relationship('Post', backref='poster', lazy='dynamic')
 
 
 
@@ -158,3 +159,24 @@ class Doctor(db.Model):
     hospitalization = db.relationship('Hospitalization', backref='sdoctor', lazy='dynamic')
     appointment = db.relationship('Appointment', backref='adoctor', lazy='dynamic')
     operation = db.relationship('Operation', backref='odoctor', lazy='dynamic')
+
+
+class Post(db.Model):
+    __tablename__ = 'pet_post'
+    id = db.Column(db.Integer, primary_key=True)
+    Ptopic = db.Column(db.String(1048), index=True)
+    Pcontent = db.Column(db.String(1048), index=True)
+    Pdate = db.Column(db.DateTime,index=True,default=datetime.now())
+    Pcustomer = db.Column(db.Integer, db.ForeignKey('pet_customer.id'))
+    Panswer = db.relationship('Answer', backref='answerer', lazy='dynamic')
+    def __repr__(self):
+        return '<Post:{}>'.format(self.Ptopic)
+
+class Answer(db.Model):
+    __tablename__ = 'pet_answer'
+    id = db.Column(db.Integer, primary_key=True)
+    Acontent = db.Column(db.String(1048), index=True)
+    Adate = db.Column(db.DateTime,index=True,default=datetime.now())
+    Apost = db.Column(db.Integer, db.ForeignKey('pet_post.id'))
+    def __repr__(self):
+        return '<Post:{}>'.format(self.Acontent)

@@ -70,7 +70,7 @@ def loginEmployee():
             session["USERNAME"] = user_in_db.Ename
             return redirect(url_for('loggedin_home_employee'))
         flash('Incorrect Password')
-        return redirect(url_for('login'))
+        return redirect(url_for('loginEmployee'))
     return render_template('login_employee.html', title='Sign In', form=form)
 
 
@@ -423,6 +423,47 @@ def listproduct():
     goods = Good.query.all()
     return render_template('adminproduct.html', title='Shop', goods=goods)
 
+@app.route('/employee_posts')
+def employee_posts():
+    if not session.get("USERNAME") is None:
+        posts=Post.query.all()
+        read_posts = set()
+        for post in posts:
+            if post.Panswer.all():
+                read_posts.add(post)
+
+        unread_posts=Post.query.filter(Post.Panswer == None).all()
+
+        print('unread posts',unread_posts)
+        return render_template('employee_posts.html', unread_posts=unread_posts, read_posts=read_posts)
+    else:
+        return redirect(url_for('employee_mainpage'))
+
+
+
+
+@app.route('/employee_posts/<id>',methods = ['GET', 'POST'])
+def employee_post_detail(id):
+    if not session.get("USERNAME") is None:
+        post = Post.query.filter_by(id = id).first()
+        answer=post.Panswer.all()
+        return render_template('employee_post_detail.html',post = post, answer=answer)
+    else:
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/employee_posts/employee_answer_post/<id>',methods = ['GET', 'POST'])
+def employee_answer_post(id):
+    form = AnswerForm()
+    if not session.get("USERNAME") is None:
+        post = Post.query.filter_by(id = id).first()
+        if form.validate_on_submit():
+            answer = Answer(Acontent=form.content.data, Apost=post.id)
+            db.session.add(answer)
+            db.session.commit()
+            return redirect(url_for('employee_posts'))
+        return render_template('employee_answer_post.html',post = post, form=form,id = id)
+    else:
+        return redirect(url_for('employee_mainpage'))
 
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
@@ -526,6 +567,44 @@ def loginCustomer():
         flash('Incorrect Password')
         return redirect(url_for('loginCustomer'))
     return render_template('login_customer.html', title='Login In', form=form)
+
+@app.route('/customer_add_post',methods=['GET','POST'])
+def customer_add_post():
+    form = PostForm()
+    if not session.get("USERNAME") is None:
+        customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        if form.validate_on_submit():
+            post = Post(Ptopic=form.topic.data, Pcontent=form.content.data, poster = customer_in_db)
+            db.session.add(post)
+            db.session.commit()
+            return redirect(url_for('customer_posts'))
+        return render_template('customer_add_post.html', user=customer_in_db, form=form)
+    else:
+        return redirect(url_for('loginCustomer'))
+
+@app.route('/customer_posts')
+def customer_posts():
+    if not session.get("USERNAME") is None:
+        customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        posts = customer_in_db.Cpost.all()
+        read_posts=set()
+        for p in posts:
+            if p.Panswer.all():
+                read_posts.add(p)
+        unread_posts = customer_in_db.Cpost.filter(Post.Panswer == None).all()
+        return render_template('customer_posts.html', user=customer_in_db, unread_posts=unread_posts, read_posts=read_posts)
+    else:
+        return redirect(url_for('loginCustomer'))
+
+@app.route('/customer_posts/<id>',methods = ['GET', 'POST'])
+def customer_post_detail(id):
+    if not session.get("USERNAME") is None:
+        customer = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        post = Post.query.filter_by(id = id).first()
+        answer=post.Panswer.all()
+        return render_template('customer_post_detail.html',post = post, answer=answer, customer=customer)
+    else:
+        return redirect(url_for('loginCustomer'))
 
 
 @app.route('/logoutEmployee')

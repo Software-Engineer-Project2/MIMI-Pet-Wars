@@ -1,0 +1,17 @@
+{% extends"base.html" %}
+
+{% block content %}
+<h3>{{post.Ptopic}}</h3>
+    {{post.Pcontent}}
+    {% if answer %}
+    {% for a in answer%}
+<h3>Answer</h3>
+        {{a.content}}
+      {{a.time}}
+{% endfor %}
+    {% else %}
+        <h3>Please answer the post.</h3>
+        <button onclick="window.location.href='/employee_posts/employee_answer_post/{{post.id}}'">Answer</button>
+
+    {% endif %}
+{% endblock %}
