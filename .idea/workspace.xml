@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_customer.html" afterDir="false" />
-    </list>
+    <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,7 +140,7 @@
       <workItem from="1587572236340" duration="9713000" />
       <workItem from="1587619499899" duration="462000" />
       <workItem from="1587619981639" duration="7041000" />
-      <workItem from="1587664884720" duration="294000" />
+      <workItem from="1587664884720" duration="821000" />
     </task>
     <servers />
   </component>
