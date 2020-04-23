@@ -1,16 +1,19 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make Appointment</title>
+</head>
+<body>
     {% extends "base.html" %}
     {% block content %}
-    <h1>&nbsp</h1>
-<h1>&nbsp</h1>
-    <!-- <h1 align="center">Please Fill Out Some Information</h1> -->
-    <form style="margin-left: 500px;"
-    action="" method="post" novalidate>
+    <h1 align="center">Please Fill Out Some Information</h1>
+    <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            <div id="ownername">
-            {{ form.ownername.label }}<br>{{ form.ownername(size=32) }}</div>
-			{% for error in form.ownername.errors %}
+            <div id="pet">
+            {{ form.pet.label }}<br>{{ form.pet }}</div>
+			{% for error in form.pet.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}<br>
         </p>
@@ -30,6 +33,28 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}<br>
         </p>
+
+        <p>
+            <div id="chooseposition">
+            {{ form.chooseposition.label }}<br>{{ form.chooseposition }}</div>
+            {% for error in form.chooseposition.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+        <p>
+            <div id="datetime">
+            {{ form.datetime.label }}<br>{{ form.datetime }}</div>
+			{% for error in form.datetime.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+        <p>
+            <div id="doctor">
+            {{ form.doctor.label }}<br>{{ form.doctor }}</div>
+			{% for error in form.doctor.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
         <p>
             <div id="otherdescription">
             {{ form.otherdescription.label }}<br>{{ form.otherdescription }}</div>
@@ -40,3 +65,5 @@
         {{ form.submit.label }}<br>{{ form.submit }}<br>
     </form>
     {% endblock %}
+</body>
+</html>

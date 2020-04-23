@@ -145,8 +145,6 @@ def arrangeappointmentemployee():
 #         return redirect(url_for('employee_mainpage'))
 
 
-
-
 @app.route('/AddHospitalization/<id>', methods=['GET', 'POST'])
 def AddHospitalization(id):
     form = AddHospitalizationForm()
@@ -170,6 +168,7 @@ def AddHospitalization(id):
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/AddPrescription/<id>', methods=['GET', 'POST'])
 def AddPrescription(id):
@@ -213,6 +212,7 @@ def AddPrescription(id):
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+
 @app.route('/OperationMain', methods=['GET', 'POST'])
 def OperationMain():
     if not session.get("USERNAME") is None:
@@ -221,6 +221,7 @@ def OperationMain():
     else:
         flash("Employee needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
+
 
 @app.route('/HospitalizationMain', methods=['GET', 'POST'])
 def HospitalizationMain():
@@ -231,35 +232,49 @@ def HospitalizationMain():
         flash("Employee needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
 
+
 @app.route('/ApplyingOperationPermission', methods=['GET', 'POST'])
 # Arrange confirmed appointments
 def ApplyingOperationPermission():
     if not session.get("USERNAME") is None:
         standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
-                                                         Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='1').all()
+                                                         Appointment.Acomplete == '1',
+                                                         Appointment.AneedOperation == '0',
+                                                         Appointment.OperationPer == '1').all()
         emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
-                                                          Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='1').all()
-        return render_template('ApplyingOperationPermission.html', title='Displays procedures for which customer approval is being sought',
+                                                          Appointment.Acomplete == '1',
+                                                          Appointment.AneedOperation == '0',
+                                                          Appointment.OperationPer == '1').all()
+        return render_template('ApplyingOperationPermission.html',
+                               title='Displays procedures for which customer approval is being sought',
                                standard_appointments=standard_appointments,
                                emergency_appointments=emergency_appointments)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+
 @app.route('/UnderOperation', methods=['GET', 'POST'])
 # Arrange confirmed appointments
 def UnderOperation():
     if not session.get("USERNAME") is None:
         standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
-                                                         Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='0',Appointment.OperationEnd=='1').all()
+                                                         Appointment.Acomplete == '1',
+                                                         Appointment.AneedOperation == '0',
+                                                         Appointment.OperationPer == '0',
+                                                         Appointment.OperationEnd == '1').all()
         emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
-                                                          Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='0',Appointment.OperationEnd=='1').all()
+                                                          Appointment.Acomplete == '1',
+                                                          Appointment.AneedOperation == '0',
+                                                          Appointment.OperationPer == '0',
+                                                          Appointment.OperationEnd == '1').all()
         return render_template('UnderOperation.html', title='Preparing for operation',
                                standard_appointments=standard_appointments,
                                emergency_appointments=emergency_appointments)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/AddOperation/<id>', methods=['GET', 'POST'])
 def AddOperation(id):
@@ -292,23 +307,30 @@ def CompleteOpeConfirm(id):
     if not session.get("USERNAME") is None:
         appointment = Appointment.query.filter(id == id).first()
         if form.validate_on_submit():
-            appointment.OperationEnd=form.complete.data
+            appointment.OperationEnd = form.complete.data
             db.session.commit()
             flash('Confirm successfully', 'success')
             return redirect(url_for('UnderOperation'))
-        return render_template('CompleteOperationConfirm.html', title='Preparing for operation',form=form,id=id)
+        return render_template('CompleteOperationConfirm.html', title='Preparing for operation', form=form, id=id)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/CompletedOperation', methods=['GET', 'POST'])
 # Arrange confirmed appointments
 def CompletedOperation():
     if not session.get("USERNAME") is None:
         standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
-                                                         Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='0',Appointment.OperationEnd=='0').all()
+                                                         Appointment.Acomplete == '1',
+                                                         Appointment.AneedOperation == '0',
+                                                         Appointment.OperationPer == '0',
+                                                         Appointment.OperationEnd == '0').all()
         emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
-                                                          Appointment.Acomplete == '1',Appointment.AneedOperation=='0',Appointment.OperationPer=='0',Appointment.OperationEnd=='0').all()
+                                                          Appointment.Acomplete == '1',
+                                                          Appointment.AneedOperation == '0',
+                                                          Appointment.OperationPer == '0',
+                                                          Appointment.OperationEnd == '0').all()
         return render_template('CompletedOperation.html', title='Completed Operation',
                                standard_appointments=standard_appointments,
                                emergency_appointments=emergency_appointments)
@@ -316,50 +338,73 @@ def CompletedOperation():
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+
 @app.route('/ApplyingHospitalizationPermission', methods=['GET', 'POST'])
 # 9. The customer's permission for hospitalization is being sought
 def ApplyingHospitalizationPermission():
     if not session.get("USERNAME") is None:
         standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
-                                                         Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='1').all()
+                                                         Appointment.Acomplete == '1',
+                                                         Appointment.AneedHospitalization == '0',
+                                                         Appointment.HospitalizationPer == '1').all()
         emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
-                                                          Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='1').all()
-        return render_template('ApplyingHospitalizationPermission.html', title='Displays procedures for which customer approval is being sought',
+                                                          Appointment.Acomplete == '1',
+                                                          Appointment.AneedHospitalization == '0',
+                                                          Appointment.HospitalizationPer == '1').all()
+        return render_template('ApplyingHospitalizationPermission.html',
+                               title='Displays procedures for which customer approval is being sought',
                                standard_appointments=standard_appointments,
                                emergency_appointments=emergency_appointments)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/InHospitalization', methods=['GET', 'POST'])
 # 10. The pet is in hospital
 def InHospitalization():
     if not session.get("USERNAME") is None:
         standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
-                                                         Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='0',Appointment.HospitalizationEnd=='1').all()
+                                                         Appointment.Acomplete == '1',
+                                                         Appointment.AneedHospitalization == '0',
+                                                         Appointment.HospitalizationPer == '0',
+                                                         Appointment.HospitalizationEnd == '1').all()
         emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
-                                                          Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='0',Appointment.HospitalizationEnd=='1').all()
-        return render_template('InHospitalization.html', title='Displays procedures for which customer approval is being sought',
+                                                          Appointment.Acomplete == '1',
+                                                          Appointment.AneedHospitalization == '0',
+                                                          Appointment.HospitalizationPer == '0',
+                                                          Appointment.HospitalizationEnd == '1').all()
+        return render_template('InHospitalization.html',
+                               title='Displays procedures for which customer approval is being sought',
                                standard_appointments=standard_appointments,
                                emergency_appointments=emergency_appointments)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+
 @app.route('/ReleaseHos', methods=['GET', 'POST'])
 # 7. Have been discharged from hospital
 def ReleaseHos():
     if not session.get("USERNAME") is None:
         standard_appointments = Appointment.query.filter(Appointment.Atype == '1',
-                                                         Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='0',Appointment.HospitalizationEnd=='0').all()
+                                                         Appointment.Acomplete == '1',
+                                                         Appointment.AneedHospitalization == '0',
+                                                         Appointment.HospitalizationPer == '0',
+                                                         Appointment.HospitalizationEnd == '0').all()
         emergency_appointments = Appointment.query.filter(Appointment.Atype == '0',
-                                                          Appointment.Acomplete == '1',Appointment.AneedHospitalization=='0',Appointment.HospitalizationPer=='0',Appointment.HospitalizationEnd=='0').all()
-        return render_template('ReleaseHos.html', title='Displays procedures for which customer approval is being sought',
+                                                          Appointment.Acomplete == '1',
+                                                          Appointment.AneedHospitalization == '0',
+                                                          Appointment.HospitalizationPer == '0',
+                                                          Appointment.HospitalizationEnd == '0').all()
+        return render_template('ReleaseHos.html',
+                               title='Displays procedures for which customer approval is being sought',
                                standard_appointments=standard_appointments,
                                emergency_appointments=emergency_appointments)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/ArrAppEmployeeYD', methods=['GET', 'POST'])
 # Arrange confirmed appointments
@@ -423,47 +468,48 @@ def listproduct():
     goods = Good.query.all()
     return render_template('adminproduct.html', title='Shop', goods=goods)
 
+
 @app.route('/employee_posts')
 def employee_posts():
     if not session.get("USERNAME") is None:
-        posts=Post.query.all()
+        posts = Post.query.all()
         read_posts = set()
         for post in posts:
             if post.Panswer.all():
                 read_posts.add(post)
 
-        unread_posts=Post.query.filter(Post.Panswer == None).all()
+        unread_posts = Post.query.filter(Post.Panswer == None).all()
 
-        print('unread posts',unread_posts)
+        print('unread posts', unread_posts)
         return render_template('employee_posts.html', unread_posts=unread_posts, read_posts=read_posts)
     else:
         return redirect(url_for('employee_mainpage'))
 
 
-
-
-@app.route('/employee_posts/<id>',methods = ['GET', 'POST'])
+@app.route('/employee_posts/<id>', methods=['GET', 'POST'])
 def employee_post_detail(id):
     if not session.get("USERNAME") is None:
-        post = Post.query.filter_by(id = id).first()
-        answer=post.Panswer.all()
-        return render_template('employee_post_detail.html',post = post, answer=answer)
+        post = Post.query.filter_by(id=id).first()
+        answer = post.Panswer.all()
+        return render_template('employee_post_detail.html', post=post, answer=answer)
     else:
         return redirect(url_for('employee_mainpage'))
 
-@app.route('/employee_posts/employee_answer_post/<id>',methods = ['GET', 'POST'])
+
+@app.route('/employee_posts/employee_answer_post/<id>', methods=['GET', 'POST'])
 def employee_answer_post(id):
     form = AnswerForm()
     if not session.get("USERNAME") is None:
-        post = Post.query.filter_by(id = id).first()
+        post = Post.query.filter_by(id=id).first()
         if form.validate_on_submit():
             answer = Answer(Acontent=form.content.data, Apost=post.id)
             db.session.add(answer)
             db.session.commit()
             return redirect(url_for('employee_posts'))
-        return render_template('employee_answer_post.html',post = post, form=form,id = id)
+        return render_template('employee_answer_post.html', post=post, form=form, id=id)
     else:
         return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
@@ -481,7 +527,7 @@ def addproduct():
                 good = Good(id=id, Gname=name, Ginfo=info, Gimage=file_url, Gprice=price, Gadddate=adddate)
                 db.session.add(good)
                 db.session.commit()
-                #flash("Add product successfully")
+                # flash("Add product successfully")
             return redirect(url_for('listproduct'))
         return render_template('addproduct.html', title='addproduct', form=form)
     else:
@@ -494,7 +540,7 @@ def deleteproduct(id):
     good = Good.query.get_or_404(id)
     db.session.delete(good)
     db.session.commit()
-    #flash("Delete Product")
+    # flash("Delete Product")
     return redirect(url_for('listproduct'))
 
 
@@ -502,7 +548,7 @@ def deleteproduct(id):
 def editproduct(id):
     form = AddProductForm()
     good = Good.query.get_or_404(id)
-    form.Gid.data=good.id
+    form.Gid.data = good.id
     if form.validate_on_submit():
         if request.method == 'POST' and 'photo' in request.files:
             filename = photos.save(request.files['photo'])
@@ -513,14 +559,16 @@ def editproduct(id):
             good.Gadddate = form.Gadddate.data
             good.Gimage = file_url
             db.session.commit()
-            #flash("Add product successfully")
+            # flash("Add product successfully")
         return redirect(url_for('listproduct'))
     return render_template('editproduct.html', form=form)
+
 
 @app.route('/shoppage', methods=['GET', 'POST'])
 def shoppage():
     goods = Good.query.all()
-    return render_template('shoppage.html',goods=goods)
+    return render_template('shoppage.html', goods=goods)
+
 
 @app.route('/order', methods=['GET', 'POST'])
 def order():
@@ -568,13 +616,14 @@ def loginCustomer():
         return redirect(url_for('loginCustomer'))
     return render_template('login_customer.html', title='Login In', form=form)
 
-@app.route('/customer_add_post',methods=['GET','POST'])
+
+@app.route('/customer_add_post', methods=['GET', 'POST'])
 def customer_add_post():
     form = PostForm()
     if not session.get("USERNAME") is None:
         customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
         if form.validate_on_submit():
-            post = Post(Ptopic=form.topic.data, Pcontent=form.content.data, poster = customer_in_db)
+            post = Post(Ptopic=form.topic.data, Pcontent=form.content.data, poster=customer_in_db)
             db.session.add(post)
             db.session.commit()
             return redirect(url_for('customer_posts'))
@@ -582,27 +631,56 @@ def customer_add_post():
     else:
         return redirect(url_for('loginCustomer'))
 
+
 @app.route('/customer_posts')
 def customer_posts():
     if not session.get("USERNAME") is None:
         customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
         posts = customer_in_db.Cpost.all()
-        read_posts=set()
+        read_posts = set()
         for p in posts:
             if p.Panswer.all():
                 read_posts.add(p)
         unread_posts = customer_in_db.Cpost.filter(Post.Panswer == None).all()
-        return render_template('customer_posts.html', user=customer_in_db, unread_posts=unread_posts, read_posts=read_posts)
+        return render_template('customer_posts.html', user=customer_in_db, unread_posts=unread_posts,
+                               read_posts=read_posts)
     else:
         return redirect(url_for('loginCustomer'))
 
-@app.route('/customer_posts/<id>',methods = ['GET', 'POST'])
+
+# @app.route('/customer_add_pet',methods=['GET', 'POST'])
+# def customer_add_pet():
+#     form = PetForm()
+#     if not session.get("USERNAME") is None:
+#         customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+#         mes = 'Hello, %s ! , you can add your pet information here' % user
+#         if form.validate_on_submit():
+#             pet = Pet(Pname=form.name.data, Page=form.age.data, Psex=form.gender.data, Pspecies=form.type.data,
+#                       owner=customer_in_db, Pinfo=form.info.data)
+#             db.session.add(pet)
+#             db.session.commit()
+#             flash('Save Pet Information Successfully !!!')
+#             return redirect(url_for('my_pets_information'))
+#         return render_template('customer_add_pet.html', title='Add Pet Information', form=form, mes=mes)
+#     else:
+#         return redirect(url_for('loginCustomer'))
+#
+#
+#
+# @app.route('/My Pets')
+# def my_pets_information():
+#     pets = Pet.query.all()
+#     user = session["USERNAME"]
+#     mes = 'Hello, %s ! , Here are your pets information' % user
+#     return render_template('my_pets_information.html', pets=pets, mes=mes)
+
+@app.route('/customer_posts/<id>', methods=['GET', 'POST'])
 def customer_post_detail(id):
     if not session.get("USERNAME") is None:
         customer = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-        post = Post.query.filter_by(id = id).first()
-        answer=post.Panswer.all()
-        return render_template('customer_post_detail.html',post = post, answer=answer, customer=customer)
+        post = Post.query.filter_by(id=id).first()
+        answer = post.Panswer.all()
+        return render_template('customer_post_detail.html', post=post, answer=answer, customer=customer)
     else:
         return redirect(url_for('loginCustomer'))
 
@@ -616,9 +694,103 @@ def logoutEmployee():
 @app.route('/Make Appointment', methods=['GET', 'POST'])
 def make_appointment():
     form = MakeAppointment()
+    if form.validate_on_submit():
+        pet = Pet.query.filter(Pet.id == int(form.pet.data)).first()
+        appointment = Appointment(appopet=pet, Atype=form.type.data,
+                                  Adoc=form.doctor.data, Adate=form.datetime.data, Ainfo=form.otherdescription.data,
+                                  Acomplete='1')
+        db.session.add(appointment)
+        db.session.commit()
+        return redirect(url_for('loggedin_home_customer'))
+
     return render_template('make_appointment_customer.html', title='Make Appointment', form=form)
 
 
 @app.route('/Track State')
 def track_state():
     return '<h1>Track State</h1>'
+
+
+@app.route('/Add Pet information', methods=['GET', 'POST'])
+def add_pet_information():
+    form = Addpetinformation()
+    if not session.get("USERNAME") is None:
+        user = session.get("USERNAME")
+        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        mes = 'Hello, %s ! , you can add your pet information here' % user
+        if form.validate_on_submit():
+            pet = Pet.query.filter(Pet.Pname == form.name.data and Pet.Powner == user_in_db.id).first()
+            if pet:
+                return render_template('add_pet_information.html', title='Add Pet Information',
+                                       warn='The name already exists', form=form, mes=mes)
+            else:
+                pet = Pet(Pname=form.Pname.data, Page=form.Page.data, Psex=form.Psex.data, Pspecies=form.Pspecies.data,
+                          Pinfo=form.Pinfo.data, owner=user_in_db)
+                db.session.add(pet)
+                db.session.commit()
+                flash('Save Pet Information Successfully !!!')
+            return redirect(url_for('my_pets_information'))
+        return render_template('add_pet_information.html', title='Add Pet Information', warn='New pet', form=form,
+                               mes=mes)
+    else:
+        return redirect(url_for('loginCustomer'))
+
+
+@app.route('/My Pets')
+def my_pets_information():
+    if not session.get("USERNAME") is None:
+        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        pets = user_in_db.Cpet.all()
+        user = session["USERNAME"]
+        mes = 'Hello, %s ! , Here are your pets information' % user
+        return render_template('my_pets_information.html', pets=pets, mes=mes)
+    else:
+        return redirect(url_for('loginCustomer'))
+
+
+@app.route('/customer_my_appointments')
+def customer_my_appointments():
+    user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+    pets = Pet.query.filter(Pet.Powner == user_in_db.id).all()
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoints = []
+            for pet in pets:
+                a = Appointment.query.filter(Appointment.Apet == pet.id).all()
+                appoints.extend(a)
+    return render_template('customer_my_appointments.html', pets=pets, appoints=appoints)
+
+
+@app.route('/customer_my_appointments/edit_appo/<id>')
+def customer_edit_appointments(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            doctors = Doctor.query.all()
+            return render_template('customer_edit_appo.html', doctors=doctors, appoint=appoint)
+        else:
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            appoint.Atype = request.form['type']
+            appoint.Adate = request.form['date']
+            appoint.Alocation = request.form['location']
+            appoint.Adoc = request.form['doc']
+            appoint.Ainfo = request.form['information']
+            db.session.commit()
+            return redirect(url_for('customer_my_appointments'))
+    else:
+        return redirect(url_for('loginCustomer'))
+
+
+@app.route('/customer_my_appointments/delete_appo/<id>',methods=['GET', 'POST'])
+def customer_delete_appointments(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            return render_template('customer_delete_appo.html', appoint=appoint)
+        else:
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            db.session.delete(appoint)
+            db.session.commit()
+            return redirect(url_for('customer_my_appointments'))
+    else:
+        return redirect(url_for('loginCustomer'))

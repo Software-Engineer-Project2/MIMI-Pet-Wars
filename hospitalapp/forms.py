@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm, Form
 from wtforms import StringField, FileField, SubmitField, PasswordField, BooleanField, IntegerField, RadioField, \
-    DateField, TextField, SelectField,TextAreaField
+    DateField, TextField, SelectField,TextAreaField,DateTimeField
 from wtforms.validators import DataRequired, Length
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from hospitalapp import photos
+from hospitalapp import photos, db
+from hospitalapp.models import Pet, Doctor
 
 
 class LoginFormEmployee(FlaskForm):
@@ -175,14 +176,6 @@ class SignupCustomer(FlaskForm):
     Csubmit = SubmitField('Sign up')
 
 
-class MakeAppointment(FlaskForm):
-    ownername = StringField('OwnerName', validators=[DataRequired()])
-    ownerphone = StringField('OwnerPhone', validators=[DataRequired()])
-    pettype = StringField('PetType', validators=[DataRequired()])
-    otherdescription = StringField('OtherDescription', validators=[DataRequired()])
-    submit = SubmitField('Submit')
-
-
 class PostForm(FlaskForm):
     topic = StringField(label='Topic', render_kw={
         'class': "form-control",
@@ -201,3 +194,60 @@ class AnswerForm(FlaskForm):
         'placeholder': 'Please enter the answer'
     }, validators=[DataRequired()])
     submit = SubmitField('Confirm')
+
+class PostForm(FlaskForm):
+    topic = StringField(label='Topic', render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter your post'
+    }, validators=[DataRequired()])
+    content = TextAreaField(label='Content', render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter the content'
+    }, validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class PetForm(FlaskForm):
+    name = StringField(label='Pet Name', render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter your pet name'
+    }, validators=[DataRequired()])
+    type = SelectField('Species',coerce=int, choices=[(1, 'Cat'), (2, 'Dog')], render_kw={
+        'class': "form-control",
+        'placeholder': 'Please choose your pet species'
+    }, validators=[DataRequired()])
+    age = RadioField(label='Pet Age', render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter your pet age'
+    }, validators=[DataRequired()])
+    gender = RadioField(label='Pet Gender', choices=[('1', 'Male'), ('2', 'Female')], render_kw={
+        'class': "form-control",
+        'placeholder': 'Please choose your pet gendeer'
+    }, validators=[DataRequired()])
+    info = TextAreaField(label='Other information', render_kw={
+        'class': "form-control",
+        'placeholder': 'Please enter other information'
+    }, validators=[DataRequired()])
+    submit = SubmitField('Register')
+
+class MakeAppointment(FlaskForm):
+    pets = [('%d'% r.id, r.Pname) for r in Pet.query.all()]
+    pet = SelectField(label='Select Pet', choices= pets,validators=[DataRequired()])
+    ownerphone = StringField('OwnerPhone', validators=[DataRequired()])
+    type = RadioField('Type', choices=[('0', 'Emergency'), ('1', 'Standard')], validators=[DataRequired()])
+    otherdescription = StringField('OtherDescription', validators=[DataRequired()])
+    chooseposition = SelectField('Choose Position',choices=[('0', 'Beijing'), ('1', 'Shanghai'),('2', 'Chengdu')], default=0, validators=[DataRequired()])
+    doctors = [('%d' % r.id, r.Dname) for r in Doctor.query.all()]
+    doctor = SelectField(label='Choose doctor you want', choices=doctors, validators=[DataRequired()])
+    datetime = DateTimeField('Input Datetime(format: YYYY-MM-DD-HH-MM)', format='%Y-%m-%d-%H-%M',validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
+class Addpetinformation(FlaskForm):
+    Pname = StringField('Pet Name', validators=[DataRequired()])
+    Page = IntegerField('Pet age',validators=[DataRequired()])
+    Psex = RadioField('Gender', choices=[('1', 'Male'), ('2', 'Female')], default=1, validators=[DataRequired()])
+    Pspecies = StringField('Pet Type', validators=[DataRequired()])
+    Pinfo = TextAreaField('Pet Information', validators=[DataRequired()])
+    submit = SubmitField('Save')
+
+

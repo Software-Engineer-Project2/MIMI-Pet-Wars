@@ -1,0 +1,55 @@
+{% extends "loggedin_index.html" %}
+{% block content %}
+<br><br><br><br><br><br><br>
+                        <table class="table">
+                            <tbody>
+
+								<tr>
+									<th>Appointment ID</th>
+									<th>Date</th>
+									<th>Pet Name</th>
+									<th>Type </th>
+									<th>Cost </th>
+                                    <th>Appointments Information </th>
+                                    <th>Operation Status</th>
+                                    <th>Hospitalization Status </th>
+                                </tr>
+
+                                {% for a in appoints%}
+                                {% for pet in pets%}
+                                {%  if a.Apet==pet.id %}
+                                <tr>
+                                    <td align="center">{{a.id}}</td>
+                                    <td align="center">{{a.Adate}}</td>
+                                    <td align="center">{{pet.Pname}}</td>
+                                    {% if a.Atype == '1' %}
+                                    <td align="center">Standard</td>
+                                    {% elif a.Atype == '0' %}
+                                    <td align="center">Emergent</td>
+                                    {% endif %}
+                                    <td align="center">{{a.Acost}}</td>
+                                    <td align="center">{{a.Ainfo}}</td>
+                                    <td align="center">{{ a.OperationStatus }}</td>
+                                    <td align="center">{{a.HospitalizationStatus}}</td>
+                                    <td align="center">
+                                        <button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'">Edit</button>
+                                        <button  onclick="window.location.href='/customer_my_appointments/delete_appo/{{a.id}}'" >Delete</button>
+										<button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'">Surgery</button>
+										<button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'" >In Hospital</button>
+										<button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'" >Release</button>
+
+									</td>
+
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+
+
+
+
+{% endblock %}
+

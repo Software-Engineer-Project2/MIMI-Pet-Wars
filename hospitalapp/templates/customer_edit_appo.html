@@ -1,0 +1,32 @@
+{% extends 'loggedin_index.html' %}
+{% block title %}
+    <title>Modify Appointment</title>
+{% endblock %}
+{% block content %}
+   <form
+   style="margin-left: 500px;"
+   action="{{ url_for('customer_edit_appointments',id=id) }}" method="POST" enctype="multipart/form-data">
+    <label>Appointment type：(0 for emergency, 1 for standard) </label>
+    <input type="text" name="type" value="{{appoint.Atype}}"><br>
+    <label>Appointment Datetime(format: YYYY-MM-DD-HH-MM)</label>
+    <input type="text" name="date" value="{{appoint.Adate}}"><br>
+       <label>Apointment Location</label>
+    <input list="locationlist" name="location">
+		<datalist id="locationlist">
+		    <option value="Shanghai">
+            <option value="Beijing">
+            <option value="Chengdu">
+		</datalist><br>
+    <label>Apointment Doctor</label>
+    <input list="doctorlist" name="doctor">
+		<datalist id="doctorlist">
+            {% for d in doc%}
+		    <option value={{d.Dname}}>
+            {% endfor %}
+		</datalist><br>
+
+        <label>Other Description</label>
+    <input type="text" name="information" value="{{appoint.Ainfo}}"><br>
+
+   </form>
+{% endblock %}

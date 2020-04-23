@@ -28,6 +28,7 @@ class Pet(db.Model):
     Pspecies = db.Column(db.String(64), index=True, unique=True)
     Powner = db.Column(db.Integer, db.ForeignKey('pet_customer.id'))#G
     Pinfo = db.Column(db.String(1048))
+    appointment = db.relationship('Appointment', backref='appopet', lazy='dynamic')
 
 
 
@@ -46,8 +47,9 @@ class Prescription(db.Model):
 class Appointment(db.Model):
     __tablename__ = 'pet_appointment'
     id = db.Column(db.Integer, primary_key=True)
-    Apet = db.Column(db.String(64), db.ForeignKey('pet_pet.id'))#
+    Apet = db.Column(db.Integer, db.ForeignKey('pet_pet.id'))#
     Atype = db.Column(db.String(10), index=True)
+    Alocation = db.Column(db.String(64), index=True)
     Adoc = db.Column(db.String(64), db.ForeignKey('pet_doctor.id'))#
     Acomplete = db.Column(db.String(10), index=True)
     Ainfo = db.Column(db.String(1048))
@@ -63,7 +65,7 @@ class Appointment(db.Model):
     HospitalizationEnd= db.Column(db.String(10), nullable=True)
     OperationStatus = db.Column(db.String(10), nullable=True)
     HospitalizationStatus = db.Column(db.String(10), nullable=True)
-    PrescriptionStatus = db.Column(db.String(10), nullable=True)
+    Astatus = db.Column(db.Integer, nullable=True)
     prescription = db.relationship('Prescription', backref='pappointment', lazy='dynamic')#
     Hospitalization  = db.relationship('Hospitalization', backref='happointment', lazy='dynamic')#
     Operation = db.relationship('Operation', backref='oappointment', lazy='dynamic')#

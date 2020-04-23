@@ -2,20 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_add_post.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_post_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_posts.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_answer_post.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_post_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_posts.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_delete_appo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_edit_appo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_my_appointments.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/add_pet_information.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/add_pet_information.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_customer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_employee.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_employee.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/make_appointment_customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/make_appointment_customer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/my_pets_information.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/my_pets_information.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,16 +60,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\PycharmProjects\MIMI-Pet-Wars\hospitalapp" />
+      <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\MIMI-Pet-Wars\hospitalapp\templates" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\hospitalapp" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\flaskenv" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\petapp\template" />
       <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet\petapp" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\PycharmProjects\MIMI-Pet-Wars\hospitalapp" />
-      <recent name="D:\Viola\BJUTstage3\2020\COMP3030J\code\pet" />
     </key>
   </component>
   <component name="RunManager" selected="Python.flask run">
@@ -151,6 +149,10 @@
       <workItem from="1586502420289" duration="7328000" />
       <workItem from="1587087241246" duration="3558000" />
       <workItem from="1587366345431" duration="13287000" />
+      <workItem from="1587565550978" duration="6331000" />
+      <workItem from="1587572236340" duration="9713000" />
+      <workItem from="1587619499899" duration="462000" />
+      <workItem from="1587619981639" duration="7041000" />
     </task>
     <servers />
   </component>
@@ -199,9 +201,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="759" y="281" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584432092098" />
-    <state x="644" y="220" key="FileChooserDialogImpl" timestamp="1587366300871">
+    <state x="644" y="220" key="FileChooserDialogImpl" timestamp="1587568112626">
       <screen x="0" y="0" width="1536" height="832" />
     </state>
+    <state x="644" y="220" key="FileChooserDialogImpl/0.0.1536.832/-1600.0.1600.870@0.0.1536.832" timestamp="1587568112626" />
     <state x="644" y="220" key="FileChooserDialogImpl/0.0.1536.832@0.0.1536.832" timestamp="1587366300871" />
     <state x="805" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584444109593" />
     <state width="1360" height="265" key="GridCell.Tab.0.bottom" timestamp="1584446788474">
@@ -228,13 +231,15 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="528" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584432378881" />
-    <state x="461" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1586502425587">
+    <state x="461" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1587619505097">
       <screen x="0" y="0" width="1536" height="832" />
     </state>
+    <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832/-1600.0.1600.870@0.0.1536.832" timestamp="1587619505097" />
     <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832@0.0.1536.832" timestamp="1586502425587" />
-    <state x="425" y="70" width="672" height="676" key="search.everywhere.popup" timestamp="1587373320854">
-      <screen x="0" y="0" width="1536" height="832" />
+    <state x="-1157" y="73" width="700" height="707" key="search.everywhere.popup" timestamp="1587631897560">
+      <screen x="-1600" y="0" width="1600" height="870" />
     </state>
+    <state x="-1157" y="73" width="700" height="707" key="search.everywhere.popup/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1587631897560" />
     <state x="425" y="70" width="672" height="676" key="search.everywhere.popup/0.0.1536.832@0.0.1536.832" timestamp="1587373320854" />
   </component>
   <component name="XDebuggerManager">
@@ -242,7 +247,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/hospitalapp/routes.py</url>
-          <line>420</line>
+          <line>465</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
