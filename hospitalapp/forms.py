@@ -165,6 +165,13 @@ class LoginFormCustomer(FlaskForm):
     Csubmit = SubmitField('Log in')
 
 
+class LoginFormCustomer_chinese(FlaskForm):
+    Cusername = StringField('用户名', validators=[DataRequired()])
+    Cpassword = PasswordField('密码', validators=[DataRequired(), Length(8, 128)])
+    Cremember_me = BooleanField('记住密码')
+    Csubmit = SubmitField('登录')
+
+
 class SignupCustomer(FlaskForm):
     Cusername = StringField('Username', validators=[DataRequired()])
     Cpassword = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
@@ -174,6 +181,17 @@ class SignupCustomer(FlaskForm):
     Cemail = StringField('Email', validators=[DataRequired()])
     Caccept_rules = BooleanField('I accept the site rules', validators=[DataRequired()])
     Csubmit = SubmitField('Sign up')
+
+
+class SignupCustomer_chinese(FlaskForm):
+    Cusername = StringField('用户名', validators=[DataRequired()])
+    Cpassword = PasswordField('密码', validators=[DataRequired(), Length(8, 128)])
+    Cpassword2 = PasswordField('请再次输入你的密码', validators=[DataRequired(), Length(8, 128)])
+    Cgender = RadioField('性别', choices=[('1', '男'), ('2', '女')], default=1, validators=[DataRequired()])
+    Cphone = StringField('电话', validators=[DataRequired()])
+    Cemail = StringField('邮件', validators=[DataRequired()])
+    Caccept_rules = BooleanField('我接受这个请求', validators=[DataRequired()])
+    Csubmit = SubmitField('注册')
 
 
 class PostForm(FlaskForm):

@@ -17,9 +17,18 @@ configure_uploads(app, photos)
 
 
 @app.route('/')
+def choose_language():
+    return render_template('choose_language.html', title='Home')
+
+
 @app.route('/index')
 def index():
     return render_template('index.html', title='Home')
+
+
+@app.route('/index_chinese')
+def index_chinese():
+    return render_template('index_chinese.html', title='Home')
 
 
 @app.route('/about')
@@ -32,9 +41,19 @@ def customer_mainpage():
     return render_template('customer_mainpage.html', title='Home')
 
 
+@app.route('/customer_mainpage_chinese')
+def customer_mainpage_chinese():
+    return render_template('customer_mainpage_chinese.html', title='Home')
+
+
 @app.route('/employee_mainpage')
 def employee_mainpage():
     return render_template('employee_mainpage.html', title='Home')
+
+
+@app.route('/employee_mainpage_chinese')
+def employee_mainpage_chinese():
+    return render_template('employee_mainpage_chinese.html', title='Home')
 
 
 @app.route('/loggedin_home_customer', methods=['GET', 'POST'])
@@ -45,6 +64,16 @@ def loggedin_home_customer():
     else:
         flash("Customer needs to either login or signup first")
         return redirect(url_for('customer_mainpage'))
+
+
+@app.route('/loggedin_home_customer_chinese', methods=['GET', 'POST'])
+def loggedin_home_customer_chinese():
+    if not session.get("USERNAME") is None:
+        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        return render_template('loggedin_home_customer_chinese.html', Cusername=user_in_db.Cname)
+    else:
+        flash("Customer needs to either login or signup first")
+        return redirect(url_for('customer_mainpage_chinese'))
 
 
 @app.route('/loggedin_home_employee')
@@ -570,6 +599,12 @@ def shoppage():
     return render_template('shoppage.html', goods=goods)
 
 
+@app.route('/shoppage_chinese', methods=['GET', 'POST'])
+def shoppage_chinese():
+    goods = Good.query.all()
+    return render_template('shoppage_chinese.html', goods=goods)
+
+
 @app.route('/order', methods=['GET', 'POST'])
 def order():
     form = OrderForm()
@@ -600,6 +635,26 @@ def signupCustomer():
     return render_template('signup_customer.html', title='Register a new user', form=form)
 
 
+@app.route('/signupCustomer_chinese', methods=['GET', 'POST'])
+def signupCustomer_chinese():
+    form = SignupCustomer_chinese()
+    if form.validate_on_submit():
+        print("888888")
+        if form.Cpassword.data != form.Cpassword2.data:
+            flash('密码不匹配!')
+            return redirect(url_for('signupCustomer_chinese'))
+        passw_hash = generate_password_hash(form.Cpassword.data)
+        # customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data, password_hash=passw_hash)
+        customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data,
+                            Cgender=form.Cgender.data, Cpassword=passw_hash)
+        db.session.add(customer)
+        db.session.commit()
+        session["USERNAME"] = customer.Cname
+        flash('欢迎你, %s ! , 你已经注册成功' % customer.Cname)
+        return redirect(url_for('loginCustomer_chinese'))
+    return render_template('signup_customer_chinese.html', title='Register a new user', form=form)
+
+
 @app.route('/loginCustomer', methods=['GET', 'POST'])
 def loginCustomer():
     form = LoginFormCustomer()
@@ -615,6 +670,23 @@ def loginCustomer():
         flash('Incorrect Password')
         return redirect(url_for('loginCustomer'))
     return render_template('login_customer.html', title='Login In', form=form)
+
+
+@app.route('/loginCustomer_chinese', methods=['GET', 'POST'])
+def loginCustomer_chinese():
+    form = LoginFormCustomer_chinese()
+    if form.validate_on_submit():
+        user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
+        if not user_in_db:
+            flash('没有发现用户名 {}'.format(form.Cusername.data))
+            return redirect(url_for('loginCustomer_chinese'))
+        if check_password_hash(user_in_db.Cpassword, form.Cpassword.data):
+            flash('登录成功!')
+            session["USERNAME"] = user_in_db.Cname
+            return redirect(url_for('loggedin_home_customer_chinese'))
+        flash('密码不正确')
+        return redirect(url_for('loginCustomer_chinese'))
+    return render_template('login_customer_chinese.html', title='Login In', form=form)
 
 
 @app.route('/customer_add_post', methods=['GET', 'POST'])
@@ -719,7 +791,7 @@ def add_pet_information():
         user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
         mes = 'Hello, %s ! , you can add your pet information here' % user
         if form.validate_on_submit():
-            pet = Pet.query.filter(Pet.Pname == form.name.data and Pet.Powner == user_in_db.id).first()
+            pet = Pet.query.filter(Pet.Pname == form.Pname.data and Pet.Powner == user_in_db.id).first()
             if pet:
                 return render_template('add_pet_information.html', title='Add Pet Information',
                                        warn='The name already exists', form=form, mes=mes)

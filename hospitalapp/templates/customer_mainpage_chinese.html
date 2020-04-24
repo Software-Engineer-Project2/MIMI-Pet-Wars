@@ -1,5 +1,4 @@
-
-{% extends "base.html" %}
+{% extends "base_chinese.html" %}
 
 {% block content %}
 
@@ -8,27 +7,27 @@
         <li><img src="../static/style/inIcon.png" width="150px" height="150px"></li>
         <br/>
         <li> 
-        <a href="{{ url_for('loginCustomer') }}" 
+        <a href="{{ url_for('loginCustomer_chinese') }}"
          style="text-decoration: none; font-size: x-large; float: right;">
-            Log in </a>
+            登录  </a>
         </li>    
     </ul>
     <ul style="display: inline-block;">     
         <li><img src="../static/style/upIcon.png" width="150px" height="150px"></li>
         <br/>
         <li> 
-        <a href="{{ url_for('signupCustomer') }}" 
+        <a href="{{ url_for('signupCustomer_chinese') }}"
          style="text-decoration: none; font-size: x-large; float: right;">
-            Sign up </a>
+            注册 </a>
         </li> 
     </ul>
     <ul style="display: inline-block;">     
         <li><img src="../static/style/shopIcon.png" width="150px" height="150px"></li>
         <br/>
         <li> 
-        <a href="{{ url_for('shoppage') }}" 
+        <a href="{{ url_for('shoppage_chinese') }}"
          style="text-decoration: none; font-size: x-large; float:right;">
-            Store </a>
+            商店 </a>
         </li> 
     </ul>
 

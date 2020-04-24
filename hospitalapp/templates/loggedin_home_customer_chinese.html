@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "base_chinese.html" %}
+{% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+	<div align="center">
+ <a class="link1" href="{{ url_for('add_pet_information')}}">添加宠物信息</a>
+    <br>
+    <br>
+    <a class="link1" href="{{ url_for('my_pets_information')}}">我的宠物</a>
+    <br>
+    <br>
+
+	<a class="link1" href="{{ url_for('make_appointment')}}">预约医生</a>
+    <br><br><br>
+    <a class="link1" href="{{ url_for('customer_my_appointments')}}">我的预约</a>
+        <br><br><br>
+    <a class="link1" href="{{ url_for('customer_posts')}}">我的留言</a>
+
+    </div>
+
+{% endblock %}
+</body>
+</html>

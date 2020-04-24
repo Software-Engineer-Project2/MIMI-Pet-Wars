@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兽医医院 系统 注册</title>
+    <link rel="stylesheet" type="text/css" href="../static/style/cusSignin.css">
+</head>
+<body>
+<form method="post">
+    {{ form.csrf_token}} <!-- render hidden token -->
+    <br><br><br>
+            <div id="Cusername">
+            {{ form.Cusername.label }}
+            <span class="kuang">{{ form.Cusername }}
+            </span>
+			{% for error in form.Cusername.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+            <br>
+
+
+            <div id="Cphone">
+                {{ form.Cphone.label }}
+                <span class="kuang">{{ form.Cphone }}</span>
+                {% for error in form.Cphone.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+
+
+        <div id="Cgender">
+            {{ form.Cgender.label }}
+                {% for choice in form.Cgender %}
+                    <tr>
+                        <td>{{ choice }}</td>
+                        <td>{{ choice.label }}</td>
+                    </tr>
+                {% endfor %}
+
+                {% for error in form.Cgender.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+            <div id="Cemail">
+                {{ form.Cemail.label}}
+                <span class="kuang"> {{ form.Cemail }}</span>
+                {% for error in form.Cemail.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+
+            <div id="Cpassword">
+                {{ form.Cpassword.label}}
+                <span class="kuang">{{ form.Cpassword }}</span>
+                {% for error in form.Cpassword.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+
+            <div id="Cpassword2">
+                {{ form.Cpassword2.label}}
+                <span class="kuang">{{ form.Cpassword2 }}</span>
+                {% for error in form.Cpassword2.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+    <div>
+        {{ form.Caccept_rules }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="color: rgb(136, 56, 3);">{{ form.Caccept_rules.label }}</span>
+
+    </div>
+     <br>
+
+
+    <div>
+    {{ form.Csubmit.label }}
+    <button id="sub">{{ form.Csubmit }}
+        </button>
+        </div>
+
+        <br><br><br><br>
+
+</form>
+</body>
+</html>
