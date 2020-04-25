@@ -9,10 +9,12 @@
 									<th>Date</th>
 									<th>Pet Name</th>
 									<th>Type </th>
-									<th>Cost </th>
+									<th>Doc </th>
                                     <th>Appointments Information </th>
                                     <th>Operation Status</th>
                                     <th>Hospitalization Status </th>
+                                    <th>Change</th>
+                                    <th>Permission</th>
                                 </tr>
 
                                 {% for a in appoints%}
@@ -34,9 +36,11 @@
                                     <td align="center">
                                         <button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'">Edit</button>
                                         <button  onclick="window.location.href='/customer_my_appointments/delete_appo/{{a.id}}'" >Delete</button>
-										<button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'">Surgery</button>
-										<button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'" >In Hospital</button>
-										<button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'" >Release</button>
+                                    </td>
+                                    <td align="center">
+										<button  onclick="window.location.href='/customer_my_appointments/operation/{{a.id}}'">Surgery</button>
+										<button  onclick="window.location.href='/customer_my_appointments/inpatient/{{a.id}}'" >In Hospital</button>
+										<button  onclick="window.location.href='/customer_my_appointments/release/{{a.id}}'" >Release</button>
 
 									</td>
 

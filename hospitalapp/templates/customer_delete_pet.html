@@ -1,0 +1,12 @@
+{% extends 'loggedin_index.html' %}
+{% block title %}
+    <title>Delete Pet</title>
+{% endblock %}
+{% block content %}
+
+<form action="/My Pets/delete_pet/{{pet.id}}" method="POST">
+    <input type="submit" value="Delete">
+</form>
+
+
+{% endblock %}

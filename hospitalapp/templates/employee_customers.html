@@ -1,0 +1,32 @@
+{% extends 'employee_loggedin_base.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if customers %}
+		Customer:<br><hr>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>Gender </th>
+                    <th>Phone </th>
+                    <th>Email </th>
+                </tr>
+               {% for c in customers %}
+                     <tr>
+                        <td align="center">{{c.id}}</td>
+                        <td align="center">{{c.Cname}}</td>
+                         <td align="center">{{c.Cgender}}</td>
+                        <td align="center">{{c.Cphone}}</td>
+                        <td align="center">{{c.Cemail}}</td>
+                     </tr>
+               {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No customers !</p>
+	{% endif %}
+
+
+{% endblock %}

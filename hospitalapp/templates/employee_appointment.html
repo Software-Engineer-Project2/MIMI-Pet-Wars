@@ -1,0 +1,27 @@
+{% extends "loggedin_index.html" %}
+{% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+    <a href="{{ url_for('listproduct') }}">Start</a><br>
+
+	<div align="center">
+        <br><br><br>
+    <a href="{{url_for('employee_appo_checkin')}}">Check-in Office </a>
+    <br><br><br>
+       <a href="{{url_for('employee_appo_outpatient')}}">Out-patient Department</a>
+    <br><br><br>
+           <a href="{{url_for('employee_appo_inpatient')}}">In-patient Department</a>
+    <br><br><br>
+           <a href="{{url_for('employee_appo_operation')}}">Operation Department</a>
+    <br><br><br>
+            <a href="{{url_for('employee_appo_completed')}}">Completed Appointment</a>
+    <br><br><br>
+</div>
+
+
+
+
+{% endblock %}
+
+</body>
+</html>

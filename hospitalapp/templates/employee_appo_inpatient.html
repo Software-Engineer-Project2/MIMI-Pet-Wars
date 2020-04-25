@@ -1,0 +1,104 @@
+{% extends 'employee_loggedin_base.html' %}
+{% block title %}
+    <title>{{title}}</title>
+{% endblock %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if Iappointments %}
+		Inpatient Appointments:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Owner</th>
+                    <th>Pet </th>
+                    <th>Location </th>
+                    <th>Date </th>
+                    <th>Information </th>
+                    <th>Operation Status</th>
+                    <th>Inpatient Status</th>
+                    <th>Release</th>
+                </tr>
+            {% for a in Iappointments%}
+               {% for pet in pets%}
+                  {%  if a.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+
+                        <td align="center">{{a.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{a.Alocation}}</td>
+                        <td align="center">{{a.Adate}}</td>
+                        <td align="center">{{ a.Ainfo }}</td>
+                        <td align="center">{{a.OperationStatus}}</td>
+                        <td align="center">{{ a.HospitalizationStatus }}</td>
+                        <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_inpatient/release/{{a.id}}'" >Inform Release</button>
+
+                        </td>
+
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No appointments need to inform for releasing!</p>
+	{% endif %}
+
+{% if Rappointments %}
+		Inpatient Appointments:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Owner</th>
+                    <th>Pet </th>
+                    <th>Location </th>
+                    <th>Date </th>
+                    <th>Information </th>
+                    <th>Operation Status</th>
+                    <th>Inpatient Status</th>
+                    <th>finish </th>
+                    <th>Release</th>
+                </tr>
+            {% for a in Rappointments%}
+               {% for pet in pets%}
+                  {%  if a.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+
+                        <td align="center">{{a.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{a.Alocation}}</td>
+                        <td align="center">{{a.Adate}}</td>
+                        <td align="center">{{ a.Ainfo }}</td>
+                        <td align="center">{{a.OperationStatus}}</td>
+                        <td align="center">{{ a.HospitalizationStatus }}</td>
+                         <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_inpatient/release_complete/{{a.id}}'" >Complete</button>
+
+                        </td>
+
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No appointments ready to release!</p>
+	{% endif %}
+{% endblock %}

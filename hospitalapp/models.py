@@ -5,8 +5,8 @@ from hospitalapp import db
 
 class Customer(db.Model):
     __tablename__ = 'pet_customer'
-    id = db.Column(db.Integer, primary_key=True)
-    Cname = db.Column(db.String(70), index=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    Cname = db.Column(db.String(70), index=True)
     Cpassword = db.Column(db.Integer)
     Cphone = db.Column(db.String(64))
     Cemail = db.Column(db.String(255))
@@ -22,13 +22,13 @@ class Customer(db.Model):
 class Pet(db.Model):
     __tablename__ = 'pet_pet'
     id = db.Column(db.Integer, primary_key=True)
-    Pname = db.Column(db.String(70), index=True, unique=True)
+    Pname = db.Column(db.String(70))
     Page = db.Column(db.Integer)
-    Psex = db.Column(db.Integer)
-    Pspecies = db.Column(db.String(64), index=True, unique=True)
+    Psex = db.Column(db.String(64))
+    Pspecies = db.Column(db.String(64))
     Powner = db.Column(db.Integer, db.ForeignKey('pet_customer.id'))#G
     Pinfo = db.Column(db.String(1048))
-    appointment = db.relationship('Appointment', backref='appopet', lazy='dynamic')
+    appointment = db.relationship('Appointment', backref='apppetter', lazy='dynamic')
 
 
 
@@ -51,21 +51,16 @@ class Appointment(db.Model):
     Atype = db.Column(db.String(10), index=True)
     Alocation = db.Column(db.String(64), index=True)
     Adoc = db.Column(db.String(64), db.ForeignKey('pet_doctor.id'))#
-    Acomplete = db.Column(db.String(10), index=True)
     Ainfo = db.Column(db.String(1048))
     Adate = db.Column(db.DateTime, index=True)
     Acost = db.Column(db.String(64))
-    AneedOperation = db.Column(db.String(10), nullable=True)
-    AneedHospitalization = db.Column(db.String(10), nullable=True)
-    AneedPrescription = db.Column(db.String(10), nullable=True)
-    OperationPer= db.Column(db.String(10), nullable=True)
-    HospitalizationPer= db.Column(db.String(10), nullable=True)
-    ReleasePer= db.Column(db.String(10), nullable=True)
-    OperationEnd = db.Column(db.String(10), nullable=True)
-    HospitalizationEnd= db.Column(db.String(10), nullable=True)
+    Astart = db.Column(db.String(10), nullable=True)
+    Acomplete = db.Column(db.String(10), index=True)
+    Afinish = db.Column(db.String(10), nullable=True)
+    Ostatus = db.Column(db.String(10), nullable=True)
     OperationStatus = db.Column(db.String(10), nullable=True)
+    Hstatus = db.Column(db.String(10), nullable=True)
     HospitalizationStatus = db.Column(db.String(10), nullable=True)
-    Astatus = db.Column(db.Integer, nullable=True)
     prescription = db.relationship('Prescription', backref='pappointment', lazy='dynamic')#
     Hospitalization  = db.relationship('Hospitalization', backref='happointment', lazy='dynamic')#
     Operation = db.relationship('Operation', backref='oappointment', lazy='dynamic')#
@@ -121,8 +116,8 @@ class Operation(db.Model):
 
 class Employee(db.Model):
     __tablename__ = 'pet_employee'
-    id = db.Column(db.Integer, primary_key=True)
-    Ename = db.Column(db.String(64), index=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    Ename = db.Column(db.String(64), index=True)
     Egender = db.Column(db.String(10), index=True)
     EIDcard = db.Column(db.String(10))
     Epassword = db.Column(db.String(10))
@@ -133,8 +128,8 @@ class Employee(db.Model):
 
 class Medicine(db.Model):
     __tablename__ = 'pet_medicine'
-    id = db.Column(db.Integer, primary_key=True)
-    Mname = db.Column(db.String(64), index=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    Mname = db.Column(db.String(64), index=True)
     Minf = db.Column(db.String(512))
     Mquantity = db.Column(db.Integer)
     prescription = db.relationship('Prescription', backref='medicine', lazy='dynamic')

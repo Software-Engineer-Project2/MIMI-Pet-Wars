@@ -1,13 +1,10 @@
-{% extends 'loggedin_index.html' %}
+{% extends 'employee_loggedin_base.html' %}
 {% block title %}
-    <title>Modify Appointment</title>
+    <title>{{title}}</title>
 {% endblock %}
 {% block content %}
-<h1>&nbsp</h1>
-<h1>&nbsp</h1>
-   <form
-   style="margin-left: 500px;"
-   action="{{ url_for('AddHospitalization',id=id) }}" method="post" enctype="multipart/form-data">
+
+<form action="/customer_my_appointments/operation/{{appoint.id}}" method="POST">
    {{ form.csrf_token }}
          {{ form.hidden_tag() }}
       <p>

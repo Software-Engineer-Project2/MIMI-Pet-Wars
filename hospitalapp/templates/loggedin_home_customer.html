@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-{% extends "base.html" %}
+{% extends "customer_loggedin_base.html" %}
 {% block content %}
 <h1>&nbsp</h1>
 <h1>&nbsp</h1>
@@ -13,7 +13,7 @@
  <a class="link1" href="{{ url_for('add_pet_information')}}">Add Pet Information</a>
     <br>
     <br>
-    <a class="link1" href="{{ url_for('my_pets_information')}}">My Pets</a>
+    <a class="link1" href="{{ url_for('customer_my_pets')}}">My Pets</a>
     <br>
     <br>
 

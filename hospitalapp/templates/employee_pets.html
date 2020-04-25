@@ -1,0 +1,42 @@
+{% extends 'employee_loggedin_base.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if pets %}
+		Outpatient Appointments:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Pet ID</th>
+                    <th>Name</th>
+                    <th>Owner </th>
+                    <th>Gender </th>
+                    <th>Type </th>
+                    <th>Age </th>
+                    <th>Information</th>
+                </tr>
+               {% for pet in pets%}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+                        <td align="center">{{pet.id}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                         <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Psex}}</td>
+                        <td align="center">{{pet.Pspecies}}</td>
+                         <td align="center">{{pet.Page}}</td>
+
+                        <td align="center">{{ pet.Pinfo }}</td>
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+               {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No pets !</p>
+	{% endif %}
+
+
+{% endblock %}

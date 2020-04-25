@@ -1,0 +1,35 @@
+{% extends 'employee_loggedin_base.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if doctors %}
+		Outpatient Appointments:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Doctoe ID</th>
+                    <th>Name</th>
+                    <th>Phone </th>
+                    <th>Level </th>
+                    <th>Hospital </th>
+                    <th>Information </th>
+                </tr>
+               {% for d in doctors %}
+                     <tr>
+                        <td align="center">{{d.id}}</td>
+                        <td align="center">{{d.Dname}}</td>
+                         <td align="center">{{d.Dphone}}</td>
+                        <td align="center">{{d.Dlevel}}</td>
+                        <td align="center">{{d.Dhospital}}</td>
+                         <td align="center">{{d.Dinf}}</td>>
+                     </tr>
+               {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No doctors !</p>
+	{% endif %}
+
+
+{% endblock %}

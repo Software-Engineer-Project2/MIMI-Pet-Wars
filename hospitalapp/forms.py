@@ -83,7 +83,7 @@ class AddOperationForm(FlaskForm):
         'class': "form-control",
         'placeholder': 'Please enter the Cost'
     }, validators=[DataRequired()])
-    Osubmit = SubmitField('Submit')
+    Osubmit = SubmitField('Inform Customer of Operation')
 
 
 class AddHospitalizationForm(FlaskForm):
@@ -103,7 +103,7 @@ class AddHospitalizationForm(FlaskForm):
         'class': "form-control",
         'placeholder': 'Please enter the Cost'
     }, validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Inform customer of inpatient')
 
 
 class AddPrescriptionForm(FlaskForm):
@@ -229,7 +229,7 @@ class PetForm(FlaskForm):
         'class': "form-control",
         'placeholder': 'Please enter your pet name'
     }, validators=[DataRequired()])
-    type = SelectField('Species',coerce=int, choices=[(1, 'Cat'), (2, 'Dog')], render_kw={
+    type = RadioField('Species',coerce=int, choices=[("cat", 'Cat'), ("dog", 'Dog')], render_kw={
         'class': "form-control",
         'placeholder': 'Please choose your pet species'
     }, validators=[DataRequired()])
@@ -253,7 +253,7 @@ class MakeAppointment(FlaskForm):
     ownerphone = StringField('OwnerPhone', validators=[DataRequired()])
     type = RadioField('Type', choices=[('0', 'Emergency'), ('1', 'Standard')], validators=[DataRequired()])
     otherdescription = StringField('OtherDescription', validators=[DataRequired()])
-    chooseposition = SelectField('Choose Position',choices=[('0', 'Beijing'), ('1', 'Shanghai'),('2', 'Chengdu')], default=0, validators=[DataRequired()])
+    chooseposition = SelectField('Choose Position',choices=[('Beijing', 'Beijing'), ('Shanghai', 'Shanghai'),('Chengdu', 'Chengdu')], default=0, validators=[DataRequired()])
     doctors = [('%d' % r.id, r.Dname) for r in Doctor.query.all()]
     doctor = SelectField(label='Choose doctor you want', choices=doctors, validators=[DataRequired()])
     datetime = DateTimeField('Input Datetime(format: YYYY-MM-DD-HH-MM)', format='%Y-%m-%d-%H-%M',validators=[DataRequired()])

@@ -1,0 +1,12 @@
+{% extends 'employee_loggedin_base.html' %}
+{% block title %}
+    <title>Finish</title>
+{% endblock %}
+{% block content %}
+
+<form action="/employee_appo_outpatient/complete/{{appoint.id}}" method="POST">
+    <input type="submit" value="Complete">
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'employee_loggedin_base.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if e_appointments %}
+		Emergency Appointments:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Owner</th>
+                    <th>Pet </th>
+                    <th>Location </th>
+                    <th>Date </th>
+                    <th>Information </th>
+                    <th>View</th>
+                    <th>Check in </th>
+                </tr>
+            {% for ea in e_appointments%}
+               {% for pet in pets%}
+                  {%  if ea.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+
+                        <td align="center">{{ea.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{ea.Alocation}}</td>
+                        <td align="center">{{ea.Adate}}</td>
+                        <td align="center">{{ ea.Ainfo }}</td>
+                        <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_checkin/view_appo/{{ea.id}}'" >View</button>
+
+                        </td>
+                        <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_checkin/checkin_appo/{{ea.id}}'" >Checkin</button>
+
+                        </td>
+
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No emergency appointments !</p>
+	{% endif %}
+
+    {% if s_appointments %}
+		Standard Appointments:<br><hr>
+           <table class="table">
+                <tbody>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Owner</th>
+                    <th>Pet </th>
+                    <th>Location </th>
+                    <th>Date </th>
+                    <th>Information </th>
+                    <th>View</th>
+                    <th>Check in </th>
+                </tr>
+            {% for sa in s_appointments%}
+               {% for pet in pets%}
+                  {%  if sa.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+                        <form action='/employee_appo_checkin' method="POST">
+                        <td align="center">{{sa.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{sa.Alocation}}</td>
+                        <td align="center">{{sa.Adate}}</td>
+                        <td align="center">{{ sa.Ainfo }}</td>
+                        <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_checkin/view_appo/{{sa.id}}'" >View</button>
+
+                        </td>
+                        <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_checkin/checkin_appo/{{sa.id}}'" >Checkin</button>
+
+                        </td>
+                        </form>
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>No standard appointments!</p>
+    {% endif %}
+
+
+{% endblock %}

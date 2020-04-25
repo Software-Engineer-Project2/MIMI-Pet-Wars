@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../static/style/home.css">
+
+        {% if title %}
+        <title>{{ title }} - microblog</title>
+        {% else %}
+        <title>pet</title>
+        {% endif %}
+    </head>
+    <body>
+        <div id="bg">
+            <div id="navi"><h1>Healing Paws <br>Veterinary Hospital</h1></div>
+            <div id="navibar">
+
+            <ul id="barr" aria-orientation="horizontal">
+                <li><a id="cus" href="{{ url_for('customer_mainpage') }}">Customer </a></li>
+                <li><a id="emp" href="{{ url_for('employee_mainpage') }}">Employee </a></li>
+            </ul>
+            <ul id="bar" aria-orientation="horizontal">
+                <!-- <div id="navibar" aria-orientation="horizontal" align="center"> -->
+                <li><a href="{{url_for('employee_appointment')}}">Appointment</a></li>
+                <li><a  href="{{ url_for('listproduct') }}">Admin product </a></li>
+                <li><a href="{{ url_for('employee_pets') }}">Pet List </a></li>
+                 <li><a  href="{{ url_for('employee_customers') }}">Customer List </a></li>
+                <li><a  href="{{ url_for('employee_doctors') }}">Doctor List </a></li>
+                 <li><a  href="{{ url_for('employee_posts') }}">Employee Posts</a></li>
+                <li ><a id="homebtn" href="{{ url_for('index') }}">Home</a></li>
+                <!-- </div> -->
+            </ul>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <br>
+        {% block content %}{% endblock %}
+
+
+<div id="bottom">
+    <br><br><br><br><br>
+    <p><strong>Contact Us</strong>
+        <br><br>Healing Paws Veterinary Hospital
+        <br>603 Hampton Pointe Blvd, Suite 603-5
+        <br>Hillsborough, NC 27278
+    </p>
+    <p>
+        <br><br>Phone: 919-245-3437
+        <br>Fax: 919-245-3502
+        <br>Email: healingpaws@thevetspets.com
+    </p>
+</div>
+
+<br><br><br><br><br><br><br><br>
+<p style=" color: gray; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; margin:auto;">
+    |  © Healing Paws Veterinary Hospital 2020</p>
+
+    <br><br><br><br><br><br>
+
+
+    </body>
+</html>

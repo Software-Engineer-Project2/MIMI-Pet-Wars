@@ -1,0 +1,52 @@
+{% extends 'employee_loggedin_base.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if appoints  %}
+		Outpatient Appointments:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Operation ID</th>
+                    <th>Owner</th>
+                    <th>Pet </th>
+                    <th>Date </th>
+                    <th>Information </th>
+                    <th>Operation Status</th>
+                    <th>Complete Operation </th>
+                </tr>
+    {% for a in appoints %}
+        {% for o in operations %}
+            {%  if o.Oappiiontment==a.id %}
+               {% for pet in pets %}
+                  {%  if a.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+                        <td align="center">{{o.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{o.Odate}}</td>
+                        <td align="center">{{o.Oinfo }}</td>
+                        <td align="center">{{a.OperationStatus}}</td>
+                         <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_operation/complete operation/{{a.id}}'" >Complete Operation</button>
+
+                        </td>
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No operation appointments !</p>
+	{% endif %}
+
+
+{% endblock %}

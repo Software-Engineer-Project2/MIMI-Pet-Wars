@@ -1,0 +1,40 @@
+{% extends 'employee_loggedin_base.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+ {% if appointments %}
+		Completed Appointments:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Owner</th>
+                    <th>Pet </th>
+                    <th>Location </th>
+                    <th>Date </th>
+                    <th>Information </th>
+                </tr>
+            {% for ea in appointments%}
+               {% for pet in pets%}
+                  {%  if ea.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+                        <td align="center">{{ea.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{ea.Alocation}}</td>
+                        <td align="center">{{ea.Adate}}</td>
+                        <td align="center">{{ ea.Ainfo }}</td>
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No Completed Appointments !</p>
+	{% endif %}
+{% endblock %}

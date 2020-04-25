@@ -1,0 +1,64 @@
+{% extends 'employee_loggedin_base.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if appointments %}
+		Outpatient Appointments:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Owner</th>
+                    <th>Pet </th>
+                    <th>Location </th>
+                    <th>Date </th>
+                    <th>Information </th>
+                    <th>Operation Status</th>
+                    <th>Inpatient Status</th>
+                    <th>finish </th>
+                    <th>Operation</th>
+                    <th>Inpatient</th>
+                </tr>
+            {% for a in appointments%}
+               {% for pet in pets%}
+                  {%  if a.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+
+                        <td align="center">{{a.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{a.Alocation}}</td>
+                        <td align="center">{{a.Adate}}</td>
+                        <td align="center">{{ a.Ainfo }}</td>
+                        <td align="center">{{a.OperationStatus}}</td>
+                        <td align="center">{{ a.HospitalizationStatus }}</td>
+                         <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_outpatient/complete/{{a.id}}'" >Complete</button>
+
+                        </td>
+                        <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_outpatient/operation/{{a.id}}'" >Operation</button>
+
+                        </td>
+                        <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_outpatient/inpatient/{{a.id}}'" >Inpatient</button>
+
+                        </td>
+
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No outpatient appointments !</p>
+	{% endif %}
+
+
+{% endblock %}
