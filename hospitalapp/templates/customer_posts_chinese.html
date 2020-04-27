@@ -1,0 +1,30 @@
+{% extends "base_chinese.html" %}
+{% block content %}
+<strong>Do you have any question? </strong>
+      <button  onclick="window.location.href='{{url_for('customer_add_post')}}'">Write A Post.</button>
+
+
+<form style="margin-left: 500px;" action="{{ url_for('customer_posts') }}" method="post" novalidate role="form" enctype="multipart/form-data">
+    {% if unread_posts %}
+    <h2>Unread Posts </h2>
+    {% for unread_post in unread_posts%}
+    <div class="text"><a href="/customer_posts/{{unread_post.id}}">
+        <h3>{{unread_post.Ptopic}}</h3></a><small>{{unread_post.Pdate}}</small></div>
+    {% endfor %}
+    {% else %}
+    <p>没有留言</p>
+    {% endif %}
+
+    {% if read_posts %}
+    <h2>Read Posts </h2>
+    {% for read_post in read_posts%}
+    <div class="text"><a href="/customer_posts/{{read_post.id}}">
+        <h3>{{read_post.Ptopic}}</h3></a><small>{{read_post.Pdate}}</small></div>
+    {% endfor %}
+    {% else %}
+    <p>没有留言</p>
+    {% endif %}
+</form>
+
+
+{% endblock %}

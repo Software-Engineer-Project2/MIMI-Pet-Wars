@@ -1,0 +1,59 @@
+{% extends "base_chinese.html" %}
+{% block content %}
+<br><br><br><br><br><br><br>
+                        <table class="table">
+                            <tbody>
+
+								<tr>
+									<th>预约编号</th>
+									<th>日期</th>
+									<th>宠物名字</th>
+									<th>类型 </th>
+									<th>医生 </th>
+                                    <th>预约信息 </th>
+                                    <th>手术状态</th>
+                                    <th>住院状态 </th>
+                                    <th>变更</th>
+                                    <th>许可</th>
+                                </tr>
+
+                                {% for a in appoints%}
+                                {% for pet in pets%}
+                                {%  if a.Apet==pet.id %}
+                                <tr>
+                                    <td align="center">{{a.id}}</td>
+                                    <td align="center">{{a.Adate}}</td>
+                                    <td align="center">{{pet.Pname}}</td>
+                                    {% if a.Atype == '1' %}
+                                    <td align="center">Standard</td>
+                                    {% elif a.Atype == '0' %}
+                                    <td align="center">Emergent</td>
+                                    {% endif %}
+                                    <td align="center">{{a.Acost}}</td>
+                                    <td align="center">{{a.Ainfo}}</td>
+                                    <td align="center">{{ a.OperationStatus }}</td>
+                                    <td align="center">{{a.HospitalizationStatus}}</td>
+                                    <td align="center">
+                                        <button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'">编辑</button>
+                                        <button  onclick="window.location.href='/customer_my_appointments/delete_appo/{{a.id}}'" >删除</button>
+                                    </td>
+                                    <td align="center">
+										<button  onclick="window.location.href='/customer_my_appointments/operation/{{a.id}}'">外科手术</button>
+										<button  onclick="window.location.href='/customer_my_appointments/inpatient/{{a.id}}'" >住院中</button>
+										<button  onclick="window.location.href='/customer_my_appointments/release/{{a.id}}'" >出院</button>
+
+									</td>
+
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+
+
+
+
+{% endblock %}
+

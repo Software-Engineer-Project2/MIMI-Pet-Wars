@@ -260,6 +260,20 @@ class MakeAppointment(FlaskForm):
     submit = SubmitField('Submit')
 
 
+class MakeAppointment_chinese(FlaskForm):
+    pets = [('%d'% r.id, r.Pname) for r in Pet.query.all()]
+    pet = SelectField(label='选择宠物', choices= pets,validators=[DataRequired()])
+    ownerphone = StringField('主人电话', validators=[DataRequired()])
+    type = RadioField('类型', choices=[('0', '紧急'), ('1', '标准')], validators=[DataRequired()])
+    otherdescription = StringField('其他描述', validators=[DataRequired()])
+    chooseposition = SelectField('选择位置',choices=[('Beijing', '北京'), ('Shanghai', '上海'),('Chengdu', '成都')], default=0, validators=[DataRequired()])
+    doctors = [('%d' % r.id, r.Dname) for r in Doctor.query.all()]
+    doctor = SelectField(label='选择你预约的医生', choices=doctors, validators=[DataRequired()])
+    datetime = DateTimeField('输入时间(format: YYYY-MM-DD-HH-MM)', format='%Y-%m-%d-%H-%M',validators=[DataRequired()])
+    submit = SubmitField('提交')
+
+
+
 class Addpetinformation(FlaskForm):
     Pname = StringField('Pet Name', validators=[DataRequired()])
     Page = IntegerField('Pet age',validators=[DataRequired()])
@@ -267,5 +281,14 @@ class Addpetinformation(FlaskForm):
     Pspecies = StringField('Pet Type', validators=[DataRequired()])
     Pinfo = TextAreaField('Pet Information', validators=[DataRequired()])
     submit = SubmitField('Save')
+
+
+class Addpetinformation_chinese(FlaskForm):
+    Pname = StringField('用户名', validators=[DataRequired()])
+    Page = IntegerField('宠物年纪',validators=[DataRequired()])
+    Psex = RadioField('性别', choices=[('1', '雄'), ('2', '雌')], default=1, validators=[DataRequired()])
+    Pspecies = StringField('宠物类型', validators=[DataRequired()])
+    Pinfo = TextAreaField('宠物信息', validators=[DataRequired()])
+    submit = SubmitField('保存')
 
 

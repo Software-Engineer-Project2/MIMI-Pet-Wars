@@ -599,6 +599,21 @@ def customer_add_post():
         return redirect(url_for('loginCustomer'))
 
 
+@app.route('/customer_posts_chinese')
+def customer_posts_chinese():
+    if not session.get("USERNAME") is None:
+        customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        posts = customer_in_db.Cpost.all()
+        read_posts = set()
+        for p in posts:
+            if p.Panswer.all():
+                read_posts.add(p)
+        unread_posts = customer_in_db.Cpost.filter(Post.Panswer == None).all()
+        return render_template('customer_posts_chinese.html', user=customer_in_db, unread_posts=unread_posts,
+                               read_posts=read_posts)
+    else:
+        return redirect(url_for('loginCustomer_chinese'))
+
 @app.route('/customer_posts')
 def customer_posts():
     if not session.get("USERNAME") is None:
@@ -648,6 +663,22 @@ def make_appointment():
     return render_template('make_appointment_customer.html', title='Make Appointment', form=form)
 
 
+@app.route('/Make Appointment_chinese', methods=['GET', 'POST'])
+def make_appointment_chinese():
+    form = MakeAppointment_chinese()
+    if form.validate_on_submit():
+        pet = Pet.query.filter(Pet.id == int(form.pet.data)).first()
+        appointment = Appointment(apppetter=pet, Atype=form.type.data,
+                                  Adoc=form.doctor.data, Alocation=form.chooseposition.data, Adate=form.datetime.data,
+                                  Ainfo=form.otherdescription.data,
+                                  Acomplete='0', Astart='0')
+        db.session.add(appointment)
+        db.session.commit()
+        return redirect(url_for('loggedin_home_customer_chinese'))
+
+    return render_template('make_appointment_customer_chinese.html', title='Make Appointment', form=form)
+
+
 @app.route('/Add Pet information', methods=['GET', 'POST'])
 def add_pet_information():
     form = Addpetinformation()
@@ -668,6 +699,26 @@ def add_pet_information():
         return redirect(url_for('loginCustomer'))
 
 
+@app.route('/Add Pet information_chinese', methods=['GET', 'POST'])
+def add_pet_information_chinese():
+    form = Addpetinformation_chinese()
+    if not session.get("USERNAME") is None:
+        user = session.get("USERNAME")
+        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        mes = '您好, %s ! , 您能在此添加您的宠物信息' % user
+        if form.validate_on_submit():
+            pet = Pet(Pname=form.Pname.data, Page=form.Page.data, Psex=form.Psex.data, Pspecies=form.Pspecies.data,
+                      Pinfo=form.Pinfo.data, owner=user_in_db)
+            db.session.add(pet)
+            db.session.commit()
+            flash('保存宠物信息成功 !!!')
+            return redirect(url_for('customer_my_pets'))
+        return render_template('add_pet_information_chinese.html', title='Add Pet Information', warn='New pet', form=form,
+                               mes=mes)
+    else:
+        return redirect(url_for('loginCustomer_chinese'))
+
+
 @app.route('/My Pets', methods=['GET', 'POST'])
 def customer_my_pets():
     if not session.get("USERNAME") is None:
@@ -678,6 +729,18 @@ def customer_my_pets():
         return render_template('customer_my_pets.html', pets=pets, mes=mes)
     else:
         return redirect(url_for('loginCustomer'))
+
+
+@app.route('/My Pets_chinese', methods=['GET', 'POST'])
+def customer_my_pets_chinese():
+    if not session.get("USERNAME") is None:
+        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        pets = user_in_db.Cpet.all()
+        user = session["USERNAME"]
+        mes = '你好, %s ! , 这是你的宠物信息' % user
+        return render_template('customer_my_pets_chinese.html', pets=pets, mes=mes)
+    else:
+        return redirect(url_for('loginCustomer_chinese'))
 
 
 @app.route('/My Pets/edit_pet/<id>', methods=['GET', 'POST'])
@@ -727,6 +790,19 @@ def customer_my_appointments():
                 a = Appointment.query.filter(Appointment.Apet == pet.id).all()
                 appoints.extend(a)
     return render_template('customer_my_appointments.html', pets=pets, appoints=appoints)
+
+
+@app.route('/customer_my_appointments_chinese', methods=['GET', 'POST'])
+def customer_my_appointments_chinese():
+    user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+    pets = Pet.query.filter(Pet.Powner == user_in_db.id).all()
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoints = []
+            for pet in pets:
+                a = Appointment.query.filter(Appointment.Apet == pet.id).all()
+                appoints.extend(a)
+    return render_template('customer_my_appointments_chinese.html', pets=pets, appoints=appoints)
 
 
 @app.route('/customer_my_appointments/edit_appo/<id>', methods=['GET', 'POST'])
