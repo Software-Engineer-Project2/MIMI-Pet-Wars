@@ -1,0 +1,32 @@
+{% extends 'base_chinese.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if customers %}
+		客户:<br><hr>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>客户编号</th>
+                    <th>名字</th>
+                    <th>性别 </th>
+                    <th>电话 </th>
+                    <th>邮箱 </th>
+                </tr>
+               {% for c in customers %}
+                     <tr>
+                        <td align="center">{{c.id}}</td>
+                        <td align="center">{{c.Cname}}</td>
+                         <td align="center">{{c.Cgender}}</td>
+                        <td align="center">{{c.Cphone}}</td>
+                        <td align="center">{{c.Cemail}}</td>
+                     </tr>
+               {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------没有客户 !</p>
+	{% endif %}
+
+
+{% endblock %}

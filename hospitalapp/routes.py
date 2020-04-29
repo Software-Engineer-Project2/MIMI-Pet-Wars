@@ -150,10 +150,38 @@ def signupEmployee():
     return render_template('signup_employee.html', title='Register a new user', form=form)
 
 
+@app.route('/signupEmployee_chinese', methods=['GET', 'POST'])
+def signupEmployee_chinese():
+    form = SignupFormEmployee_chinese()
+    if form.validate_on_submit():
+        if form.Epassword.data != form.Epassword2.data:
+            flash('密码不匹配!')
+            return redirect(url_for('signupEmployee_chinese'))
+
+        passw_hash = generate_password_hash(form.Epassword.data)
+        employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=form.Ephone.data,
+                            Egender=form.Egender.data, Eemail=form.Eemail.data, Ehiredate=form.Ehiredate.data,
+                            Epassword=passw_hash)
+        db.session.add(employee)
+        db.session.commit()
+        session["USERNAME"] = employee.Ename
+        return redirect(url_for("loginEmployee_chinese"))
+    return render_template('signup_employee_chinese.html', title='Register a new user', form=form)
+
+
 @app.route('/employee_appointment')
 def employee_appointment():
     if not session.get("USERNAME") is None:
         return render_template('employee_appointment.html', title='Home')
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/employee_appointment_chinese')
+def employee_appointment_chinese():
+    if not session.get("USERNAME") is None:
+        return render_template('employee_appointment_chinese.html', title='Home')
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -397,6 +425,20 @@ def employee_pets():
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+
+
+@app.route('/employee_pets_chinese', methods=['GET', 'POST'])
+def employee_pets_chinese():
+    if not session.get("USERNAME") is None:
+        pets = Pet.query.filter().all()
+        customers = Customer.query.filter().all()
+        return render_template('employee_pets_chinese.html', title='Display In-patient appointments',pets=pets, customers=customers)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage_chinese'))
+
+
+
 @app.route('/employee_customers', methods=['GET', 'POST'])
 def employee_customers():
     if not session.get("USERNAME") is None:
@@ -405,6 +447,17 @@ def employee_customers():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/employee_customers_chinese', methods=['GET', 'POST'])
+def employee_customers_chinese():
+    if not session.get("USERNAME") is None:
+        customers = Customer.query.filter().all()
+        return render_template('employee_customers_chinese.html', title='Display In-patient appointments', customers=customers)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/employee_doctors', methods=['GET', 'POST'])
 def employee_doctors():
@@ -415,10 +468,27 @@ def employee_doctors():
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+
+@app.route('/employee_doctors_chinese', methods=['GET', 'POST'])
+def employee_doctors_chinese():
+    if not session.get("USERNAME") is None:
+        doctors = Doctor.query.filter().all()
+        return render_template('employee_doctors_chinese.html', title='Display In-patient appointments',doctors=doctors)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
 @app.route('/listproduct', methods=['GET', 'POST'])
 def listproduct():
     goods = Good.query.all()
     return render_template('adminproduct.html', title='Shop', goods=goods)
+
+
+@app.route('/listproduct_chinese', methods=['GET', 'POST'])
+def listproduct_chinese():
+    goods = Good.query.all()
+    return render_template('adminproduct_chinese.html', title='Shop', goods=goods)
 
 
 @app.route('/employee_posts')
@@ -434,6 +504,23 @@ def employee_posts():
 
         print('unread posts', unread_posts)
         return render_template('employee_posts.html', unread_posts=unread_posts, read_posts=read_posts)
+    else:
+        return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/employee_posts_chinese')
+def employee_posts_chinese():
+    if not session.get("USERNAME") is None:
+        posts = Post.query.all()
+        read_posts = set()
+        for post in posts:
+            if post.Panswer.all():
+                read_posts.add(post)
+
+        unread_posts = Post.query.filter(Post.Panswer == None).all()
+
+        print('unread posts', unread_posts)
+        return render_template('employee_posts_chinese.html', unread_posts=unread_posts, read_posts=read_posts)
     else:
         return redirect(url_for('employee_mainpage'))
 
@@ -482,6 +569,30 @@ def addproduct():
                 # flash("Add product successfully")
             return redirect(url_for('listproduct'))
         return render_template('addproduct.html', title='addproduct', form=form)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/addproduct_chinese', methods=['GET', 'POST'])
+def addproduct_chinese():
+    form = AddProductForm_chinese()
+    if not session.get("USERNAME") is None:
+        if form.validate_on_submit():
+            if request.method == 'POST' and 'photo' in request.files:
+                filename = photos.save(request.files['photo'])
+                file_url = photos.get_basename(filename)
+                id = form.Gid.data
+                name = form.Gname.data
+                info = form.Ginfo.data
+                price = form.Gprice.data
+                adddate = form.Gadddate.data
+                good = Good(id=id, Gname=name, Ginfo=info, Gimage=file_url, Gprice=price, Gadddate=adddate)
+                db.session.add(good)
+                db.session.commit()
+                # flash("Add product successfully")
+            return redirect(url_for('listproduct_chinese'))
+        return render_template('addproduct_chinese.html', title='addproduct', form=form)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))

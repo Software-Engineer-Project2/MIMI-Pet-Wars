@@ -34,6 +34,18 @@ class SignupFormEmployee(FlaskForm):
     Esubmit = SubmitField('Register')
 
 
+class SignupFormEmployee_chinese(FlaskForm):
+    Eusername = StringField('用户名', validators=[DataRequired()])
+    Eidcard = StringField('身份证号', validators=[DataRequired()])
+    Ephone = StringField('电话', validators=[DataRequired()])
+    Egender = RadioField('性别', choices=[('0', '男'), ('1', '女')], validators=[DataRequired()])
+    Eemail = StringField('邮箱', validators=[DataRequired()])
+    Ehiredate = DateField('入职日期 (格式: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
+    Epassword = PasswordField('密码', validators=[DataRequired()])
+    Epassword2 = PasswordField('重复密码', validators=[DataRequired()])
+    Esubmit = SubmitField('注册')
+
+
 class ArrangeAppointmentFormEmployee(FlaskForm):
     Epet = IntegerField('Pet id', validators=[DataRequired()])
     Etype = RadioField('Type', choices=[('0', 'Emergency'), ('1', 'Standard')], validators=[DataRequired()])
@@ -142,6 +154,17 @@ class AddProductForm(FlaskForm):
     Gprice = IntegerField('Good price', validators=[DataRequired()])
     Gadddate = DateField('AddDate', validators=[DataRequired()])
     submit = SubmitField('submit')
+
+
+class AddProductForm_chinese(FlaskForm):
+    Gid = IntegerField('货物编号', validators=[DataRequired()])
+    Gname = StringField('货物名称', validators=[DataRequired()])
+    Ginfo = StringField('信息', validators=[DataRequired()])
+    photo = FileField('上传图片', validators=[FileRequired(),
+                                          FileAllowed(photos, "images only")])
+    Gprice = IntegerField('货物价格', validators=[DataRequired()])
+    Gadddate = DateField('添加日期', validators=[DataRequired()])
+    submit = SubmitField('提交')
 
 
 class PrescriptionForm(FlaskForm):

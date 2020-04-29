@@ -1,0 +1,35 @@
+{% extends 'base_chinese.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if doctors %}
+		门诊医生:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>医生编号</th>
+                    <th>名字</th>
+                    <th>电话 </th>
+                    <th>职称水平 </th>
+                    <th>医院 </th>
+                    <th>简述 </th>
+                </tr>
+               {% for d in doctors %}
+                     <tr>
+                        <td align="center">{{d.id}}</td>
+                        <td align="center">{{d.Dname}}</td>
+                         <td align="center">{{d.Dphone}}</td>
+                        <td align="center">{{d.Dlevel}}</td>
+                        <td align="center">{{d.Dhospital}}</td>
+                         <td align="center">{{d.Dinf}}</td>>
+                     </tr>
+               {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------暂时没有医生 !</p>
+	{% endif %}
+
+
+{% endblock %}

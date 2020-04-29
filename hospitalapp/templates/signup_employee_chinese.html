@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet_Wars system signup</title>
+    <link rel="stylesheet" type="text/css" href="../static/style/empSignin.css">
+</head>
+<body>
+    <form action="" method="post" novalidate id="signupForm" align="center">
+        {{ form.hidden_tag() }}
+        <br><br><br>
+            <div id="Eusername">
+            {{ form.Eusername.label }}
+            <span class="kuang">{{ form.Eusername }}</span>
+
+			{% for error in form.Eusername.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+            <br>
+
+            <div id="Eidcard">
+                {{ form.Eidcard.label }}
+                <span class="kuang">{{form.Eidcard}}</span>
+
+
+                {% for error in form.Eidcard.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+            <div id="Ephone">
+                {{ form.Ephone.label }}
+                <span class="kuang">{{ form.Ephone }}
+                </span>
+
+                {% for error in form.Ephone.errors %}
+                <span style="color: red;" display：inline-block;>[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+            <div id="Egender">
+                {{ form.Egender.label }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% for choice in form.Egender %}
+                    <tr>
+                        <td>{{ choice }}</td>
+                        <td>{{ choice.label }}</td>
+                    </tr>
+                {% endfor %}
+
+
+                {% for error in form.Egender.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+            <div id="Eemail">
+                {{ form.Eemail.label}}
+                <span class="kuang"> {{ form.Eemail }}
+                    </span>
+
+                {% for error in form.Eemail.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+            <div id="hiredate">
+
+                {{ form.Ehiredate.label }}
+                <span class="kuang">{{ form.Ehiredate }}</span>
+
+                {% for error in form.Ehiredate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+            <div id="Epassword">
+                {{ form.Epassword.label }}
+                <span class="kuang">{{ form.Epassword }}
+                    </span>
+
+                {% for error in form.Epassword.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+
+            <div id="EpasswordRepeat">
+                {{ form.Epassword2.label }}
+                <span class="kuang">{{ form.Epassword2 }}
+                    </span>
+
+                {% for error in form.Epassword2.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+                <br>
+                <br>
+
+
+    <div>{{ form.Esubmit.label }}
+        <button id="sub"> {{ form.Esubmit }}
+        </button>
+        </div>
+        <br><br><br><br>
+</form>>
+</body>
+</html>
