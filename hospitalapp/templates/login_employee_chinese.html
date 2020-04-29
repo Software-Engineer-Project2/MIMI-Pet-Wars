@@ -1,0 +1,31 @@
+{% extends "base_chinese.html" %}
+
+{% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+    <h1 style="margin-left: 500px;">登录</h1>
+    <form style="margin-left: 500px;"
+    action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.Eusername.label }}<br>
+            {{ form.Eusername(size=32) }}
+			
+			{% for error in form.Eusername.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+			
+        </p>
+        <p>
+            {{ form.Epassword.label }}<br>
+            {{ form.Epassword(size=32) }}
+			
+			{% for error in form.Epassword.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+			
+        </p>
+        <p>{{ form.Eremember_me() }} {{ form.Eremember_me.label }}</p>
+        <p>{{ form.Esubmit() }}</p>
+    </form>
+{% endblock %}

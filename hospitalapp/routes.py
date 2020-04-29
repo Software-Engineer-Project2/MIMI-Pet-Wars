@@ -86,6 +86,17 @@ def loggedin_home_employee():
         return redirect(url_for('loginEmployee'))
 
 
+@app.route('/loggedin_home_employee_chinese')
+def loggedin_home_employee_chinese():
+    if not session.get("USERNAME") is None:
+        user_in_db = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
+        return render_template('loggedin_home_employee_chinese.html', Eusername=user_in_db.Ename)
+    else:
+        flash("雇员需要登录或者注册首先")
+        return redirect(url_for('loginEmployee_chinese'))
+
+
+
 @app.route('/loginEmployee', methods=['GET', 'POST'])
 def loginEmployee():
     form = LoginFormEmployee()
@@ -101,6 +112,23 @@ def loginEmployee():
         flash('Incorrect Password')
         return redirect(url_for('loginEmployee'))
     return render_template('login_employee.html', title='Sign In', form=form)
+
+
+@app.route('/loginEmployee_chinese', methods=['GET', 'POST'])
+def loginEmployee_chinese():
+    form = LoginFormEmployee_chinese()
+    if form.validate_on_submit():
+        user_in_db = Employee.query.filter(Employee.Ename == form.Eusername.data).first()
+        if not user_in_db:
+            flash('没有发现用户: {}'.format(form.Eusername.data))
+            return redirect(url_for('loginEmployee'))
+        if check_password_hash(user_in_db.Epassword, form.Epassword.data):
+            flash('登录成功!')
+            session["USERNAME"] = user_in_db.Ename
+            return redirect(url_for('loggedin_home_employee_chinese'))
+        flash('密码不正确')
+        return redirect(url_for('loginEmployee'))
+    return render_template('login_employee_chinese.html', title='Sign In', form=form)
 
 
 @app.route('/signupEmployee', methods=['GET', 'POST'])

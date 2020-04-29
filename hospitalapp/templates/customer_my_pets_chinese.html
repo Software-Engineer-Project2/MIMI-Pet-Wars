@@ -8,7 +8,7 @@
 {% extends "base_chinese.html" %}
 {% block content %}
 <h2 >{{ mes }}</h2>
-      <button  onclick="window.location.href='{{url_for('add_pet_information')}}'">Add a pet.</button>
+      <button  onclick="window.location.href='{{url_for('add_pet_information_chinese')}}'">添加宠物.</button>
 
 <h4>{{ pets|length}} 您的宠物:</h4>
 
@@ -38,10 +38,10 @@
                                     <td align="center">{{pet.Pspecies}}</td>
                                     <td align="center">{{pet.Pinfo}}</td>
                                     <td align="center">
-                                        <button  onclick="window.location.href='/My Pets/edit_pet/{{pet.id}}'">Edit</button>
+                                        <button  onclick="window.location.href='/My Pets/edit_pet/{{pet.id}}'">编辑</button>
 									</td>
                                     <td align="center">
-                                        <button  onclick="window.location.href='/My Pets/delete_pet/{{pet.id}}'" >Delete</button>
+                                        <button  onclick="window.location.href='/My Pets/delete_pet/{{pet.id}}'" >删除</button>
 
 									</td>
 

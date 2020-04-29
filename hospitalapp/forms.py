@@ -15,6 +15,13 @@ class LoginFormEmployee(FlaskForm):
     Esubmit = SubmitField('Sign In')
 
 
+class LoginFormEmployee_chinese(FlaskForm):
+    Eusername = StringField('用户名', validators=[DataRequired()])
+    Epassword = PasswordField('密码', validators=[DataRequired()])
+    Eremember_me = BooleanField('记住密码')
+    Esubmit = SubmitField('登录')
+
+
 class SignupFormEmployee(FlaskForm):
     Eusername = StringField('Username', validators=[DataRequired()])
     Eidcard = StringField('ID Card Number', validators=[DataRequired()])

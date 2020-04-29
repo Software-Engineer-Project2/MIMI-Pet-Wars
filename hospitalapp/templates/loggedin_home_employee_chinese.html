@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome back</title>
+</head>
+<body>
+
+{% extends "base_chinese.html" %}
+{% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+    <a href="{{ url_for('listproduct') }}">管理货物</a><br>
+
+	<div align="center">
+        <br><br><br>
+    <a href="{{url_for('employee_appointment')}}">预约</a>
+    <br><br><br>
+       <a href="{{url_for('employee_pets')}}">宠物列表</a>
+    <br><br><br>
+           <a href="{{url_for('employee_customers')}}">顾客列表</a>
+    <br><br><br>
+           <a href="{{url_for('employee_doctors')}}">医生列表</a>
+    <br><br><br>
+  <a href="{{url_for('employee_posts')}}">雇员留言</a>
+    <br><br><br>
+</div>
+
+
+
+
+{% endblock %}
+
+</body>
+</html>
