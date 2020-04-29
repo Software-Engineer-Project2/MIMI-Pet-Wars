@@ -219,19 +219,16 @@ def employee_checkin_view():
         return redirect(url_for('employee_mainpage'))
 
 
+
+
 @app.route('/employee_appo_checkin/checkin_appo/<id>', methods=['GET', 'POST'])
 def employee_checkin(id):
-    if not session.get("USERNAME") is None:
-        appoint = Appointment.query.filter(Appointment.id == id).first()
-        if request.method == 'GET':
-            return render_template('employee_checkin.html', appoint=appoint)
-        else:
-            appoint.Astart = '1'
-            db.session.commit()
-            return redirect(url_for('employee_appo_checkin'))
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+    appoint = Appointment.query.get_or_404(id)
+    appoint.Astart = '1'
+    db.session.commit()
+    return redirect(url_for('employee_appo_checkin'))
+
+
 
 
 @app.route('/employee_appo_outpatient', methods=['GET', 'POST'])
@@ -246,7 +243,7 @@ def employee_appo_outpatient():
         appointments3 = Appointment.query.filter(Appointment.Astart == '1',
                                                  Appointment.Hstatus == '5').all()
         appointments.append(appointments2)
-        appointments.append(appointments2)
+        appointments.append(appointments3)
         print(appointments)
         # type-1 complete-0 - Standard Appointments not checkin
         return render_template('employee_appo_outpatient.html', title='Display appointment not checkin yet',
@@ -258,17 +255,11 @@ def employee_appo_outpatient():
 
 @app.route('/employee_appo_outpatient/complete/<id>', methods=['GET', 'POST'])
 def employee_outpatient_finish(id):
-    if not session.get("USERNAME") is None:
-        appoint = Appointment.query.filter(Appointment.id == id).first()
-        if request.method == 'GET':
-            return render_template('employee_outpatient_complete.html', appoint=appoint)
-        else:
-            appoint.Acomplete = '1'
-            db.session.commit()
-            return redirect(url_for('employee_appo_outpatient'))
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+    appoint = Appointment.query.get_or_404(id)
+    appoint.Acomplete = '1'
+    db.session.commit()
+    return redirect(url_for('employee_appo_outpatient'))
+
 
 
 @app.route('/employee_appo_outpatient/operation/<id>', methods=['GET', 'POST'])
@@ -324,8 +315,10 @@ def employee_appo_inpatient():
         Rappointments = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
                                                  Appointment.Hstatus == '4').all()  # type-1 complete-0 - Standard Appointments not checkin
         # type-1 complete-0 - Standard Appointments not checkin
+        Wappointments = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
+                                                 Appointment.Hstatus == '3').all()
         return render_template('employee_appo_inpatient.html', title='Display In-patient appointments',
-                               Iappointments=Iappointments, Rappointments=Rappointments, pets=pets, customers=customers)
+                               Iappointments=Iappointments, Rappointments=Rappointments,Wappointments=Wappointments, pets=pets, customers=customers)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -334,16 +327,11 @@ def employee_appo_inpatient():
 @app.route('/employee_appo_inpatient/release/<id>', methods=['GET', 'POST'])
 def employee_inpatient_release(id):
     if not session.get("USERNAME") is None:
-        if request.method == 'GET':
-            appoint = Appointment.query.filter(Appointment.id == id).first()
-            return render_template('employee_inpatient_release.html', title="Inform customer to Rlease",
-                                   appoint=appoint)
-        else:
-            appoint = Appointment.query.filter(Appointment.id == id).first()
-            appoint.Hstatus = '3'
-            appoint.HospitalizationStatus = "Inform customer of release"
-            db.session.commit()
-            return redirect(url_for('employee_appo_inpatient'))
+        appoint = Appointment.query.get_or_404(id)
+        appoint.Hstatus = '3'
+        appoint.HospitalizationStatus = "Inform customer of release"
+        db.session.commit()
+        return redirect(url_for('employee_appo_inpatient'))
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -352,12 +340,7 @@ def employee_inpatient_release(id):
 @app.route('/employee_appo_inpatient/release_complete/<id>', methods=['GET', 'POST'])
 def employee_inpatient_releasecomplete(id):
     if not session.get("USERNAME") is None:
-        if request.method == 'GET':
-            appoint = Appointment.query.filter(Appointment.id == id).first()
-            return render_template('employee_inpatient_releasecomplete.html', title="Complete inpatient",
-                                   appoint=appoint)
-        else:
-            appoint = Appointment.query.filter(Appointment.id == id).first()
+            appoint = Appointment.query.get_or_404(id)
             appoint.Hstatus = '5'
             appoint.HospitalizationStatus = "Released"
             db.session.commit()
@@ -387,16 +370,11 @@ def employee_appo_operation():
 @app.route('/employee_appo_operation/complete operation/<id>', methods=['GET', 'POST'])
 def employee_operation_complete(id):
     if not session.get("USERNAME") is None:
-        if request.method == 'GET':
-            appoint = Appointment.query.filter(Appointment.id == id).first()
-            return render_template('employee_operation_complete.html', title="Complete operation",
-                                   appoint=appoint)
-        else:
-            appoint = Appointment.query.filter(Appointment.id == id).first()
-            appoint.Ostatus = '3'
-            appoint.OperationStatus = "Operation Completed"
-            db.session.commit()
-            return redirect(url_for('employee_appo_operation'))
+        appoint = Appointment.query.get_or_404(id)
+        appoint.Ostatus = '3'
+        appoint.OperationStatus = "Operation Completed"
+        db.session.commit()
+        return redirect(url_for('employee_appo_operation'))
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -906,14 +884,10 @@ def customer_edit_pet(id):
 @app.route('/My Pets/delete_pet/<id>', methods=['GET', 'POST'])
 def customer_delete_pet(id):
     if not session.get("USERNAME") is None:
-        if request.method == 'GET':
-            pet = Pet.query.filter(Pet.id == id).first()
-            return render_template('customer_delete_pet.html', pet=pet)
-        else:
-            pet = Pet.query.filter(Pet.id == id).first()
-            db.session.delete(pet)
-            db.session.commit()
-            return redirect(url_for('customer_my_pets'))
+        pet = Pet.query.get_or_404(id)
+        db.session.delete(pet)
+        db.session.commit()
+        return redirect(url_for('customer_my_pets'))
     else:
         return redirect(url_for('loginCustomer'))
 
@@ -927,6 +901,7 @@ def customer_my_appointments():
             appoints = []
             for pet in pets:
                 a = Appointment.query.filter(Appointment.Apet == pet.id).all()
+                print(a)
                 appoints.extend(a)
     return render_template('customer_my_appointments.html', pets=pets, appoints=appoints)
 

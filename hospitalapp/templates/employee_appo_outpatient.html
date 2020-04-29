@@ -36,8 +36,9 @@
                         <td align="center">{{a.OperationStatus}}</td>
                         <td align="center">{{ a.HospitalizationStatus }}</td>
                          <td align="center">
-                            <button  onclick="window.location.href='/employee_appo_outpatient/complete/{{a.id}}'" >Complete</button>
-
+ <a href="{{ url_for('employee_outpatient_finish', id=a.id) }}">
+             Complete
+            </a>
                         </td>
                         <td align="center">
                             <button  onclick="window.location.href='/employee_appo_outpatient/operation/{{a.id}}'" >Operation</button>

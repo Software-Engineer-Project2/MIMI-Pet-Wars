@@ -31,8 +31,9 @@
                         <td align="center">{{o.Oinfo }}</td>
                         <td align="center">{{a.OperationStatus}}</td>
                          <td align="center">
-                            <button  onclick="window.location.href='/employee_appo_operation/complete operation/{{a.id}}'" >Complete Operation</button>
-
+ <a href="{{ url_for('employee_operation_complete', id=a.id) }}">
+             Complete Operation
+            </a>
                         </td>
                      </tr>
                         {% endif %}

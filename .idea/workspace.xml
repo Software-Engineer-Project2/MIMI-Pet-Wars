@@ -3,11 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/CompleteOperationConfirm.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/CompletedOperation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/DisplayAppointmentEmployee.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/Hospitalization.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/UnderOperation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/customer_my_pets.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_my_pets.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/customer_my_pets_chinese.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_my_pets_chinese.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_checkin.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_checkin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_inpatient.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_inpatient.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_operation.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_operation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_outpatient.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_outpatient.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_checkin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_inpatient_release.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_inpatient_releasecomplete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_outpatient_complete.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +160,7 @@
       <workItem from="1587736497434" duration="18193000" />
       <workItem from="1587752083785" duration="19937000" />
       <workItem from="1587842383623" duration="296000" />
+      <workItem from="1588132228772" duration="4238000" />
     </task>
     <servers />
   </component>

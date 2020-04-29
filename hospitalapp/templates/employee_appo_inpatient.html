@@ -37,8 +37,9 @@
                         <td align="center">{{a.OperationStatus}}</td>
                         <td align="center">{{ a.HospitalizationStatus }}</td>
                         <td align="center">
-                            <button  onclick="window.location.href='/employee_appo_inpatient/release/{{a.id}}'" >Inform Release</button>
-
+ <a href="{{ url_for('employee_inpatient_release', id=a.id) }}">
+             Inform Release
+            </a>
                         </td>
 
                      </tr>
@@ -86,8 +87,9 @@
                         <td align="center">{{a.OperationStatus}}</td>
                         <td align="center">{{ a.HospitalizationStatus }}</td>
                          <td align="center">
-                            <button  onclick="window.location.href='/employee_appo_inpatient/release_complete/{{a.id}}'" >Complete</button>
-
+ <a href="{{ url_for('employee_inpatient_releasecomplete', id=a.id) }}">
+             Complete
+            </a>
                         </td>
 
                      </tr>
@@ -100,5 +102,47 @@
             </table>
     {% else %}
 		<p>----------------No appointments ready to release!</p>
+	{% endif %}
+
+{% if Wappointments %}
+		Inpatient Appointments waiting for permission:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Owner</th>
+                    <th>Pet </th>
+                    <th>Location </th>
+                    <th>Date </th>
+                    <th>Information </th>
+                    <th>Operation Status</th>
+                    <th>Inpatient Status</th>
+                </tr>
+            {% for a in Wappointments%}
+               {% for pet in pets%}
+                  {%  if a.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+
+                        <td align="center">{{a.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{a.Alocation}}</td>
+                        <td align="center">{{a.Adate}}</td>
+                        <td align="center">{{ a.Ainfo }}</td>
+                        <td align="center">{{a.OperationStatus}}</td>
+                        <td align="center">{{ a.HospitalizationStatus }}</td>
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No appointments waiting for permission!</p>
 	{% endif %}
 {% endblock %}

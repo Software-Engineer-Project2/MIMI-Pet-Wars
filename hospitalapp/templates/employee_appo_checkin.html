@@ -35,7 +35,9 @@
 
                         </td>
                         <td align="center">
-                            <button  onclick="window.location.href='/employee_appo_checkin/checkin_appo/{{ea.id}}'" >Checkin</button>
+                            <a href="{{ url_for('employee_checkin', id=ea.id) }}">
+            <i class="fa fa-trash"></i> Check_in
+            </a>
 
                         </td>
 
@@ -83,9 +85,10 @@
 
                         </td>
                         <td align="center">
-                            <button  onclick="window.location.href='/employee_appo_checkin/checkin_appo/{{sa.id}}'" >Checkin</button>
+                              <a href="{{ url_for('employee_checkin', id=sa.id) }}">
+            <i class="fa fa-trash"></i> Check_in
+            </a>
 
-                        </td>
                         </form>
                      </tr>
                         {% endif %}

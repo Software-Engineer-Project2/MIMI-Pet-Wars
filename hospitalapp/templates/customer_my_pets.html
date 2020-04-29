@@ -41,8 +41,9 @@
                                         <button  onclick="window.location.href='/My Pets/edit_pet/{{pet.id}}'">Edit</button>
 									</td>
                                     <td align="center">
-                                        <button  onclick="window.location.href='/My Pets/delete_pet/{{pet.id}}'" >Delete</button>
+ <a href="{{ url_for('customer_delete_pet', id=pet.id) }}"><button >Delete</button>
 
+            </a>
 									</td>
 
                                 </tr>
