@@ -55,6 +55,239 @@ def employee_mainpage():
 def employee_mainpage_chinese():
     return render_template('employee_mainpage_chinese.html', title='Home')
 
+@app.route('/senior_mainpage',methods=['GET', 'POST'])
+def senior_mainpage():
+    form = LoginFormCustomer()
+    if request.method=="POST":
+        user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
+        if not user_in_db:
+            flash('No user found with username: {}'.format(form.Cusername.data))
+            return redirect(url_for('senior_mainpage'))
+        if check_password_hash(user_in_db.Cpassword, form.Cpassword.data):
+            flash('Login success!')
+            session["USERNAME"] = user_in_db.Cname
+            return redirect(url_for('loggedin_home_senior'))
+        flash('Incorrect Password')
+        return redirect(url_for('senior_mainpage'))
+    return render_template('senior_mainpage.html',  title='Login In', form=form)
+
+
+@app.route('/signupSenior', methods=['GET', 'POST'])
+def signupSenior():
+    form = SignupCustomer()
+    if form.validate_on_submit():
+        if form.Cpassword.data != form.Cpassword2.data:
+            flash('Passwords do not match!')
+            return redirect(url_for('signupSenior'))
+        passw_hash = generate_password_hash(form.Cpassword.data)
+        customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data,
+                            Cgender=form.Cgender.data, Cpassword=passw_hash)
+        db.session.add(customer)
+        db.session.commit()
+        session["USERNAME"] = customer.Cname
+        flash('Welcome home, %s ! , you need sign in again' % customer.Cname)
+        return redirect(url_for('senior_mainpage'))
+    return render_template('signup_customer.html', title='Register a new user', form=form)
+
+
+@app.route('/loggedin_home_senior', methods=['GET', 'POST'])
+def loggedin_home_senior():
+    if not session.get("USERNAME") is None:
+        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        print(user_in_db.Cname)
+        pets = user_in_db.Cpet.all()
+        doctors = Doctor.query.filter().all()
+        if not session.get("USERNAME") is None:
+            if request.method == 'GET':
+                posts = user_in_db.Cpost.all()
+                read_posts = set()
+                for p in posts:
+                    if p.Panswer.all():
+                        read_posts.add(p)
+                unread_posts = user_in_db.Cpost.filter(Post.Panswer == None).all()
+                appoints = []
+                for pet in pets:
+                    a = Appointment.query.filter(Appointment.Apet == pet.id).all()
+                    print(a)
+                    appoints.extend(a)
+        return render_template('loggedin_home_senior.html', Cusername=user_in_db.Cname,pets=pets,appoints = appoints,read_posts=read_posts,unread_posts=unread_posts,doctors=doctors)
+    else:
+        flash("Customer needs to either login or signup first")
+        return redirect(url_for('senior_mainpage'))
+
+@app.route('/loggedin_home_senior/write_post', methods=['GET', 'POST'])
+def senior_write_post():
+    user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+    if request.method=="POST":
+        post = Post(Ptopic=request.form['topic'], Pcontent=request.form['content'], poster=user_in_db)
+        db.session.add(post)
+        db.session.commit()
+    return redirect(url_for('loggedin_home_senior'))
+
+@app.route('/loggedin_home_senior/add_pet', methods=['GET', 'POST'])
+def senior_add_pet():
+    user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+    if request.method=="POST":
+        pet = Pet(Pname=request.form['pet_name'], Page=request.form['pet_age'], Psex=request.form['pet_gender'], Pspecies=request.form['pet_species'],
+                  Pinfo=request.form['pet_info'], owner=user_in_db)
+        db.session.add(pet)
+        db.session.commit()
+    return redirect(url_for('loggedin_home_senior'))
+
+@app.route('/loggedin_home_senior/edit_pet/<id>', methods=['GET', 'POST'])
+def senior_edit_pet(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+            pet = Pet.query.filter(Pet.Powner == user_in_db.id).first()
+            return render_template('senior_edit_pet.html', pet=pet)
+        else:
+            user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+            pet = Pet.query.filter(Pet.Powner == user_in_db.id).first()
+            pet.Pname = request.form['name']
+            pet.Page = request.form['age']
+            pet.Psex = request.form['gender']
+            pet.Pspecies = request.form['species']
+            pet.Pinfo = request.form['information']
+            db.session.commit()
+            return redirect(url_for('loggedin_home_senior'))
+    else:
+        return redirect(url_for('senior_mainpage'))
+
+
+@app.route('/loggedin_home_senior/delete_pet/<id>', methods=['GET', 'POST'])
+def senior_delete_pet(id):
+    if not session.get("USERNAME") is None:
+        pet = Pet.query.get_or_404(id)
+        db.session.delete(pet)
+        db.session.commit()
+        return redirect(url_for('loggedin_home_senior'))
+    else:
+        return redirect(url_for('senior_mainpage'))
+
+@app.route('/loggedin_home_senior/operation/<id>', methods=['GET', 'POST'])
+def senior_appo_operation(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            return render_template('senior_appo_operation.html', appoint=appoint)
+        else:
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            if appoint.Ostatus == '1':
+                appoint.Ostatus = '2'
+                appoint.OperationStatus = "Ready to surgery"
+                db.session.commit()
+                flash("Ready to sugery")
+            else:
+                flash("No surgical approval is required")
+            return redirect(url_for('loggedin_home_senior'))
+    else:
+        return redirect(url_for('senior_mainpage'))
+
+@app.route('/loggedin_home_senior/inpatient/<id>', methods=['GET', 'POST'])
+def senior_appo_inpatient(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            return render_template('senior_appo_inpatient.html', title="Allows operation", appoint=appoint)
+        else:
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            if appoint.Hstatus == '1':
+                appoint.Hstatus = '2'
+                appoint.HospitalizationStatus = "Ready to inpatient"
+                db.session.commit()
+                flash("Ready to sugery")
+            else:
+                flash("No inpatient approval is required")
+            return redirect(url_for('loggedin_home_senior'))
+    else:
+        return redirect(url_for('senior_mainpage'))
+
+
+
+@app.route('/loggedin_home_senior/emergency_appointment', methods=['GET', 'POST'])
+def senior_emergency_appoint():
+    if request.method == "POST":
+        pet_name = request.form["appoint_name"]
+        date_str = request.form['date']
+        date_str = date_str+':59'
+        date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+        pet = Pet.query.filter(Pet.Pname==pet_name).first()
+        appointment = Appointment(apppetter=pet, Atype='0',
+                                  Adoc=request.form["doc"], Alocation=request.form["location"], Adate=date,
+                                  Ainfo='',Acomplete='0', Astart='0')
+        db.session.add(appointment)
+        db.session.commit()
+    return redirect(url_for('loggedin_home_senior'))
+
+@app.route('/loggedin_home_senior/standard_appointment', methods=['GET', 'POST'])
+def senior_standard_appoint():
+    if request.method == "POST":
+        pet_name = request.form["appoint_name"]
+        date_str = request.form['date']
+        date_str = date_str+':59'
+        date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+        pet = Pet.query.filter(Pet.Pname==pet_name).first()
+        appointment = Appointment(apppetter=pet, Atype='1',
+                                  Adoc=request.form["doc"], Alocation=request.form["location"], Adate=date,
+                                  Ainfo=request.form["info"],Acomplete='0', Astart='0')
+        db.session.add(appointment)
+        db.session.commit()
+    return redirect(url_for('loggedin_home_senior'))
+
+
+@app.route('/loggedin_home_senior/delete_appoint/<id>', methods=['GET', 'POST'])
+def senior_delete_appoint(id):
+    if not session.get("USERNAME") is None:
+        appoint = Appointment.query.get_or_404(id)
+        db.session.delete(appoint)
+        db.session.commit()
+        return redirect(url_for('loggedin_home_senior'))
+    else:
+        return redirect(url_for('senior_mainpage'))
+
+@app.route('/loggedin_home_senior/edit_appoint/<id>', methods=['GET', 'POST'])
+def senior_edit_appoint(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            docID = appoint.Adoc
+            doc = Doctor.query.filter(Doctor.id == docID).first()
+            doctors = Doctor.query.all()
+            return render_template('senior_edit_appo.html', doctors=doctors, doc=doc, appoint=appoint)
+        else:
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            appoint.Atype = request.form['type']
+            appoint.Adate = datetime.now()
+            appoint.Alocation = request.form['location']
+            docname = request.form['doctor']
+            doctor = Doctor.query.filter(Doctor.Dname == docname).first()
+            appoint.Adoc = doctor.id
+            appoint.Ainfo = request.form['information']
+            db.session.commit()
+            return redirect(url_for('loggedin_home_senior'))
+    else:
+        return redirect(url_for('senior_mainpage'))
+
+@app.route('/loggedin_home_senior/release/<id>', methods=['GET', 'POST'])
+def senior_appo_release(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            return render_template('senior_appo_release.html', title="Allows release", appoint=appoint)
+        else:
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            if appoint.Hstatus == '3':
+                appoint.Hstatus = '4'
+                appoint.HospitalizationStatus = "Ready to release"
+                db.session.commit()
+                flash("Ready to release")
+            else:
+                flash("No release approval is required")
+            return redirect(url_for('loggedin_home_senior'))
+    else:
+        return redirect(url_for('senior_mainpage'))
+
 
 @app.route('/loggedin_home_customer', methods=['GET', 'POST'])
 def loggedin_home_customer():
@@ -64,8 +297,7 @@ def loggedin_home_customer():
     else:
         flash("Customer needs to either login or signup first")
         return redirect(url_for('customer_mainpage'))
-
-
+    
 @app.route('/loggedin_home_customer_chinese', methods=['GET', 'POST'])
 def loggedin_home_customer_chinese():
     if not session.get("USERNAME") is None:
@@ -992,7 +1224,7 @@ def customer_appo_inpatient(id):
                 db.session.commit()
                 flash("Ready to sugery")
             else:
-                flash("No surgical approval is required")
+                flash("No inpatient approval is required")
             return redirect(url_for('customer_my_appointments'))
     else:
         return redirect(url_for('loginCustomer'))
