@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Shop Cart</h1>
+<a href="{{ url_for('shoppage') }}">Keep shopping</a>
+	<table>
+		<tr>
+			<th>Image</th>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Number</th>
+		</tr>
+		{% for Good in goods %}
+		<tr>
+			<td>
+				<img src="{{ url_for('static', filename= './img/photos/' + Good.Gimage) }}" width="100" height="100">
+			</td>
+			<td>{{ Good.Gname }}</td>
+			<td>{{ Good.Gprice }}</td>
+			<td>{{ Good.Gnumber }}</td>
+			<td>
+				<a href="{{ url_for('deletecart', Gid=Good.id) }}">Delete</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+<div>Total Price</div>
+<div>{{ total }}</div>
+
+<a href="{{ url_for('buy') }}">Buy</a>
+
+{% endblock %}
+	

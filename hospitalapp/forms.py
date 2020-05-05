@@ -166,6 +166,10 @@ class AddProductForm_chinese(FlaskForm):
     Gadddate = DateField('添加日期', validators=[DataRequired()])
     submit = SubmitField('提交')
 
+class ProductNumberForm(FlaskForm):
+    number = IntegerField('number', validators=[DataRequired()])
+    submit = SubmitField('Buy')
+
 
 class PrescriptionForm(FlaskForm):
     Pmed = StringField('Medicine', validators=[DataRequired()])
@@ -183,10 +187,16 @@ class HospitalizationForm(FlaskForm):
     cost = StringField('Cost', validators=[DataRequired()])
     submit = SubmitField('Manage Hospitalization')
 
-
 class OrderForm(FlaskForm):
-    Ordersubmit = SubmitField('Buy')
+    Oname = StringField('Name', validators=[DataRequired()])
+    Oaddress = StringField('Address', validators=[DataRequired()])
+    Ophonenumber = IntegerField('phonenumber', validators=[DataRequired()])
+    submit = SubmitField('Pay')
 
+class PayForm(FlaskForm):
+    cardnumber = IntegerField('creditcard', validators=[DataRequired()])
+    password = IntegerField('password', validators=[DataRequired()])
+    submit = SubmitField('Pay')
 
 class LoginFormCustomer(FlaskForm):
     Cusername = StringField('Username', validators=[DataRequired()])

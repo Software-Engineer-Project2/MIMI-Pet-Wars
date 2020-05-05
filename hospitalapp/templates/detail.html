@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Detail</h1>
+<img src="{{ url_for('static', filename= './img/photos/' + good.Gimage) }}" width="240" height="240">
+<div>Name</div>
+<div>{{ good.Gname }}</div>
+<div>Infomation</div>
+<div>{{ good.Ginfo }}</div>
+<div>Price</div>
+<div>{{ good.Gprice }}</div>
+<div>Add date</div>
+<div>{{ good.Gadddate }}</div>
+<form method="post" enctype="multipart/form-data">
+	{{ form.hidden_tag() }}
+	<p>{{ form.number }}</p><br>
+	{{ form.submit() }}
+</form>
+
+{% endblock %}

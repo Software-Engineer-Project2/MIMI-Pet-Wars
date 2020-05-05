@@ -1,4 +1,5 @@
 import os
+import time
 
 from datetime import datetime
 
@@ -759,6 +760,82 @@ def employee_answer_post(id):
     else:
         return redirect(url_for('employee_mainpage'))
 
+@app.route('/shoppage/detail/<id>', methods=['GET','POST'])
+def detail(id):
+    good = Good.query.get_or_404(id)
+    form = ProductNumberForm()
+    if form.validate_on_submit():
+        if request.method == 'POST':
+            good.ifincart = 1
+            good.Gnumber = form.number.data
+            db.session.commit()
+        return redirect(url_for('shopcart'))
+    return render_template('detail.html', good=good, form=form)
+
+@app.route('/shopcart', methods=['Get','Post'])
+def shopcart():
+    total = 0
+    goods = Good.query.filter_by(ifincart = 1)
+    for good in goods:
+        total = total + good.Gprice * good.Gnumber
+    return render_template('shopcart.html',goods=goods, total=total)
+
+@app.route('/deletecart/<Gid>', methods=['Get','Post'])
+def deletecart(Gid):
+    good = Good.query.get_or_404(Gid)
+    good.ifincart = 0
+    good.Gnumber = 0
+    db.session.commit()
+    goods = Good.query.filter_by(ifincart = 1)  
+    return render_template('shopcart.html', goods=goods)
+
+@app.route('/buy', methods=['Get','Post'])
+def buy():
+    total = 0
+    goods = Good.query.filter_by(ifincart = 1)
+    Oid = str(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time())))+ str(time.time()).replace('.', '')
+    id = str(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time())))+ str(time.time()).replace('.', '')
+    form = OrderForm()
+    if form.validate_on_submit():
+        if request.method == 'POST':
+            for good in goods:
+                total = total + good.Gprice * good.Gnumber
+                relation = GORelation(id=id, Goodid=good.id, Orderid=Oid, number=good.Gnumber)
+                id =id + str(1)
+                db.session.add(relation)
+            name = form.Oname.data
+            address = form.Oaddress.data
+            phonenumber = form.Ophonenumber.data
+            order = Order(id=Oid, Oname=name,Ostate='not pay', Oprice=total, Oaddress=address, Ophonenumber=phonenumber)
+            db.session.add(order)
+            db.session.commit()
+        return redirect(url_for('notpayorders'))
+    return render_template('buy.html', goods=goods, form=form)
+
+@app.route('/pay/<id>', methods=['GET', 'POST'])
+def pay(id):
+    form = PayForm()
+    order = Order.query.get_or_404(id)
+    if form.validate_on_submit():
+        if request.method == 'POST':
+            order.Ostate = 'paid'
+            db.session.commit()
+            return redirect(url_for('paidorders'))
+    return render_template('pay.html', form=form, order=order)
+
+@app.route('/orders', methods=['GET', 'POST'])
+def orders():
+    return render_template('orders.html')
+
+@app.route('/notpayorders', methods=['GET', 'POST'])
+def notpayorders():
+    orders = Order.query.filter_by(Ostate='not pay')
+    return render_template('order.html', orders=orders)
+
+@app.route('/paidorders', methods=['GET', 'POST'])
+def paidorders():
+    orders = Order.query.filter_by(Ostate='paid')
+    return render_template('paidorders.html', orders=orders)
 
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
@@ -782,7 +859,6 @@ def addproduct():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
-
 
 @app.route('/addproduct_chinese', methods=['GET', 'POST'])
 def addproduct_chinese():

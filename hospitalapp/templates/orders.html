@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Order</h1>
+
+<a href="{{ url_for('notpayorders') }}">Not pay Orders</a><br>
+<a href="{{ url_for('paidorders') }}">Paid Orders</a>
+
+{% endblock %}

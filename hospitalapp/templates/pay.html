@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Pay</h1>
+<form method="post" enctype="multipart/form-data">
+	{{ form.hidden_tag() }}
+	<p>
+		{{ form.cardnumber.label }}
+		{{ form.cardnumber }}
+	</p>
+	<p>
+		{{ form.password.label }}
+		{{ form.password }}
+	</p>
+	{{ form.submit }}
+</form>
+
+{% endblock %}

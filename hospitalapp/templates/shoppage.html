@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<a href="{{ url_for('shopcart') }}">Shop Cart</a><br>
+<a href="{{ url_for('orders') }}">Order</a>
+
 <table style="width: 30%; margin-left: 400px; font-size: larger; color: teal; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 	<tr>
 		<th>Image</th>
@@ -15,6 +18,9 @@
 		</td>
 		<td>{{ Good.Gname }}</td>
 		<td>{{ Good.Gprice }}</td>
+		<td>
+			<a href="{{ url_for('detail', id = Good.id) }}">Detail</a>
+		</td>
 	</tr>
 	{% endfor %}	
 </table>

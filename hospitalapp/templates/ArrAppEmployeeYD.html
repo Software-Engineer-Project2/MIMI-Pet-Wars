@@ -1,0 +1,67 @@
+{% extends "loggedin_index.html" %}
+{% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+	
+	<div style="background-color: white; width: 70%; margin-left: 200px; box-shadow: gainsboro 2px 2px;
+	padding: 20px;">
+	{% if emergency_appointments %}
+		<h2 style="color: teal;">Emergency Appointments:(Click to edit)</h2><br>
+		<ul>
+		{% for ea in emergency_appointments %}
+			<li style="padding: 10px;">
+				Pet Number: {{ ea.Apet }}
+                Type:{{ea.Atype}}
+                Doctor: {{ea.Adoc}}
+                Complete: {{ea.Acomplete}}
+                Information:{{ea.Ainfo}}
+				Dat:{{ea.Adate}}
+				<br>
+				<div style="float: right;">
+                <button><a href={{url_for('AddPrescription',id=sa.id)}}>Prescription</a> </button>
+                <button><a href={{url_for('AddOperation',id=sa.id)}}>Operation</a> </button>
+                <button><a href={{url_for('AddHospitalization',id=sa.id)}}>Hospitalization</a> </button>
+				</div>
+            </li>
+		{% endfor %}
+		</ul>
+		
+	{% else %}
+		<h4>No emergency appointments!</h4>
+	{% endif %}
+	</div>
+
+	
+	<div style="background-color: white; width: 70%; margin-left: 200px; box-shadow: gainsboro 2px 2px;
+	padding: 20px;">
+	{% if standard_appointments %}
+		<h2 style="color: teal;">Standard Appointments:(Click to edit)</h2><br>
+		<ul>
+		{% for sa in standard_appointments %}
+			<li style="padding: 10px;">
+				Pet Number: {{ sa.Apet }}
+                Type:{{sa.Atype}}
+                Doctor: {{sa.Adoc}}
+                Complete: {{sa.Acomplete}}
+                Information:{{sa.Ainfo}}
+				Date:{{sa.Adate}}
+				<br>
+				<div style="float: right;">
+                <button><a href={{url_for('AddPrescription',id=sa.id)}}>Prescription</a> </button>
+                <button><a href={{url_for('AddOperation',id=sa.id)}}>Operation</a> </button>
+                <button><a href={{url_for('AddHospitalization',id=sa.id)}}>Hospitalization</a> </button>
+				</div>
+
+            </li>
+		{% endfor %}
+		</ul>
+		
+		
+	{% else %}
+		<h4>No standard appointments!</h4>
+	{% endif %}
+	</div>
+
+
+
+{% endblock %}

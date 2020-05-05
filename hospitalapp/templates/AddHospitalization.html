@@ -1,0 +1,58 @@
+{% extends 'loggedin_index.html' %}
+{% block title %}
+    <title>Modify Appointment</title>
+{% endblock %}
+{% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+   <form
+   style="margin-left: 500px;"
+   action="{{ url_for('AddHospitalization',id=id) }}" method="post" enctype="multipart/form-data">
+   {{ form.csrf_token }}
+         {{ form.hidden_tag() }}
+      <p>
+         <div class="form-group">
+            {{ form.room.label }}<br>
+            {{ form.room(size=32) }}
+         </div>
+			{% for error in form.room.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+      </p>
+
+
+      <p>
+         <div class="form-group">
+                {{ form.startdate.label }}<br>
+                {{ form.startdate }}
+         </div>
+                {% for error in form.startdate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+      </p>
+
+ <p>
+         <div class="form-group">
+                {{ form.enddate.label }}<br>
+                {{ form.enddate }}
+         </div>
+                {% for error in form.enddate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+      </p>
+
+
+      <p>
+         <div class="form-group">
+                {{ form.cost.label}}<br>
+                {{ form.cost }}
+         </div>
+                {% for error in form.cost.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+      </p>
+
+
+    {{ form.submit.label }}<br>{{ form.submit }}<br>
+    </form>
+{% endblock %}

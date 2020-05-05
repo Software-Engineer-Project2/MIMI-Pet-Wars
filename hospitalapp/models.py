@@ -11,7 +11,6 @@ class Customer(db.Model):
     Cphone = db.Column(db.String(64))
     Cemail = db.Column(db.String(255))
     Cgender = db.Column(db.String(10), index=True)
-    Corder = db.relationship('Order', backref='ocustomer', lazy='dynamic')#
     Cpet = db.relationship('Pet', backref='owner', lazy='dynamic')#
     Cpost = db.relationship('Post', backref='poster', lazy='dynamic')
 
@@ -69,13 +68,13 @@ class Appointment(db.Model):
 
 class Order(db.Model):
     __tablename__ = 'pet_order'
-    id = db.Column(db.Integer, primary_key=True)
-    Obuyer = db.Column(db.Integer, db.ForeignKey('pet_customer.id'))
-    Ogood = db.Column(db.Integer, db.ForeignKey('pet_good.id'))
+    id = db.Column(db.String, primary_key=True)
+    Oname = db.Column(db.String(64), index=True)
     Ostate = db.Column(db.String(64), index=True)
     Oprice = db.Column(db.Integer)
-    Odate = db.Column(db.DateTime, index=True)
-    Onumber = db.Column(db.Integer)
+    Oaddress = db.Column(db.String(300), index=True)
+    Ophonenumber = db.Column(db.Integer)
+    GORelation = db.relationship('GORelation', backref='order', lazy='dynamic')
 
 
 class Good(db.Model):
@@ -86,10 +85,19 @@ class Good(db.Model):
     Gimage = db.Column(db.String(120), index=True)
     Gprice = db.Column(db.Integer)
     Gadddate = db.Column(db.DateTime, index=True)
-    Order = db.relationship('Order', backref='author', lazy='dynamic')
+    ifincart = db.Column(db.Integer, default=0)
+    Gnumber = db.Column(db.Integer, default=0)
+    GORelation = db.relationship('GORelation', backref='good', lazy='dynamic')
 
     def  __repr__(self):
             return '<Good is {}>'.format(self.Gname)
+
+class GORelation(db.Model):
+    __tablename__ = 'pet_relationship'
+    id = db.Column(db.String, primary_key=True)
+    Goodid = db.Column(db.Integer, db.ForeignKey('pet_good.id'))
+    Orderid = db.Column(db.Integer, db.ForeignKey('pet_order.id'))
+    number = db.Column(db.Integer)
 
 class Hospitalization(db.Model):
     __tablename__ = 'pet_hospitalization'

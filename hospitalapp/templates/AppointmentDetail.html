@@ -1,0 +1,95 @@
+{% extends 'loggedin_index.html' %}
+{% block title %}
+    <title>Modify Appointment</title>
+{% endblock %}
+{% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+   <form style="margin-left: 500px;"
+   action="{{ url_for('ModifyAppointmentEmployee',id=id) }}" method="post" enctype="multipart/form-data">
+   {{ form.csrf_token }}
+         {{ form.hidden_tag() }}
+      <p>
+         <div class="form-group">
+            {{ form.Epet.label }}<br>
+            {{ form.Epet(size=32) }}
+         </div>
+			{% for error in form.Epet.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+      </p>
+
+      <p>
+         <div class="form-group">
+                {% for choice in form.Etype %}
+                    <tr>
+                        <td>{{ choice }}</td>
+                        <td>{{ choice.label }}</td>
+                    </tr>
+                {% endfor %}
+        </div>
+                {% for error in form.Etype.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+      </p>
+
+      <p>
+         <div class="form-group">
+                {{ form.Edoc.label }}<br>
+                {{ form.Edoc }}
+         </div>
+                {% for error in form.Edoc.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}<br>
+      </p>
+
+      <p>
+         <div class="form-group">
+                {% for choice in form.Ecomplete %}
+                    <tr>
+                        <td>{{ choice }}</td>
+                        <td>{{ choice.label }}</td>
+                    </tr>
+                {% endfor %}
+         </div>
+                {% for error in form.Ecomplete.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+      </p>
+
+      <p>
+         <div class="form-group">
+                {{ form.Einf.label}}<br>
+                {{ form.Einf }}
+         </div>
+                {% for error in form.Einf.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+      </p>
+
+      <p>
+         <div class="form-group">
+
+                {{ form.Edate.label }}<br>
+                {{ form.Edate(size=32) }}
+         </div>
+                {% for error in form.Edate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+      </p>
+
+      <p>
+         <div class="form-group">
+                {{ form.Ecost.label}}<br>
+                {{ form.Ecost }}
+         </div>
+                {% for error in form.Ecost.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+      </p>
+
+
+    {{ form.Esubmit.label }}<br>{{ form.Esubmit }}<br>
+    </form>
+       
+{% endblock %}
