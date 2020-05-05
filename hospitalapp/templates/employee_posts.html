@@ -7,8 +7,9 @@
             <caption><h3>Unanswered Questions</h3></caption>
             <thead>
             <tr>
-                <th width="50%">Topic</th>
-                <th width="50%">Date</th>
+                <th width="40%">Topic</th>
+                <th width="40%">Date</th>
+                <th>Answer</th>
             </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
             <tr onclick="location.href='/employee_post_detail/{{unread_post.id}}'">
                 <td>{{unread_post.Ptopic}}</td>
                 <td>{{unread_post.Pdate}}</td>
+                <td><a onclick="location.href='/employee_post_detail/{{unread_post.id}}'"> Answer </a></td>
             </tr>
             {% endfor %}
             </tbody>
@@ -28,15 +30,17 @@
             <caption><h3>Read Posts</h3></caption>
             <thead>
             <tr>
-                <th width="50%">Topic</th>
-                <th width="50%">Date</th>
+                <th width="40%">Topic</th>
+                <th width="40%">Date</th>
+                <th>View</th>
             </tr>
             </thead>
             <tbody>
             {% for read_post in read_posts%}
-            <tr onclick="location.href='/employee_post_detail/{{read_post.id}}'">
+            <tr >
                 <td>{{read_post.Ptopic}}</td>
-                <td>{{read_posts.Pdate}}</td>
+                <td>{{read_post.Pdate}}</td>
+                <td><a onclick="location.href='/employee_post_detail/{{read_post.id}}'">View</a></td>
             </tr>
             {% endfor %}
             </tbody>

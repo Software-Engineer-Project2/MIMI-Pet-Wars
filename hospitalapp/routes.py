@@ -443,10 +443,13 @@ def employee_appo_checkin():
 
 
 @app.route('/employee_appo_checkin/view_appo/<id>', methods=['GET', 'POST'])
-def employee_checkin_view():
+def employee_checkin_view(id):
     if not session.get("USERNAME") is None:
+        customer = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
         appoint = Appointment.query.filter(Appointment.id == id).first()
-        return render_template('employee_checkin_view.html', appoint=appoint)
+        pet = Pet.query.filter(Pet.id == appoint.Apet).first()
+        doc = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
+        return render_template('employee_checkin_view.html', appoint=appoint,customer = customer, pet = pet,doc = doc)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -736,11 +739,12 @@ def employee_posts_chinese():
         return redirect(url_for('employee_mainpage'))
 
 
-@app.route('/employee_posts/<id>', methods=['GET', 'POST'])
+@app.route('/employee_post_detail/<id>', methods=['GET', 'POST'])
 def employee_post_detail(id):
     if not session.get("USERNAME") is None:
         post = Post.query.filter_by(id=id).first()
         answer = post.Panswer.all()
+
         return render_template('employee_post_detail.html', post=post, answer=answer)
     else:
         return redirect(url_for('employee_mainpage'))

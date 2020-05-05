@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/loggedin_home_senior.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/senior_appo_inpatient.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/senior_appo_operation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/senior_appo_release.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/senior_edit_appo.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/senior_edit_pet.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/senior_mainpage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_checkin_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_checkin_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_post_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_posts.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_posts.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,6 +157,7 @@
       <workItem from="1588243482487" duration="42000" />
       <workItem from="1588315056868" duration="5801000" />
       <workItem from="1588356465165" duration="13208000" />
+      <workItem from="1588688915936" duration="4573000" />
     </task>
     <servers />
   </component>
@@ -242,11 +238,11 @@
     </state>
     <state x="-1160" y="136" key="SettingsEditor/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1587754681713" />
     <state x="528" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584432378881" />
-    <state x="461" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1588356465944">
+    <state x="461" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1588688915656">
       <screen x="0" y="0" width="1536" height="832" />
     </state>
     <state x="-1120" y="255" key="com.intellij.ide.util.TipDialog/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1587714424561" />
-    <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832/-1600.0.1600.870@0.0.1536.832" timestamp="1588243484246" />
+    <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832/-1600.0.1600.870@0.0.1536.832" timestamp="1588688915656" />
     <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832@0.0.1536.832" timestamp="1588356465944" />
     <state x="-1157" y="73" width="700" height="707" key="search.everywhere.popup" timestamp="1587780561892">
       <screen x="-1600" y="0" width="1600" height="870" />
