@@ -15,6 +15,8 @@
                     <th>Type </th>
                     <th>Age </th>
                     <th>Information</th>
+                    <th>Delete</th>
+
                 </tr>
                {% for pet in pets%}
                      {% for customer in customers%}
@@ -28,6 +30,7 @@
                          <td align="center">{{pet.Page}}</td>
 
                         <td align="center">{{ pet.Pinfo }}</td>
+                         <td align="center"><button  onclick="window.location.href='/employee_pets/delete_pet/{{pet.id}}'" >Delete</button></td>
                      </tr>
                         {% endif %}
                      {% endfor %}

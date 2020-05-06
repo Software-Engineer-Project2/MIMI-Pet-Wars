@@ -639,6 +639,25 @@ def employee_pets():
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+@app.route('/employee_pets/delete_pet/<id>', methods=['GET', 'POST'])
+def employee_pets_delete(id):
+    pet = Pet.query.get_or_404(id)
+    db.session.delete(pet)
+    appoints = Appointment.query.filter(Appointment.Apet ==id).all()
+    operations = Operation.query.filter().all()
+    inpatients = Hospitalization.query.filter().all()
+    for appoint in appoints:
+        for operation in operations:
+            if operation.Oappiiontment ==appoint.id :
+                db.session.delete(operation)
+        for inpatient in inpatients:
+            if inpatient.Sappointment == appoint.id:
+                db.session.delete(inpatient)
+        db.session.delete(appoint)
+    db.session.commit()
+    return redirect(url_for('employee_pets'))
+
+
 
 
 @app.route('/employee_pets_chinese', methods=['GET', 'POST'])
