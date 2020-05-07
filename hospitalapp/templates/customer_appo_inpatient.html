@@ -3,7 +3,13 @@
     <title>{{title}}</title>
 {% endblock %}
 {% block content %}
-
+Appointment ID: {{appoint.id}}<br>
+In-patient ID: {{inpatient.id}}<br>
+In-patient Doctor: {{doc.Dname}}<br>
+In-patient Start Date: {{inpatient.Sstartdate}}<br>
+In-patient End Date: {{inpatient.Senddate}}<br>
+In-patient Room: {{inpatient.Sroom}}<br>
+In-patient Cost: {{inpatient.Scost}}<br>
 <form action="/customer_my_appointments/inpatient/{{appoint.id}}" method="POST">
     <input type="submit" value="Allow">
 </form>

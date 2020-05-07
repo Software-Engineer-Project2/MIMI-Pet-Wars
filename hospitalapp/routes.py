@@ -56,10 +56,11 @@ def employee_mainpage():
 def employee_mainpage_chinese():
     return render_template('employee_mainpage_chinese.html', title='Home')
 
-@app.route('/senior_mainpage',methods=['GET', 'POST'])
+
+@app.route('/senior_mainpage', methods=['GET', 'POST'])
 def senior_mainpage():
     form = LoginFormCustomer()
-    if request.method=="POST":
+    if request.method == "POST":
         user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
         if not user_in_db:
             flash('No user found with username: {}'.format(form.Cusername.data))
@@ -70,7 +71,7 @@ def senior_mainpage():
             return redirect(url_for('loggedin_home_senior'))
         flash('Incorrect Password')
         return redirect(url_for('senior_mainpage'))
-    return render_template('senior_mainpage.html',  title='Login In', form=form)
+    return render_template('senior_mainpage.html', title='Login In', form=form)
 
 
 @app.route('/signupSenior', methods=['GET', 'POST'])
@@ -111,29 +112,34 @@ def loggedin_home_senior():
                     a = Appointment.query.filter(Appointment.Apet == pet.id).all()
                     print(a)
                     appoints.extend(a)
-        return render_template('loggedin_home_senior.html', Cusername=user_in_db.Cname,pets=pets,appoints = appoints,read_posts=read_posts,unread_posts=unread_posts,doctors=doctors)
+        return render_template('loggedin_home_senior.html', Cusername=user_in_db.Cname, pets=pets, appoints=appoints,
+                               read_posts=read_posts, unread_posts=unread_posts, doctors=doctors)
     else:
         flash("Customer needs to either login or signup first")
         return redirect(url_for('senior_mainpage'))
 
+
 @app.route('/loggedin_home_senior/write_post', methods=['GET', 'POST'])
 def senior_write_post():
     user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-    if request.method=="POST":
+    if request.method == "POST":
         post = Post(Ptopic=request.form['topic'], Pcontent=request.form['content'], poster=user_in_db)
         db.session.add(post)
         db.session.commit()
     return redirect(url_for('loggedin_home_senior'))
 
+
 @app.route('/loggedin_home_senior/add_pet', methods=['GET', 'POST'])
 def senior_add_pet():
     user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-    if request.method=="POST":
-        pet = Pet(Pname=request.form['pet_name'], Page=request.form['pet_age'], Psex=request.form['pet_gender'], Pspecies=request.form['pet_species'],
+    if request.method == "POST":
+        pet = Pet(Pname=request.form['pet_name'], Page=request.form['pet_age'], Psex=request.form['pet_gender'],
+                  Pspecies=request.form['pet_species'],
                   Pinfo=request.form['pet_info'], owner=user_in_db)
         db.session.add(pet)
         db.session.commit()
     return redirect(url_for('loggedin_home_senior'))
+
 
 @app.route('/loggedin_home_senior/edit_pet/<id>', methods=['GET', 'POST'])
 def senior_edit_pet(id):
@@ -166,6 +172,7 @@ def senior_delete_pet(id):
     else:
         return redirect(url_for('senior_mainpage'))
 
+
 @app.route('/loggedin_home_senior/operation/<id>', methods=['GET', 'POST'])
 def senior_appo_operation(id):
     if not session.get("USERNAME") is None:
@@ -184,6 +191,7 @@ def senior_appo_operation(id):
             return redirect(url_for('loggedin_home_senior'))
     else:
         return redirect(url_for('senior_mainpage'))
+
 
 @app.route('/loggedin_home_senior/inpatient/<id>', methods=['GET', 'POST'])
 def senior_appo_inpatient(id):
@@ -205,33 +213,33 @@ def senior_appo_inpatient(id):
         return redirect(url_for('senior_mainpage'))
 
 
-
 @app.route('/loggedin_home_senior/emergency_appointment', methods=['GET', 'POST'])
 def senior_emergency_appoint():
     if request.method == "POST":
         pet_name = request.form["appoint_name"]
         date_str = request.form['date']
-        date_str = date_str+':59'
+        date_str = date_str + ':59'
         date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
-        pet = Pet.query.filter(Pet.Pname==pet_name).first()
+        pet = Pet.query.filter(Pet.Pname == pet_name).first()
         appointment = Appointment(apppetter=pet, Atype='0',
                                   Adoc=request.form["doc"], Alocation=request.form["location"], Adate=date,
-                                  Ainfo='',Acomplete='0', Astart='0')
+                                  Ainfo='', Acomplete='0', Astart='0')
         db.session.add(appointment)
         db.session.commit()
     return redirect(url_for('loggedin_home_senior'))
+
 
 @app.route('/loggedin_home_senior/standard_appointment', methods=['GET', 'POST'])
 def senior_standard_appoint():
     if request.method == "POST":
         pet_name = request.form["appoint_name"]
         date_str = request.form['date']
-        date_str = date_str+':59'
+        date_str = date_str + ':59'
         date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
-        pet = Pet.query.filter(Pet.Pname==pet_name).first()
+        pet = Pet.query.filter(Pet.Pname == pet_name).first()
         appointment = Appointment(apppetter=pet, Atype='1',
                                   Adoc=request.form["doc"], Alocation=request.form["location"], Adate=date,
-                                  Ainfo=request.form["info"],Acomplete='0', Astart='0')
+                                  Ainfo=request.form["info"], Acomplete='0', Astart='0')
         db.session.add(appointment)
         db.session.commit()
     return redirect(url_for('loggedin_home_senior'))
@@ -246,6 +254,7 @@ def senior_delete_appoint(id):
         return redirect(url_for('loggedin_home_senior'))
     else:
         return redirect(url_for('senior_mainpage'))
+
 
 @app.route('/loggedin_home_senior/edit_appoint/<id>', methods=['GET', 'POST'])
 def senior_edit_appoint(id):
@@ -269,6 +278,7 @@ def senior_edit_appoint(id):
             return redirect(url_for('loggedin_home_senior'))
     else:
         return redirect(url_for('senior_mainpage'))
+
 
 @app.route('/loggedin_home_senior/release/<id>', methods=['GET', 'POST'])
 def senior_appo_release(id):
@@ -298,7 +308,8 @@ def loggedin_home_customer():
     else:
         flash("Customer needs to either login or signup first")
         return redirect(url_for('customer_mainpage'))
-    
+
+
 @app.route('/loggedin_home_customer_chinese', methods=['GET', 'POST'])
 def loggedin_home_customer_chinese():
     if not session.get("USERNAME") is None:
@@ -327,7 +338,6 @@ def loggedin_home_employee_chinese():
     else:
         flash("雇员需要登录或者注册首先")
         return redirect(url_for('loginEmployee_chinese'))
-
 
 
 @app.route('/loginEmployee', methods=['GET', 'POST'])
@@ -449,12 +459,10 @@ def employee_checkin_view(id):
         appoint = Appointment.query.filter(Appointment.id == id).first()
         pet = Pet.query.filter(Pet.id == appoint.Apet).first()
         doc = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
-        return render_template('employee_checkin_view.html', appoint=appoint,customer = customer, pet = pet,doc = doc)
+        return render_template('employee_checkin_view.html', appoint=appoint, customer=customer, pet=pet, doc=doc)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
-
-
 
 
 @app.route('/employee_appo_checkin/checkin_appo/<id>', methods=['GET', 'POST'])
@@ -465,8 +473,6 @@ def employee_checkin(id):
     return redirect(url_for('employee_appo_checkin'))
 
 
-
-
 @app.route('/employee_appo_outpatient', methods=['GET', 'POST'])
 def employee_appo_outpatient():
     if not session.get("USERNAME") is None:
@@ -475,7 +481,7 @@ def employee_appo_outpatient():
         appointments = Appointment.query.filter(Appointment.Astart == '1',
                                                 Appointment.Acomplete == '0').all()  # type-1 complete-0 - Standard Appointments not checkin
         appointments2 = Appointment.query.filter(Appointment.Astart == '1',
-                                                Appointment.Ostatus == '3').all()
+                                                 Appointment.Ostatus == '3').all()
         appointments3 = Appointment.query.filter(Appointment.Astart == '1',
                                                  Appointment.Hstatus == '5').all()
         appointments.append(appointments2)
@@ -497,23 +503,26 @@ def employee_outpatient_finish(id):
     return redirect(url_for('employee_appo_outpatient'))
 
 
-
 @app.route('/employee_appo_outpatient/operation/<id>', methods=['GET', 'POST'])
 def employee_outpatient_operation(id):
     if not session.get("USERNAME") is None:
         form = AddOperationForm()
         appoint = Appointment.query.filter(Appointment.id == id).first()
         doctor = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
-        if form.validate_on_submit():
-            operation = Operation(oappointment=appoint, odoctor=doctor, Odate=form.Odate.data, Oinf=form.Oinf.data,
-                                  Ocost=form.Ocost.data)
-            appoint.OperationStatus = "Inform customer operation"
-            appoint.Ostatus = '1'
-            db.session.add(operation)
-            db.session.commit()
+        if appoint.Ostatus == '0':
+            if form.validate_on_submit():
+                operation = Operation(oappointment=appoint, odoctor=doctor, Odate=form.Odate.data, Oinf=form.Oinf.data,
+                                      Ocost=form.Ocost.data)
+                appoint.OperationStatus = "Inform customer operation"
+                appoint.Ostatus = '1'
+                db.session.add(operation)
+                db.session.commit()
+                return redirect(url_for('employee_appo_outpatient'))
+            return render_template('employee_outpatient_operation.html',
+                                   title='Enter operation information and inform customer', form=form, appoint=appoint)
+        else:
+            flash("The appointment already has surgery")
             return redirect(url_for('employee_appo_outpatient'))
-        return render_template('employee_outpatient_operation.html',
-                               title='Enter operation information and inform customer', form=form, appoint=appoint)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -525,17 +534,25 @@ def employee_outpatient_inpatient(id):
         form = AddHospitalizationForm()
         appoint = Appointment.query.filter(Appointment.id == id).first()
         doctor = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
-        if form.validate_on_submit():
-            inpatient = Hospitalization(happointment=appoint, sdoctor=doctor, Sroom=form.room.data,
-                                        Sstartdate=form.startdate.data, Senddate=form.enddate.data,
-                                        Scost=form.cost.data)
-            appoint.HospitalizationStatus = "Inform customer inpatient"
-            appoint.Hstatus = '1'
-            db.session.add(inpatient)
-            db.session.commit()
+        if appoint.Hstatus == '0':
+            if form.validate_on_submit():
+                if form.startdate.data >= form.enddate.data:
+                    flash("Please enter an end date later than the start date ")
+                    redirect(url_for("employee_outpatient_inpatient", id=id))
+                else:
+                    inpatient = Hospitalization(happointment=appoint, sdoctor=doctor, Sroom=form.room.data,
+                                                Sstartdate=form.startdate.data, Senddate=form.enddate.data,
+                                                Scost=form.cost.data)
+                    appoint.HospitalizationStatus = "Inform customer inpatient"
+                    appoint.Hstatus = '1'
+                    db.session.add(inpatient)
+                    db.session.commit()
+                    return redirect(url_for('employee_appo_outpatient'))
+            return render_template('employee_outpatient_inpatient.html',
+                                   title='Enter operation information and inform customer', form=form, appoint=appoint)
+        else:
+            flash("The appointment already has in-patient")
             return redirect(url_for('employee_appo_outpatient'))
-        return render_template('employee_outpatient_inpatient.html',
-                               title='Enter operation information and inform customer', form=form, appoint=appoint)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -554,7 +571,8 @@ def employee_appo_inpatient():
         Wappointments = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
                                                  Appointment.Hstatus == '3').all()
         return render_template('employee_appo_inpatient.html', title='Display In-patient appointments',
-                               Iappointments=Iappointments, Rappointments=Rappointments,Wappointments=Wappointments, pets=pets, customers=customers)
+                               Iappointments=Iappointments, Rappointments=Rappointments, Wappointments=Wappointments,
+                               pets=pets, customers=customers)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -576,11 +594,11 @@ def employee_inpatient_release(id):
 @app.route('/employee_appo_inpatient/release_complete/<id>', methods=['GET', 'POST'])
 def employee_inpatient_releasecomplete(id):
     if not session.get("USERNAME") is None:
-            appoint = Appointment.query.get_or_404(id)
-            appoint.Hstatus = '5'
-            appoint.HospitalizationStatus = "Released"
-            db.session.commit()
-            return redirect(url_for('employee_appo_inpatient'))
+        appoint = Appointment.query.get_or_404(id)
+        appoint.Hstatus = '5'
+        appoint.HospitalizationStatus = "Released"
+        db.session.commit()
+        return redirect(url_for('employee_appo_inpatient'))
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -592,16 +610,17 @@ def employee_appo_operation():
         pets = Pet.query.filter().all()
         customers = Customer.query.filter().all()
         appoints = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
-                                                Appointment.Ostatus == '2').all()  # type-1 complete-0 - Standard Appointments not checkin
+                                            Appointment.Ostatus == '2').all()  # type-1 complete-0 - Standard Appointments not checkin
         operations = Operation.query.filter().all()
         print(operations)
         print(appoints)
         print(pets)
         return render_template('employee_appo_operation.html', title='Display In-patient appointments',
-                               appoints=appoints,pets=pets, customers=customers,operations=operations)
+                               appoints=appoints, pets=pets, customers=customers, operations=operations)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/employee_appo_operation/complete operation/<id>', methods=['GET', 'POST'])
 def employee_operation_complete(id):
@@ -629,26 +648,29 @@ def employee_appo_completed():
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+
 @app.route('/employee_pets', methods=['GET', 'POST'])
 def employee_pets():
     if not session.get("USERNAME") is None:
         pets = Pet.query.filter().all()
         customers = Customer.query.filter().all()
-        return render_template('employee_pets.html', title='Display In-patient appointments',pets=pets, customers=customers)
+        return render_template('employee_pets.html', title='Display In-patient appointments', pets=pets,
+                               customers=customers)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/employee_pets/delete_pet/<id>', methods=['GET', 'POST'])
 def employee_pets_delete(id):
     pet = Pet.query.get_or_404(id)
     db.session.delete(pet)
-    appoints = Appointment.query.filter(Appointment.Apet ==id).all()
+    appoints = Appointment.query.filter(Appointment.Apet == id).all()
     operations = Operation.query.filter().all()
     inpatients = Hospitalization.query.filter().all()
     for appoint in appoints:
         for operation in operations:
-            if operation.Oappiiontment ==appoint.id :
+            if operation.Oappiiontment == appoint.id:
                 db.session.delete(operation)
         for inpatient in inpatients:
             if inpatient.Sappointment == appoint.id:
@@ -658,18 +680,16 @@ def employee_pets_delete(id):
     return redirect(url_for('employee_pets'))
 
 
-
-
 @app.route('/employee_pets_chinese', methods=['GET', 'POST'])
 def employee_pets_chinese():
     if not session.get("USERNAME") is None:
         pets = Pet.query.filter().all()
         customers = Customer.query.filter().all()
-        return render_template('employee_pets_chinese.html', title='Display In-patient appointments',pets=pets, customers=customers)
+        return render_template('employee_pets_chinese.html', title='Display In-patient appointments', pets=pets,
+                               customers=customers)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage_chinese'))
-
 
 
 @app.route('/employee_customers', methods=['GET', 'POST'])
@@ -686,7 +706,8 @@ def employee_customers():
 def employee_customers_chinese():
     if not session.get("USERNAME") is None:
         customers = Customer.query.filter().all()
-        return render_template('employee_customers_chinese.html', title='Display In-patient appointments', customers=customers)
+        return render_template('employee_customers_chinese.html', title='Display In-patient appointments',
+                               customers=customers)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -696,7 +717,7 @@ def employee_customers_chinese():
 def employee_doctors():
     if not session.get("USERNAME") is None:
         doctors = Doctor.query.filter().all()
-        return render_template('employee_doctors.html', title='Display In-patient appointments',doctors=doctors)
+        return render_template('employee_doctors.html', title='Display In-patient appointments', doctors=doctors)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -706,7 +727,8 @@ def employee_doctors():
 def employee_doctors_chinese():
     if not session.get("USERNAME") is None:
         doctors = Doctor.query.filter().all()
-        return render_template('employee_doctors_chinese.html', title='Display In-patient appointments',doctors=doctors)
+        return render_template('employee_doctors_chinese.html', title='Display In-patient appointments',
+                               doctors=doctors)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -783,7 +805,8 @@ def employee_answer_post(id):
     else:
         return redirect(url_for('employee_mainpage'))
 
-@app.route('/shoppage/detail/<id>', methods=['GET','POST'])
+
+@app.route('/shoppage/detail/<id>', methods=['GET', 'POST'])
 def detail(id):
     good = Good.query.get_or_404(id)
     form = ProductNumberForm()
@@ -795,45 +818,50 @@ def detail(id):
         return redirect(url_for('shopcart'))
     return render_template('detail.html', good=good, form=form)
 
-@app.route('/shopcart', methods=['Get','Post'])
+
+@app.route('/shopcart', methods=['Get', 'Post'])
 def shopcart():
     total = 0
-    goods = Good.query.filter_by(ifincart = 1)
+    goods = Good.query.filter_by(ifincart=1)
     for good in goods:
         total = total + good.Gprice * good.Gnumber
-    return render_template('shopcart.html',goods=goods, total=total)
+    return render_template('shopcart.html', goods=goods, total=total)
 
-@app.route('/deletecart/<Gid>', methods=['Get','Post'])
+
+@app.route('/deletecart/<Gid>', methods=['Get', 'Post'])
 def deletecart(Gid):
     good = Good.query.get_or_404(Gid)
     good.ifincart = 0
     good.Gnumber = 0
     db.session.commit()
-    goods = Good.query.filter_by(ifincart = 1)  
+    goods = Good.query.filter_by(ifincart=1)
     return render_template('shopcart.html', goods=goods)
 
-@app.route('/buy', methods=['Get','Post'])
+
+@app.route('/buy', methods=['Get', 'Post'])
 def buy():
     total = 0
-    goods = Good.query.filter_by(ifincart = 1)
-    Oid = str(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time())))+ str(time.time()).replace('.', '')
-    id = str(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time())))+ str(time.time()).replace('.', '')
+    goods = Good.query.filter_by(ifincart=1)
+    Oid = str(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))) + str(time.time()).replace('.', '')
+    id = str(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))) + str(time.time()).replace('.', '')
     form = OrderForm()
     if form.validate_on_submit():
         if request.method == 'POST':
             for good in goods:
                 total = total + good.Gprice * good.Gnumber
                 relation = GORelation(id=id, Goodid=good.id, Orderid=Oid, number=good.Gnumber)
-                id =id + str(1)
+                id = id + str(1)
                 db.session.add(relation)
             name = form.Oname.data
             address = form.Oaddress.data
             phonenumber = form.Ophonenumber.data
-            order = Order(id=Oid, Oname=name,Ostate='not pay', Oprice=total, Oaddress=address, Ophonenumber=phonenumber)
+            order = Order(id=Oid, Oname=name, Ostate='not pay', Oprice=total, Oaddress=address,
+                          Ophonenumber=phonenumber)
             db.session.add(order)
             db.session.commit()
         return redirect(url_for('notpayorders'))
     return render_template('buy.html', goods=goods, form=form)
+
 
 @app.route('/pay/<id>', methods=['GET', 'POST'])
 def pay(id):
@@ -846,19 +874,23 @@ def pay(id):
             return redirect(url_for('paidorders'))
     return render_template('pay.html', form=form, order=order)
 
+
 @app.route('/orders', methods=['GET', 'POST'])
 def orders():
     return render_template('orders.html')
+
 
 @app.route('/notpayorders', methods=['GET', 'POST'])
 def notpayorders():
     orders = Order.query.filter_by(Ostate='not pay')
     return render_template('order.html', orders=orders)
 
+
 @app.route('/paidorders', methods=['GET', 'POST'])
 def paidorders():
     orders = Order.query.filter_by(Ostate='paid')
     return render_template('paidorders.html', orders=orders)
+
 
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
@@ -882,6 +914,7 @@ def addproduct():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/addproduct_chinese', methods=['GET', 'POST'])
 def addproduct_chinese():
@@ -1062,6 +1095,7 @@ def customer_posts_chinese():
     else:
         return redirect(url_for('loginCustomer_chinese'))
 
+
 @app.route('/customer_posts')
 def customer_posts():
     if not session.get("USERNAME") is None:
@@ -1103,7 +1137,7 @@ def make_appointment():
         appointment = Appointment(apppetter=pet, Atype=form.type.data,
                                   Adoc=form.doctor.data, Alocation=form.chooseposition.data, Adate=form.datetime.data,
                                   Ainfo=form.otherdescription.data,
-                                  Acomplete='0', Astart='0')
+                                  Acomplete='0', Astart='0', Ostatus="0", Hstatus='0')
         db.session.add(appointment)
         db.session.commit()
         return redirect(url_for('loggedin_home_customer'))
@@ -1161,7 +1195,8 @@ def add_pet_information_chinese():
             db.session.commit()
             flash('保存宠物信息成功 !!!')
             return redirect(url_for('customer_my_pets'))
-        return render_template('add_pet_information_chinese.html', title='Add Pet Information', warn='New pet', form=form,
+        return render_template('add_pet_information_chinese.html', title='Add Pet Information', warn='New pet',
+                               form=form,
                                mes=mes)
     else:
         return redirect(url_for('loginCustomer_chinese'))
@@ -1294,7 +1329,14 @@ def customer_appo_operation(id):
     if not session.get("USERNAME") is None:
         if request.method == 'GET':
             appoint = Appointment.query.filter(Appointment.id == id).first()
-            return render_template('customer_appo_operation.html', appoint=appoint)
+            operation = Operation.query.filter(Operation.Oappiiontment == id).first()
+            if operation and appoint.Ostatus == '1':
+                print(operation)
+                doc = Doctor.query.filter(Doctor.id == operation.Odoc).first()
+                return render_template('customer_appo_operation.html', appoint=appoint, operation=operation, doc=doc)
+            else:
+                flash("No surgical approval is required for this appointment")
+                return redirect(url_for('customer_my_appointments'))
         else:
             appoint = Appointment.query.filter(Appointment.id == id).first()
             if appoint.Ostatus == '1':
@@ -1314,7 +1356,15 @@ def customer_appo_inpatient(id):
     if not session.get("USERNAME") is None:
         if request.method == 'GET':
             appoint = Appointment.query.filter(Appointment.id == id).first()
-            return render_template('customer_appo_inpatient.html', title="Allows operation", appoint=appoint)
+            inpatient = Hospitalization.query.filter(Hospitalization.Sappointment == id).first()
+            if inpatient and appoint.Hstatus == '1':
+                doc = Doctor.query.filter(Doctor.id == inpatient.Sdoc).first()
+                return render_template('customer_appo_inpatient.html', title="Allows operation", appoint=appoint,
+                                       inpatient=inpatient, doc=doc)
+            else:
+                flash("No in-patient approval is required for this appointment")
+                return redirect(url_for('customer_my_appointments'))
+
         else:
             appoint = Appointment.query.filter(Appointment.id == id).first()
             if appoint.Hstatus == '1':
@@ -1334,7 +1384,14 @@ def customer_appo_release(id):
     if not session.get("USERNAME") is None:
         if request.method == 'GET':
             appoint = Appointment.query.filter(Appointment.id == id).first()
-            return render_template('customer_appo_release.html', title="Allows release", appoint=appoint)
+            inpatient = Hospitalization.query.filter(Hospitalization.Sappointment == id).first()
+            if inpatient and appoint.Hstatus == '3':
+                doc = Doctor.query.filter(Doctor.id == inpatient.Sdoc).first()
+                return render_template('customer_appo_release.html', title="Allows release", appoint=appoint,
+                                       inpatient=inpatient, doc=doc)
+            else:
+                flash("No in-patient release approval is required for this appointment")
+                return redirect(url_for('customer_my_appointments'))
         else:
             appoint = Appointment.query.filter(Appointment.id == id).first()
             if appoint.Hstatus == '3':

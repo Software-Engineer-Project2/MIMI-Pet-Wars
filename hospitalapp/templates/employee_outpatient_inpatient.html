@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 
-<form action="/customer_my_appointments/operation/{{appoint.id}}" method="POST">
+<form action="/employee_appo_outpatient/inpatient/{{appoint.id}}" method="POST">
    {{ form.csrf_token }}
          {{ form.hidden_tag() }}
       <p>
