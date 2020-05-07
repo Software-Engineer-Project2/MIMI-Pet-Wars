@@ -4,10 +4,7 @@
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/customer_appo_inpatient.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_appo_inpatient.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/customer_appo_operation.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_appo_operation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_outpatient_inpatient.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_outpatient_inpatient.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/customer_posts.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_posts.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +158,7 @@
       <workItem from="1588750390017" duration="2881000" />
       <workItem from="1588794194736" duration="54000" />
       <workItem from="1588812433691" duration="7000" />
-      <workItem from="1588812477464" duration="3968000" />
+      <workItem from="1588812477464" duration="5843000" />
     </task>
     <servers />
   </component>

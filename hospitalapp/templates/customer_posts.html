@@ -5,11 +5,14 @@
 
 
 <form style="margin-left: 500px;" action="{{ url_for('customer_posts') }}" method="post" novalidate role="form" enctype="multipart/form-data">
+    <h2>Unread Posts: </h2>
+
     {% if unread_posts %}
-    <h2>Unread Posts </h2>
     {% for unread_post in unread_posts%}
-    <div class="text"><a href="/customer_posts/{{unread_post.id}}">
-        <h3>{{unread_post.Ptopic}}</h3></a><small>{{unread_post.Pdate}}</small></div>
+    <div class="text">
+        <h3>Post topic: {{unread_post.Ptopic}}</h3></a><small>Post date: {{unread_post.Pdate}}</small>
+    <a href="/customer_posts/{{unread_post.id}}">view</a>
+    </div>
     {% endfor %}
     {% else %}
     <p>No posts</p>
@@ -18,8 +21,10 @@
     {% if read_posts %}
     <h2>Read Posts </h2>
     {% for read_post in read_posts%}
-    <div class="text"><a href="/customer_posts/{{read_post.id}}">
-        <h3>{{read_post.Ptopic}}</h3></a><small>{{read_post.Pdate}}</small></div>
+    <div class="text">
+                <h3>Post topic: {{read_post.Ptopic}}</h3></a><small>Post date: {{read_post.Pdate}}</small>
+</div>
+    <a href="/customer_posts/{{read_post.id}}">View Answer</a>
     {% endfor %}
     {% else %}
     <p>No posts</p>
