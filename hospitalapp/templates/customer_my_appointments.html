@@ -1,59 +1,107 @@
-{% extends "loggedin_index.html" %}
+{% extends "customer_loggedin_base.html" %}
 {% block content %}
-<br><br><br><br><br><br><br>
-                        <table class="table">
-                            <tbody>
 
-								<tr>
-									<th>Appointment ID</th>
-									<th>Date</th>
-									<th>Pet Name</th>
-									<th>Type </th>
-									<th>Doc </th>
-                                    <th>Appointments Information </th>
-                                    <th>Operation Status</th>
-                                    <th>Hospitalization Status </th>
-                                    <th>Change</th>
-                                    <th>Permission</th>
-                                </tr>
-
-                                {% for a in appoints%}
-                                {% for pet in pets%}
-                                {%  if a.Apet==pet.id %}
-                                <tr>
-                                    <td align="center">{{a.id}}</td>
-                                    <td align="center">{{a.Adate}}</td>
-                                    <td align="center">{{pet.Pname}}</td>
-                                    {% if a.Atype == '1' %}
-                                    <td align="center">Standard</td>
-                                    {% elif a.Atype == '0' %}
-                                    <td align="center">Emergent</td>
-                                    {% endif %}
-                                    <td align="center">{{a.Acost}}</td>
-                                    <td align="center">{{a.Ainfo}}</td>
-                                    <td align="center">{{ a.OperationStatus }}</td>
-                                    <td align="center">{{a.HospitalizationStatus}}</td>
-                                    <td align="center">
-                                        <button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'">Edit</button>
-                                        <button  onclick="window.location.href='/customer_my_appointments/delete_appo/{{a.id}}'" >Delete</button>
-                                    </td>
-                                    <td align="center">
-										<button  onclick="window.location.href='/customer_my_appointments/operation/{{a.id}}'">Surgery</button>
-										<button  onclick="window.location.href='/customer_my_appointments/inpatient/{{a.id}}'" >In Hospital</button>
-										<button  onclick="window.location.href='/customer_my_appointments/release/{{a.id}}'" >Release</button>
-
-									</td>
-
-                                </tr>
-                                {% endif %}
-                                {% endfor %}
-                                {% endfor %}
-
-                            </tbody>
-                        </table>
-
-
-
+                        
+                        <div class="container-fluid">
+                        <!-- <div class="col-lg-6"> -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <h4>Appointments</h4>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <!-- <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Status</th>
+                                                    <th>Date</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>1</th>
+                                                    <td>Kolor Tea Shirt For Man</td>
+                                                    <td><span class="badge badge-primary px-2">Sale</span>
+                                                    </td>
+                                                    <td>January 22</td>
+                                                    <td class="color-primary">$21.56</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>2</th>
+                                                    <td>Kolor Tea Shirt For Women</td>
+                                                    <td><span class="badge badge-danger px-2">Tax</span>
+                                                    </td>
+                                                    <td>January 30</td>
+                                                    <td class="color-success">$55.32</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>3</th>
+                                                    <td>Blue Backpack For Baby</td>
+                                                    <td><span class="badge badge-success px-2">Extended</span>
+                                                    </td>
+                                                    <td>January 25</td>
+                                                    <td class="color-danger">$14.85</td>
+                                                </tr>
+                                            </tbody>
+                                        </table> -->
+                                        <table  class="table table-striped">
+                                            <tbody>
+                
+                                                <tr>
+                                                    <th>Appointment ID</th>
+                                                    <th>Date</th>
+                                                    <th>Pet Name</th>
+                                                    <th>Type </th>
+                                                    <th>Doc </th>
+                                                    <th>Appointments Information </th>
+                                                    <th>Operation Status</th>
+                                                    <th>Hospitalization Status </th>
+                                                    <th>Change</th>
+                                                    <th>Permission</th>
+                                                </tr>
+                
+                                                {% for a in appoints%}
+                                                {% for pet in pets%}
+                                                {%  if a.Apet==pet.id %}
+                                                <tr>
+                                                    <td align="center">{{a.id}}</td>
+                                                    <td align="center">{{a.Adate}}</td>
+                                                    <td align="center">{{pet.Pname}}</td>
+                                                    {% if a.Atype == '1' %}
+                                                    <td align="center">Standard</td>
+                                                    {% elif a.Atype == '0' %}
+                                                    <td align="center">Emergent</td>
+                                                    {% endif %}
+                                                    <td align="center">{{a.Acost}}</td>
+                                                    <td align="center">{{a.Ainfo}}</td>
+                                                    <td align="center">{{ a.OperationStatus }}</td>
+                                                    <td align="center">{{a.HospitalizationStatus}}</td>
+                                                    <td align="center">
+                                                        <button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'">Edit</button>
+                                                        <button  onclick="window.location.href='/customer_my_appointments/delete_appo/{{a.id}}'" >Delete</button>
+                                                    </td>
+                                                    <td align="center">
+                                                        <button  onclick="window.location.href='/customer_my_appointments/operation/{{a.id}}'">Surgery</button>
+                                                        <button  onclick="window.location.href='/customer_my_appointments/inpatient/{{a.id}}'" >In Hospital</button>
+                                                        <button  onclick="window.location.href='/customer_my_appointments/release/{{a.id}}'" >Release</button>
+                
+                                                    </td>
+                
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% endfor %}
+                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- </div> -->
+                        </div>
 
 {% endblock %}
 

@@ -5,65 +5,83 @@
     <title>Make Appointment</title>
 </head>
 <body>
-    {% extends "base.html" %}
+    {% extends "customer_loggedin_base.html" %}
     {% block content %}
-    <h1 align="center">Please Fill Out Some Information</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            <div id="pet">
-            {{ form.pet.label }}<br>{{ form.pet }}</div>
-			{% for error in form.pet.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-
-        <p>
-            <div id="ownerphone">
-            {{ form.ownerphone.label }}<br>{{form.ownerphone}}</div>
-            {% for error in form.ownerphone.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-
-        <p>
-            <div id="type">
-            {{ form.type.label }}<br>{{ form.type }}</div>
-            {% for error in form.type.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-
-        <p>
-            <div id="chooseposition">
-            {{ form.chooseposition.label }}<br>{{ form.chooseposition }}</div>
-            {% for error in form.chooseposition.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        <p>
-            <div id="datetime">
-            {{ form.datetime.label }}<br>{{ form.datetime }}</div>
-			{% for error in form.datetime.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        <p>
-            <div id="doctor">
-            {{ form.doctor.label }}<br>{{ form.doctor }}</div>
-			{% for error in form.doctor.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        <p>
-            <div id="otherdescription">
-            {{ form.otherdescription.label }}<br>{{ form.otherdescription }}</div>
-            {% for error in form.otherdescription.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        {{ form.submit.label }}<br>{{ form.submit }}<br>
-    </form>
+    
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-validation">
+                            
+                     
+                                
+                                 
+                                <h1 align="center">Please Fill Out Some Information</h1>
+                                <form class="form-valide" action="" method="post" novalidate>
+                                    {{ form.hidden_tag() }}
+                                    <p>
+                                        <div id="pet">
+                                        {{ form.pet.label }}<br>{{ form.pet }}</div>
+                                        {% for error in form.pet.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}<br>
+                                    </p>
+                            
+                                    <p>
+                                        <div id="ownerphone">
+                                        {{ form.ownerphone.label }}<br>{{form.ownerphone}}</div>
+                                        {% for error in form.ownerphone.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </p>
+                            
+                                    <p>
+                                        <div id="type">
+                                        {{ form.type.label }}<br>{{ form.type }}</div>
+                                        {% for error in form.type.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}<br>
+                                    </p>
+                            
+                                    <p>
+                                        <div id="chooseposition">
+                                        {{ form.chooseposition.label }}<br>{{ form.chooseposition }}</div>
+                                        {% for error in form.chooseposition.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}<br>
+                                    </p>
+                                    <p>
+                                        <div id="datetime">
+                                        {{ form.datetime.label }}<br>{{ form.datetime }}</div>
+                                        {% for error in form.datetime.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}<br>
+                                    </p>
+                                    <p>
+                                        <div id="doctor">
+                                        {{ form.doctor.label }}<br>{{ form.doctor }}</div>
+                                        {% for error in form.doctor.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}<br>
+                                    </p>
+                                    <p>
+                                        <div id="otherdescription">
+                                        {{ form.otherdescription.label }}<br>{{ form.otherdescription }}</div>
+                                        {% for error in form.otherdescription.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}<br>
+                                    </p>
+                                    {{ form.submit.label }}<br>{{ form.submit }}<br>
+                                </form>    
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endblock %}
 </body>
 </html>

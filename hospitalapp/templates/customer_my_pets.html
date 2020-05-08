@@ -5,52 +5,105 @@
     <title>My Pets</title>
 </head>
 <body>
-{% extends "base.html" %}
+{% extends "customer_loggedin_base.html" %}
 {% block content %}
-<h2 >{{ mes }}</h2>
-      <button  onclick="window.location.href='{{url_for('add_pet_information')}}'">Add a pet.</button>
 
-<h4>{{ pets|length}} pets:</h4>
-
-<table class="table">
-                            <tbody>
-
-								<tr>
-									<th>Pet ID</th>
-									<th>Pet Name</th>
-									<th>Pet Gender</th>
-									<th>Pet Species </th>
-									<th>Information </th>
-                                    <th>Edit </th>
-                                    <th>Delete </th>
-                                </tr>
+     
 
 
-                                {% for pet in pets%}
-                                <tr>
-                                    <td align="center">{{pet.id}}</td>
-                                    <td align="center">{{pet.Pname}}</td>
-                                     {% if pet.Psex == '1' %}
-                                    <td align="center">Male</td>
-                                    {% elif pet.Psex == '2' %}
-                                    <td align="center">Female</td>
-                                    {% endif %}
-                                    <td align="center">{{pet.Pspecies}}</td>
-                                    <td align="center">{{pet.Pinfo}}</td>
-                                    <td align="center">
-                                        <button  onclick="window.location.href='/My Pets/edit_pet/{{pet.id}}'">Edit</button>
-									</td>
-                                    <td align="center">
- <a href="{{ url_for('customer_delete_pet', id=pet.id) }}"><button >Delete</button>
 
-            </a>
-									</td>
 
-                                </tr>
-                                {% endfor %}
 
-                            </tbody>
-                        </table>
+                        <div class="container-fluid">
+                            <h2 >{{ mes }}</h2>
+                            <!-- <div class="col-lg-6"> -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4>{{ pets|length}} pets:</h4>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <!-- <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                        <th>Status</th>
+                                                        <th>Date</th>
+                                                        <th>Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>1</th>
+                                                        <td>Kolor Tea Shirt For Man</td>
+                                                        <td><span class="badge badge-primary px-2">Sale</span>
+                                                        </td>
+                                                        <td>January 22</td>
+                                                        <td class="color-primary">$21.56</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>2</th>
+                                                        <td>Kolor Tea Shirt For Women</td>
+                                                        <td><span class="badge badge-danger px-2">Tax</span>
+                                                        </td>
+                                                        <td>January 30</td>
+                                                        <td class="color-success">$55.32</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>3</th>
+                                                        <td>Blue Backpack For Baby</td>
+                                                        <td><span class="badge badge-success px-2">Extended</span>
+                                                        </td>
+                                                        <td>January 25</td>
+                                                        <td class="color-danger">$14.85</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table> -->
+                                            <table class="table table-striped">
+                                                <tbody>
+                    
+                                                    <tr>
+                                                        <th>Pet ID</th>
+                                                        <th>Pet Name</th>
+                                                        <th>Pet Gender</th>
+                                                        <th>Pet Species </th>
+                                                        <th>Information </th>
+                                                        <th>Edit </th>
+                                                        <th>Delete </th>
+                                                    </tr>
+                    
+                    
+                                                    {% for pet in pets%}
+                                                    <tr>
+                                                        <td align="center">{{pet.id}}</td>
+                                                        <td align="center">{{pet.Pname}}</td>
+                                                         {% if pet.Psex == '1' %}
+                                                        <td align="center">Male</td>
+                                                        {% elif pet.Psex == '2' %}
+                                                        <td align="center">Female</td>
+                                                        {% endif %}
+                                                        <td align="center">{{pet.Pspecies}}</td>
+                                                        <td align="center">{{pet.Pinfo}}</td>
+                                                        <td align="center">
+                                                            <button  onclick="window.location.href='/My Pets/edit_pet/{{pet.id}}'">Edit</button>
+                                                        </td>
+                                                        <td align="center">
+                     <a href="{{ url_for('customer_delete_pet', id=pet.id) }}"><button >Delete</button>
+                    
+                                </a>
+                                                        </td>
+                    
+                                                    </tr>
+                                                    {% endfor %}
+                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                            </div>
 
 {% endblock %}
 </body>

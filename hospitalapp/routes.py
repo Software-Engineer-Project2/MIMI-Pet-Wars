@@ -16,15 +16,22 @@ from flask_uploads import UploadSet, IMAGES, configure_uploads
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
 
+@app.route('/test')
+def plz():
+    return render_template('base.html')
 
 @app.route('/')
+def start():
+    return render_template('start.html')    
+
+@app.route('/lang')
 def choose_language():
     return render_template('choose_language.html', title='Home')
 
 
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    return render_template('index.html')
 
 
 @app.route('/index_chinese')
@@ -1140,7 +1147,7 @@ def make_appointment():
                                   Acomplete='0', Astart='0', Ostatus="0", Hstatus='0')
         db.session.add(appointment)
         db.session.commit()
-        return redirect(url_for('loggedin_home_customer'))
+        return redirect(url_for('customer_my_appointments'))
 
     return render_template('make_appointment_customer.html', title='Make Appointment', form=form)
 
@@ -1270,7 +1277,7 @@ def customer_my_appointments():
                 print(a)
                 appoints.extend(a)
     return render_template('customer_my_appointments.html', pets=pets, appoints=appoints)
-
+    
 
 @app.route('/customer_my_appointments_chinese', methods=['GET', 'POST'])
 def customer_my_appointments_chinese():

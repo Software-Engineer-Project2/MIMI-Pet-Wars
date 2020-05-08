@@ -1,33 +1,34 @@
-{% extends "base.html" %}
+{% extends "customer_loggedin_base.html" %}
 {% block content %}
-<strong>Do you have any question? </strong>
-      <button  onclick="window.location.href='{{url_for('customer_add_post')}}'">Write A Post.</button>
 
 
-<form style="margin-left: 500px;" action="{{ url_for('customer_posts') }}" method="post" novalidate role="form" enctype="multipart/form-data">
+
+<form  action="{{ url_for('customer_posts') }}" method="post" novalidate role="form" enctype="multipart/form-data">
     <h2>Unread Posts: </h2>
 
     {% if unread_posts %}
-    {% for unread_post in unread_posts%}
-    <div class="text">
-        <h3>Post topic: {{unread_post.Ptopic}}</h3></a><small>Post date: {{unread_post.Pdate}}</small>
-    <a href="/customer_posts/{{unread_post.id}}">view</a>
-    </div>
-    {% endfor %}
+        {% for unread_post in unread_posts%}
+        <div class="text">
+            <h3>Post topic: {{unread_post.Ptopic}}</h3></a>
+            <small>Post date: {{unread_post.Pdate}}</small>
+        <a href="/customer_posts/{{unread_post.id}}">view</a>
+        </div>
+        {% endfor %}
     {% else %}
-    <p>No posts</p>
+        <p>No posts</p>
     {% endif %}
 
     {% if read_posts %}
-    <h2>Read Posts </h2>
-    {% for read_post in read_posts%}
-    <div class="text">
-                <h3>Post topic: {{read_post.Ptopic}}</h3></a><small>Post date: {{read_post.Pdate}}</small>
-</div>
-    <a href="/customer_posts/{{read_post.id}}">View Answer</a>
-    {% endfor %}
+        <h2>Read Posts </h2>
+        {% for read_post in read_posts%}
+        <div class="text">
+                    <h3>Post topic: {{read_post.Ptopic}}</h3></a>
+                    <small>Post date: {{read_post.Pdate}}</small>
+        </div>
+        <a href="/customer_posts/{{read_post.id}}">View Answer</a>
+        {% endfor %}
     {% else %}
-    <p>No posts</p>
+        <p>No posts</p>
     {% endif %}
 </form>
 

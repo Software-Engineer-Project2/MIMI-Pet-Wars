@@ -5,7 +5,7 @@
     <title>My Pets</title>
 </head>
 <body>
-{% extends "base.html" %}
+{% extends "customer_loggedin_base.html" %}
 {% block content %}
 <h2 >{{ mes }}</h2>
       <button  onclick="window.location.href='{{url_for('add_pet_information')}}'">Add a pet.</button>

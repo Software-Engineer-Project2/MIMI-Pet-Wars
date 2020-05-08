@@ -1,24 +1,40 @@
-{% extends"base.html" %}
+{% extends"customer_loggedin_base.html" %}
 
 {% block content %}
 
+    <div class="container-fluid">
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title"><h1>{{post.Ptopic}}</h1></h1>
+                        <div class="bootstrap-media">
+                            <div class="media">
+                                
+                                <div class="media-body">
+                                    
+                                    <i><h3>{{post.Pcontent}}</h3></i>
+                                    <small align="right">{{post.Pdate}}</small>
+                                    <br/><br/>
+                                        {% if answer %}
+                                            <small>Answer</small>
+                                            {% for a in answer %}
+                                                <i><h4>{{a.Acontent}}</h4></i>
+                                                <small align="right">{{a.Adate}}</small>
+                                            {% endfor %}
 
-<h2>{{post.Ptopic}}</h2>
+                                        {% else %}
 
-<h3>{{post.Pcontent}}</h3><small>{{post.Pdate}}</small>
-    {% if answer %}
-        <h2>Answer</h2>
-    {% for a in answer %}
-        <h3>{{a.Acontent}}</h3><small>{{a.Adate}}</small>
-    {% endfor %}
+                                            <h4>Please wait for the answer.</h4>
 
-
-
-
-
-    {% else %}
-
-        <h3 >Please wait for the answer.</h3>
-
-    {% endif %}
+                                        {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
 {% endblock %}

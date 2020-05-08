@@ -1,46 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% extends "customer_loggedin_base.html" %}
-{% block content %}
-<h1>&nbsp</h1>
-<h1>&nbsp</h1>
-	<div align="center">
-        <hr><h1>Pet</h1>
-        <fieldset>
-    <legend>Add A Pet</legend>
-           <form action="/loggedin_home_senior/add_pet" method="POST">
-        <label>Pet Name </label>
-        <input type="text" name="pet_name" ><br>
-        <label>Pet Age</label>
-        <input type="text" name="pet_age" ><br>
-        <label>Pet Gender</label>
-        <input type="radio" name="pet_gender" value="1" /> Male
-        <input type="radio" name="pet_gender" value="2" /> Female<br />
-        <label>Pet Type</label>
-        <input type="radio" name="pet_species" value="dog" /> Dog
-        <input type="radio" name="pet_species" value="cat" /> Cat<br />
-        <label>Pet Information</label>
-        <input type="text" name="pet_info" ><br>
-        <input type="submit" value="Add Pet">
 
-        </form>
-        </fieldset>
-    <br>
-    <br>
-<table class="table">
+{% extends "senior_loggedin_base.html" %}
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-validation">
+                     
+                        <hr><h1>Pet</h1>
+                        <fieldset>
+                        <legend>Add A Pet</legend>
+                        <form action="/loggedin_home_senior/add_pet" method="POST">
+                        <label>Pet Name </label>
+                        <input type="text" name="pet_name" ><br>
+                        <label>Pet Age</label>
+                        <input type="text" name="pet_age" ><br>
+                        <label>Pet Gender</label>
+                        <input type="radio" name="pet_gender" value="1" /> Male
+                        <input type="radio" name="pet_gender" value="2" /> Female<br />
+                        <label>Pet Type</label>
+                        <input type="radio" name="pet_species" value="dog" /> Dog
+                        <input type="radio" name="pet_species" value="cat" /> Cat<br />
+                        <label>Pet Information</label>
+                        <input type="text" name="pet_info" ><br>
+                        <input type="submit" value="Add Pet">
+
+                        </form>
+                        </fieldset>
+                        <br><br>
+                        <table class="table">
                             <tbody>
 
-								<tr>
-									<th>Pet ID</th>
-									<th>Pet Name</th>
-									<th>Pet Gender</th>
-									<th>Pet Species </th>
-									<th>Information </th>
+                                <tr>
+                                    <th>Pet ID</th>
+                                    <th>Pet Name</th>
+                                    <th>Pet Gender</th>
+                                    <th>Pet Species </th>
+                                    <th>Information </th>
                                     <th>Edit </th>
                                     <th>Delete </th>
                                 </tr>
@@ -50,7 +49,7 @@
                                 <tr>
                                     <td align="center">{{pet.id}}</td>
                                     <td align="center">{{pet.Pname}}</td>
-                                     {% if pet.Psex == '1' %}
+                                        {% if pet.Psex == '1' %}
                                     <td align="center">Male</td>
                                     {% elif pet.Psex == '2' %}
                                     <td align="center">Female</td>
@@ -59,204 +58,245 @@
                                     <td align="center">{{pet.Pinfo}}</td>
                                     <td align="center">
                                         <button  onclick="window.location.href='/loggedin_home_senior/edit_pet/{{pet.id}}'">Edit</button>
-									</td>
-                                    <td align="center">
- <a href="{{ url_for('senior_delete_pet', id=pet.id) }}"><button >Delete</button>
-
-            </a>
-									</td>
-
-                                </tr>
-                                {% endfor %}
-
-                            </tbody>
-                        </table>    <br>
-    <br>
-        <hr><h1>Appointment</h1>
-<fieldset>
-    <legend>Emergency Appointment</legend>
-           <form action="/loggedin_home_senior/emergency_appointment" method="POST">
-            <label>Pet </label>
-            <input list="epetlist" name="appoint_name" >
-                <datalist id="epetlist">
-                    {% for pet in pets%}
-                    <option value="{{pet.Pname}}">
-                    {% endfor%}
-                </datalist><br>
-            <label>Location </label>
-            <input list="elocationlist" name="location" >
-                <datalist id="elocationlist">
-                    <option value="Shanghai">
-                    <option value="Beijing">
-                    <option value="Chengdu">
-                </datalist><br>
-            <label>Appointment Datetime(format: YYYY-MM-DD HH:MM)</label>
-            <input type="text" name="date" ><br>
-            <label>Doctor </label>
-            <input list="edoclist" name="doc" >
-                <datalist id="edoclist">
-                    {% for doc in doctors%}
-                    <option value="{{doc.Dname}}">
-                    {% endfor%}
-                </datalist><br>
-            <input type="submit" value="Emergency Appointment Submit">
-
-           </form>
-</fieldset>
-        <fieldset>
-    <legend>Standard Appointment</legend>
-           <form action="/loggedin_home_senior/standard_appointment" method="POST">
-                <label>Pet </label>
-            <input list="spetlist" name="appoint_name" >
-                <datalist id="spetlist">
-                    {% for pet in pets%}
-                    <option value="{{pet.Pname}}">
-                    {% endfor%}
-                </datalist><br>
-            <label>Location </label>
-            <input list="slocationlist" name="location" >
-                <datalist id="slocationlist">
-                    <option value="Shanghai">
-                    <option value="Beijing">
-                    <option value="Chengdu">
-                </datalist><br>
-            <label>Appointment Datetime(format: YYYY-MM-DD HH:MM)</label>
-            <input type="text" name="date" ><br>
-            <label>Doctor </label>
-            <input list="sdoclist" name="doc" >
-                <datalist id="sdoclist">
-                    {% for doc in doctors%}
-                    <option value="{{doc.Dname}}">
-                    {% endfor%}
-                </datalist><br>
-            <label>Appointment Information</label>
-            <input type="text" name="info" ><br>
-            <input type="submit" value="Standard Appointment Submit">
-
-           </form>
-           </form>
-</fieldset>
-    <br><br><br>
-     <table class="table">
-                            <tbody>
-
-								<tr>
-									<th>Appointment ID</th>
-									<th>Date</th>
-									<th>Pet Name</th>
-									<th>Type </th>
-                                    <th>Appointments Information </th>
-                                    <th>Operation Status</th>
-                                    <th>Hospitalization Status </th>
-                                    <th>Change</th>
-                                    <th>Permission</th>
-                                </tr>
-
-                                {% for a in appoints%}
-                                {% for pet in pets%}
-                                {%  if a.Apet==pet.id %}
-                                <tr>
-                                    <td align="center">{{a.id}}</td>
-                                    <td align="center">{{a.Adate}}</td>
-                                    <td align="center">{{pet.Pname}}</td>
-                                    {% if a.Atype == '1' %}
-                                    <td align="center">Standard</td>
-                                    {% elif a.Atype == '0' %}
-                                    <td align="center">Emergent</td>
-                                    {% endif %}
-                                    <td align="center">{{a.Ainfo}}</td>
-                                    <td align="center">{{ a.OperationStatus }}</td>
-                                    <td align="center">{{a.HospitalizationStatus}}</td>
-                                    <td align="center">
-                                        <button  onclick="window.location.href='/loggedin_home_senior/edit_appoint/{{a.id}}'">Edit</button>
-                                        <button  onclick="window.location.href='/loggedin_home_senior/delete_appoint/{{a.id}}'" >Delete</button>
                                     </td>
                                     <td align="center">
-										<button  onclick="window.location.href='/loggedin_home_senior/operation/{{a.id}}'">Surgery</button>
-										<button  onclick="window.location.href='/loggedin_home_senior/inpatient/{{a.id}}'" >In Hospital</button>
-										<button  onclick="window.location.href='/loggedin_home_senior/release/{{a.id}}'" >Release</button>
+                <a href="{{ url_for('senior_delete_pet', id=pet.id) }}"><button >Delete</button>
 
-									</td>
+                </a>
+                                    </td>
 
-                                </tr>
-                                {% endif %}
-                                {% endfor %}
-                                {% endfor %}
-
-                            </tbody>
-                        </table>
-        <br><br><br>
-        <hr><h1>Post</h1>
-<fieldset>
-    <legend>Add A Post</legend>
-        <form action="/loggedin_home_senior/write_post" method="POST">
-        <label>Topic </label>
-        <input type="text" name="topic" ><br>
-        <label>Content</label>
-        <input type="text" name="content" ><br>
-        <input type="submit" value="Post Submit">
-
-        </form>
-</fieldset>
-        {% if unread_posts %}
-    <h2>Unread Posts </h2>
-    <div class="text">
-        <table class="unread post">
-                            <tbody>
-
-								<tr>
-									<th align="center">Post ID</th>
-									<th align="center">Date</th>
-									<th align="center">Post Topic</th>
-									<th align="center">Post Content </th>
-                                </tr>
-                                    {% for unread_post in unread_posts%}
-
-                            <tr>
-									<td align="center">{{unread_post.id}}</td>
-									<td align="center">{{unread_post.Pdate}}</td>
-									<td align="center">{{unread_post.Ptopic}}</td>
-									<td align="center">{{unread_post.Pcontent}} </td>
                                 </tr>
                                 {% endfor %}
 
                             </tbody>
-        </table>
-
-    {% else %}
-    <p>No unread posts</p>
-    {% endif %}
-
-    {% if read_posts %}
-    <h2>Read Posts </h2>
-    <div class="text">
-        <table class="unread post">
-                            <tbody>
-
-								<tr>
-									<th>Post ID</th>
-									<th>Date</th>
-									<th>Post Topic</th>
-									<th>Post Content </th>
-                                </tr>
-                                    {% for unread_post in unread_posts%}
-
-                            <tr>
-									<td>{{read_posts.id}}</td>
-									<td>{{read_posts.Pdate}}</td>
-									<td>{{read_posts.Ptopic}}</td>
-									<td>{{read_posts.Pcontent}} </td>
-                                </tr>
-                                {% endfor %}
-
-                            </tbody>
-        </table>
-
-    {% else %}
-    <p>No read posts</p>
-    {% endif %}
-
+                        </table> 
+                    </div>      
+                </div>
+                   
+            </div>
+        </div>
     </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-validation">
+                     
+                        <hr><h1>Appointment</h1>
+                        <fieldset>
+                            <legend>Emergency Appointment</legend>
+                                <form action="/loggedin_home_senior/emergency_appointment" method="POST">
+                                    <label>Pet </label>
+                                    <input list="epetlist" name="appoint_name" >
+                                        <datalist id="epetlist">
+                                            {% for pet in pets%}
+                                            <option value="{{pet.Pname}}">
+                                            {% endfor%}
+                                        </datalist><br>
+                                    <label>Location </label>
+                                    <input list="elocationlist" name="location" >
+                                        <datalist id="elocationlist">
+                                            <option value="Shanghai">
+                                            <option value="Beijing">
+                                            <option value="Chengdu">
+                                        </datalist><br>
+                                    <label>Appointment Datetime(format: YYYY-MM-DD HH:MM)</label>
+                                    <input type="text" name="date" ><br>
+                                    <label>Doctor </label>
+                                    <input list="edoclist" name="doc" >
+                                        <datalist id="edoclist">
+                                            {% for doc in doctors%}
+                                            <option value="{{doc.Dname}}">
+                                            {% endfor%}
+                                        </datalist><br>
+                                    <input type="submit" value="Emergency Appointment Submit">
+
+                                </form>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Standard Appointment</legend>
+                                <form action="/loggedin_home_senior/standard_appointment" method="POST">
+                                        <label>Pet </label>
+                                    <input list="spetlist" name="appoint_name" >
+                                        <datalist id="spetlist">
+                                            {% for pet in pets%}
+                                            <option value="{{pet.Pname}}">
+                                            {% endfor%}
+                                        </datalist><br>
+                                    <label>Location </label>
+                                    <input list="slocationlist" name="location" >
+                                        <datalist id="slocationlist">
+                                            <option value="Shanghai">
+                                            <option value="Beijing">
+                                            <option value="Chengdu">
+                                        </datalist><br>
+                                    <label>Appointment Datetime(format: YYYY-MM-DD HH:MM)</label>
+                                    <input type="text" name="date" ><br>
+                                    <label>Doctor </label>
+                                    <input list="sdoclist" name="doc" >
+                                        <datalist id="sdoclist">
+                                            {% for doc in doctors%}
+                                            <option value="{{doc.Dname}}">
+                                            {% endfor%}
+                                        </datalist><br>
+                                    <label>Appointment Information</label>
+                                    <input type="text" name="info" ><br>
+                                    <input type="submit" value="Standard Appointment Submit">
+
+                                </form>
+                                </form>
+                        </fieldset>
+                        <br><br><br>
+                        <table class="table">
+                                <tbody>
+
+                                    <tr>
+                                        <th>Appointment ID</th>
+                                        <th>Date</th>
+                                        <th>Pet Name</th>
+                                        <th>Type </th>
+                                        <th>Appointments Information </th>
+                                        <th>Operation Status</th>
+                                        <th>Hospitalization Status </th>
+                                        <th>Change</th>
+                                        <th>Permission</th>
+                                    </tr>
+
+                                    {% for a in appoints%}
+                                    {% for pet in pets%}
+                                    {%  if a.Apet==pet.id %}
+                                    <tr>
+                                        <td align="center">{{a.id}}</td>
+                                        <td align="center">{{a.Adate}}</td>
+                                        <td align="center">{{pet.Pname}}</td>
+                                        {% if a.Atype == '1' %}
+                                        <td align="center">Standard</td>
+                                        {% elif a.Atype == '0' %}
+                                        <td align="center">Emergent</td>
+                                        {% endif %}
+                                        <td align="center">{{a.Ainfo}}</td>
+                                        <td align="center">{{ a.OperationStatus }}</td>
+                                        <td align="center">{{a.HospitalizationStatus}}</td>
+                                        <td align="center">
+                                            <button  onclick="window.location.href='/loggedin_home_senior/edit_appoint/{{a.id}}'">Edit</button>
+                                            <button  onclick="window.location.href='/loggedin_home_senior/delete_appoint/{{a.id}}'" >Delete</button>
+                                        </td>
+                                        <td align="center">
+                                            <button  onclick="window.location.href='/loggedin_home_senior/operation/{{a.id}}'">Surgery</button>
+                                            <button  onclick="window.location.href='/loggedin_home_senior/inpatient/{{a.id}}'" >In Hospital</button>
+                                            <button  onclick="window.location.href='/loggedin_home_senior/release/{{a.id}}'" >Release</button>
+
+                                        </td>
+
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endfor %}
+
+                                </tbody>
+                        </table>
+
+                    </div>      
+                </div>
+                   
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-validation">
+                     
+                       
+                        <h1>Post</h1>
+                        <fieldset>
+                            <legend>Add A Post</legend>
+                                <form action="/loggedin_home_senior/write_post" method="POST">
+                                <label>Topic </label>
+                                <input type="text" name="topic" ><br>
+                                <label>Content</label>
+                                <input type="text" name="content" ><br>
+                                <input type="submit" value="Post Submit">
+
+                                </form>
+                        </fieldset>
+                        {% if unread_posts %}
+                        <h2>Unread Posts </h2>
+                        <div class="text">
+                        <table class="unread post">
+                                            <tbody>
+
+                                                <tr>
+                                                    <th align="center">Post ID</th>
+                                                    <th align="center">Date</th>
+                                                    <th align="center">Post Topic</th>
+                                                    <th align="center">Post Content </th>
+                                                </tr>
+                                                    {% for unread_post in unread_posts%}
+
+                                            <tr>
+                                                    <td align="center">{{unread_post.id}}</td>
+                                                    <td align="center">{{unread_post.Pdate}}</td>
+                                                    <td align="center">{{unread_post.Ptopic}}</td>
+                                                    <td align="center">{{unread_post.Pcontent}} </td>
+                                                </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                        </table>
+
+                        {% else %}
+                        <p>No unread posts</p>
+                        {% endif %}
+
+                        {% if read_posts %}
+                        <h2>Read Posts </h2>
+                        <div class="text">
+                            <table class="unread post">
+                                                <tbody>
+
+                                                    <tr>
+                                                        <th>Post ID</th>
+                                                        <th>Date</th>
+                                                        <th>Post Topic</th>
+                                                        <th>Post Content </th>
+                                                    </tr>
+                                                        {% for unread_post in unread_posts%}
+
+                                                <tr>
+                                                        <td>{{read_posts.id}}</td>
+                                                        <td>{{read_posts.Pdate}}</td>
+                                                        <td>{{read_posts.Ptopic}}</td>
+                                                        <td>{{read_posts.Pcontent}} </td>
+                                                    </tr>
+                                                    {% endfor %}
+
+                                                </tbody>
+                            </table>
+
+                        {% else %}
+                        <p>No read posts</p>
+                        {% endif %}
+
+                        </div>
+    
+                                
+                                    
+                            
+                        </div>
+
+                    </div>      
+                </div>
+                   
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 

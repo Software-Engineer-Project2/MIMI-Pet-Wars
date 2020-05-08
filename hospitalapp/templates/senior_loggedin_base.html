@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <b class="logo-abbr"><img src="../static/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="../static/./images/logo-compact.png" alt="" width="80%"></span>
+                    <span class="brand-title">
+                        <img src="../static/images/logo-text.png" alt="" width="80%">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">SENIOR</li>
+                    
+                
+                    
+                    <br><br><br>
+                    <br><br><br>
+                    <li>
+                        <button type="button" onclick="location.href='{{url_for('loggedin_home_senior')}}'" class="btn mb-1 btn-outline-success">Home</button>
+                        <button type="button" onclick="location.href='{{url_for('employee_posts')}}'" class="btn mb-1 btn-outline-warning">Emergency</button>
+                        <button type="button" onclick="location.href='{{url_for('employee_posts')}}'" class="btn mb-1 btn-outline-primary">Log out</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            
+            <!-- row -->
+
+            <div class="container-fluid">
+                
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                <br>
+                {% block content %}{% endblock %}
+                
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by Group 7 2020</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../static/plugins/common/common.min.js"></script>
+    <script src="../static/js/custom.min.js"></script>
+    <script src="../static/js/settings.js"></script>
+    <script src="../static/js/gleek.js"></script>
+    <script src="../static/js/styleSwitcher.js"></script>
+
+</body>
+
+</html>
