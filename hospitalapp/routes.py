@@ -1237,6 +1237,21 @@ def customer_add_post():
         return redirect(url_for('loginCustomer'))
 
 
+@app.route('/customer_add_post_chinese', methods=['GET', 'POST'])
+def customer_add_post_chinese():
+    form = PostForm()
+    if not session.get("USERNAME") is None:
+        customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        if form.validate_on_submit():
+            post = Post(Ptopic=form.topic.data, Pcontent=form.content.data, poster=customer_in_db)
+            db.session.add(post)
+            db.session.commit()
+            return redirect(url_for('customer_posts'))
+        return render_template('customer_add_post_chinese.html', user=customer_in_db, form=form)
+    else:
+        return redirect(url_for('loginCustomer'))
+
+
 @app.route('/customer_posts_chinese')
 def customer_posts_chinese():
     if not session.get("USERNAME") is None:
@@ -1340,13 +1355,13 @@ def make_appointment_chinese():
     for d in doctors:
         docnames.append(d.Dname)
     if request.method == "GET":
-        return render_template('make_appointment_customer_chineses.html', title='Make Appointment', pets=pets, doctors=doctors)
+        return render_template('make_appointment_customer_chinese.html', title='Make Appointment', pets=pets, doctors=doctors)
     else:
 
         pet_name = request.form["pet name"]
         if pet_name not in petnames:
             flash("Please select correct pet name")
-            return redirect(url_for("make_appointment"))
+            return redirect(url_for("make_appointment_chinese"))
         else:
             pet = Pet.query.filter(Pet.Pname == pet_name).first()
 
@@ -1357,7 +1372,7 @@ def make_appointment_chinese():
         docname = request.form['doctor']
         if docname not in docnames:
             flash("Please select correct doctor name")
-            return redirect(url_for("make_appointment"))
+            return redirect(url_for("make_appointment_chinese"))
         else:
             doctor = Doctor.query.filter(Doctor.Dname == docname).first()
         appointment = Appointment(apppetter=pet, Atype=type,
@@ -1402,7 +1417,7 @@ def add_pet_information_chinese():
             db.session.add(pet)
             db.session.commit()
             flash('保存宠物信息成功 !!!')
-            return redirect(url_for('customer_my_pets'))
+            return redirect(url_for('customer_my_pets_chinese'))
         return render_template('add_pet_information_chinese.html', title='Add Pet Information', warn='New pet',
                                form=form,
                                mes=mes)
@@ -1458,6 +1473,30 @@ def customer_edit_pet(id):
         return redirect(url_for('loginCustomer'))
 
 
+@app.route('/My Pets/edit_pet_chinese/<id>', methods=['GET', 'POST'])
+def customer_edit_pet_chinese(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+            pet = Pet.query.filter(Pet.id==id).first()
+            return render_template('customer_edit_pet_chinese.html', pet=pet)
+        else:
+            user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+            pet = Pet.query.filter(Pet.Powner == user_in_db.id).first()
+            if not request.form['age'] :
+                flash("Please enter petname")
+                return redirect(url_for("customer_my_pets"))
+            pet.Pname = request.form['name']
+            pet.Page = request.form['age']
+            pet.Psex = request.form['gender']
+            pet.Pspecies = request.form['species']
+            pet.Pinfo = request.form['information']
+            db.session.commit()
+            return redirect(url_for('customer_my_pets_chinese'))
+    else:
+        return redirect(url_for('loginCustomer_chinese'))
+
+
 @app.route('/My Pets/delete_pet/<id>', methods=['GET', 'POST'])
 def customer_delete_pet(id):
     if not session.get("USERNAME") is None:
@@ -1465,6 +1504,17 @@ def customer_delete_pet(id):
         db.session.delete(pet)
         db.session.commit()
         return redirect(url_for('customer_my_pets'))
+    else:
+        return redirect(url_for('loginCustomer'))
+
+
+@app.route('/My Pets/delete_pet/<id>', methods=['GET', 'POST'])
+def customer_delete_pet_chinese(id):
+    if not session.get("USERNAME") is None:
+        pet = Pet.query.get_or_404(id)
+        db.session.delete(pet)
+        db.session.commit()
+        return redirect(url_for('customer_my_pets_chinese'))
     else:
         return redirect(url_for('loginCustomer'))
 
@@ -1520,6 +1570,31 @@ def customer_edit_appointments(id):
         return redirect(url_for('loginCustomer'))
 
 
+@app.route('/customer_my_appointments/edit_appo_chinese/<id>', methods=['GET', 'POST'])
+def customer_edit_appointments_chinese(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            docID = appoint.Adoc
+            doc = Doctor.query.filter(Doctor.id == docID).first()
+            doctors = Doctor.query.all()
+            return render_template('customer_edit_appo.html', doctors=doctors, doc=doc, appoint=appoint)
+        else:
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            appoint.Atype = request.form['type']
+            appoint.Adate = datetime.now()
+            appoint.Alocation = request.form['location']
+            docname = request.form['doctor']
+            doctor = Doctor.query.filter(Doctor.Dname == docname).first()
+            appoint.Adoc = doctor.id
+            appoint.Ainfo = request.form['information']
+            db.session.commit()
+            return redirect(url_for('customer_my_appointments_chinese'))
+    else:
+        return redirect(url_for('loginCustomer_chinese'))
+
+
+
 @app.route('/customer_my_appointments/delete_appo/<id>', methods=['GET', 'POST'])
 def customer_delete_appointments(id):
     if not session.get("USERNAME") is None:
@@ -1531,6 +1606,20 @@ def customer_delete_appointments(id):
             db.session.delete(appoint)
             db.session.commit()
             return redirect(url_for('customer_my_appointments'))
+    else:
+        return redirect(url_for('loginCustomer'))
+
+@app.route('/customer_my_appointments/delete_appo/<id>', methods=['GET', 'POST'])
+def customer_delete_appointments_chinese(id):
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            return render_template('customer_delete_appo_chinese.html', appoint=appoint)
+        else:
+            appoint = Appointment.query.filter(Appointment.id == id).first()
+            db.session.delete(appoint)
+            db.session.commit()
+            return redirect(url_for('customer_my_appointments_chinese'))
     else:
         return redirect(url_for('loginCustomer'))
 

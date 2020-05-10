@@ -1,0 +1,55 @@
+{% extends "customer_loggedin_base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-validation">
+                        
+                            
+                            
+                                <strong>你想对医院说些什么?</strong>
+
+                                <h3>你的留言</h3>
+                            
+                            <form class="form-valide" action="{{ url_for('customer_add_post') }}" method="post" novalidate role="form" enctype="multipart/form-data">
+                                {{ form.hidden_tag() }}
+                                <p>
+                                    <div class="form-group">
+                                    {{ form.topic.label }}<br>
+                                    {{ form.topic}}
+                                    {% for error in form.topic.errors %}
+                                    <span style="color: red">{{ error }}</span>
+                                    {% endfor %}
+                                    </div>
+                                </p>
+                                <p>
+                                <div class="form-group">
+                                {{ form.content.label(class="form-control-label")  }}
+                                {{ form.content(size=1500, rows="3") }}
+                                {% for error in form.content.errors %}
+                                <span style="color: red;">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                </p>
+                            
+                                <div class="form-group">
+                                    {{ form.submit }}
+                                </div>
+                            
+                            
+                            
+                            
+                            </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

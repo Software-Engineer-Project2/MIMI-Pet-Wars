@@ -1,7 +1,7 @@
 {% extends "base_chinese.html" %}
 {% block content %}
 <strong>你有什么问题吗? </strong>
-      <button  onclick="window.location.href='{{url_for('customer_add_post')}}'">写下留言.</button>
+      <button  onclick="window.location.href='{{url_for('customer_add_post_chinese')}}'">写下留言.</button>
 
 
 <form style="margin-left: 500px;" action="{{ url_for('customer_posts') }}" method="post" novalidate role="form" enctype="multipart/form-data">

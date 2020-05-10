@@ -38,11 +38,11 @@
                                     <td align="center">{{pet.Pspecies}}</td>
                                     <td align="center">{{pet.Pinfo}}</td>
                                     <td align="center">
-                                        <button  onclick="window.location.href='/My Pets/edit_pet/{{pet.id}}'">编辑</button>
+                                        <button  onclick="window.location.href='/My Pets/edit_pet_chinese/{{pet.id}}'">编辑</button>
 									</td>
                                     <td align="center">
 
- <a href="{{ url_for('customer_delete_pet', id=pet.id) }}"><button >删除</button>
+ <a href="{{ url_for('customer_delete_pet_chinese', id=pet.id) }}"><button >删除</button>
 
             </a>
 									</td>

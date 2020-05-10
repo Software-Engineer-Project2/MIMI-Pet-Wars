@@ -1,0 +1,12 @@
+{% extends 'base_chinese.html' %}
+{% block title %}
+    <title>删除预约</title>
+{% endblock %}
+{% block content %}
+
+<form action="/customer_my_appointments/delete_appo/{{appoint.id}}" method="POST">
+    <input type="submit" value="删除">
+</form>
+
+
+{% endblock %}
