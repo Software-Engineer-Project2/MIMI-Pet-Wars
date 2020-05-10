@@ -44,41 +44,24 @@ def about():
     return render_template('about_us.html', title='about')
 
 
-@app.route('/customer_mainpage')
-def customer_mainpage():
-    return render_template('customer_mainpage.html', title='Home')
 
 
-@app.route('/customer_mainpage_chinese')
-def customer_mainpage_chinese():
-    return render_template('customer_mainpage_chinese.html', title='Home')
 
-
-@app.route('/employee_mainpage')
-def employee_mainpage():
-    return render_template('employee_mainpage.html', title='Home')
-
-
-@app.route('/employee_mainpage_chinese')
-def employee_mainpage_chinese():
-    return render_template('employee_mainpage_chinese.html', title='Home')
-
-
-@app.route('/senior_mainpage', methods=['GET', 'POST'])
-def senior_mainpage():
+@app.route('/senior_login', methods=['GET', 'POST'])
+def senior_login():
     form = LoginFormCustomer()
     if request.method == "POST":
         user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
         if not user_in_db:
             flash('No user found with username: {}'.format(form.Cusername.data))
-            return redirect(url_for('senior_mainpage'))
+            return redirect(url_for('senior_login'))
         if check_password_hash(user_in_db.Cpassword, form.Cpassword.data):
             flash('Login success!')
             session["USERNAME"] = user_in_db.Cname
             return redirect(url_for('loggedin_home_senior'))
         flash('Incorrect Password')
-        return redirect(url_for('senior_mainpage'))
-    return render_template('senior_mainpage.html', title='Login In', form=form)
+        return redirect(url_for('senior_login'))
+    return render_template('senior_login.html', title='Login In', form=form)
 
 
 @app.route('/signupSenior', methods=['GET', 'POST'])
@@ -95,7 +78,7 @@ def signupSenior():
         db.session.commit()
         session["USERNAME"] = customer.Cname
         flash('Welcome home, %s ! , you need sign in again' % customer.Cname)
-        return redirect(url_for('senior_mainpage'))
+        return redirect(url_for('senior_login'))
     return render_template('signup_customer.html', title='Register a new user', form=form)
 
 
@@ -123,7 +106,7 @@ def loggedin_home_senior():
                                read_posts=read_posts, unread_posts=unread_posts, doctors=doctors)
     else:
         flash("Customer needs to either login or signup first")
-        return redirect(url_for('senior_mainpage'))
+        return redirect(url_for('senior_login'))
 
 
 @app.route('/loggedin_home_senior/write_post', methods=['GET', 'POST'])
@@ -166,7 +149,7 @@ def senior_edit_pet(id):
             db.session.commit()
             return redirect(url_for('loggedin_home_senior'))
     else:
-        return redirect(url_for('senior_mainpage'))
+        return redirect(url_for('senior_login'))
 
 
 @app.route('/loggedin_home_senior/delete_pet/<id>', methods=['GET', 'POST'])
@@ -177,7 +160,7 @@ def senior_delete_pet(id):
         db.session.commit()
         return redirect(url_for('loggedin_home_senior'))
     else:
-        return redirect(url_for('senior_mainpage'))
+        return redirect(url_for('senior_login'))
 
 
 @app.route('/loggedin_home_senior/operation/<id>', methods=['GET', 'POST'])
@@ -197,7 +180,7 @@ def senior_appo_operation(id):
                 flash("No surgical approval is required")
             return redirect(url_for('loggedin_home_senior'))
     else:
-        return redirect(url_for('senior_mainpage'))
+        return redirect(url_for('senior_login'))
 
 
 @app.route('/loggedin_home_senior/inpatient/<id>', methods=['GET', 'POST'])
@@ -217,7 +200,7 @@ def senior_appo_inpatient(id):
                 flash("No inpatient approval is required")
             return redirect(url_for('loggedin_home_senior'))
     else:
-        return redirect(url_for('senior_mainpage'))
+        return redirect(url_for('senior_login'))
 
 
 @app.route('/loggedin_home_senior/emergency_appointment', methods=['GET', 'POST'])
@@ -260,7 +243,7 @@ def senior_delete_appoint(id):
         db.session.commit()
         return redirect(url_for('loggedin_home_senior'))
     else:
-        return redirect(url_for('senior_mainpage'))
+        return redirect(url_for('senior_login'))
 
 
 @app.route('/loggedin_home_senior/edit_appoint/<id>', methods=['GET', 'POST'])
@@ -284,7 +267,7 @@ def senior_edit_appoint(id):
             db.session.commit()
             return redirect(url_for('loggedin_home_senior'))
     else:
-        return redirect(url_for('senior_mainpage'))
+        return redirect(url_for('senior_login'))
 
 
 @app.route('/loggedin_home_senior/release/<id>', methods=['GET', 'POST'])
@@ -304,7 +287,7 @@ def senior_appo_release(id):
                 flash("No release approval is required")
             return redirect(url_for('loggedin_home_senior'))
     else:
-        return redirect(url_for('senior_mainpage'))
+        return redirect(url_for('senior_login'))
 
 
 @app.route('/loggedin_home_customer', methods=['GET', 'POST'])
@@ -314,7 +297,7 @@ def loggedin_home_customer():
         return render_template('loggedin_home_customer.html', Cusername=user_in_db.Cname)
     else:
         flash("Customer needs to either login or signup first")
-        return redirect(url_for('customer_mainpage'))
+        return redirect(url_for('loginCustomer'))
 
 
 @app.route('/loggedin_home_customer_chinese', methods=['GET', 'POST'])
@@ -324,7 +307,7 @@ def loggedin_home_customer_chinese():
         return render_template('loggedin_home_customer_chinese.html', Cusername=user_in_db.Cname)
     else:
         flash("Customer needs to either login or signup first")
-        return redirect(url_for('customer_mainpage_chinese'))
+        return redirect(url_for('loginCustomer_chinese'))
 
 
 @app.route('/loggedin_home_employee')
@@ -425,7 +408,7 @@ def employee_appointment():
         return render_template('employee_appointment.html', title='Home')
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appointment_chinese')
@@ -434,7 +417,7 @@ def employee_appointment_chinese():
         return render_template('employee_appointment_chinese.html', title='Home')
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_checkin', methods=['GET', 'POST'])
@@ -456,7 +439,7 @@ def employee_appo_checkin():
                                e_appointments=e_appointments, pets=pets, customers=customers)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_checkin_chinese', methods=['GET', 'POST'])
@@ -494,7 +477,7 @@ def employee_checkin_view(id):
         return render_template('employee_checkin_view.html', appoint=appoint, customer=customer, pet=pet, doc=doc)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_checkin/view_appo_chinese/<id>', methods=['GET', 'POST'])
@@ -545,7 +528,7 @@ def employee_appo_outpatient():
                                appointments=appointments, pets=pets, customers=customers)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_outpatient', methods=['GET', 'POST'])
@@ -603,7 +586,7 @@ def employee_outpatient_operation(id):
             return redirect(url_for('employee_appo_outpatient'))
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_outpatient/inpatient/<id>', methods=['GET', 'POST'])
@@ -633,7 +616,7 @@ def employee_outpatient_inpatient(id):
             return redirect(url_for('employee_appo_outpatient'))
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_inpatient', methods=['GET', 'POST'])
@@ -653,7 +636,7 @@ def employee_appo_inpatient():
                                pets=pets, customers=customers)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_inpatient', methods=['GET', 'POST'])
@@ -686,7 +669,7 @@ def employee_inpatient_release(id):
         return redirect(url_for('employee_appo_inpatient'))
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_inpatient/release_complete/<id>', methods=['GET', 'POST'])
@@ -699,7 +682,7 @@ def employee_inpatient_releasecomplete(id):
         return redirect(url_for('employee_appo_inpatient'))
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_operation', methods=['GET', 'POST'])
@@ -717,7 +700,7 @@ def employee_appo_operation():
                                appoints=appoints, pets=pets, customers=customers, operations=operations)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 @app.route('/employee_appo_operation_chinese', methods=['GET', 'POST'])
 def employee_appo_operation_chinese():
@@ -747,7 +730,7 @@ def employee_operation_complete(id):
         return redirect(url_for('employee_appo_operation'))
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_completed', methods=['GET', 'POST'])
@@ -761,7 +744,7 @@ def employee_appo_completed():
                                appointments=appointments, pets=pets, customers=customers)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_appo_completed_chinese', methods=['GET', 'POST'])
@@ -787,7 +770,7 @@ def employee_pets():
                                customers=customers)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_pets/delete_pet/<id>', methods=['GET', 'POST'])
@@ -818,7 +801,7 @@ def employee_pets_chinese():
                                customers=customers)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage_chinese'))
+        return redirect(url_for('loginEmployee_chinese'))
 
 
 @app.route('/employee_customers', methods=['GET', 'POST'])
@@ -828,7 +811,7 @@ def employee_customers():
         return render_template('employee_customers.html', title='Display In-patient appointments', customers=customers)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_customers_chinese', methods=['GET', 'POST'])
@@ -839,7 +822,7 @@ def employee_customers_chinese():
                                customers=customers)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_doctors', methods=['GET', 'POST'])
@@ -849,7 +832,7 @@ def employee_doctors():
         return render_template('employee_doctors.html', title='Display In-patient appointments', doctors=doctors)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_doctors_chinese', methods=['GET', 'POST'])
@@ -860,7 +843,7 @@ def employee_doctors_chinese():
                                doctors=doctors)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/listproduct', methods=['GET', 'POST'])
@@ -889,7 +872,7 @@ def employee_posts():
         print('unread posts', unread_posts)
         return render_template('employee_posts.html', unread_posts=unread_posts, read_posts=read_posts)
     else:
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_posts_chinese')
@@ -906,7 +889,7 @@ def employee_posts_chinese():
         print('unread posts', unread_posts)
         return render_template('employee_posts_chinese.html', unread_posts=unread_posts, read_posts=read_posts)
     else:
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_post_detail/<id>', methods=['GET', 'POST'])
@@ -917,7 +900,7 @@ def employee_post_detail(id):
 
         return render_template('employee_post_detail.html', post=post, answer=answer)
     else:
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_posts/employee_answer_post/<id>', methods=['GET', 'POST'])
@@ -932,7 +915,7 @@ def employee_answer_post(id):
             return redirect(url_for('employee_posts'))
         return render_template('employee_answer_post.html', post=post, form=form, id=id)
     else:
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/shoppage/detail/<id>', methods=['GET', 'POST'])
@@ -1042,7 +1025,7 @@ def addproduct():
         return render_template('addproduct.html', title='addproduct', form=form)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/addproduct_chinese', methods=['GET', 'POST'])
@@ -1066,7 +1049,7 @@ def addproduct_chinese():
         return render_template('addproduct_chinese.html', title='addproduct', form=form)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/deleteproduct/<id>', methods=['GET', 'POST'])
@@ -1298,8 +1281,12 @@ def customer_post_detail(id):
 @app.route('/logoutEmployee', methods=['GET', 'POST'])
 def logoutEmployee():
     session.pop("USERNAME", None)
-    return redirect(url_for('employee_mainpage'))
+    return redirect(url_for('loginEmployee'))
 
+@app.route('/logoutCustomer', methods=['GET', 'POST'])
+def logoutCustomer():
+    session.pop("USERNAME", None)
+    return redirect(url_for('loginCustomer'))
 
 @app.route('/Make Appointment', methods=['GET', 'POST'])
 def make_appointment():
