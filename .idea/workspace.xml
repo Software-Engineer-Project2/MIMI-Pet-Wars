@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/customer_posts.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_posts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/customer_edit_pet.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_edit_pet.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/customer_my_pets.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_my_pets.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/make_appointment_customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/make_appointment_customer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/make_appointment_customer_chinese.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/make_appointment_customer_chinese.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pet.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +53,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -159,6 +168,7 @@
       <workItem from="1588794194736" duration="54000" />
       <workItem from="1588812433691" duration="7000" />
       <workItem from="1588812477464" duration="5843000" />
+      <workItem from="1589044269518" duration="12914000" />
     </task>
     <servers />
   </component>
@@ -179,10 +189,18 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="-1208" y="96" key="#Deployment" timestamp="1589053418601">
+      <screen x="-1600" y="0" width="1600" height="870" />
+    </state>
+    <state x="-1208" y="96" key="#Deployment/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1589053418601" />
     <state x="617" y="179" key="#Notifications" timestamp="1584432877323">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="617" y="179" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1584432877323" />
+    <state x="-1208" y="96" key="#Options" timestamp="1589053445468">
+      <screen x="-1600" y="0" width="1600" height="870" />
+    </state>
+    <state x="-1208" y="96" key="#Options/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1589053445468" />
     <state x="740" y="153" key="#__init__" timestamp="1584432362368">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -239,16 +257,16 @@
     </state>
     <state x="-1160" y="136" key="SettingsEditor/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1587754681713" />
     <state x="528" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584432378881" />
-    <state x="461" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1588812481268">
-      <screen x="0" y="0" width="1536" height="832" />
-    </state>
-    <state x="-1120" y="255" key="com.intellij.ide.util.TipDialog/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1587714424561" />
-    <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832/-1600.0.1600.870@0.0.1536.832" timestamp="1588812481268" />
-    <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832@0.0.1536.832" timestamp="1588356465944" />
-    <state x="-1157" y="73" width="700" height="707" key="search.everywhere.popup" timestamp="1587780561892">
+    <state x="-1120" y="255" key="com.intellij.ide.util.TipDialog" timestamp="1589044276917">
       <screen x="-1600" y="0" width="1600" height="870" />
     </state>
-    <state x="-1157" y="73" width="700" height="707" key="search.everywhere.popup/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1587780561892" />
+    <state x="-1120" y="255" key="com.intellij.ide.util.TipDialog/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1589044276917" />
+    <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832/-1600.0.1600.870@0.0.1536.832" timestamp="1588812481268" />
+    <state x="461" y="244" key="com.intellij.ide.util.TipDialog/0.0.1536.832@0.0.1536.832" timestamp="1588356465944" />
+    <state x="-1157" y="73" width="700" height="707" key="search.everywhere.popup" timestamp="1589046845278">
+      <screen x="-1600" y="0" width="1600" height="870" />
+    </state>
+    <state x="-1157" y="73" width="700" height="707" key="search.everywhere.popup/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1589046845278" />
     <state x="425" y="70" width="672" height="676" key="search.everywhere.popup/0.0.1536.832@0.0.1536.832" timestamp="1587373320854" />
   </component>
 </project>

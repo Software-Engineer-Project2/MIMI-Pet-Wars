@@ -5,65 +5,86 @@
     <title>Make Appointment</title>
 </head>
 <body>
-    {% extends "base_chinese.html" %}
+    {% extends "customer_loggedin_base.html" %}
     {% block content %}
-    <h1 align="center">请填写以下信息</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            <div id="pet">
-            {{ form.pet.label }}<br>{{ form.pet }}</div>
-			{% for error in form.pet.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
 
-        <p>
-            <div id="ownerphone">
-            {{ form.ownerphone.label }}<br>{{form.ownerphone}}</div>
-            {% for error in form.ownerphone.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-validation">
 
-        <p>
-            <div id="type">
-            {{ form.type.label }}<br>{{ form.type }}</div>
-            {% for error in form.type.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
 
-        <p>
-            <div id="chooseposition">
-            {{ form.chooseposition.label }}<br>{{ form.chooseposition }}</div>
-            {% for error in form.chooseposition.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        <p>
-            <div id="datetime">
-            {{ form.datetime.label }}<br>{{ form.datetime }}</div>
-			{% for error in form.datetime.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        <p>
-            <div id="doctor">
-            {{ form.doctor.label }}<br>{{ form.doctor }}</div>
-			{% for error in form.doctor.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        <p>
-            <div id="otherdescription">
-            {{ form.otherdescription.label }}<br>{{ form.otherdescription }}</div>
-            {% for error in form.otherdescription.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-        </p>
-        {{ form.submit.label }}<br>{{ form.submit }}<br>
-    </form>
+
+
+                                <h1 align="center">请填写一些信息</h1>
+
+                                <form action='/Make Appointment' method="POST">
+                                    <p>
+                                        <div id="pet">
+                                    <label>宠物名称(请双击空格从您的宠物中选择一个) </label><br>
+                                    <input list="petname" name="pet name" >
+                                    <datalist id="petname">
+                                        {% for pet in pets %}
+                                        <option value="{{pet.Pname}}"><br>
+                                        {% endfor %}<br>
+                                    </datalist><br></div>
+                                    </p>
+
+                                    <p>
+                                        <div id="ownerphone">
+                                        <label>顾客电话： </label><br>
+                                    <input type="text" name="phone"><br></div>
+
+                                    </p>
+
+                                    <p>
+                                        <div id="type">
+                                        <label>类型: </label><br>
+                                    <input type="radio" name="type" value="0">Emergency<br>
+                                    <input type="radio" name="type" value="1">Standard<br></div>
+
+                                    </p>
+
+                                    <p>
+                                        <div id="chooseposition">
+                                        <label>选择位置: </label><br>
+                                    <input list="locationlist" name="location">
+                                    <datalist id="locationlist">
+                                        <option value="Shanghai">
+                                        <option value="Beijing">
+                                        <option value="Chengdu">
+                                    </datalist><br></div>
+                                    </p>
+                                    <p>
+                                        <div id="datetime">
+                                        <label>输入日期时间(格式:YYYY-MM-DD HH:MM): </label><br>
+                                    <input type="text" name="date"></div>
+                                    </p>
+                                    <p>
+                                        <div id="doctor">
+                                        <label>选择医生: </label><br>
+                                        {% for d in doctors%}
+                                        <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
+                                        {% endfor %}
+                                  <br></div>
+
+                                    </p>
+                                    <p>
+                                        <div id="otherdescription">
+                                        <label>其他信息: </label><br>
+                                    <input type="text" name="information"><br></div>
+                                    </p>
+                                    <input type="submit" value="Submit">}<br>
+                                </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endblock %}
 </body>
 </html>

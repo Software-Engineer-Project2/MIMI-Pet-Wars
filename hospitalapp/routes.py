@@ -1138,34 +1138,85 @@ def logoutEmployee():
 
 @app.route('/Make Appointment', methods=['GET', 'POST'])
 def make_appointment():
-    form = MakeAppointment()
-    if form.validate_on_submit():
-        pet = Pet.query.filter(Pet.id == int(form.pet.data)).first()
-        appointment = Appointment(apppetter=pet, Atype=form.type.data,
-                                  Adoc=form.doctor.data, Alocation=form.chooseposition.data, Adate=form.datetime.data,
-                                  Ainfo=form.otherdescription.data,
-                                  Acomplete='0', Astart='0', Ostatus="0", Hstatus='0')
+    user = session.get("USERNAME")
+    user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+    pets = Pet.query.filter(Pet.Powner==user_in_db.id).all()
+    doctors = Doctor.query.all()
+    petnames=[]
+    docnames=[]
+    for p in pets:
+        petnames.append(p.Pname)
+    for d in doctors:
+        docnames.append(d.Dname)
+    if request.method == "GET":
+        return render_template('make_appointment_customer.html', title='Make Appointment', pets=pets, doctors=doctors)
+    else:
+
+        pet_name = request.form["pet name"]
+        if pet_name not in petnames:
+            flash("Please select correct pet name")
+            return redirect(url_for("make_appointment"))
+        else:
+            pet = Pet.query.filter(Pet.Pname == pet_name).first()
+
+        date_str = request.form['date']
+        date_str = date_str + ':59'
+        date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+        type = request.form['type']
+        docname = request.form['doctor']
+        if docname not in docnames:
+            flash("Please select correct doctor name")
+            return redirect(url_for("make_appointment"))
+        else:
+            doctor = Doctor.query.filter(Doctor.Dname == docname).first()
+        appointment = Appointment(apppetter=pet, Atype=type,
+                                  adoctor=doctor, Alocation=request.form["location"], Adate=date,
+                                  Ainfo=request.form["information"], Acomplete='0', Astart='0', Ostatus="0", Hstatus='0')
         db.session.add(appointment)
         db.session.commit()
         return redirect(url_for('customer_my_appointments'))
 
-    return render_template('make_appointment_customer.html', title='Make Appointment', form=form)
 
 
 @app.route('/Make Appointment_chinese', methods=['GET', 'POST'])
 def make_appointment_chinese():
-    form = MakeAppointment_chinese()
-    if form.validate_on_submit():
-        pet = Pet.query.filter(Pet.id == int(form.pet.data)).first()
-        appointment = Appointment(apppetter=pet, Atype=form.type.data,
-                                  Adoc=form.doctor.data, Alocation=form.chooseposition.data, Adate=form.datetime.data,
-                                  Ainfo=form.otherdescription.data,
-                                  Acomplete='0', Astart='0')
+    user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+    pets = Pet.query.filter(Pet.Powner == user_in_db.id).all()
+    doctors = Doctor.query.all()
+    petnames = []
+    docnames = []
+    for p in pets:
+        petnames.append(p.Pname)
+    for d in doctors:
+        docnames.append(d.Dname)
+    if request.method == "GET":
+        return render_template('make_appointment_customer_chineses.html', title='Make Appointment', pets=pets, doctors=doctors)
+    else:
+
+        pet_name = request.form["pet name"]
+        if pet_name not in petnames:
+            flash("Please select correct pet name")
+            return redirect(url_for("make_appointment"))
+        else:
+            pet = Pet.query.filter(Pet.Pname == pet_name).first()
+
+        date_str = request.form['date']
+        date_str = date_str + ':59'
+        date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+        type = request.form['type']
+        docname = request.form['doctor']
+        if docname not in docnames:
+            flash("Please select correct doctor name")
+            return redirect(url_for("make_appointment"))
+        else:
+            doctor = Doctor.query.filter(Doctor.Dname == docname).first()
+        appointment = Appointment(apppetter=pet, Atype=type,
+                                  adoctor=doctor, Alocation=request.form["location"], Adate=date,
+                                  Ainfo=request.form["information"], Acomplete='0', Astart='0', Ostatus="0",
+                                  Hstatus='0')
         db.session.add(appointment)
         db.session.commit()
         return redirect(url_for('loggedin_home_customer_chinese'))
-
-    return render_template('make_appointment_customer_chinese.html', title='Make Appointment', form=form)
 
 
 @app.route('/Add Pet information', methods=['GET', 'POST'])
@@ -1238,11 +1289,14 @@ def customer_edit_pet(id):
     if not session.get("USERNAME") is None:
         if request.method == 'GET':
             user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-            pet = Pet.query.filter(Pet.Powner == user_in_db.id).first()
+            pet = Pet.query.filter(Pet.id==id).first()
             return render_template('customer_edit_pet.html', pet=pet)
         else:
             user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
             pet = Pet.query.filter(Pet.Powner == user_in_db.id).first()
+            if not request.form['age'] :
+                flash("Please enter petname")
+                return redirect(url_for("customer_my_pets"))
             pet.Pname = request.form['name']
             pet.Page = request.form['age']
             pet.Psex = request.form['gender']
