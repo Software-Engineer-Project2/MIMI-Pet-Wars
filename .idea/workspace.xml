@@ -20,18 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_checkin_chinese.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_inpatient_chinese.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_outpatient_chinese.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pet.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/editproduct_chinese.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_completed_chinese.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_operation_chinese.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_checkin_view_chinese.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/templates/adminproduct_chinese.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/adminproduct_chinese.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/base_chinese.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/base_chinese.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_checkin_chinese.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appo_checkin_chinese.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_appointment_chinese.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_appointment_chinese.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -220,6 +217,10 @@
       <screen x="-1600" y="0" width="1600" height="870" />
     </state>
     <state x="-1208" y="96" key="#Options/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1589053445468" />
+    <state x="563" y="198" key="#Web_Browsers" timestamp="1589137455121">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="563" y="198" key="#Web_Browsers/0.0.1536.824@0.0.1536.824" timestamp="1589137455121" />
     <state x="740" y="153" key="#__init__" timestamp="1584432362368">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -254,25 +255,25 @@
     <state x="644" y="220" key="FileChooserDialogImpl/0.0.1536.832/-1600.0.1600.870@0.0.1536.832" timestamp="1588794245792" />
     <state x="644" y="220" key="FileChooserDialogImpl/0.0.1536.832@0.0.1536.832" timestamp="1587366300871" />
     <state x="805" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584444109593" />
-    <state width="1515" height="195" key="GridCell.Tab.0.bottom" timestamp="1589136420497">
+    <state width="1515" height="195" key="GridCell.Tab.0.bottom" timestamp="1589138670811">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589136420497" />
+    <state width="1515" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589138670811" />
     <state width="1360" height="265" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
-    <state width="1515" height="195" key="GridCell.Tab.0.center" timestamp="1589136420497">
+    <state width="1515" height="195" key="GridCell.Tab.0.center" timestamp="1589138670811">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="195" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589136420497" />
+    <state width="1515" height="195" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589138670811" />
     <state width="1360" height="265" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
-    <state width="1515" height="195" key="GridCell.Tab.0.left" timestamp="1589136420497">
+    <state width="1515" height="195" key="GridCell.Tab.0.left" timestamp="1589138670810">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="195" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589136420497" />
+    <state width="1515" height="195" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589138670810" />
     <state width="1360" height="265" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788473" />
-    <state width="1515" height="195" key="GridCell.Tab.0.right" timestamp="1589136420497">
+    <state width="1515" height="195" key="GridCell.Tab.0.right" timestamp="1589138670811">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589136420497" />
+    <state width="1515" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589138670811" />
     <state width="1360" height="265" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
     <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1586058659733">
       <screen x="0" y="0" width="1536" height="832" />

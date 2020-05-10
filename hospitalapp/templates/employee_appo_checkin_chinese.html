@@ -31,11 +31,11 @@
                         <td align="center">{{ea.Adate}}</td>
                         <td align="center">{{ ea.Ainfo }}</td>
                         <td align="center">
-                            <button  onclick="window.location.href='/employee_appo_checkin/view_appo/{{ea.id}}'" >查看</button>
+                            <button  onclick="window.location.href='/employee_appo_checkin/view_appo_chinese/{{ea.id}}'" >查看</button>
 
                         </td>
                         <td align="center">
-                            <a href="{{ url_for('employee_checkin', id=ea.id) }}">
+                            <a href="{{ url_for('employee_checkin_chinese', id=ea.id) }}">
             <i class="fa fa-trash"></i> 检查
             </a>
 

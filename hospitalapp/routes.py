@@ -481,6 +481,9 @@ def employee_appo_checkin_chinese():
         return redirect(url_for('employee_mainpage'))
 
 
+
+
+
 @app.route('/employee_appo_checkin/view_appo/<id>', methods=['GET', 'POST'])
 def employee_checkin_view(id):
     if not session.get("USERNAME") is None:
@@ -494,12 +497,33 @@ def employee_checkin_view(id):
         return redirect(url_for('employee_mainpage'))
 
 
+@app.route('/employee_appo_checkin/view_appo_chinese/<id>', methods=['GET', 'POST'])
+def employee_checkin_view_chinese(id):
+    if not session.get("USERNAME") is None:
+        customer = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        appoint = Appointment.query.filter(Appointment.id == id).first()
+        pet = Pet.query.filter(Pet.id == appoint.Apet).first()
+        doc = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
+        return render_template('employee_checkin_view_chinese.html', appoint=appoint, customer=customer, pet=pet, doc=doc)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
 @app.route('/employee_appo_checkin/checkin_appo/<id>', methods=['GET', 'POST'])
 def employee_checkin(id):
     appoint = Appointment.query.get_or_404(id)
     appoint.Astart = '1'
     db.session.commit()
     return redirect(url_for('employee_appo_checkin'))
+
+
+@app.route('/employee_appo_checkin/checkin_appo_chinese/<id>', methods=['GET', 'POST'])
+def employee_checkin_chinese(id):
+    appoint = Appointment.query.get_or_404(id)
+    appoint.Astart = '1'
+    db.session.commit()
+    return redirect(url_for('employee_appo_checkin_chinese'))
 
 
 @app.route('/employee_appo_outpatient', methods=['GET', 'POST'])
@@ -695,6 +719,23 @@ def employee_appo_operation():
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
+@app.route('/employee_appo_operation_chinese', methods=['GET', 'POST'])
+def employee_appo_operation_chinese():
+    if not session.get("USERNAME") is None:
+        pets = Pet.query.filter().all()
+        customers = Customer.query.filter().all()
+        appoints = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
+                                            Appointment.Ostatus == '2').all()  # type-1 complete-0 - Standard Appointments not checkin
+        operations = Operation.query.filter().all()
+        print(operations)
+        print(appoints)
+        print(pets)
+        return render_template('employee_appo_operation_chinese.html', title='Display In-patient appointments',
+                               appoints=appoints, pets=pets, customers=customers, operations=operations)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
 
 @app.route('/employee_appo_operation/complete operation/<id>', methods=['GET', 'POST'])
 def employee_operation_complete(id):
@@ -717,6 +758,20 @@ def employee_appo_completed():
         appointments = Appointment.query.filter(
             Appointment.Acomplete == '1').all()  # type-1 complete-0 - Standard Appointments not checkin
         return render_template('employee_appo_completed.html', title='Display appointment completed',
+                               appointments=appointments, pets=pets, customers=customers)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/employee_appo_completed_chinese', methods=['GET', 'POST'])
+def employee_appo_completed_chinese():
+    if not session.get("USERNAME") is None:
+        pets = Pet.query.filter().all()
+        customers = Customer.query.filter().all()
+        appointments = Appointment.query.filter(
+            Appointment.Acomplete == '1').all()  # type-1 complete-0 - Standard Appointments not checkin
+        return render_template('employee_appo_completed_chinese.html', title='Display appointment completed',
                                appointments=appointments, pets=pets, customers=customers)
     else:
         flash("User needs to either login or signup first")
@@ -1023,6 +1078,15 @@ def deleteproduct(id):
     return redirect(url_for('listproduct'))
 
 
+@app.route('/deleteproduct_chinese/<id>', methods=['GET', 'POST'])
+def deleteproduct_chinese(id):
+    good = Good.query.get_or_404(id)
+    db.session.delete(good)
+    db.session.commit()
+    # flash("Delete Product")
+    return redirect(url_for('listproduct_chinese'))
+
+
 @app.route('/editproduct/<id>', methods=['GET', 'POST'])
 def editproduct(id):
     form = AddProductForm()
@@ -1042,6 +1106,25 @@ def editproduct(id):
         return redirect(url_for('listproduct'))
     return render_template('editproduct.html', form=form)
 
+
+@app.route('/editproduct_chinese/<id>', methods=['GET', 'POST'])
+def editproduct_chinese(id):
+    form = AddProductForm_chinese()
+    good = Good.query.get_or_404(id)
+    form.Gid.data = good.id
+    if form.validate_on_submit():
+        if request.method == 'POST' and 'photo' in request.files:
+            filename = photos.save(request.files['photo'])
+            file_url = photos.get_basename(filename)
+            good.Gname = form.Gname.data
+            good.Ginfo = form.Ginfo.data
+            good.Gprice = form.Gprice.data
+            good.Gadddate = form.Gadddate.data
+            good.Gimage = file_url
+            db.session.commit()
+            # flash("Add product successfully")
+        return redirect(url_for('listproduct_chinese'))
+    return render_template('editproduct_chinese.html', form=form)
 
 @app.route('/shoppage', methods=['GET', 'POST'])
 def shoppage():
