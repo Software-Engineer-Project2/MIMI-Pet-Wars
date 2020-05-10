@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Pets</title>
+</head>
+<body>
+{% block content %}
+
+ <form action='/employee_doctorss/add_doctor' method="POST">
+    <label>Doctor Name: </label>
+    <input type="text" name="name"><br>
+       <label> Doctor Department: </label>
+    <input type="text" name="department" ><br>
+    <label>Doctor Phone: </label>
+     <input type="text" name="phone" ><br>
+    <label>Doctor Level: </label>
+     <input type="text" name="level"><br>
+     <label>Doctor Information: </label>
+     <input type="text" name="info"><br>
+     <label>Doctor Hospital: </label>
+     {% for hospital in hospitals %}
+     <input type="radio" name="hospital" value="{{hospital.id}}">{{hospital.Hname}}<br>
+     {% endfor %}
+
+  <input type="submit" value="Submit">
+   </form>
+{% endblock %}
+</body>
+</html>
