@@ -97,21 +97,11 @@
                             <li><a href="{{ url_for('customer_posts') }}">My Posts</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-notebook menu-icon"></i> <span class="nav-text">Store</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            
-                            <li><a href="{{ url_for('shoppage') }}">View Products</a></li>
-                            <li><a href="{{ url_for('shopcart') }}">Shop Cart</a></li>
-                            <li><a href="{{ url_for('orders') }}">Orders</a></li>
-                        </ul>
-                    </li>
+                    
                     <br><br><br>
                     <br><br><br>
                     <li>
-                        <a href="{{url_for('logoutCustomer')}}" class="btn mb-1 btn-outline-primary">Log out</a>
+                        <button type="button" class="btn mb-1 btn-outline-primary">Log out</button>
                     </li>
                 </ul>
             </div>

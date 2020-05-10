@@ -1,7 +1,8 @@
-{% extends 'customer_loggedin_base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
-
+<a href="{{ url_for('shopcart') }}">Shop Cart</a><br>
+<a href="{{ url_for('orders') }}">Order</a>
 
 <table style="width: 30%; margin-left: 400px; font-size: larger; color: teal; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 	<tr>

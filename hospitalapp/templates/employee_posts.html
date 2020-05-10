@@ -1,84 +1,57 @@
 {% extends "employee_loggedin_base.html" %}
 {% block content %}
 <strong>Click question to check detail and answer it.</strong><br>
+<form action="{{ url_for('employee_posts') }}" method="post" novalidate role="form" enctype="multipart/form-data">
+    {% if unread_posts %}
+        <table class="table">
+            <caption><h3>Unanswered Questions</h3></caption>
+            <thead>
+            <tr>
+                <th width="40%">Topic</th>
+                <th width="40%">Date</th>
+                <th>Answer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for unread_post in unread_posts %}
+            <tr onclick="location.href='/employee_post_detail/{{unread_post.id}}'">
+                <td>{{unread_post.Ptopic}}</td>
+                <td>{{unread_post.Pdate}}</td>
+                <td><a onclick="location.href='/employee_post_detail/{{unread_post.id}}'"> Answer </a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+    <p>No posts</p>
+    {% endif %}
+    {% if read_posts %}
+        <table class="table">
+            <caption><h3>Read Posts</h3></caption>
+            <thead>
+            <tr>
+                <th width="40%">Topic</th>
+                <th width="40%">Date</th>
+                <th>View</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for read_post in read_posts%}
+            <tr >
+                <td>{{read_post.Ptopic}}</td>
+                <td>{{read_post.Pdate}}</td>
+                <td><a onclick="location.href='/employee_post_detail/{{read_post.id}}'">View</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
+    {% else %}
+    <p>No read posts</p>
 
+    {% endif %}
 
+</form>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-        <div class="card-body">
-            {% if unread_posts %}
-            <div class="card-title">
-               <h4>Unread Posts</h4>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th >Topic</th>
-                            <th >Date</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for unread_post in unread_posts %}
-                        <tr onclick="location.href='/employee_post_detail/{{unread_post.id}}'">
-                            <td>{{unread_post.Ptopic}}</td>
-                            <td>{{unread_post.Pdate}}</td>
-                            
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            {% else %}
-            <div class="card-title">
-                <h4>No Post!</h4>
-             </div>
-            {% endif %}
-        </div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                   {% if read_posts %}
-                    <h4 class="card-title">Read Posts:</h4>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered zero-configuration">
-                            <thead>
-                                <tr>
-                                    <th >Topic</th>
-                                    <th >Date</th>
-                                    <th>View</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    {% for read_post in read_posts%}
-                                    <tr >
-                                        <td>{{read_post.Ptopic}}</td>
-                                        <td>{{read_post.Pdate}}</td>
-                                        <td><a onclick="location.href='/employee_post_detail/{{read_post.id}}'"><span class="label gradient-1 btn-rounded">View</span></a></td>
-                                    </tr>
-                                    {% endfor %}
-                                    </tbody>
-                           
-                        </table>
-                    </div>
-                    {% else %}
-                    <h4 class="card-title">No read posts!</h4>
-                     {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}

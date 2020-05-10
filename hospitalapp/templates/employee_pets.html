@@ -1,57 +1,45 @@
 {% extends 'employee_loggedin_base.html' %}
 {% block content %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                       {% if pets %}
-                        <h4 class="card-title">Pets:</h4>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered zero-configuration">
-                                <thead>
-                                    <tr>
-                                        <th>Pet ID</th>
-                                        <th>Name</th>
-                                        <th>Owner </th>
-                                        <th>Gender </th>
-                                        <th>Type </th>
-                                        <th>Age </th>
-                                        <th>Information</th>
-                                        <th>Delete</th>
-                    
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                   {% for pet in pets%}
-                                         {% for customer in customers%}
-                                            {%  if pet.Powner==customer.id %}
-                                         <tr>
-                                            <td align="center">{{pet.id}}</td>
-                                            <td align="center">{{pet.Pname}}</td>
-                                             <td align="center">{{customer.Cname}}</td>
-                                            <td align="center">{{pet.Psex}}</td>
-                                            <td align="center">{{pet.Pspecies}}</td>
-                                             <td align="center">{{pet.Page}}</td>
-                    
-                                            <td align="center">{{ pet.Pinfo }}</td>
-                                             <td align="center"><button  onclick="window.location.href='/employee_pets/delete_pet/{{pet.id}}'" >Delete</button></td>
-                                         </tr>
-                                            {% endif %}
-                                         {% endfor %}
-                                   {% endfor %}
-                                    </tbody>
-                               
-                            </table>
-                        </div>
-                        {% else %}
-                        <h4 class="card-title">No pets!</h4>
-                         {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<br><br><br><br><br><br><br>
+
+    {% if pets %}
+		Outpatient Appointments:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Pet ID</th>
+                    <th>Name</th>
+                    <th>Owner </th>
+                    <th>Gender </th>
+                    <th>Type </th>
+                    <th>Age </th>
+                    <th>Information</th>
+                    <th>Delete</th>
+
+                </tr>
+               {% for pet in pets%}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+                        <td align="center">{{pet.id}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                         <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Psex}}</td>
+                        <td align="center">{{pet.Pspecies}}</td>
+                         <td align="center">{{pet.Page}}</td>
+
+                        <td align="center">{{ pet.Pinfo }}</td>
+                         <td align="center"><button  onclick="window.location.href='/employee_pets/delete_pet/{{pet.id}}'" >Delete</button></td>
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+               {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------No pets !</p>
+	{% endif %}
+
 
 {% endblock %}

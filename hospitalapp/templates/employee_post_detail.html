@@ -1,41 +1,18 @@
 {% extends"employee_loggedin_base.html" %}
 
 {% block content %}
+<h3>Post: </h3>
+    Post Topic: {{post.Ptopic}}<br>
+    Post Content: {{post.Pcontent}}<br>
+    {% if answer %}
+    {% for a in answer%}
+    <h3>Answer: </h3>
+        Answer Content: {{a.Acontent}}<br>
+      Answer Time: {{a.Adate}}
+    {% endfor %}
+    {% else %}
+        <h3>Please answer the post.</h3>
+        <button onclick="window.location.href='/employee_posts/employee_answer_post/{{post.id}}'">Answer</button>
 
-
-    <div class="container-fluid">
-        <!-- row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="card-title"><h1>< {{post.Ptopic}} ></h1></h1>
-                        <div class="bootstrap-media">
-                            <div class="media">
-                                
-                                <div class="media-body">
-                                    
-                                    <h3>{{post.Pcontent}}</h3>
-                                    <small align="right">{{post.Pdate}}</small>
-                                    <br/><br/>
-                                        {% if answer %}
-                                            <small>Answer</small>
-                                            {% for a in answer %}
-                                                <h4>{{a.Acontent}}</h4>
-                                                <small align="right">{{a.Adate}}</small>
-                                            {% endfor %}
-
-                                        {% else %}
-
-                                            <h4>Please answer the post.</h4>
-                                            <button onclick="window.location.href='/employee_posts/employee_answer_post/{{post.id}}'">Answer</button>
-                                        {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>  
+    {% endif %}
 {% endblock %}
