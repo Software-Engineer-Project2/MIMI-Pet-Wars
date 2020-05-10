@@ -1,0 +1,148 @@
+{% extends 'base_chinese.html' %}
+{% block title %}
+    <title>{{title}}</title>
+{% endblock %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if Iappointments %}
+		住院预约:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>预约单号</th>
+                    <th>主人</th>
+                    <th>宠物 </th>
+                    <th>位置 </th>
+                    <th>日期 </th>
+                    <th>信息 </th>
+                    <th>手术状态</th>
+                    <th>住院状态</th>
+                    <th>出院</th>
+                </tr>
+            {% for a in Iappointments%}
+               {% for pet in pets%}
+                  {%  if a.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+
+                        <td align="center">{{a.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{a.Alocation}}</td>
+                        <td align="center">{{a.Adate}}</td>
+                        <td align="center">{{ a.Ainfo }}</td>
+                        <td align="center">{{a.OperationStatus}}</td>
+                        <td align="center">{{ a.HospitalizationStatus }}</td>
+                        <td align="center">
+ <a href="{{ url_for('employee_inpatient_release', id=a.id) }}">
+             通知出院
+            </a>
+                        </td>
+
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------没有预约需要通知出院!</p>
+	{% endif %}
+
+{% if Rappointments %}
+		出院预约:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>预约单号</th>
+                    <th>主人</th>
+                    <th>宠物 </th>
+                    <th>位置 </th>
+                    <th>日期 </th>
+                    <th>信息 </th>
+                    <th>手术状态</th>
+                    <th>住院状态</th>
+                    <th>完成 </th>
+                    <th>释放</th>
+                </tr>
+            {% for a in Rappointments%}
+               {% for pet in pets%}
+                  {%  if a.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+
+                        <td align="center">{{a.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{a.Alocation}}</td>
+                        <td align="center">{{a.Adate}}</td>
+                        <td align="center">{{ a.Ainfo }}</td>
+                        <td align="center">{{a.OperationStatus}}</td>
+                        <td align="center">{{ a.HospitalizationStatus }}</td>
+                         <td align="center">
+ <a href="{{ url_for('employee_inpatient_releasecomplete', id=a.id) }}">
+             完成
+            </a>
+                        </td>
+
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------没有预约需要出院!</p>
+	{% endif %}
+
+{% if Wappointments %}
+		等待允许的预约号:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>预约单号</th>
+                    <th>主人/th>
+                    <th>宠物 </th>
+                    <th>位置 </th>
+                    <th>日期 </th>
+                    <th>信息 </th>
+                    <th>手术状态</th>
+                    <th>住院状态</th>
+                </tr>
+            {% for a in Wappointments%}
+               {% for pet in pets%}
+                  {%  if a.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+
+                        <td align="center">{{a.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{a.Alocation}}</td>
+                        <td align="center">{{a.Adate}}</td>
+                        <td align="center">{{ a.Ainfo }}</td>
+                        <td align="center">{{a.OperationStatus}}</td>
+                        <td align="center">{{ a.HospitalizationStatus }}</td>
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------没有预约单需要允许!</p>
+	{% endif %}
+{% endblock %}

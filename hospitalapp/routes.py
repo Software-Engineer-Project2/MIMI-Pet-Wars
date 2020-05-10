@@ -459,6 +459,28 @@ def employee_appo_checkin():
         return redirect(url_for('employee_mainpage'))
 
 
+@app.route('/employee_appo_checkin_chinese', methods=['GET', 'POST'])
+def employee_appo_checkin_chinese():
+    if not session.get("USERNAME") is None:
+
+        pets = Pet.query.filter().all()
+        customers = Customer.query.filter().all()
+        s_appointments = Appointment.query.filter(Appointment.Atype == '1',
+                                                  Appointment.Astart == '0',
+                                                  Appointment.Acomplete == '0').all()  # type-1 complete-0 - Standard Appointments not checkin
+        print(s_appointments)
+        e_appointments = Appointment.query.filter(Appointment.Atype == '0',
+                                                  Appointment.Astart == '0', Appointment.Acomplete == '0').all()
+        # type-1 complete-0 - Standard Appointments not checkin
+        print(e_appointments)
+        return render_template('employee_appo_checkin_chinese.html', title='Display appointment not checkin yet',
+                               s_appointments=s_appointments,
+                               e_appointments=e_appointments, pets=pets, customers=customers)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
 @app.route('/employee_appo_checkin/view_appo/<id>', methods=['GET', 'POST'])
 def employee_checkin_view(id):
     if not session.get("USERNAME") is None:
@@ -500,6 +522,31 @@ def employee_appo_outpatient():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/employee_appo_outpatient', methods=['GET', 'POST'])
+def employee_appo_outpatient_chinese():
+    if not session.get("USERNAME") is None:
+        pets = Pet.query.filter().all()
+        customers = Customer.query.filter().all()
+        appointments = Appointment.query.filter(Appointment.Astart == '1',
+                                                Appointment.Acomplete == '0').all()  # type-1 complete-0 - Standard Appointments not checkin
+        appointments2 = Appointment.query.filter(Appointment.Astart == '1',
+                                                 Appointment.Ostatus == '3').all()
+        appointments3 = Appointment.query.filter(Appointment.Astart == '1',
+                                                 Appointment.Hstatus == '5').all()
+        appointments.append(appointments2)
+        appointments.append(appointments3)
+        print(appointments)
+        # type-1 complete-0 - Standard Appointments not checkin
+        return render_template('employee_appo_outpatient_chinese.html', title='Display appointment not checkin yet',
+                               appointments=appointments, pets=pets, customers=customers)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
+
 
 
 @app.route('/employee_appo_outpatient/complete/<id>', methods=['GET', 'POST'])
@@ -578,6 +625,26 @@ def employee_appo_inpatient():
         Wappointments = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
                                                  Appointment.Hstatus == '3').all()
         return render_template('employee_appo_inpatient.html', title='Display In-patient appointments',
+                               Iappointments=Iappointments, Rappointments=Rappointments, Wappointments=Wappointments,
+                               pets=pets, customers=customers)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+
+@app.route('/employee_appo_inpatient', methods=['GET', 'POST'])
+def employee_appo_inpatient_chinese():
+    if not session.get("USERNAME") is None:
+        pets = Pet.query.filter().all()
+        customers = Customer.query.filter().all()
+        Iappointments = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
+                                                 Appointment.Hstatus == '2').all()  # type-1 complete-0 - Standard Appointments not checkin
+        Rappointments = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
+                                                 Appointment.Hstatus == '4').all()  # type-1 complete-0 - Standard Appointments not checkin
+        # type-1 complete-0 - Standard Appointments not checkin
+        Wappointments = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
+                                                 Appointment.Hstatus == '3').all()
+        return render_template('employee_appo_inpatient_chinese.html', title='Display In-patient appointments',
                                Iappointments=Iappointments, Rappointments=Rappointments, Wappointments=Wappointments,
                                pets=pets, customers=customers)
     else:

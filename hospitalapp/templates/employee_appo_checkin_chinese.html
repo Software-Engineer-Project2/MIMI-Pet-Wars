@@ -1,0 +1,106 @@
+{% extends 'base_chinese.html' %}
+{% block content %}
+<br><br><br><br><br><br><br>
+
+    {% if e_appointments %}
+		紧急预约:<br><hr>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>预约单号 </th>
+                    <th>主人 </th>
+                    <th>宠物 </th>
+                    <th>位置 </th>
+                    <th>日期 </th>
+                    <th>信息 </th>
+                    <th>查看</th>
+                    <th>检查 </th>
+                </tr>
+            {% for ea in e_appointments%}
+               {% for pet in pets%}
+                  {%  if ea.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+
+                        <td align="center">{{ea.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{ea.Alocation}}</td>
+                        <td align="center">{{ea.Adate}}</td>
+                        <td align="center">{{ ea.Ainfo }}</td>
+                        <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_checkin/view_appo/{{ea.id}}'" >查看</button>
+
+                        </td>
+                        <td align="center">
+                            <a href="{{ url_for('employee_checkin', id=ea.id) }}">
+            <i class="fa fa-trash"></i> 检查
+            </a>
+
+                        </td>
+
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>----------------没有紧急的预约 !</p>
+	{% endif %}
+
+    {% if s_appointments %}
+		标准预约:<br><hr>
+           <table class="table">
+                <tbody>
+                <tr>
+                    <th>预约单号</th>
+                    <th>主人</th>
+                    <th>宠物 </th>
+                    <th>位置 </th>
+                    <th>日期 </th>
+                    <th>信息 </th>
+                    <th>查看</th>
+                    <th>检查 </th>
+                </tr>
+            {% for sa in s_appointments%}
+               {% for pet in pets%}
+                  {%  if sa.Apet==pet.id %}
+                     {% for customer in customers%}
+                        {%  if pet.Powner==customer.id %}
+                     <tr>
+                        <form action='/employee_appo_checkin' method="POST">
+                        <td align="center">{{sa.id}}</td>
+                        <td align="center">{{customer.Cname}}</td>
+                        <td align="center">{{pet.Pname}}</td>
+                        <td align="center">{{sa.Alocation}}</td>
+                        <td align="center">{{sa.Adate}}</td>
+                        <td align="center">{{ sa.Ainfo }}</td>
+                        <td align="center">
+                            <button  onclick="window.location.href='/employee_appo_checkin/view_appo/{{sa.id}}'" >查看</button>
+
+                        </td>
+                        <td align="center">
+                              <a href="{{ url_for('employee_checkin', id=sa.id) }}">
+            <i class="fa fa-trash"></i> 检查
+            </a>
+
+                        </form>
+                     </tr>
+                        {% endif %}
+                     {% endfor %}
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+		<p>没有标准的预约!</p>
+    {% endif %}
+
+
+{% endblock %}
