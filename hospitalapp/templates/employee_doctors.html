@@ -1,42 +1,48 @@
 {% extends 'employee_loggedin_base.html' %}
 {% block content %}
-<br><br><br><br><br><br><br>
-<button  onclick="window.location.href='/employee_doctorss/add_doctor'" >Add a doctor</button><br>
 
-    {% if doctors %}
-		Outpatient Appointments:<br><hr>
-
-            <table class="table">
-                <tbody>
-                <tr>
-                    <th>Doctoe ID</th>
-                    <th>Name</th>
-                    <th>Phone </th>
-                    <th>Level </th>
-                    <th>Hospital </th>
-                    <th>Information </th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-               {% for d in doctors %}
-                     <tr>
-                        <td align="center">{{d.id}}</td>
-                        <td align="center">{{d.Dname}}</td>
-                         <td align="center">{{d.Dphone}}</td>
-                        <td align="center">{{d.Dlevel}}</td>
-                        <td align="center">{{d.Dhospital}}</td>
-                         <td align="center">{{d.Dinf}}</td>>
-                         <td align="center"><button  onclick="window.location.href='/employee_doctorss/edit_doctor/{{d.id}}'" >Edit</button></td>
-
-                         <td align="center"><button  onclick="window.location.href='/employee_doctors/delete_doctor/{{d.id}}'" >Delete</button></td>
-
-                     </tr>
-               {% endfor %}
-                </tbody>
-            </table>
-    {% else %}
-		<p>----------------No doctors !</p>
-	{% endif %}
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                       {% if doctors %}
+                        <h4 class="card-title">Doctors:</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>Doctoe ID</th>
+                                        <th>Name</th>
+                                        <th>Phone </th>
+                                        <th>Level </th>
+                                        <th>Hospital </th>
+                                        <th>Information </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                   {% for d in doctors %}
+                                         <tr>
+                                            <td align="center">{{d.id}}</td>
+                                            <td align="center">{{d.Dname}}</td>
+                                             <td align="center">{{d.Dphone}}</td>
+                                            <td align="center">{{d.Dlevel}}</td>
+                                            <td align="center">{{d.Dhospital}}</td>
+                                             <td align="center">{{d.Dinf}}</td>
+                                         </tr>
+                                   {% endfor %}
+                                    </tbody>
+                               
+                            </table>
+                        </div>
+                        {% else %}
+                        <h4 class="card-title">No doctors!</h4>
+                         {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

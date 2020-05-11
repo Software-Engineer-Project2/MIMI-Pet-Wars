@@ -8,19 +8,19 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="card-title"><h1>{{post.Ptopic}}</h1></h1>
+                        <h1 class="card-title"><h1>< {{post.Ptopic}} ></h1></h1>
                         <div class="bootstrap-media">
                             <div class="media">
                                 
                                 <div class="media-body">
                                     
-                                    <i><h3>{{post.Pcontent}}</h3></i>
+                                    <h3>{{post.Pcontent}}</h3>
                                     <small align="right">{{post.Pdate}}</small>
                                     <br/><br/>
                                         {% if answer %}
                                             <small>Answer</small>
                                             {% for a in answer %}
-                                                <i><h4>{{a.Acontent}}</h4></i>
+                                                <h4>{{a.Acontent}}</h4>
                                                 <small align="right">{{a.Adate}}</small>
                                             {% endfor %}
 
