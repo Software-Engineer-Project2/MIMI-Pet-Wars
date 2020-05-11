@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Pets</title>
+</head>
+<body>
+{% block content %}
+<h1>&nbsp</h1>
+
+{% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                {% if message %}
+                    <div class="alert alert-warning" role="alert">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+        {% if form and form.errors %}
+            {% for key, error in form.errors.items() %}
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+ <form action='/customer_profile' method="POST">
+    <label>Phone: </label>
+    <input type="text" name="phone" value="{{customer.Cphone}}"><br>
+       <label> Gender: </label><br>
+     {% if customer.Cgender=='0' %}
+    <input type="radio" name="gender" value="0" checked="checked">Male<br>
+    <input type="radio" name="gender" value="1">Female<br>
+     {% else %}
+     <input type="radio" name="gender" value="0">Male<br>
+    <input type="radio" name="gender" value="1"  checked="checked">Female<br>
+     {% endif %}
+
+    <label>Email: </label>
+     <input type="text" name="email" value="{{customer.Cemail}}"><br>
+  <input type="submit" value="Reset">
+   </form>
+{% endblock %}
+</body>
+</html>

@@ -60,6 +60,18 @@
                                 </div> -->
                                 <h2 class="text-center">Sign up</h2>
                                 <form method="post" class="mt-5 mb-5 login-input">
+    {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                {% if message %}
+                    <div class="alert alert-warning" role="alert">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+        {% if form and form.errors %}
+            {% for key, error in form.errors.items() %}
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
                                     {{ form.csrf_token}} <!-- render hidden token -->
                                     
                                             <div id="Cusername" class="form-group">

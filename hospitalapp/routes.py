@@ -1,6 +1,6 @@
 import os
 import time
-
+import re
 from datetime import datetime
 
 from flask import render_template, flash, redirect, url_for, session, request, abort
@@ -363,6 +363,52 @@ def loginEmployee():
         return redirect(url_for('loginEmployee'))
     return render_template('login_employee.html', title='Sign In', form=form)
 
+@app.route('/employee_profile', methods=['GET', 'POST'])
+def employee_profile():
+    if not session.get("USERNAME") is None:
+        emp = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
+        if request.method == 'GET':
+            return render_template('employee_profile.html', emp=emp)
+        else:
+            if validatePhone(request.form['phone'])==1:
+                emp.Ephone = request.form['phone']
+            else:
+                flash("Please enter an 11-digit mobile phone number starting with 1")
+                return redirect(url_for("employee_profile"))
+            if validateEmail(request.form['email'])==1:
+                emp.Eemail = request.form['email']
+            else:
+                flash("Please enter the correct email")
+                return redirect(url_for("employee_profile"))
+            emp.Egender = request.form['gender']
+            db.session.commit()
+            return redirect(url_for('loggedin_home_employee'))
+    else:
+        return redirect(url_for('loginEmployee'))
+@app.route('/customer_profile', methods=['GET', 'POST'])
+def customer_profile():
+    if not session.get("USERNAME") is None:
+        customer = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        if request.method == 'GET':
+            return render_template('customer_profile.html', customer=customer)
+        else:
+            if validatePhone(request.form['phone'])==1:
+                customer.Cphone = request.form['phone']
+            else:
+                flash("Please enter an 11-digit mobile phone number starting with 1")
+                return redirect(url_for("customer_profile"))
+            if validateEmail(request.form['email'])==1:
+                customer.Cemail = request.form['email']
+            else:
+                flash("Please enter the correct email")
+                return redirect(url_for("customer_profile"))
+            customer.Cgender = request.form['gender']
+            db.session.commit()
+            return redirect(url_for('loggedin_home_customer'))
+    else:
+        return redirect(url_for('loginCustomer'))
+
+
 
 @app.route('/loginEmployee_chinese', methods=['GET', 'POST'])
 def loginEmployee_chinese():
@@ -390,8 +436,19 @@ def signupEmployee():
             return redirect(url_for('signupEmployee'))
 
         passw_hash = generate_password_hash(form.Epassword.data)
-        employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=form.Ephone.data,
-                            Egender=form.Egender.data, Eemail=form.Eemail.data, Ehiredate=form.Ehiredate.data,
+        if validatePhone(form.Ephone.data) == 1:
+            phone = form.Ephone.data
+        else:
+            flash("Please enter an 11-digit mobile phone number starting with 1")
+            return redirect(url_for("signupEmployee"))
+
+        if validateEmail(form.Eemail.data) == 1:
+            email = form.Eemail.data
+        else:
+            flash("Please enter the correct email")
+            return redirect(url_for("signupEmployee"))
+        employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=phone,
+                            Egender=form.Egender.data, Eemail=email, Ehiredate=form.Ehiredate.data,
                             Epassword=passw_hash)
         db.session.add(employee)
         db.session.commit()
@@ -1097,8 +1154,19 @@ def signupCustomer():
             print("99999")
             return redirect(url_for('signupCustomer'))
         passw_hash = generate_password_hash(form.Cpassword.data)
+        if validatePhone(form.Cphone.data) == 1:
+            phone = form.Cphone.data
+        else:
+            flash("Please enter an 11-digit mobile phone number starting with 1")
+            return redirect(url_for("signupCustomer"))
+
+        if validateEmail(form.Cemail.data) == 1:
+            email = form.Cemail.data
+        else:
+            flash("Please enter the correct email")
+            return redirect(url_for("signupCustomer"))
         # customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data, password_hash=passw_hash)
-        customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data,
+        customer = Customer(Cname=form.Cusername.data, Cphone=phone, Cemail=email,
                             Cgender=form.Cgender.data, Cpassword=passw_hash)
         db.session.add(customer)
         db.session.commit()
@@ -1609,3 +1677,22 @@ def customer_appo_release(id):
             return redirect(url_for('customer_my_appointments'))
     else:
         return redirect(url_for('loginCustomer'))
+
+
+def validatePhone(str):
+    if len(str) != 11:
+        return False
+    elif str[0] != "1":
+        return False
+        # elif str
+    for i in str:
+        if i >= "0" or i <= "9":
+            return 1
+
+    return 0
+
+def validateEmail(email):
+    if len(email) > 7:
+        if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email) != None:
+            return 1
+    return 0
