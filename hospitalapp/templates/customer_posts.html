@@ -1,6 +1,7 @@
 {% extends "customer_loggedin_base.html" %}
 {% block content %}
-
+<strong>Any questions? </strong>
+      <button  onclick="window.location.href='{{url_for('customer_add_post_chinese')}}'">write post.</button>
 
 
 <form  action="{{ url_for('customer_posts') }}" method="post" novalidate role="form" enctype="multipart/form-data">

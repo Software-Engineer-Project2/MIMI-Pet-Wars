@@ -67,24 +67,28 @@
         <div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label">顾客</li>
+                    <li class="nav-label">雇员</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-grid menu-icon"></i><span class="nav-text">宠物</span>
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">预约单</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url_for('add_pet_information')}}">添加新宠物</a></li>
-                            <li><a href="{{ url_for('customer_my_pets')}}">我的宠物</a></li>
+                            <li><a href="{{url_for('employee_appo_checkin')}}">预约柜台</a></li>
+                            <li><a href="{{url_for('employee_appo_outpatient')}}">门诊部门</a></li>
+                            <li><a href="{{url_for('employee_appo_inpatient')}}">住院部门</a></li>
+                            <li><a href="{{url_for('employee_appo_operation')}}">手术部门</a></li>
+                            <li><a href="{{url_for('employee_appo_completed')}}">完成预约</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">预约单</span>
+                            <i class="icon-menu menu-icon"></i><span class="nav-text">列表</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url_for('make_appointment')}}">添加新预约</a></li>
-                            <li><a href="{{ url_for('customer_my_appointments')}}">我的预约</a></li>
+                            <li><a href="{{url_for('employee_pets')}}">宠物列表</a></li>
+                            <li><a href="{{url_for('employee_customers')}}">顾客列表</a></li>
+                            <li><a href="{{url_for('employee_doctors')}}">医生列表</a></li>
 
                         </ul>
                     </li>
@@ -93,25 +97,26 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">留言</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url_for('customer_add_post') }}">添加新留言</a></li>
-                            <li><a href="{{ url_for('customer_posts') }}">我的留言</a></li>
+
+                            <li><a href="{{url_for('employee_posts')}}">查看留言</a></li>
                         </ul>
                     </li>
+
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-notebook menu-icon"></i> <span class="nav-text">商店</span>
                         </a>
                         <ul aria-expanded="false">
-
-                            <li><a href="{{ url_for('shoppage') }}">查看货物</a></li>
-                            <li><a href="{{ url_for('shopcart') }}">购物篮</a></li>
-                            <li><a href="{{ url_for('orders') }}">货物</a></li>
+                            <li><a href="{{ url_for('addproduct') }}">添加新的货物</a></li>
+                            <li><a href="{{ url_for('listproduct') }}">管理货物</a></li>
                         </ul>
                     </li>
+
+
                     <br><br><br>
                     <br><br><br>
                     <li>
-                        <a href="{{url_for('logoutCustomer')}}" class="btn mb-1 btn-outline-primary">退出</a>
+                        <a href="{{url_for('logoutEmployee')}}" class="btn mb-1 btn-outline-primary">退出</a>
                     </li>
                 </ul>
             </div>

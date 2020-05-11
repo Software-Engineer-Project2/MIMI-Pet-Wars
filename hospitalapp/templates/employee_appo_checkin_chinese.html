@@ -1,0 +1,151 @@
+{% extends 'employee_loggedin_base_chinese.html' %}
+{% block content %}
+<head><link href="../static/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet"></head>
+
+
+<script src="../static/plugins/common/common.min.js"></script>
+<script src="../static/js/custom.min.js"></script>
+<script src="../static/js/settings.js"></script>
+<script src="../static/js/gleek.js"></script>
+<script src="../static/js/styleSwitcher.js"></script>
+
+<script src="../static/plugins/tables/js/jquery.dataTables.min.js"></script>
+<script src="../static/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="../static/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+
+<div class="container-fluid">
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-body">
+                     {% if e_appointments %}
+                      <h4 class="card-title">
+                        紧急预约:</h4>
+                      <div class="table-responsive">
+                        
+                          <table class="table table-striped table-bordered zero-configuration">
+                              <thead>
+                                 <tr>
+                                    <th>预约单号</th>
+                                    <th>主人</th>
+                                    <th>宠物 </th>
+                                    <th>位置 </th>
+                                    <th>日期 </th>
+                                    <th>信息 </th>
+                                    <th>查看</th>
+                                    <th>检查 </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                 {% for ea in e_appointments%}
+                                 {% for pet in pets%}
+                                    {%  if ea.Apet==pet.id %}
+                                       {% for customer in customers%}
+                                          {%  if pet.Powner==customer.id %}
+                                       <tr>
+                  
+                                          <td align="center">{{ea.id}}</td>
+                                          <td align="center">{{customer.Cname}}</td>
+                                          <td align="center">{{pet.Pname}}</td>
+                                          <td align="center">{{ea.Alocation}}</td>
+                                          <td align="center">{{ea.Adate}}</td>
+                                          <td align="center">{{ ea.Ainfo }}</td>
+                                          <td align="center">
+                                              <button  onclick="window.location.href='/employee_appo_checkin/view_appo/{{ea.id}}'" >查看</button>
+                  
+                                          </td>
+                                          <td align="center">
+                                              <a href="{{ url_for('employee_checkin', id=ea.id) }}">
+                                        检查</a>
+                  
+                                          </td>
+                  
+                                       </tr>
+                                          {% endif %}
+                                       {% endfor %}
+                                    {% endif %}
+                                 {% endfor %}
+                              {% endfor %}
+                              </tbody>
+                              
+                          </table>
+                        
+                      </div>
+                      {% else %}
+                      <h4 class="card-title">
+                        没有紧急预约 !</h4>
+	                  {% endif %}
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="row">
+         <div class="col-12">
+             <div class="card">
+                 <div class="card-body">
+                  {% if s_appointments %}
+                     <h4 class="card-title">标准预约:</h4>
+                     <div class="table-responsive">
+                        
+                        
+                         <table class="table table-striped table-bordered zero-configuration">
+                             <thead>
+                                <tr>
+                                   <th>预约单号</th>
+                                   <th>主人</th>
+                                   <th>宠物 </th>
+                                   <th>位置 </th>
+                                   <th>日期 </th>
+                                   <th>信息 </th>
+                                   <th>查看</th>
+                                   <th>检查 </th>
+                               </tr>
+                             </thead>
+                             <tbody>
+                              {% for sa in s_appointments%}
+                              {% for pet in pets%}
+                                 {%  if sa.Apet==pet.id %}
+                                    {% for customer in customers%}
+                                       {%  if pet.Powner==customer.id %}
+                                    <tr>
+                                       <form action='/employee_appo_checkin' method="POST">
+                                       <td align="center">{{sa.id}}</td>
+                                       <td align="center">{{customer.Cname}}</td>
+                                       <td align="center">{{pet.Pname}}</td>
+                                       <td align="center">{{sa.Alocation}}</td>
+                                       <td align="center">{{sa.Adate}}</td>
+                                       <td align="center">{{ sa.Ainfo }}</td>
+                                       <td align="center">
+                                           <button  onclick="window.location.href='/employee_appo_checkin/view_appo/{{sa.id}}'" >查看</button>
+               
+                                       </td>
+                                       <td align="center">
+                                             <a href="{{ url_for('employee_checkin', id=sa.id) }}">检查</a>
+                           </a>
+               
+                                       </form>
+                                    </tr>
+                                       {% endif %}
+                                    {% endfor %}
+                                 {% endif %}
+                              {% endfor %}
+                           {% endfor %}
+                             </tbody>
+                             
+                         </table>
+                         
+                     </div>
+                     {% else %}
+                     <h4 class="card-title">没有标准预约!</h4>
+		               {% endif %}
+                 </div>
+             </div>
+         </div>
+     </div>
+  </div>
+
+  
+
+{% endblock %}

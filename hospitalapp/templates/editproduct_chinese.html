@@ -1,0 +1,41 @@
+{% extends 'base_chinese.html' %}
+{% block content %}
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+
+    <h1>Editproduct</h1>
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+ 		<p>
+ 			{{ form.Gid.label }}<br>
+ 			{{ form.Gid }}
+ 		</p>
+ 		<p>
+ 			{{ form.Gname.label }}<br>
+ 			{{ form.Gname }}
+ 		</p>
+ 		<p>
+ 			{{ form.Ginfo.label }}<br>
+ 			{{ form.Ginfo }}
+ 		</p>
+ 		<p>
+ 			{{ form.photo.label }}<br>
+ 			{{ form.photo() }}
+        	{% for error in form.photo.errors %}
+            <span style="color: red;">{{ error }}</span>
+        	{% endfor %}
+ 		</p>
+ 		<p>
+ 			{{ form.Gprice.label }}<br>
+ 			{{ form.Gprice }}
+ 		</p>
+        <p>
+ 			{{ form.Gadddate.label }}<br>
+ 			{{ form.Gadddate }}
+ 		</p>
+        {{ form.submit() }}
+    </form>
+    {% if img_url %}
+        <img src="{{ img_url }}" />
+    {% endif %}
+{% endblock %}
