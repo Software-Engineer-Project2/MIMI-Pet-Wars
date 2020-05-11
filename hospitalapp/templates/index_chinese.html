@@ -1,61 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../static/style/home.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="../static/css/style.css" rel="stylesheet">
+
 </head>
-<body>
-<div id="bg">
-    <div id="navi"><h1> 治愈之爪 <br> 兽医医院 </h1></div>
-    <div id="navibar">
 
-    <ul id="barr" aria-orientation="horizontal">
-        <li><a id="cus" href="{{ url_for('customer_mainpage_chinese') }}">顾客 </a></li>
-        <li><a id="emp" href="{{ url_for('employee_mainpage_chinese') }}">雇员 </a></li>
-    </ul>
-    <ul id="bar" aria-orientation="horizontal">
-        <!-- <div id="navibar" aria-orientation="horizontal" align="center"> -->
-        <li><a href="pets_tips.html">宠物提示</a></li>
-        <li><a href="pet_shop.html">宠物商店</a></li>
-        <li><a href="about_us.html">关于</a></li>
-        <li ><a id="homebtn" href="{{ url_for('index') }}">主页</a></li>
-        <!-- </div> -->
-    </ul>
+<body class="h-100">
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
     </div>
-</div>
+    <!--*******************
+        Preloader end
+    ********************-->
 
 
 
-    <!-- <ul id="image"> -->
-    <!-- <li id="img1"><img  src="../static/style/left.png" width="4%" height="4%" ></li> -->
-    <!-- <li id="img0"><img  src="../static/style/main1.jpg" width="70%" height="40%"></li> -->
-    <!-- <li id="img2"><img  src="../static/style/right.png" width="4%" height="4%"></li> -->
-    <!-- </ul> -->
 
-    <img id="img0" src="../static/style/main1.jpg" width="70%" >
 
-<div id="bottom">
-    <br><br><br><br><br>
-    <p><strong>联系我们</strong>
-        <br><br>治愈之爪 兽医医院
-        <br>603 汉普顿 普安特 大道, 套间 603-5
-        <br>希尔斯堡, 合格证 27278
-    </p>
-    <p>
-        <br><br>电话: 919-245-3437
-        <br>传真: 919-245-3502
-        <br>邮箱: healingpaws@thevetspets.com
-    </p>
-</div>
+    <div class="login-form-bg h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    <div class="form-input-content">
+                        <div class="card login-form mb-0">
+                            <div class="card-body pt-5" align="center">
+                                <h4 class="text-center">欢迎!</h4>
+                                <br/><br/><br/>
+                                <a href="{{ url_for('senior_login_chinese') }}"  class="btn mb-1 btn-outline-success">老年人通道</a>  <br/><br/>
+                                <a href="{{ url_for('loginCustomer_chinese') }}"  class="btn mb-1 btn-outline-warning">顾客通道</a>  <br/><br/>
+                                <a href="{{ url_for('loginEmployee_chinese') }}"  class="btn mb-1 btn-outline-primary">雇员通道</a>
 
-<br><br><br><br><br><br><br><br>
-<p style=" color: gray; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; margin:auto;">
-    |  © 治愈之爪 兽医医院 2020</p>
-
-    <br><br><br><br><br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../static/plugins/common/common.min.js"></script>
+    <script src="../static/js/custom.min.js"></script>
+    <script src="../static/js/settings.js"></script>
 </body>
 </html>
+
+
+
+
+

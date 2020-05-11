@@ -64,6 +64,23 @@ def senior_login():
     return render_template('senior_login.html', title='Login In', form=form)
 
 
+@app.route('/senior_login_chinese', methods=['GET', 'POST'])
+def senior_login_chinese():
+    form = LoginFormCustomer_chinese()
+    if request.method == "POST":
+        user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
+        if not user_in_db:
+            flash('No user found with username: {}'.format(form.Cusername.data))
+            return redirect(url_for('senior_login_chinese'))
+        if check_password_hash(user_in_db.Cpassword, form.Cpassword.data):
+            flash('登陆成功!')
+            session["USERNAME"] = user_in_db.Cname
+            return redirect(url_for('loggedin_home_senior'))
+        flash('Incorrect Password')
+        return redirect(url_for('senior_login_chinese'))
+    return render_template('senior_login_chinese.html', title='Login In', form=form)
+
+
 @app.route('/signupSenior', methods=['GET', 'POST'])
 def signupSenior():
     form = SignupCustomer()
