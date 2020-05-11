@@ -12,7 +12,7 @@ class LoginFormEmployee(FlaskForm):
     Eusername = StringField('Username', validators=[DataRequired()])
     Epassword = PasswordField('Password', validators=[DataRequired()])
     Eremember_me = BooleanField('Remember Me')
-    Esubmit = SubmitField('Log In')
+    Esubmit = SubmitField('Sign In')
 
 
 class LoginFormEmployee_chinese(FlaskForm):

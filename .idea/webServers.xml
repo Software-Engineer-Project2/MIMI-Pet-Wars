@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="76fa29f7-bd25-43a5-8f11-cbf6036354e3" name="Violafutong" url="http://group7.top">
-        <fileTransfer host="group7.top" port="22" rootFolder="/home/ubuntu/Pycharm" accessType="SFTP">
+        <fileTransfer host="group7.top" port="22" rootFolder="/home/ubuntu/webpage" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
