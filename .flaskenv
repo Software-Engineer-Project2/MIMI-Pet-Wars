@@ -1,2 +1,2 @@
 #set flaks environment
-FLASK_APP = pet.py
+FLASK_APP = hello.py

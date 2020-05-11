@@ -20,14 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flaskenv" beforeDir="false" afterPath="$PROJECT_DIR$/.flaskenv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<!--<<<<<<< HEAD
-=======-->
-      <change beforePath="$PROJECT_DIR$/hospitalapp/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_doctors.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_doctors.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pet.py" beforeDir="false" />
-<!-->>>>>>> c4fca31f7e6b34450842daa28d3a64dc5f370e98-->
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,13 +190,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1208" y="96" key="#Deployment" timestamp="1589151847408">
@@ -255,25 +248,25 @@
     <state x="644" y="220" key="FileChooserDialogImpl/0.0.1536.832/-1600.0.1600.870@0.0.1536.832" timestamp="1588794245792" />
     <state x="644" y="220" key="FileChooserDialogImpl/0.0.1536.832@0.0.1536.832" timestamp="1587366300871" />
     <state x="805" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584444109593" />
-    <state width="1515" height="195" key="GridCell.Tab.0.bottom" timestamp="1589191379569">
+    <state width="1515" height="195" key="GridCell.Tab.0.bottom" timestamp="1589192925096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589191379569" />
+    <state width="1515" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589192925096" />
     <state width="1360" height="265" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
-    <state width="1515" height="195" key="GridCell.Tab.0.center" timestamp="1589191379569">
+    <state width="1515" height="195" key="GridCell.Tab.0.center" timestamp="1589192925096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="195" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589191379569" />
+    <state width="1515" height="195" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589192925096" />
     <state width="1360" height="265" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
-    <state width="1515" height="195" key="GridCell.Tab.0.left" timestamp="1589191379569">
+    <state width="1515" height="195" key="GridCell.Tab.0.left" timestamp="1589192925096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="195" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589191379569" />
+    <state width="1515" height="195" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589192925096" />
     <state width="1360" height="265" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788473" />
-    <state width="1515" height="195" key="GridCell.Tab.0.right" timestamp="1589191379569">
+    <state width="1515" height="195" key="GridCell.Tab.0.right" timestamp="1589192925096">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589191379569" />
+    <state width="1515" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589192925096" />
     <state width="1360" height="265" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584446788474" />
     <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1586058659733">
       <screen x="0" y="0" width="1536" height="832" />
