@@ -731,15 +731,6 @@ def employee_customers():
         return redirect(url_for('loginEmployee'))
 
 
-@app.route('/employee_customers_chinese', methods=['GET', 'POST'])
-def employee_customers_chinese():
-    if not session.get("USERNAME") is None:
-        customers = Customer.query.filter().all()
-        return render_template('employee_customers_chinese.html', title='Display In-patient appointments',
-                               customers=customers)
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_doctors', methods=['GET', 'POST'])
@@ -749,7 +740,7 @@ def employee_doctors():
         return render_template('employee_doctors.html', title='Display In-patient appointments', doctors=doctors)
     else:
         flash("User needs to either login or signup first")
-        return redirect(url_for('loginEmployee'))
+        return redirect(url_for('employee_mainpage'))
 
 
 @app.route('/employee_doctors_chinese', methods=['GET', 'POST'])
@@ -760,6 +751,56 @@ def employee_doctors_chinese():
                                doctors=doctors)
     else:
         flash("User needs to either login or signup first")
+        return redirect(url_for('employee_mainpage'))
+
+@app.route('/employee_doctorss/delete_doctor/<id>', methods=['GET', 'POST'])
+def employee_doctorss_delete(id):
+    doctor = Doctor.query.get_or_404(id)
+    db.session.delete(doctor)
+    appoints = Appointment.query.filter(Appointment.Adoc == id).all()
+    operations = Operation.query.filter(Operation.Odoc == id).all()
+    inpatients = Hospitalization.query.filter(Hospitalization.Sdoc==id).all()
+    for operation in operations:
+        db.session.delete(operation)
+    for inpatient in inpatients:
+        db.session.delete(inpatient)
+    for appoint in appoints:
+        db.session.delete(appoint)
+    db.session.commit()
+    return redirect(url_for('employee_doctors'))
+
+@app.route('/employee_doctorss/edit_doctor/<id>', methods=['GET', 'POST'])
+def employee_doctor_edit(id):
+    if not session.get("USERNAME") is None:
+        doc = Doctor.query.filter(Doctor.id == id).first()
+        if request.method == 'GET':
+            hospitals = Hospital.query.all()
+            return render_template('employee_doctor_edit.html',doc = doc, hospitals=hospitals)
+        else:
+            doc.Dname = request.form['name']
+            doc.department = request.form['department']
+            doc.Dphone= request.form['phone']
+            doc.Dlevel= request.form['level']
+            doc.Dinf= request.form['info']
+            doc.Dhospital= request.form['hospital']
+            db.session.commit()
+            return redirect(url_for('employee_doctors'))
+    else:
+        return redirect(url_for('loginEmployee'))
+
+@app.route('/employee_doctorss/add_doctor', methods=['GET', 'POST'])
+def employee_add_doctor():
+    if not session.get("USERNAME") is None:
+        if request.method == 'GET':
+            hospitals = Hospital.query.all()
+            return render_template('employee_add_doctor.html', hospitals=hospitals)
+        else:
+            doc = Doctor(Dname = request.form['name'],department = request.form['department'],
+                         Dphone= request.form['phone'],Dlevel= request.form['level'],Dinf= request.form['info'],Dhospital= request.form['hospital'])
+            db.session.add(doc)
+            db.session.commit()
+            return redirect(url_for('employee_doctors'))
+    else:
         return redirect(url_for('loginEmployee'))
 
 
