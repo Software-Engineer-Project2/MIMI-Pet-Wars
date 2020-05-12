@@ -17,6 +17,9 @@
 		<td>
 			<a href="{{ url_for('pay', id=Order.id) }}">Pay</a>
 		</td>
+		<td>
+			<a href="{{ url_for('orderdetail', id = Order.id) }}">Detail</a>
+		</td>
 	</tr>
 	{% endfor %}
 </table>

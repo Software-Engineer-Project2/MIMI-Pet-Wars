@@ -1,7 +1,7 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
 
-<h1>Detail</h1>
+<h1>Order Detail</h1>
 <div>Name</div>
 <div>{{ order.Oname }}</div>
 <div>Status</div>
@@ -12,6 +12,20 @@
 <div>{{ order.Oaddress }}</div>
 <div>Phone Number</div>
 <div>{{ order.Ophonenumber }}</div>
-
+<table style="width: 30%; margin-left: 400px; font-size: larger; color: teal; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+	<tr>
+		<th>Good Id</th>
+		<th>Number</th>
+	</tr>
+	<br><br><br><br>
+	{% for GORelation in relationships %}
+	<tr>
+		<td>
+			<a href="{{ url_for('detail', id = GORelation.Goodid) }}">{{ GORelation.Goodid }}</a>
+		</td>
+		<td>{{ GORelation.number }}</td>
+	</tr>
+	{% endfor %}	
+</table>
 
 {% endblock %}

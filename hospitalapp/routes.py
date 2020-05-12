@@ -1150,6 +1150,12 @@ def order():
         return redirect(url_for('paypage'))
     render_template('order.html', title='order', form=form)
 
+@app.route('/orderdetail/<id>', methods=['GET', 'POST'])
+def orderdetail(id):
+    order = Order.query.get_or_404(id)
+    relationships = GORelation.query.filter_by(Orderid = id)
+    return render_template('orderdetail.html', order=order, relationships=relationships)
+
 
 @app.route('/signupCustomer', methods=['GET', 'POST'])
 def signupCustomer():

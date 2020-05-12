@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="main">
+<ul style="display: inline-block; ">
+    <li><img src="../static/style/inIcon.png" width="150px" height="150px"></li>
+    <br/>
+    <li> 
+    <a href="{{ url_for('loginEmployee') }}" 
+     style="text-decoration: none; font-size: x-large; float: right;">
+        Log in </a>
+    </li>    
+</ul>
+<ul style="display: inline-block;">     
+    <li><img src="../static/style/upIcon.png" width="150px" height="150px"></li>
+    <br/>
+    <li> 
+    <a href="{{ url_for('signupEmployee') }}" 
+     style="text-decoration: none; font-size: x-large; float: right;">
+        Sign up </a>
+    </li> 
+</ul>
+</div>
+
+<!-- <img src="../static/style/inIcon.png" width="150px" height="150px">
+<br>
+<a href="{{ url_for('loginEmployee') }}" 
+     style="text-decoration: none; font-size: x-large; float: right;">
+        Log in </a>
+
+<img src="../static/style/upIcon.png" width="150px" height="150px">
+<br>
+<a href="{{ url_for('signupEmployee') }}" 
+     style="text-decoration: none; font-size: x-large; float: right;">
+        Sign up </a> -->
+
+<br><br><br><br>
+
+{% endblock  %}
