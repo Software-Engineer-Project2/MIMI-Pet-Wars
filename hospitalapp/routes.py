@@ -787,7 +787,14 @@ def employee_customers():
         flash("User needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
 
-
+@app.route('/employee_customers_chinese', methods=['GET', 'POST'])
+def employee_customers_chinese():
+    if not session.get("USERNAME") is None:
+        customers = Customer.query.filter().all()
+        return render_template('employee_customers_chinese.html', title='Display In-patient appointments', customers=customers)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('loginEmployee'))
 
 
 @app.route('/employee_doctors', methods=['GET', 'POST'])
