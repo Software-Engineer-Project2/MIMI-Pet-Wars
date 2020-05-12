@@ -1677,6 +1677,21 @@ def customer_appo_release(id):
             return redirect(url_for('customer_my_appointments'))
     else:
         return redirect(url_for('loginCustomer'))
+    
+    
+    
+@app.route('/checkuser', methods=['POST'])
+def check_username():
+	chosen_name = request.form['username']
+	user_in_db = User.query.filter(User.username == chosen_name).first()
+	if not user_in_db:
+		return jsonify({'text': 'Username is available',
+						'returnvalue': 0})
+	else:
+		return jsonify({'text': 'Sorry! Username is already taken',
+						'returvalue': 1})    
+    
+    
 
 
 def validatePhone(str):
