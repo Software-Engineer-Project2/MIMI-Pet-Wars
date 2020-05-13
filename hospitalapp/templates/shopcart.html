@@ -1,14 +1,14 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
 
-<h1>Shop Cart</h1>
-<a href="{{ url_for('shoppage') }}">Keep shopping</a>
+<h1 data-lang="shopcart"></h1>
+<a href="{{ url_for('shoppage') }}" data-lang="keepshopping"></a>
 	<table>
 		<tr>
-			<th>Image</th>
-			<th>Name</th>
-			<th>Price</th>
-			<th>Number</th>
+			<th data-lang="iamge"></th>
+			<th data-lang="name"></th>
+			<th data-lang="price"></th>
+			<th data-lang="number"></th>
 		</tr>
 		{% for Good in goods %}
 		<tr>
@@ -19,16 +19,16 @@
 			<td>{{ Good.Gprice }}</td>
 			<td>{{ Good.Gnumber }}</td>
 			<td>
-				<a href="{{ url_for('deletecart', Gid=Good.id) }}">Delete</a>
+				<a href="{{ url_for('deletecart', Gid=Good.id) }}" data-lang="delete"></a>
 			</td>
 		</tr>
 		{% endfor %}
 	</table>
 
-<div>Total Price</div>
+<div data-lang="totalprice"></div>
 <div>{{ total }}</div>
 
-<a href="{{ url_for('buy') }}">Buy</a>
+<a href="{{ url_for('buy') }}" data-lang="buy"></a>
 
 {% endblock %}
 	

@@ -21,20 +21,20 @@
                   <div class="card-body">
                      {% if e_appointments %}
                       <h4 class="card-title">
-                        Emergency Appointments:</h4>
+                      <span data-lang="emergencyappointments"></span>:</h4>
                       <div class="table-responsive">
                         
                           <table class="table table-striped table-bordered zero-configuration">
                               <thead>
                                  <tr>
-                                    <th>Appointment ID</th>
-                                    <th>Owner</th>
-                                    <th>Pet </th>
-                                    <th>Location </th>
-                                    <th>Date </th>
-                                    <th>Information </th>
-                                    <th>View</th>
-                                    <th>Check in </th>
+                                    <th data-lang="appointmentid"></th>
+                                    <th data-lang="owner"></th>
+                                    <th data-lang="pet"> </th>
+                                    <th data-lang="location"> </th>
+                                    <th data-lang="date"> </th>
+                                    <th data-lang="inforamtion"> </th>
+                                    <th data-lang="view"></th>
+                                    <th data-lang="checkin"> </th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -56,8 +56,8 @@
                   
                                           </td>
                                           <td align="center">
-                                              <a href="{{ url_for('employee_checkin', id=ea.id) }}">
-                                        Check_in</a>
+                                              <a href="{{ url_for('employee_checkin', id=ea.id) }}" data-lang="check_in">
+                                        </a>
                   
                                           </td>
                   
@@ -73,8 +73,8 @@
                         
                       </div>
                       {% else %}
-                      <h4 class="card-title">
-                        No emergency appointments !</h4>
+                      <h4 class="card-title" data-lang="noemergencyappointments">
+                        </h4>
 	                  {% endif %}
                   </div>
               </div>
@@ -86,21 +86,21 @@
              <div class="card">
                  <div class="card-body">
                   {% if s_appointments %}
-                     <h4 class="card-title">Standard Appointments:</h4>
+                     <h4 class="card-title" data-lang="standardappointments">:</h4>
                      <div class="table-responsive">
                         
                         
                          <table class="table table-striped table-bordered zero-configuration">
                              <thead>
                                 <tr>
-                                   <th>Appointment ID</th>
-                                   <th>Owner</th>
-                                   <th>Pet </th>
-                                   <th>Location </th>
-                                   <th>Date </th>
-                                   <th>Information </th>
-                                   <th>View</th>
-                                   <th>Check in </th>
+									<th data-lang="appointmentid"></th>
+                                    <th data-lang="owner"></th>
+                                    <th data-lang="pet"> </th>
+                                    <th data-lang="location"> </th>
+                                    <th data-lang="date"> </th>
+                                    <th data-lang="inforamtion"> </th>
+                                    <th data-lang="view"></th>
+                                    <th data-lang="checkin"> </th>
                                </tr>
                              </thead>
                              <tbody>
@@ -122,7 +122,7 @@
                
                                        </td>
                                        <td align="center">
-                                             <a href="{{ url_for('employee_checkin', id=sa.id) }}">Check_in</a>
+                                             <a href="{{ url_for('employee_checkin', id=sa.id) }}" data-lang="check_in"></a>
                            </a>
                
                                        </form>
@@ -138,7 +138,7 @@
                          
                      </div>
                      {% else %}
-                     <h4 class="card-title">No standard appointments!</h4>
+                     <h4 class="card-title" data-lang="nostandardappointments"></h4>
 		               {% endif %}
                  </div>
              </div>

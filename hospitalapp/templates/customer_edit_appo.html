@@ -5,18 +5,18 @@
 {% block content %}
 <form action="/customer_my_appointments/edit_appo/{{appoint.id}}" method="POST">
 
-    <label>Appointment type：(0 for emergency, 1 for standard) </label>
+    <label data-lang="appointmenttype0foremergency1forstandard"></label>
     <input type="text" name="type" value="{{appoint.Atype}}"><br>
-    <label>Appointment Datetime(format: YYYY-MM-DD-HH-MM)</label>
+    <label data-lang="appointmentdatetimeformatYYYY-MM-DD-HH-MM"></label>
     <input type="text" name="date" value="{{appoint.Adate}}"><br>
-       <label>Apointment Location</label>
+       <label data-lang="apointmentlocation"></label>
     <input list="locationlist" name="location" value="{{appoint.Alocation}}">
 		<datalist id="locationlist">
 		    <option value="Shanghai">
             <option value="Beijing">
             <option value="Chengdu">
 		</datalist><br>
-    <label>Apointment Doctor</label>
+    <label data-lang="apointmentdoctor"></label>
     <input list="doctorlist" name="doctor" value="{{doc.Dname}}">
 		<datalist id="doctorlist">
             {% for d in doctors%}
@@ -24,7 +24,7 @@
             {% endfor %}
 		</datalist><br>
 
-        <label>Other Description</label>
+        <label data-lang="otherdescription"></label>
     <input type="text" name="information" value="{{appoint.Ainfo}}"><br>
     <input type="submit" value="Submit">
    </form>

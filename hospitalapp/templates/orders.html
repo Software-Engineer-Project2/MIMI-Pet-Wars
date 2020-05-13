@@ -1,9 +1,9 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
 
-<h1>Order</h1>
+<h1 data-lang="order"></h1>
 
-<a href="{{ url_for('notpayorders') }}">Not pay Orders</a><br>
-<a href="{{ url_for('paidorders') }}">Paid Orders</a>
+<a href="{{ url_for('notpayorders') }}" data-lang="notpayorders"></a><br>
+<a href="{{ url_for('paidorders') }}" data-lang="paidorders"></a>
 
 {% endblock %}

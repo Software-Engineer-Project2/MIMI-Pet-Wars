@@ -12,14 +12,14 @@
         <div class="card-body">
             {% if unread_posts %}
             <div class="card-title">
-               <h4>Unread Posts</h4>
+               <h4 data-lang="unread posts"></h4>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th >Topic</th>
-                            <th >Date</th>
+                            <th data-lang="topic"></th>
+                            <th data-lang="date"></th>
                             
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
             </div>
             {% else %}
             <div class="card-title">
-                <h4>No Post!</h4>
+                <h4 data-lang="nopost"></h4>
              </div>
             {% endif %}
         </div>
@@ -50,14 +50,14 @@
             <div class="card">
                 <div class="card-body">
                    {% if read_posts %}
-                    <h4 class="card-title">Read Posts:</h4>
+                    <h4 class="card-title" data-lang="readposts">:</h4>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration">
                             <thead>
                                 <tr>
-                                    <th >Topic</th>
-                                    <th >Date</th>
-                                    <th>View</th>
+                                    <th data-lang="topic"></th>
+                                    <th data-lang="date"></th>
+                                    <th data-lang="view"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -65,7 +65,7 @@
                                     <tr >
                                         <td>{{read_post.Ptopic}}</td>
                                         <td>{{read_post.Pdate}}</td>
-                                        <td><a onclick="location.href='/employee_post_detail/{{read_post.id}}'"><span class="label gradient-1 btn-rounded">View</span></a></td>
+                                        <td><a onclick="location.href='/employee_post_detail/{{read_post.id}}'"><span class="label gradient-1 btn-rounded" data-lang="view"></span></a></td>
                                     </tr>
                                     {% endfor %}
                                     </tbody>
@@ -73,7 +73,7 @@
                         </table>
                     </div>
                     {% else %}
-                    <h4 class="card-title">No read posts!</h4>
+                    <h4 class="card-title" data-lang="noreadposts">!</h4>
                      {% endif %}
                 </div>
             </div>

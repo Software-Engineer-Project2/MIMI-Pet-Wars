@@ -10,21 +10,21 @@
                 <div class="card-body">
                     <div class="form-validation">
                      
-                        <hr><h1>Pet</h1>
+                        <hr><h1 data-lang="pet"></h1>
                         <fieldset>
-                        <legend>Add A Pet</legend>
+                        <legend data-lang="addapet"></legend>
                         <form action="/loggedin_home_senior/add_pet" method="POST">
-                        <label>Pet Name </label>
+                        <label data-lang="petname"> </label>
                         <input type="text" name="pet_name" ><br>
-                        <label>Pet Age</label>
+                        <label data-lang="petage"></label>
                         <input type="text" name="pet_age" ><br>
-                        <label>Pet Gender</label>
-                        <input type="radio" name="pet_gender" value="1" /> Male
-                        <input type="radio" name="pet_gender" value="2" /> Female<br />
-                        <label>Pet Type</label>
-                        <input type="radio" name="pet_species" value="dog" /> Dog
-                        <input type="radio" name="pet_species" value="cat" /> Cat<br />
-                        <label>Pet Information</label>
+                        <label data-lang="petgender"></label>
+                        <input type="radio" name="pet_gender" value="1" / data-lang="male"> 
+                        <input type="radio" name="pet_gender" value="2" / data-lang="female"> <br />
+                        <label data-lang="pettype"></label>
+                        <input type="radio" name="pet_species" value="dog" / data-lang="dog"> 
+                        <input type="radio" name="pet_species" value="cat" / data-lang="cat"> <br />
+                        <label data-lang="petinformation"></label>
                         <input type="text" name="pet_info" ><br>
                         <input type="submit" value="Add Pet">
 
@@ -35,13 +35,13 @@
                             <tbody>
 
                                 <tr>
-                                    <th>Pet ID</th>
-                                    <th>Pet Name</th>
-                                    <th>Pet Gender</th>
-                                    <th>Pet Species </th>
-                                    <th>Information </th>
-                                    <th>Edit </th>
-                                    <th>Delete </th>
+                                    <th data-lang="petid"></th>
+                                    <th data-lang="petname"></th>
+                                    <th data-lang="petgender"></th>
+                                    <th data-lang="petspecies"> </th>
+                                    <th data-lang="information"></th>
+                                    <th data-lang="edit"> </th>
+                                    <th data-lang="delete"> </th>
                                 </tr>
 
 
@@ -50,17 +50,17 @@
                                     <td align="center">{{pet.id}}</td>
                                     <td align="center">{{pet.Pname}}</td>
                                         {% if pet.Psex == '1' %}
-                                    <td align="center">Male</td>
+                                    <td align="center" data-lang="male"></td>
                                     {% elif pet.Psex == '2' %}
-                                    <td align="center">Female</td>
+                                    <td align="center" data-lang="female"></td>
                                     {% endif %}
                                     <td align="center">{{pet.Pspecies}}</td>
                                     <td align="center">{{pet.Pinfo}}</td>
                                     <td align="center">
-                                        <button  onclick="window.location.href='/loggedin_home_senior/edit_pet/{{pet.id}}'">Edit</button>
+                                        <button  onclick="window.location.href='/loggedin_home_senior/edit_pet/{{pet.id}}'" data-lang="edit"></button>
                                     </td>
                                     <td align="center">
-                <a href="{{ url_for('senior_delete_pet', id=pet.id) }}"><button >Delete</button>
+                <a href="{{ url_for('senior_delete_pet', id=pet.id) }}"><button  data-lang="delete"></button>
 
                 </a>
                                     </td>
@@ -83,27 +83,27 @@
                 <div class="card-body">
                     <div class="form-validation">
                      
-                        <hr><h1>Appointment</h1>
+                        <hr><h1 data-lang="appointment"></h1>
                         <fieldset>
-                            <legend>Emergency Appointment</legend>
+                            <legend data-lang="emergencyappointment"></legend>
                                 <form action="/loggedin_home_senior/emergency_appointment" method="POST">
-                                    <label>Pet </label>
+                                    <label data-lang="pet"> </label>
                                     <input list="epetlist" name="appoint_name" >
                                         <datalist id="epetlist">
                                             {% for pet in pets%}
                                             <option value="{{pet.Pname}}">
                                             {% endfor%}
                                         </datalist><br>
-                                    <label>Location </label>
+                                    <label  data-lang="location"> </label>
                                     <input list="elocationlist" name="location" >
                                         <datalist id="elocationlist">
                                             <option value="Shanghai">
                                             <option value="Beijing">
                                             <option value="Chengdu">
                                         </datalist><br>
-                                    <label>Appointment Datetime(format: YYYY-MM-DD HH:MM)</label>
+                                    <label  data-lang="appointmentdatetimeformatYYYY-MM-DD-HH-MM"></label>
                                     <input type="text" name="date" ><br>
-                                    <label>Doctor </label>
+                                    <label  data-lang="doctor"> </label>
                                     <input list="edoclist" name="doc" >
                                         <datalist id="edoclist">
                                             {% for doc in doctors%}
@@ -115,32 +115,32 @@
                                 </form>
                         </fieldset>
                         <fieldset>
-                            <legend>Standard Appointment</legend>
+                            <legend data-lang="standardappointment"></legend>
                                 <form action="/loggedin_home_senior/standard_appointment" method="POST">
-                                        <label>Pet </label>
+                                        <label data-lang="pet"> </label>
                                     <input list="spetlist" name="appoint_name" >
                                         <datalist id="spetlist">
                                             {% for pet in pets%}
                                             <option value="{{pet.Pname}}">
                                             {% endfor%}
                                         </datalist><br>
-                                    <label>Location </label>
+                                    <label data-lang="location"> </label>
                                     <input list="slocationlist" name="location" >
                                         <datalist id="slocationlist">
                                             <option value="Shanghai">
                                             <option value="Beijing">
                                             <option value="Chengdu">
                                         </datalist><br>
-                                    <label>Appointment Datetime(format: YYYY-MM-DD HH:MM)</label>
+                                    <label data-lang="appointmentdatetimeformatYYYY-MM-DD-HH-MM"></label>
                                     <input type="text" name="date" ><br>
-                                    <label>Doctor </label>
+                                    <label data-lang="doctor"> </label>
                                     <input list="sdoclist" name="doc" >
                                         <datalist id="sdoclist">
                                             {% for doc in doctors%}
                                             <option value="{{doc.Dname}}">
                                             {% endfor%}
                                         </datalist><br>
-                                    <label>Appointment Information</label>
+                                    <label data-lang="appointmentinformation"></label>
                                     <input type="text" name="info" ><br>
                                     <input type="submit" value="Standard Appointment Submit">
 
@@ -152,15 +152,15 @@
                                 <tbody>
 
                                     <tr>
-                                        <th>Appointment ID</th>
-                                        <th>Date</th>
-                                        <th>Pet Name</th>
-                                        <th>Type </th>
-                                        <th>Appointments Information </th>
-                                        <th>Operation Status</th>
-                                        <th>Hospitalization Status </th>
-                                        <th>Change</th>
-                                        <th>Permission</th>
+                                        <th data-lang="appointmentid"></th>
+                                        <th data-lang="date"></th>
+                                        <th data-lang="petname"></th>
+                                        <th data-lang="type"> </th>
+                                        <th data-lang="appointmentsinformation"></th>
+                                        <th data-lang="operationstatus"></th>
+                                        <th data-lang="hospitalizationstatus"> </th>
+                                        <th data-lang="change"></th>
+                                        <th data-lang="permission"></th>
                                     </tr>
 
                                     {% for a in appoints%}
@@ -171,21 +171,21 @@
                                         <td align="center">{{a.Adate}}</td>
                                         <td align="center">{{pet.Pname}}</td>
                                         {% if a.Atype == '1' %}
-                                        <td align="center">Standard</td>
+                                        <td align="center" data-lang="standard"></td>
                                         {% elif a.Atype == '0' %}
-                                        <td align="center">Emergent</td>
+                                        <td align="center" data-lang="emergent"></td>
                                         {% endif %}
                                         <td align="center">{{a.Ainfo}}</td>
                                         <td align="center">{{ a.OperationStatus }}</td>
                                         <td align="center">{{a.HospitalizationStatus}}</td>
                                         <td align="center">
-                                            <button  onclick="window.location.href='/loggedin_home_senior/edit_appoint/{{a.id}}'">Edit</button>
-                                            <button  onclick="window.location.href='/loggedin_home_senior/delete_appoint/{{a.id}}'" >Delete</button>
+                                            <button  onclick="window.location.href='/loggedin_home_senior/edit_appoint/{{a.id}}'" data-lang="edit"></button>
+                                            <button  onclick="window.location.href='/loggedin_home_senior/delete_appoint/{{a.id}}'"  data-lang="delete"></button>
                                         </td>
                                         <td align="center">
-                                            <button  onclick="window.location.href='/loggedin_home_senior/operation/{{a.id}}'">Surgery</button>
-                                            <button  onclick="window.location.href='/loggedin_home_senior/inpatient/{{a.id}}'" >In Hospital</button>
-                                            <button  onclick="window.location.href='/loggedin_home_senior/release/{{a.id}}'" >Release</button>
+                                            <button  onclick="window.location.href='/loggedin_home_senior/operation/{{a.id}}'" data-lang="surgery"></button>
+                                            <button  onclick="window.location.href='/loggedin_home_senior/inpatient/{{a.id}}'"  data-lang="inhospital"></button>
+                                            <button  onclick="window.location.href='/loggedin_home_senior/release/{{a.id}}'"  data-lang="release"></button>
 
                                         </td>
 
@@ -211,29 +211,29 @@
                     <div class="form-validation">
                      
                        
-                        <h1>Post</h1>
+                        <h1 data-lang="post"></h1>
                         <fieldset>
-                            <legend>Add A Post</legend>
+                            <legend data-lang="addapost"></legend>
                                 <form action="/loggedin_home_senior/write_post" method="POST">
-                                <label>Topic </label>
+                                <label data-lang="topic"> </label>
                                 <input type="text" name="topic" ><br>
-                                <label>Content</label>
+                                <label data-lang="content"></label>
                                 <input type="text" name="content" ><br>
                                 <input type="submit" value="Post Submit">
 
                                 </form>
                         </fieldset>
                         {% if unread_posts %}
-                        <h2>Unread Posts </h2>
+                        <h2 data-lang="unreadposts"> </h2>
                         <div class="text">
                         <table class="unread post">
                                             <tbody>
 
                                                 <tr>
-                                                    <th align="center">Post ID</th>
-                                                    <th align="center">Date</th>
-                                                    <th align="center">Post Topic</th>
-                                                    <th align="center">Post Content </th>
+                                                    <th align="center" data-lang="postid"></th>
+                                                    <th align="center" data-lang="date"></th>
+                                                    <th align="center" data-lang="posttopic"></th>
+                                                    <th align="center" data-lang="postcontent"> </th>
                                                 </tr>
                                                     {% for unread_post in unread_posts%}
 
@@ -249,20 +249,20 @@
                         </table>
 
                         {% else %}
-                        <p>No unread posts</p>
+                        <p data-lang="nounreadposts"></p>
                         {% endif %}
 
                         {% if read_posts %}
-                        <h2>Read Posts </h2>
+                        <h2 data-lang="readposts"></h2>
                         <div class="text">
                             <table class="unread post">
                                                 <tbody>
 
                                                     <tr>
-                                                        <th>Post ID</th>
-                                                        <th>Date</th>
-                                                        <th>Post Topic</th>
-                                                        <th>Post Content </th>
+                                                        <th data-lang="postid"></th>
+                                                        <th data-lang="date"></th>
+                                                        <th data-lang="posttopic"></th>
+                                                        <th data-lang="postcontent"> </th>
                                                     </tr>
                                                         {% for unread_post in unread_posts%}
 
@@ -278,7 +278,7 @@
                             </table>
 
                         {% else %}
-                        <p>No read posts</p>
+                        <p data-lang="noreadposts"></p>
                         {% endif %}
 
                         </div>

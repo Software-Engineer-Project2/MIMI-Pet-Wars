@@ -23,7 +23,7 @@
                                 <form action='/Make Appointment' method="POST">
                                     <p>
                                         <div id="pet">
-                                    <label>Pet Name(Please double-click the blank to select one from your pet): </label><br>
+                                    <label data-lang="petname">(Please double-click the blank to select one from your pet): </label><br>
                                     <input list="petname" name="pet name" >
                                     <datalist id="petname">
                                         {% for pet in pets %}
@@ -34,22 +34,22 @@
                             
                                     <p>
                                         <div id="ownerphone">
-                                        <label>Owner Phone: </label><br>
+                                        <label data-lang="ownerphone">: </label><br>
                                     <input type="text" name="phone"><br></div>
 
                                     </p>
                             
                                     <p>
                                         <div id="type">
-                                        <label>Type: </label><br>
-                                    <input type="radio" name="type" value="0">Emergency<br>
-                                    <input type="radio" name="type" value="1">Standard<br></div>
+                                        <label data-lang="type">: </label><br>
+                                    <input type="radio" name="type" value="0" data-lang="emergency"><br>
+                                    <input type="radio" name="type" value="1" data-lang="standard"><br></div>
 
                                     </p>
                             
                                     <p>
                                         <div id="chooseposition">
-                                        <label>Choose Position: </label><br>
+                                        <label data-lang="chooseposition">: </label><br>
                                     <input list="locationlist" name="location">
                                     <datalist id="locationlist">
                                         <option value="Shanghai">
@@ -59,12 +59,12 @@
                                     </p>
                                     <p>
                                         <div id="datetime">
-                                        <label>Input Datetime(format: YYYY-MM-DD HH:MM): </label><br>
+                                        <label data-lang="inputdatetime">: </label><br>
                                     <input type="text" name="date"></div>
                                     </p>
                                     <p>
                                         <div id="doctor">
-                                        <label>Choose doctor you want: </label><br>
+                                        <label  data-lang="choosedoctor">: </label><br>
                                         {% for d in doctors%}
                                         <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
                                         {% endfor %}
@@ -73,7 +73,7 @@
                                     </p>
                                     <p>
                                         <div id="otherdescription">
-                                        <label>OtherDescription: </label><br>
+                                        <label data-lang="otherdescription">: </label><br>
                                     <input type="text" name="information"><br></div>
                                     </p>
                                     <input type="submit" value="Submit">}<br>

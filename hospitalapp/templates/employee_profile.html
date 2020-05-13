@@ -20,18 +20,18 @@
             {% endfor %}
         {% endif %}
  <form action='/employee_profile' method="POST">
-    <label>Phone: </label>
+    <label data-lang="phone">: </label>
     <input type="text" name="phone" value="{{emp.Ephone}}"><br>
-       <label> Gender: </label><br>
+       <label data-lang="gender"> : </label><br>
      {% if emp.Egender=='0' %}
-    <input type="radio" name="gender" value="0" checked="checked">Male<br>
-    <input type="radio" name="gender" value="1">Female<br>
+    <input type="radio" name="gender" value="0" checked="checked" data-lang="male"><br>
+    <input type="radio" name="gender" value="1" data-lang="female"><br>
      {% else %}
-     <input type="radio" name="gender" value="0">Male<br>
-    <input type="radio" name="gender" value="1"  checked="checked">Female<br>
+     <input type="radio" name="gender" value="0" data-lang="male"><br>
+    <input type="radio" name="gender" value="1"  checked="checked" data-lang="female"><br>
      {% endif %}
 
-    <label>Email: </label>
+    <label data-lang="email">: </label>
      <input type="text" name="email" value="{{emp.Eemail}}"><br>
   <input type="submit" value="Reset">
    </form>

@@ -6,17 +6,17 @@
               <div class="card">
                   <div class="card-body">
                      {% if appointments %}
-                      <h4 class="card-title">Completed Appointments:</h4>
+                      <h4 class="card-title" data-lang="completedappointments">:</h4>
                       <div class="table-responsive">
                           <table class="table table-striped table-bordered zero-configuration">
                               <thead>
                                  <tr>
-                                    <th>Appointment ID</th>
-                                    <th>Owner</th>
-                                    <th>Pet </th>
-                                    <th>Location </th>
-                                    <th>Date </th>
-                                    <th>Information </th>
+                                    <th data-lang="appointmentid"></th>
+                                    <th data-lang="owner"></th>
+                                    <th data-lang="pet"> </th>
+                                    <th data-lang="location"> </th>
+                                    <th data-lang="date"> </th>
+                                    <th data-lang="information"> </th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -44,7 +44,7 @@
                           </table>
                       </div>
                       {% else %}
-                      <h4 class="card-title">No Completed Appointments!</h4>
+                      <h4 class="card-title" data-lang="nocompletedappointments"></h4>
                        {% endif %}
                   </div>
               </div>

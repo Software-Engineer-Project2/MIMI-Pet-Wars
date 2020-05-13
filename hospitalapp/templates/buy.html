@@ -1,14 +1,14 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
 
-<h1>Buy</h1>
+<h1 data-lang="buy"></h1>
 
 	<table>
 		<tr>
-			<th>Image</th>
-			<th>Name</th>
-			<th>Price</th>
-			<th>Number</th>
+			<th data-lang="image"></th>
+			<th data-lang="name"></th>
+			<th data-lang="price"></th>
+			<th data-lang="number"></th>
 		</tr>
 		{% for Good in goods %}
 		<tr>

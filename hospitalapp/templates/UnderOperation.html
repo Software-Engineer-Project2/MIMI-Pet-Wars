@@ -3,46 +3,46 @@
 <h1>&nbsp</h1>
 <h1>&nbsp</h1>
     {% if emergency_appointments %}
-		Emergency Appointments:(Click to edit)<br><hr>
+		<span data-lang="emergencyappointmentsclicktoedit"></span><br><hr>
 		<ul>
 		{% for ea in emergency_appointments %}
 			<li>
-				Pet Number: {{ ea.Apet }}
-                Type:{{ea.Atype}}
-                Doctor: {{ea.Adoc}}
-                Complete: {{ea.Acomplete}}
-                Information:{{ea.Ainfo}}
-                Date:{{ea.Adate}}
-                Cost:{{ea.Acost}}</a>
+				<span data-lang="petnumber"></span>: {{ ea.Apet }}
+                <span data-lang="type"></span>:{{ea.Atype}}
+                <span data-lang="doctor"></span>: {{ea.Adoc}}
+                <span data-lang="complete"></span>: {{ea.Acomplete}}
+                <span data-lang="information"></span>:{{ea.Ainfo}}
+                <span data-lang="date"></span>:{{ea.Adate}}
+                <span data-lang="cost"></span>:{{ea.Acost}}</a>
 
             </li>
 		{% endfor %}
 		</ul>
 		<hr>
 	{% else %}
-		<p>No emergency appointments!</p>
+		<p data-lang="noemergencyappointments">!</p>
 	{% endif %}
 
 	{% if standard_appointments %}
-		Standard Appointments:(Click to edit)<br><hr>
+		<span data-lang="standardappointmentsclicktoedit"></span><br><hr>
 		<ul>
 		{% for sa in standard_appointments %}
 			<li>
-				Pet Number: {{ sa.Apet }}
-                Type:{{sa.Atype}}
-                Doctor: {{sa.Adoc}}
-                Complete: {{sa.Acomplete}}
-                Information:{{sa.Ainfo}}
-                Date:{{sa.Adate}}
-                Cost:{{sa.Acost}}
-				<button ><a href={{url_for('CompleteOpeConfirm',id=sa.id)}}>Complete the Operation</a> </button>
+				<span data-lang="petnumber"></span>: {{ sa.Apet }}
+                <span data-lang="type"></span>:{{sa.Atype}}
+                <span data-lang="doctor"></span>: {{sa.Adoc}}
+                <span data-lang="complete"></span>: {{sa.Acomplete}}
+                <span data-lang="information"></span>:{{sa.Ainfo}}
+                <span data-lang="date"></span>:{{sa.Adate}}
+                <span data-lang="cost"></span>:{{sa.Acost}}
+				<button ><a href={{url_for('CompleteOpeConfirm',id=sa.id)}} data-lang="completetheoperation"></a> </button>
 
             </li>
 		{% endfor %}
 		</ul>
 		<hr>
 	{% else %}
-		<p>No standard appointments!</p>
+		<p data-lang="nostandardappointments">!</p>
 	{% endif %}
 
 

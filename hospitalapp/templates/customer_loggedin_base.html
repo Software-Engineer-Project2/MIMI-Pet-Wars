@@ -70,13 +70,13 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="app-profile.html"><i class="icon-user"></i> <span data-lang="profile"></span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="page-lock.html"><i class="icon-lock"></i> <span data-lang="lockscreen"></span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="page-login.html"><i class="icon-key"></i> <span data-lang="logout"></span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -117,44 +117,44 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{ url_for('add_pet_information')}}" data-lang="addnewpets"></a></li>
-                            <li><a href="{{ url_for('customer_my_pets')}}">My Pets</a></li>
+                            <li><a href="{{ url_for('customer_my_pets')}}" data-lang="mypets"></a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Appointment</span>
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text" data-lang="appointment"></span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url_for('make_appointment')}}">Make an Appointment</a></li>
-                            <li><a href="{{ url_for('customer_my_appointments')}}">My Appointments</a></li>
+                            <li><a href="{{ url_for('make_appointment')}}" data-lang="makeanappointment"></a></li>
+                            <li><a href="{{ url_for('customer_my_appointments')}}" data-lang="myappointments"></a></li>
                             
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Post</span>
+                            <i class="icon-envelope menu-icon"></i> <span class="nav-text" data-lang="post"></span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url_for('customer_add_post') }}">Add a New Post</a></li>
-                            <li><a href="{{ url_for('customer_posts') }}">My Posts</a></li>
+                            <li><a href="{{ url_for('customer_add_post') }}" data-lang="addanewpost"></a></li>
+                            <li><a href="{{ url_for('customer_posts') }}" data-lang="myposts"></a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-notebook menu-icon"></i> <span class="nav-text">Store</span>
+                            <i class="icon-notebook menu-icon"></i> <span class="nav-text" data-lang="store"></span>
                         </a>
                         <ul aria-expanded="false">
                             
-                            <li><a href="{{ url_for('shoppage') }}">View Products</a></li>
-                            <li><a href="{{ url_for('shopcart') }}">Shop Cart</a></li>
-                            <li><a href="{{ url_for('orders') }}">Orders</a></li>
+                            <li><a href="{{ url_for('shoppage') }}" data-lang="viewproducts"></a></li>
+                            <li><a href="{{ url_for('shopcart') }}" data-lang="shopcart"></a></li>
+                            <li><a href="{{ url_for('orders') }}" data-lang="orders"></a></li>
                         </ul>
                     </li>
                     <br><br><br>
                     <br><br><br>
                     <li>
-                        <a href="{{url_for('logoutCustomer')}}" class="btn mb-1 btn-outline-primary">Log out</a>
+                        <a href="{{url_for('logoutCustomer')}}" class="btn mb-1 btn-outline-primary" data-lang="logout"></a>
                     </li>
                 </ul>
             </div>

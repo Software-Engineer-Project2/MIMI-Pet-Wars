@@ -1,29 +1,29 @@
 {% extends "employee_loggedin_base.html" %}
 {% block content %}
-<h1>View the detail of this Appointment</h1>
-<h3>Appointment ID: {{appoint.id}}<br>
+<h1 data-lang="viewthedetailofthisappointment"></h1>
+<h3 data-lang="appointmentid">: {{appoint.id}}<br>
 
-        Appointment Type:
+        <span data-lang="appointmenttype">:</span>
         {% if appoint.Atype=='1'%}
-            Standard
+            <span data-lang="standard">:</span>
         {% elif appoint.Atype == '0' %}
-            Emergent
+            <span data-lang="emergent">:</span>
         {% endif %}<br>
-Appointment Location: {{appoint.Alocation}}<br>
-    <b>Appointment Pet: </b>{{pet.Pname}}<br>
-    <b>Appointment Customer: </b>{{customer.Cname}}<br>
+<span data-lang="appointmentlocation">: {{appoint.Alocation}}</span><br>
+    <b data-lang="appointmentpet">: </b>{{pet.Pname}}<br>
+    <b data-lang="appointmentcustomer">: </b>{{customer.Cname}}<br>
 
-    <b>Appointment Doctor: </b>{{doc.Dname}}<br>
-    <b>Appointment Information:  </b>{{appoint.Ainfo}}<br>
-    <b>Appointment Date: </b>{{appoint.Adate}}<br>
-    <b>Appointment Out-patient Satus:</b>
+    <b data-lang="appointmentdoctor">: </b>{{doc.Dname}}<br>
+    <b data-lang="appointmentinformation">:  </b>{{appoint.Ainfo}}<br>
+    <b data-lang="appointmentdate">: </b>{{appoint.Adate}}<br>
+    <b data-lang="appointmentout-patientsatus">:</b>
         {% if appoint.Astart=='1'%}
-            Checked in
+            <span data-lang="checkedin"></span>
         {% elif appoint.Astart == '0' %}
-            Uncheck in
+            <span data-lang="uncheckin"></span>
         {% endif %}<br>
-    <b>Appointment Operation Satus: </b> {{appoint.OperationStatus}}<br>
-    <b>Appointment In-patient Satus: </b>{{appoint.HospitalizationStatus}}<br>
+    <b data-lang="appointmentoperationsatus">: </b> {{appoint.OperationStatus}}<br>
+    <b data-lang="appointmentin-patientsatus">: </b>{{appoint.HospitalizationStatus}}<br>
 
 </h3>
 

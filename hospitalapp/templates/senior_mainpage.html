@@ -4,7 +4,7 @@
 {% block content %}
 <h1>&nbsp</h1>
 <h1>&nbsp</h1>
-<h1 style="margin-left: 500px;" >Log In</h1>
+<h1 style="margin-left: 500px;" data-lang="login"></h1>
 <div style="margin: auto; align-self: center;">
 <form action="/senior_mainpage" method="POST">
         {{ form.hidden_tag() }}
@@ -30,10 +30,10 @@
         <p>{{ form.Csubmit() }}</p>
 
     </form>
-        <a href="{{ url_for('signupSenior') }}">
-            Sign up </a>
-    <a href="{{ url_for('shoppage') }}" >
-            Store </a>
+        <a href="{{ url_for('signupSenior') }}" data-lang="signup">
+             </a>
+    <a href="{{ url_for('shoppage') }}" data-lang="store">
+             </a>
         </li>
     </div>
 <div id="main">

@@ -1,22 +1,22 @@
 {% extends 'employee_loggedin_base.html' %}
 {% block content %}
 <br><br><br><br><br><br><br>
-<button  onclick="window.location.href='/employee_doctorss/add_doctor'" >Add a doctor</button><br>
+<button  onclick="window.location.href='/employee_doctorss/add_doctor'" data-lang="addadoctor"></button><br>
 
     {% if doctors %}
-		Outpatient Appointments:<br><hr>
+		<span data-lang="outpatientappointments">:</span><br><hr>
 
             <table class="table">
                 <tbody>
                 <tr>
-                    <th>Doctoe ID</th>
-                    <th>Name</th>
-                    <th>Phone </th>
-                    <th>Level </th>
-                    <th>Hospital </th>
-                    <th>Information </th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th data-lang="doctoeid"></th>
+                    <th data-lang="name"></th>
+                    <th data-lang="phone"> </th>
+                    <th data-lang="level"> </th>
+                    <th data-lang="hospital"> </th>
+                    <th data-lang="information"> </th>
+                    <th data-lang="edit"></th>
+                    <th data-lang="delete"></th>
                 </tr>
                {% for d in doctors %}
                      <tr>
@@ -26,16 +26,16 @@
                         <td align="center">{{d.Dlevel}}</td>
                         <td align="center">{{d.Dhospital}}</td>
                          <td align="center">{{d.Dinf}}</td>>
-                         <td align="center"><button  onclick="window.location.href='/employee_doctorss/edit_doctor/{{d.id}}'" >Edit</button></td>
+                         <td align="center"><button  onclick="window.location.href='/employee_doctorss/edit_doctor/{{d.id}}'" data-lang="edit"></button></td>
 
-                         <td align="center"><button  onclick="window.location.href='/employee_doctors/delete_doctor/{{d.id}}'" >Delete</button></td>
+                         <td align="center"><button  onclick="window.location.href='/employee_doctors/delete_doctor/{{d.id}}'" data-lang="delete"></button></td>
 
                      </tr>
                {% endfor %}
                 </tbody>
             </table>
     {% else %}
-		<p>----------------No doctors !</p>
+		<p data-lang="nodoctors"></p>
 	{% endif %}
 
 

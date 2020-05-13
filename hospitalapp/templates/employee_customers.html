@@ -7,16 +7,16 @@
                 <div class="card">
                     <div class="card-body">
                        {% if customers %}
-                        <h4 class="card-title">Customers:</h4>
+                        <h4 class="card-title" data-lang="customers">:</h4>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>Customer ID</th>
-                                        <th>Name</th>
-                                        <th>Gender </th>
-                                        <th>Phone </th>
-                                        <th>Email </th>
+                                        <th data-lang="customerid"></th>
+                                        <th data-lang="name"></th>
+                                        <th data-lang="gender"> </th>
+                                        <th data-lang="phone"> </th>
+                                        <th data-lang="email"> </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,7 +35,7 @@
                             </table>
                         </div>
                         {% else %}
-                        <h4 class="card-title">No customers!</h4>
+                        <h4 class="card-title" data-lang="nocustomers"></h4>
                          {% endif %}
                     </div>
                 </div>

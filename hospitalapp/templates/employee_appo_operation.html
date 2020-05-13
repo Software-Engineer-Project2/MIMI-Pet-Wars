@@ -7,18 +7,18 @@
               <div class="card">
                   <div class="card-body">
                      {% if appoints %}
-                      <h4 class="card-title">Outpatient Appointments:</h4>
+                      <h4 class="card-title" data-lang="outpatientappointments">:</h4>
                       <div class="table-responsive">
                           <table class="table table-striped table-bordered zero-configuration">
                               <thead>
                                  <tr>
-                                    <th>Operation ID</th>
-                                    <th>Owner</th>
-                                    <th>Pet </th>
-                                    <th>Date </th>
-                                    <th>Information </th>
-                                    <th>Operation Status</th>
-                                    <th>Complete Operation </th>
+                                    <th data-lang="operationid"></th>
+                                    <th data-lang="owner"></th>
+                                    <th data-lang="pet"> </th>
+                                    <th data-lang="date"> </th>
+                                    <th data-lang="information"> </th>
+                                    <th data-lang="operationstatus"></th>
+                                    <th data-lang="completeoperation"> </th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -38,8 +38,8 @@
                                          <td align="center">{{o.Oinfo }}</td>
                                          <td align="center">{{a.OperationStatus}}</td>
                                           <td align="center">
-                  <a href="{{ url_for('employee_operation_complete', id=a.id) }}">
-                              Complete Operation
+                  <a href="{{ url_for('employee_operation_complete', id=a.id) }}" data-lang="completeoperation">
+                              
                              </a>
                                          </td>
                                       </tr>
@@ -55,7 +55,7 @@
                           </table>
                       </div>
                       {% else %}
-                      <h4 class="card-title">No operation appointments!</h4>
+                      <h4 class="card-title"  data-lang="nooperationappointments"></h4>
                        {% endif %}
                   </div>
               </div>

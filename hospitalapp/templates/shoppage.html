@@ -5,9 +5,9 @@
 
 <table style="width: 30%; margin-left: 400px; font-size: larger; color: teal; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 	<tr>
-		<th>Image</th>
-		<th>Name</th>
-		<th>Price</th>
+		<th data-lang="image"></th>
+		<th data-lang="name"></th>
+		<th data-lang="price"></th>
 	</tr>
 	<br><br><br><br>
 	{% for Good in goods %}
@@ -18,7 +18,7 @@
 		<td>{{ Good.Gname }}</td>
 		<td>{{ Good.Gprice }}</td>
 		<td>
-			<a href="{{ url_for('detail', id = Good.id) }}">Detail</a>
+			<a href="{{ url_for('detail', id = Good.id) }}" data-lang="detail"></a>
 		</td>
 	</tr>
 	{% endfor %}	

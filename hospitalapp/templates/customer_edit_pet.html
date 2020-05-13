@@ -8,17 +8,17 @@
 {% block content %}
 
  <form action='/My Pets/edit_pet/{{pet.id}}' method="POST">
-    <label>Pet Name: </label>
+    <label data-lang="petname">: </label>
     <input type="text" name="name" value="{{pet.Pname}}"><br>
-       <label>Pet Age: </label>
+       <label data-lang="petage">: </label>
     <input type="text" name="age" value="{{pet.Page}}"><br>
-    <label>Pet Gender: (1 for male, 2 for female)</label>
+    <label data-lang="petgender1formale2forfemale"></label>
     <input type="text" name="gender" value="{{pet.Psex}}"><br>
-       <label>Pet Species: </label><br>
-     <input type="radio" name="species" value="cat">cat
-            <input type="radio"  name="species" value="dog" >dog<br>
+       <label data-lang="petspecies">: </label><br>
+     <input type="radio" name="species" value="cat" data-lang="cat">
+            <input type="radio"  name="species" value="dog" data-lang="dog"><br>
 
-    <label>Pet Information </label>
+    <label data-lang="petinformation"> </label>
     <input type="text" name="information" value="{{pet.Pinfo}}"><br>
   <input type="submit" value="Submit">
    </form>

@@ -1,13 +1,13 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
 
-<h1>Order</h1>
+<h1 data-lang="order"></h1>
 
 <table>
 	<tr>
-		<th>Order ID</th>
-		<th>Total Price</th>
-		<th>Status</th>
+		<th data-lang="orderid"></th>
+		<th data-lang="totalprice"></th>
+		<th data-lang="status"></th>
 	</tr>
 	{% for Order in orders %}
 	<tr>
@@ -15,7 +15,7 @@
 		<td>{{ Order.Oprice }}</td>
 		<td>{{ Order.Ostate }}</td>
 		<td>
-			<a href="{{ url_for('orderdetail', id = Order.id) }}">Detail</a>
+			<a href="{{ url_for('orderdetail', id = Order.id) }}" data-lang="detail"></a>
 		</td>
 	</tr>
 	{% endfor %}

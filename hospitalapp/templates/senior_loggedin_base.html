@@ -70,13 +70,13 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="app-profile.html"><i class="icon-user"></i> <span data-lang="profile"></span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="page-lock.html"><i class="icon-lock"></i> <span data-lang="lockscreen"></span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="page-login.html"><i class="icon-key"></i> <span data-lang="logout"></span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -110,16 +110,16 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label">SENIOR</li>
+                    <li class="nav-label"  data-lang="senior"></li>
                     
                 
                     
                     <br><br><br>
                     <br><br><br>
                     <li>
-                        <button type="button" onclick="location.href='{{url_for('loggedin_home_senior')}}'" class="btn mb-1 btn-outline-success">Home</button>
-                        <button type="button" onclick="location.href='{{url_for('employee_posts')}}'" class="btn mb-1 btn-outline-warning">Emergency</button>
-                        <button type="button" onclick="location.href='{{url_for('senior_login')}}'" class="btn mb-1 btn-outline-primary">Log out</button>
+                        <button type="button" onclick="location.href='{{url_for('loggedin_home_senior')}}'" class="btn mb-1 btn-outline-success" data-lang="home"></button>
+                        <button type="button" onclick="location.href='{{url_for('employee_posts')}}'" class="btn mb-1 btn-outline-warning" data-lang="emergency"></button>
+                        <button type="button" onclick="location.href='{{url_for('senior_login')}}'" class="btn mb-1 btn-outline-primary" data-lang="logout"></button>
                     </li>
                 </ul>
             </div>

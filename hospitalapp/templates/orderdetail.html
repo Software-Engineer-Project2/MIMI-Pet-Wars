@@ -1,21 +1,21 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
 
-<h1>Order Detail</h1>
-<div>Name</div>
+<h1 data-lang="orderdetail"></h1>
+<div data-lang="name"></div>
 <div>{{ order.Oname }}</div>
-<div>Status</div>
+<div data-lang="status"></div>
 <div>{{ order.Ostate }}</div>
-<div>Price</div>
+<div data-lang="price"></div>
 <div>{{ order.Oprice }}</div>
-<div>Address</div>
+<div data-lang="address"></div>
 <div>{{ order.Oaddress }}</div>
-<div>Phone Number</div>
+<div data-lang="phonenumber"></div>
 <div>{{ order.Ophonenumber }}</div>
 <table style="width: 30%; margin-left: 400px; font-size: larger; color: teal; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 	<tr>
-		<th>Good Id</th>
-		<th>Number</th>
+		<th data-lang="goodid"></th>
+		<th data-lang="number"></th>
 	</tr>
 	<br><br><br><br>
 	{% for GORelation in relationships %}

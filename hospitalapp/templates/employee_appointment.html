@@ -2,19 +2,19 @@
 {% block content %}
 <h1>&nbsp</h1>
 <h1>&nbsp</h1>
-    <a href="{{ url_for('listproduct') }}">Start</a><br>
+    <a href="{{ url_for('listproduct') }}" data-lang="start"></a><br>
 
 	<div align="center">
         <br><br><br>
-    <a href="{{url_for('employee_appo_checkin')}}">Check-in Office </a>
+    <a href="{{url_for('employee_appo_checkin')}}" data-lang="check-inoffice"> </a>
     <br><br><br>
-       <a href="{{url_for('employee_appo_outpatient')}}">Out-patient Department</a>
+       <a href="{{url_for('employee_appo_outpatient')}}" data-lang="out-patientdepartment"></a>
     <br><br><br>
-           <a href="{{url_for('employee_appo_inpatient')}}">In-patient Department</a>
+           <a href="{{url_for('employee_appo_inpatient')}}" data-lang="in-patientdepartment"></a>
     <br><br><br>
-           <a href="{{url_for('employee_appo_operation')}}">Operation Department</a>
+           <a href="{{url_for('employee_appo_operation')}}" data-lang="operationdepartment"></a>
     <br><br><br>
-            <a href="{{url_for('employee_appo_completed')}}">Completed Appointment</a>
+            <a href="{{url_for('employee_appo_completed')}}" data-lang="completedappointment"></a>
     <br><br><br>
 </div>
 

@@ -15,22 +15,22 @@
                 <div id="navibar">
                 
                 <ul id="barr" aria-orientation="horizontal">
-                    <li><a id="cus" href="{{ url_for('customer_mainpage') }}">Customer </a></li>
-                    <li><a id="emp" href="{{ url_for('employee_mainpage') }}">Employee </a></li>
+                    <li><a id="cus" href="{{ url_for('customer_mainpage') }}" data-lang="customer"> </a></li>
+                    <li><a id="emp" href="{{ url_for('employee_mainpage') }}" data-lang="employee"> </a></li>
                 </ul>
                 <ul id="bar" aria-orientation="horizontal">
                     <!-- <div id="navibar" aria-orientation="horizontal" align="center"> -->
-                    <li><a href="pets_tips.html">Pets Tips</a></li>
-                    <li><a href="pet_shop.html">Pets Shop</a></li>
-                    <li><a href="about_us.html">About Us</a></li>
-                    <li ><a id="homebtn" href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="pets_tips.html" data-lang="petstips"></a></li>
+                    <li><a href="pet_shop.html" data-lang="petsshop"></a></li>
+                    <li><a href="about_us.html" data-lang="aboutus"></a></li>
+                    <li ><a id="homebtn" href="{{ url_for('index') }}" data-lang="home"></a></li>
                     <!-- </div> -->
                 </ul>
                 </div>
             </div>
 
             <div align="right">
-                <a href="{{url_for('logoutEmployee')}}">Log out</a>
+                <a href="{{url_for('logoutEmployee')}}" data-lang="logout"></a>
             </div>
         </div>
         <br>
@@ -48,7 +48,7 @@
         
 <div id="bottom">
     <br><br><br><br><br>
-    <p><strong>Contact Us</strong>
+    <p><strong data-lang="contactus"></strong>
         <br><br>Healing Paws Veterinary Hospital
         <br>603 Hampton Pointe Blvd, Suite 603-5
         <br>Hillsborough, NC 27278

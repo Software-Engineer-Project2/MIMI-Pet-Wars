@@ -21,18 +21,18 @@
             {% endfor %}
         {% endif %}
  <form action='/customer_profile' method="POST">
-    <label>Phone: </label>
+    <label data-lang="phone">: </label>
     <input type="text" name="phone" value="{{customer.Cphone}}"><br>
-       <label> Gender: </label><br>
+       <label data-lang="gender"> : </label><br>
      {% if customer.Cgender=='0' %}
-    <input type="radio" name="gender" value="0" checked="checked">Male<br>
-    <input type="radio" name="gender" value="1">Female<br>
+    <input type="radio" name="gender" value="0" checked="checked" data-lang="male">Male<br>
+    <input type="radio" name="gender" value="1" data-lang="female">Female<br>
      {% else %}
-     <input type="radio" name="gender" value="0">Male<br>
-    <input type="radio" name="gender" value="1"  checked="checked">Female<br>
+     <input type="radio" name="gender" value="0" data-lang="male">Male<br>
+    <input type="radio" name="gender" value="1"  checked="checked" data-lang="female">Female<br>
      {% endif %}
 
-    <label>Email: </label>
+    <label data-lang="email">: </label>
      <input type="text" name="email" value="{{customer.Cemail}}"><br>
   <input type="submit" value="Reset">
    </form>

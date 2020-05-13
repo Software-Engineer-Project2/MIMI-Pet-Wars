@@ -70,13 +70,13 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="app-profile.html"><i class="icon-user"></i> <span data-lang="profile"></span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="page-lock.html"><i class="icon-lock"></i> <span data-lang="lockscreen"></span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="page-login.html"><i class="icon-key"></i> <span data-lang="logout"></span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -110,48 +110,48 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label">EMPLOYEE</li>
+                    <li class="nav-label" data-lang="employee"></li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Appointment</span>
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text" data-lang="appointment"></span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{url_for('employee_appo_checkin')}}">Check-in Office</a></li>
-                            <li><a href="{{url_for('employee_appo_outpatient')}}">Out-patient Department</a></li>
-                            <li><a href="{{url_for('employee_appo_inpatient')}}">In-patient Department</a></li>
-                            <li><a href="{{url_for('employee_appo_operation')}}">Operation Department</a></li>
-                            <li><a href="{{url_for('employee_appo_completed')}}">Completed Appointment</a></li>
+                            <li><a href="{{url_for('employee_appo_checkin')}}" data-lang="check-inoffice"></a></li>
+                            <li><a href="{{url_for('employee_appo_outpatient')}}" data-lang="out-patientdepartment"></a></li>
+                            <li><a href="{{url_for('employee_appo_inpatient')}}" data-lang="in-patientdepartment"></a></li>
+                            <li><a href="{{url_for('employee_appo_operation')}}" data-lang="operationdepartment"></a></li>
+                            <li><a href="{{url_for('employee_appo_completed')}}" data-lang="completedappointment"></a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-menu menu-icon"></i><span class="nav-text">List</span>
+                            <i class="icon-menu menu-icon"></i><span class="nav-text" data-lang="list"></span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{url_for('employee_pets')}}">Pet List</a></li>
-                            <li><a href="{{url_for('employee_customers')}}">Customer List</a></li>
-                            <li><a href="{{url_for('employee_doctors')}}">Doctor List</a></li>
+                            <li><a href="{{url_for('employee_pets')}}" data-lang="petlist"></a></li>
+                            <li><a href="{{url_for('employee_customers')}}" data-lang="customerlist"></a></li>
+                            <li><a href="{{url_for('employee_doctors')}}" data-lang="doctorlist"></a></li>
                             
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Post</span>
+                            <i class="icon-envelope menu-icon"></i> <span class="nav-text" data-lang="post"></span>
                         </a>
                         <ul aria-expanded="false">
                             
-                            <li><a href="{{url_for('employee_posts')}}">View Posts</a></li>
+                            <li><a href="{{url_for('employee_posts')}}" data-lang="viewposts"></a></li>
                         </ul>
                     </li>
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-notebook menu-icon"></i> <span class="nav-text">Store</span>
+                            <i class="icon-notebook menu-icon"></i> <span class="nav-text" data-lang="store"></span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url_for('addproduct') }}">Add New Product</a></li>
-                            <li><a href="{{ url_for('listproduct') }}">Manage Products</a></li>
+                            <li><a href="{{ url_for('addproduct') }}" data-lang="addnewproduct"></a></li>
+                            <li><a href="{{ url_for('listproduct') }}" data-lang="manageproducts"></a></li>
                         </ul>
                     </li>
 
@@ -159,7 +159,7 @@
                     <br><br><br>
                     <br><br><br>
                     <li>
-                        <a href="{{url_for('logoutEmployee')}}" class="btn mb-1 btn-outline-primary">Log out</a>
+                        <a href="{{url_for('logoutEmployee')}}" class="btn mb-1 btn-outline-primary" data-lang="logout"></a>
                     </li>
                 </ul>
             </div>

@@ -8,17 +8,17 @@
 {% block content %}
 
  <form action='/employee_doctorss/edit_doctor/{{doc.id}}' method="POST">
-    <label>Doctor Name: </label>
+    <label data-lang="doctorname">: </label>
     <input type="text" name="name" value="{{doc.Dname}}"><br>
-       <label> Doctor Department: </label>
+       <label data-lang="doctordepartment"> : </label>
     <input type="text" name="department" value="{{doc.department}}"><br>
-    <label>Doctor Phone: </label>
+    <label data-lang="doctorphone">: </label>
      <input type="text" name="phone" value="{{doc.Dphone}}"><br>
-    <label>Doctor Level: </label>
+    <label data-lang="doctorlevel">: </label>
      <input type="text" name="level" value="{{doc.Dlevel}}"><br>
-     <label>Doctor Information: </label>
+     <label data-lang="doctorinformation">: </label>
      <input type="text" name="info" value="{{doc.Dinf}}"><br>
-     <label>Doctor Hospital: </label>
+     <label data-lang="doctorhospital">: </label>
      {% for hospital in hospitals %}
      <input type="radio" name="hospital" value="{{hospital.id}}">{{hospital.Hname}}<br>
      {% endfor %}

@@ -6,9 +6,9 @@
 		<ul>
 		{% for p in post %}
 			<li><a href="{{ url_for('replyEmployee',id=p.id)}}" >
-				Content : {{ p.Pcontent }}
-                Date:{{p.Pdate}}
-                Customer: {{p.Pcustomer}}
+				<span data-lang="content">: {{ p.Pcontent }}</span>
+                <span data-lang="date">: {{p.Pdate}}</span>
+                <span data-lang="customer">: {{p.Pcustomer}}</span> 
                 </a>
 
             </li>
@@ -16,7 +16,7 @@
 		</ul>
 		<hr>
 	{% else %}
-		<p>No message!</p>
+		<p data-lang="no message">!</p>
 	{% endif %}
 
 
