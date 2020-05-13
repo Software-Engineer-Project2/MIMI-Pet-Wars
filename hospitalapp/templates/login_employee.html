@@ -59,7 +59,7 @@
                                     action="" method="post" novalidate>
                                         {{ form.hidden_tag() }}
                                         <p class="form-group">
-                                            {{ form.Eusername.label }}<br>
+                                            <span data-lang="username">{{ form.Eusername.label }}</span><br>
                                             {{ form.Eusername(size=32) }}
                                             
                                             {% for error in form.Eusername.errors %}
@@ -68,7 +68,7 @@
                                             
                                         </p>
                                         <p class="form-group">
-                                            {{ form.Epassword.label }}<br>
+                                            <span data-lang="password">{{ form.Epassword.label }}</span><br>
                                             {{ form.Epassword(size=32) }}
                                             
                                             {% for error in form.Epassword.errors %}
@@ -76,12 +76,14 @@
                                             {% endfor %}
                                             
                                         </p>
-                                        <p>{{ form.Eremember_me() }} {{ form.Eremember_me.label }}</p>
-                                        <p>{{ form.Esubmit() }}</p>
+                                        <p>{{ form.Eremember_me() }} 
+                                            <span data-lang="rememberme">{{ form.Eremember_me.label }}</span></p>
+                                        
+                                        <button class="btn login-form__btn submit w-100" data-lang="login">{{ form.Esubmit() }}</button>
                                     </form>
                                 
 
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="{{ url_for('signupEmployee') }}" class="text-primary">Sign Up</a> now</p>
+                                <p class="mt-5 login-form__footer"><span data-lang="haveaccount"><span data-lang="haveaccount"></span> <a href="{{ url_for('signupEmployee') }}" class="text-primary"><span data-lang="signup"></span></a> <span data-lang="now"></span></p>
                             </div>
                         </div>
                     </div>
@@ -101,6 +103,53 @@
     <script src="../static/js/settings.js"></script>
     <script src="../static/js/gleek.js"></script>
     <script src="../static/js/styleSwitcher.js"></script>
+
+     <!-- I18N -->
+     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+     <script src="../static/js/jquery.i18n.properties-1.0.9.js"></script>
+     <script>
+     var language_pack = {
+         now_lang : 0, // 0:ch,1:en
+         loadProperties : function(new_lang){
+             var self = this;
+             var tmp_lang = '';
+             if(new_lang == 0){
+                 tmp_lang = 'zh';
+                 $('body').removeClass('en').addClass('zh');
+             }else{
+                 tmp_lang = 'en';
+                 $('body').removeClass('zh').addClass('en');
+             }
+             jQuery.i18n.properties({//加载资浏览器语言对应的资源文件
+                 name: 'strings', //资源文件名称
+                 path:'../static/i18n/', //资源文件路径
+                 language: tmp_lang,
+                 cache: false,
+                 mode:'map', //用Map的方式使用资源文件中的值
+                 callback: function() {//加载成功后设置显示内容
+                     for(var i in $.i18n.map){
+                         $('[data-lang="'+i+'"]').text($.i18n.map[i]);
+                     }
+                     // document.title = $.i18n.map['string_title'];
+                 }
+             });
+             self.now_lang = new_lang;
+         }
+     }
+     $(document).ready(function(){
+         language_pack.loadProperties(0);
+         
+         $('#J_lang_switch').click(function(){
+             var new_lang;
+             if(language_pack.now_lang == 0){
+                 new_lang = 1;
+             }else{
+                 new_lang = 0;
+             }
+             language_pack.loadProperties(new_lang);
+         });
+     });
+     </script>
 </body>
 </html>
 

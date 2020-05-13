@@ -19,14 +19,15 @@
                         <label data-lang="petage"></label>
                         <input type="text" name="pet_age" ><br>
                         <label data-lang="petgender"></label>
-                        <input type="radio" name="pet_gender" value="1" / data-lang="male"> 
-                        <input type="radio" name="pet_gender" value="2" / data-lang="female"> <br />
+                        <input type="radio" name="pet_gender" id="pet_gender1" value="1"  ><label for="pet_gender1" data-lang="male"></label>
+                        <input type="radio" name="pet_gender" id="pet_gender2" value="2"  ><label for="pet_gender2" data-lang="female"></label><br />
                         <label data-lang="pettype"></label>
-                        <input type="radio" name="pet_species" value="dog" / data-lang="dog"> 
-                        <input type="radio" name="pet_species" value="cat" / data-lang="cat"> <br />
+                        <input type="radio" name="pet_species" id="pet_species1" value="dog"  ><label for="pet_species1" data-lang="dog"></label>
+                        <input type="radio" name="pet_species" id="pet_species2" value="cat"  ><label for="pet_species2" data-lang="cat"></label><br />
+                        
                         <label data-lang="petinformation"></label>
                         <input type="text" name="pet_info" ><br>
-                        <input type="submit" value="Add Pet">
+                        <button type="submit" data-lang='addpet'></button>
 
                         </form>
                         </fieldset>
@@ -110,7 +111,7 @@
                                             <option value="{{doc.Dname}}">
                                             {% endfor%}
                                         </datalist><br>
-                                    <input type="submit" value="Emergency Appointment Submit">
+                                    <button type="submit" data-lang="eappsub"></button>
 
                                 </form>
                         </fieldset>
@@ -142,7 +143,8 @@
                                         </datalist><br>
                                     <label data-lang="appointmentinformation"></label>
                                     <input type="text" name="info" ><br>
-                                    <input type="submit" value="Standard Appointment Submit">
+                                    <button type="submit" data-lang="sappsub"></button>
+
 
                                 </form>
                                 </form>
@@ -219,7 +221,7 @@
                                 <input type="text" name="topic" ><br>
                                 <label data-lang="content"></label>
                                 <input type="text" name="content" ><br>
-                                <input type="submit" value="Post Submit">
+                                <button type="submit" data-lang="submitpost"></button>
 
                                 </form>
                         </fieldset>
