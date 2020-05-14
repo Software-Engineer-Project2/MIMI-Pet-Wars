@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3b12175a-60ac-453e-bbf6-8294750aee4f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/customer_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/customer_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalapp/templates/employee_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/employee_profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hospitalapp/templates/start.html" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalapp/templates/start.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -185,7 +183,7 @@
       <workItem from="1589217770039" duration="5036000" />
       <workItem from="1589267994344" duration="1456000" />
       <workItem from="1589418938263" duration="3036000" />
-      <workItem from="1589422010955" duration="272000" />
+      <workItem from="1589422010955" duration="3893000" />
     </task>
     <servers />
   </component>
@@ -206,10 +204,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1208" y="96" key="#Deployment" timestamp="1589222196985">
+    <state x="-1208" y="96" key="#Deployment" timestamp="1589422593293">
       <screen x="-1600" y="0" width="1600" height="870" />
     </state>
-    <state x="-1208" y="96" key="#Deployment/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1589222196985" />
+    <state x="-1208" y="96" key="#Deployment/0.0.1536.832/-1600.0.1600.870@-1600.0.1600.870" timestamp="1589422593293" />
     <state x="617" y="179" key="#Notifications" timestamp="1584432877323">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
