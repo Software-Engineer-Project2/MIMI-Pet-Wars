@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.png') }}">
     <!-- Custom Stylesheet -->
-    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 
 </head>
 
@@ -41,10 +41,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="/">
-                    <b class="logo-abbr"><img src="../static/images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="../static/./images/logo-compact.png" alt="" width="80%"></span>
+                    <b class="logo-abbr"><img src="{{ url_for('static', filename='images/logo.png') }}" alt=""> </b>
+                    <span class="logo-compact"><img src="{{ url_for('static', filename='images/logo-compact.png') }}" alt="" width="80%"></span>
                     <span class="brand-title">
-                        <img src="../static/images/logo-text.png" alt="" width="80%">
+                        <img src="{{ url_for('static', filename='images/logo-text.png') }}" alt="" width="80%">
                     </span>
                 </a>
             </div>
@@ -70,25 +70,12 @@
 
 
                     <ul class="clearfix">
-                        <li class="icons dropdown d-none d-md-flex">
-                            <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
-                                <span data-lang="language"></span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
-                            </a>
-                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li><a href="javascript:void()" data-lang="english"></a></li>
-                                        <li><a href="javascript:void()" data-lang="chinese"></a></li>
-                                        <li><button id="J_lang_switch" data-lang="change"></button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                        
                         
                         <li class="icons dropdown">
                             <div    data-toggle="dropdown">
                                 <!-- <i class="icon-badge menu-icon"></i> -->
-                                <img src="../static/images/user/1.png" height="40" width="40" alt="">
+                                <img src="{{ url_for('static', filename='images/user/1.png') }}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -164,9 +151,10 @@
                     </li>
                     <br><br><br>
                     <br><br><br>
-                    <li>
-                        <a href="{{url_for('logoutCustomer')}}" class="btn mb-1 btn-outline-primary" data-lang="logout"></a>
-                    </li>
+                    <li class="nav-label" data-lang="setting"></li>
+                    <li ><a  href="javascript:void()" aria-expanded="false"  id="J_lang_switch" >
+                        <i class="icon-speedometer menu-icon"></i><span  class="nav-text" data-lang="change"></span></a></li>
+                    
                 </ul>
             </div>
         </div>
@@ -223,58 +211,19 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="../static/plugins/common/common.min.js"></script>
-    <script src="../static/js/custom.min.js"></script>
-    <script src="../static/js/settings.js"></script>
-    <script src="../static/js/gleek.js"></script>
-    <script src="../static/js/styleSwitcher.js"></script>
+    
+
+    <script src="{{ url_for('static', filename='plugins/common/common.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/custom.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/gleek.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/styleSwitcher.js') }}"></script>
 
      <!-- I18N -->
      <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-     <script src="../static/js/jquery.i18n.properties-1.0.9.js"></script>
-     <script>
-     var language_pack = {
-         now_lang : 0, // 0:ch,1:en
-         loadProperties : function(new_lang){
-             var self = this;
-             var tmp_lang = '';
-             if(new_lang == 0){
-                 tmp_lang = 'zh';
-                 $('body').removeClass('en').addClass('zh');
-             }else{
-                 tmp_lang = 'en';
-                 $('body').removeClass('zh').addClass('en');
-             }
-             jQuery.i18n.properties({//加载资浏览器语言对应的资源文件
-                 name: 'strings', //资源文件名称
-                 path:'../static/i18n/', //资源文件路径
-                 language: tmp_lang,
-                 cache: false,
-                 mode:'map', //用Map的方式使用资源文件中的值
-                 callback: function() {//加载成功后设置显示内容
-                     for(var i in $.i18n.map){
-                         $('[data-lang="'+i+'"]').text($.i18n.map[i]);
-                     }
-                     // document.title = $.i18n.map['string_title'];
-                 }
-             });
-             self.now_lang = new_lang;
-         }
-     }
-     $(document).ready(function(){
-         language_pack.loadProperties(0);
-         
-         $('#J_lang_switch').click(function(){
-             var new_lang;
-             if(language_pack.now_lang == 0){
-                 new_lang = 1;
-             }else{
-                 new_lang = 0;
-             }
-             language_pack.loadProperties(new_lang);
-         });
-     });
-     </script>
+     <script src="{{ url_for('static', filename='js/jquery.i18n.properties-1.0.9.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/i18.js') }}"></script>
+     
 </body>
 
 </html>
