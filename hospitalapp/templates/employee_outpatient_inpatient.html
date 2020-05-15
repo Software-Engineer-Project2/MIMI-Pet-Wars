@@ -1,28 +1,51 @@
-{% extends 'employee_loggedin_base.html' %}
-{% block title %}
-    <title>{{title}}</title>
-{% endblock %}
+
 {% block content %}
 
 <form action="/employee_appo_outpatient/inpatient/{{appoint.id}}" method="POST">
-   {{ form.csrf_token }}
-         {{ form.hidden_tag() }}
-      <p>
-         <div class="form-group">
-            {{ form.room.label }}<br>
-            {{ form.room(size=32) }}
-         </div>
+{{ form.csrf_token }}
+{{ form.hidden_tag() }}
+<p>
+       <div class="form-group">
+       {{ form.room.label }}<br>
+       <table>
+              <tbody>
+                     <tr>
+                     <td align="center"><input name="room" type="radio" value="101" checked="checked">101</td>   
+                     <td align="center"><input name="room" type="radio" value="102">102</td>   
+                     <td align="center"><input name="room" type="radio" value="103">103</td>   
+                     <td align="center"><input name="room" type="radio" value="104">104</td>   
+                     <td align="center"><input name="room" type="radio" value="105">105</td>   
+                     </tr>
+                     <tr>
+                     <td align="center"><input name="room" type="radio" value="201">201</td>   
+                     <td align="center"><input name="room" type="radio" value="202">202</td>   
+                     <td align="center"><input name="room" type="radio" value="203">203</td>   
+                     <td align="center"><input name="room" type="radio" value="204">204</td>   
+                     <td align="center"><input name="room" type="radio" value="205">205</td>   
+                     </tr>
+                     <tr>
+                     <td align="center"><input name="room" type="radio" value="301">301</td>   
+                     <td align="center"><input name="room" type="radio" value="302">302</td>   
+                     <td align="center"><input name="room" type="radio" value="303">303</td>   
+                     <td align="center"><input name="room" type="radio" value="304">304</td>   
+                     <td align="center"><input name="room" type="radio" value="305">305</td>   
+                            
+                     </tr>
+              </tbody>
+              
+       </table>
+       </div>
 			{% for error in form.room.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-      </p>
+       <span style="color: red;">[{{ error }}]</span>
+       {% endfor %}<br>
+</p>
 
 
       <p>
          <div class="form-group">
                 {{ form.startdate.label }}<br>
-                {{ form.startdate }}
-         </div>
+                <input name="startdate" type="date" />
+              </div>
                 {% for error in form.startdate.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}<br>
@@ -31,8 +54,8 @@
  <p>
          <div class="form-group">
                 {{ form.enddate.label }}<br>
-                {{ form.enddate }}
-         </div>
+                <input name="enddate" type="date" />
+              </div>
                 {% for error in form.enddate.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}<br>

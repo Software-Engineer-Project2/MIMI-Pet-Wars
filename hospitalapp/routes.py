@@ -566,10 +566,8 @@ def employee_appo_outpatient():
         customers = Customer.query.filter().all()
         appointments = Appointment.query.filter(Appointment.Astart == '1',
                                                 Appointment.Acomplete == '0').all()  # type-1 complete-0 - Standard Appointments not checkin
-        appointments2 = Appointment.query.filter(Appointment.Astart == '1',
-                                                 Appointment.Ostatus == '3').all()
-        appointments3 = Appointment.query.filter(Appointment.Astart == '1',
-                                                 Appointment.Hstatus == '5').all()
+        appointments2 = Appointment.query.filter(Appointment.Astart == '1',Appointment.Ostatus == '3').all()
+        appointments3 = Appointment.query.filter(Appointment.Astart == '1',Appointment.Hstatus == '5').all()
         appointments.append(appointments2)
         appointments.append(appointments3)
         print(appointments)
@@ -596,16 +594,24 @@ def employee_outpatient_operation(id):
         appoint = Appointment.query.filter(Appointment.id == id).first()
         doctor = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
         if appoint.Ostatus == '0':
-            if form.validate_on_submit():
-                operation = Operation(oappointment=appoint, odoctor=doctor, Odate=form.Odate.data, Oinf=form.Oinf.data,
-                                      Ocost=form.Ocost.data)
-                appoint.OperationStatus = "Inform customer operation"
-                appoint.Ostatus = '1'
-                db.session.add(operation)
-                db.session.commit()
-                return redirect(url_for('employee_appo_outpatient'))
-            return render_template('employee_outpatient_operation.html',
-                                   title='Enter operation information and inform customer', form=form, appoint=appoint)
+            if request.method == 'POST':
+                if is_number(form.Ocost.data):
+                    date_str = request.form["date"]
+                    date_str = date_str+" 00:00:00"
+                    date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+                    operation = Operation(oappointment=appoint, odoctor=doctor, Odate=date, Oinf=form.Oinf.data,
+                                        Ocost=form.Ocost.data)
+                    appoint.OperationStatus = "Inform customer operation"
+                    appoint.Ostatus = '1'
+                    db.session.add(operation)
+                    db.session.commit()
+                    return redirect(url_for('employee_appo_outpatient'))
+                    
+                else:
+                    flash("Please enter the cost with number")
+                    redirect(url_for("employee_outpatient_operation", id=id))
+            return render_template('employee_outpatient_operation.html', title='Display appointment not checkin yet',
+                               appoint=appoint,doctor=doctor,form=form)
         else:
             flash("The appointment already has surgery")
             return redirect(url_for('employee_appo_outpatient'))
@@ -621,19 +627,36 @@ def employee_outpatient_inpatient(id):
         appoint = Appointment.query.filter(Appointment.id == id).first()
         doctor = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
         if appoint.Hstatus == '0':
-            if form.validate_on_submit():
-                if form.startdate.data >= form.enddate.data:
-                    flash("Please enter an end date later than the start date ")
-                    redirect(url_for("employee_outpatient_inpatient", id=id))
+            if request.method == 'POST':
+                if is_number(form.cost.data):
+                    startdate_str = request.form["startdate"]
+                    enddate_str = request.form["enddate"]
+                    startdate_str = startdate_str+" 00:00:00"
+                    enddate_str = enddate_str+" 00:00:00"
+                    if startdate_str==" 00:00:00":
+                        flash("Please enter start date ")
+                        redirect(url_for("employee_outpatient_inpatient", id=id))
+                    elif enddate_str==" 00:00:00":
+                        flash("Please enter end date ")
+                        redirect(url_for("employee_outpatient_inpatient", id=id))
+                    else:
+                        startdate = datetime.strptime(startdate_str, '%Y-%m-%d %H:%M:%S')
+                        enddate = datetime.strptime(enddate_str, '%Y-%m-%d %H:%M:%S')
+                        if startdate >= enddate:
+                            flash("Please enter an end date later than the start date ")
+                            redirect(url_for("employee_outpatient_inpatient", id=id))
+                        else:
+                            inpatient = Hospitalization(happointment=appoint, sdoctor=doctor, Sroom=request.form["room"],
+                                                        Sstartdate=startdate, Senddate=enddate,
+                                                        Scost=form.cost.data)
+                            appoint.HospitalizationStatus = "Inform customer inpatient"
+                            appoint.Hstatus = '1'
+                            db.session.add(inpatient)
+                            db.session.commit()
+                            return redirect(url_for('employee_appo_outpatient'))
                 else:
-                    inpatient = Hospitalization(happointment=appoint, sdoctor=doctor, Sroom=form.room.data,
-                                                Sstartdate=form.startdate.data, Senddate=form.enddate.data,
-                                                Scost=form.cost.data)
-                    appoint.HospitalizationStatus = "Inform customer inpatient"
-                    appoint.Hstatus = '1'
-                    db.session.add(inpatient)
-                    db.session.commit()
-                    return redirect(url_for('employee_appo_outpatient'))
+                    flash("Please enter correct cost ")
+                    redirect(url_for("employee_outpatient_inpatient", id=id))
             return render_template('employee_outpatient_inpatient.html',
                                    title='Enter operation information and inform customer', form=form, appoint=appoint)
         else:
@@ -841,14 +864,21 @@ def employee_doctor_edit(id):
             hospitals = Hospital.query.all()
             return render_template('employee_doctor_edit.html',doc = doc, hospitals=hospitals)
         else:
-            doc.Dname = request.form['name']
-            doc.department = request.form['department']
-            doc.Dphone= request.form['phone']
-            doc.Dlevel= request.form['level']
-            doc.Dinf= request.form['info']
-            doc.Dhospital= request.form['hospital']
-            db.session.commit()
-            return redirect(url_for('employee_doctors'))
+            if validatePhone(request.form['phone'])==0:
+                flash("Please enter correct phone")
+                return redirect(url_for('employee_doctor_edit',id=id))
+            if is_number(request.form['level'])is False:
+                flash("Please enter correct level")
+                return redirect(url_for('employee_doctor_edit',id=id))
+            else:
+                doc.Dname = request.form['name']
+                doc.department = request.form['department']
+                doc.Dphone= request.form['phone']
+                doc.Dlevel= request.form['level']
+                doc.Dinf= request.form['info']
+                doc.Dhospital= request.form['hospital']
+                db.session.commit()
+                return redirect(url_for('employee_doctors'))
     else:
         return redirect(url_for('loginEmployee'))
 
@@ -859,11 +889,18 @@ def employee_add_doctor():
             hospitals = Hospital.query.all()
             return render_template('employee_add_doctor.html', hospitals=hospitals)
         else:
-            doc = Doctor(Dname = request.form['name'],department = request.form['department'],
-                         Dphone= request.form['phone'],Dlevel= request.form['level'],Dinf= request.form['info'],Dhospital= request.form['hospital'])
-            db.session.add(doc)
-            db.session.commit()
-            return redirect(url_for('employee_doctors'))
+            if validatePhone(request.form['phone'])==0:
+                flash("Please enter correct phone")
+                return redirect(url_for('employee_add_doctor'))
+            if is_number(request.form['level'])is False:
+                flash("Please enter correct level")
+                return redirect(url_for('employee_add_doctor'))
+            else:
+                doc = Doctor(Dname = request.form['name'],department = request.form['department'],
+                            Dphone= request.form['phone'],Dlevel= request.form['level'],Dinf= request.form['info'],Dhospital= request.form['hospital'])
+                db.session.add(doc)
+                db.session.commit()
+                return redirect(url_for('employee_doctors'))
     else:
         return redirect(url_for('loginEmployee'))
 
@@ -1724,3 +1761,19 @@ def validateEmail(email):
         if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email) != None:
             return 1
     return 0
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        pass
+
+    try:
+        import unicodedata
+        unicodedata.numeric(s)
+        return True
+    except (TypeError, ValueError):
+        pass
+
+    return False

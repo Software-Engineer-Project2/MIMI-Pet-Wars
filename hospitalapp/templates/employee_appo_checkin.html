@@ -110,7 +110,6 @@
                                     {% for customer in customers%}
                                        {%  if pet.Powner==customer.id %}
                                     <tr>
-                                       <form action='/employee_appo_checkin' method="POST">
                                        <td align="center">{{sa.id}}</td>
                                        <td align="center">{{customer.Cname}}</td>
                                        <td align="center">{{pet.Pname}}</td>
@@ -122,9 +121,8 @@
                
                                        </td>
                                        <td align="center">
-                                             <a href="{{ url_for('employee_checkin', id=sa.id) }}" data-lang="check_in"></a>
-                           </a>
-               
+                                           <a href="{{ url_for('employee_checkin', id=sa.id) }}" data-lang="check_in"></a></td>
+
                                        </form>
                                     </tr>
                                        {% endif %}

@@ -98,7 +98,7 @@ class AddOperationForm(FlaskForm):
         'class': "form-control",
         'placeholder': 'Please enter the information'
     }, validators=[DataRequired()])
-    Ocost = StringField(label='Cost', render_kw={
+    Ocost = StringField(label='Cost(Please enter number)', render_kw={
         'class': "form-control",
         'placeholder': 'Please enter the Cost'
     }, validators=[DataRequired()])
@@ -110,15 +110,15 @@ class AddHospitalizationForm(FlaskForm):
         'class': "form-control",
         'placeholder': 'Please enter the Room'
     }, validators=[DataRequired()])
-    startdate = DateField(label='Date of appointment (format: YYYY-MM-DD)', format='%Y-%m-%d', render_kw={
+    startdate = DateField(label='Start date ', format='%Y-%m-%d', render_kw={
         'class': "form-control",
         'placeholder': 'Please enter start date'
     }, validators=[DataRequired()])
-    enddate = DateField(label='Date of appointment (format: YYYY-MM-DD)', format='%Y-%m-%d', render_kw={
+    enddate = DateField(label='End date ', format='%Y-%m-%d', render_kw={
         'class': "form-control",
         'placeholder': 'Please enter end date'
     }, validators=[DataRequired()])
-    cost = StringField(label='Cost', render_kw={
+    cost = StringField(label='Cost (Please enter number)', render_kw={
         'class': "form-control",
         'placeholder': 'Please enter the Cost'
     }, validators=[DataRequired()])

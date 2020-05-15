@@ -1,8 +1,17 @@
-{% extends 'employee_loggedin_base.html' %}
-{% block title %}
-    <title>{{title}}</title>
-{% endblock %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                {% if message %}
+                    <div class="alert alert-warning" role="alert">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+        {% if form and form.errors %}
+            {% for key, error in form.errors.items() %}
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+
 
 <form action="/employee_appo_outpatient/operation/{{appoint.id}}" method="POST">
    {{ form.csrf_token }}
@@ -10,7 +19,7 @@
       <p>
          <div class="form-group">
             {{ form.Odate.label }}<br>
-            {{ form.Odate(size=32) }}
+    <input name="date" type="date" />
          </div>
 			{% for error in form.Odate.errors %}
             <span style="color: red;">[{{ error }}]</span>
