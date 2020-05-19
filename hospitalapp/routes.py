@@ -3,7 +3,8 @@ import time
 import re
 from datetime import datetime
 
-from flask import render_template, flash, redirect, url_for, session, request, abort
+from flask import render_template, flash, redirect, url_for, session, request, abort, jsonify
+from sqlalchemy.testing.pickleable import User
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
@@ -15,7 +16,6 @@ from flask_uploads import UploadSet, IMAGES, configure_uploads
 
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
-
 @app.route('/test')
 def plz():
     return render_template('base.html')
@@ -1198,10 +1198,8 @@ def orderdetail(id):
 def signupCustomer():
     form = SignupCustomer()
     if form.validate_on_submit():
-        print("888888")
         if form.Cpassword.data != form.Cpassword2.data:
             flash('Passwords do not match!')
-            print("99999")
             return redirect(url_for('signupCustomer'))
         passw_hash = generate_password_hash(form.Cpassword.data)
         if validatePhone(form.Cphone.data) == 1:
@@ -1215,6 +1213,16 @@ def signupCustomer():
         else:
             flash("Please enter the correct email")
             return redirect(url_for("signupCustomer"))
+        userEmail_in_db = Customer.query.filter(Customer.Cemail == form.Cemail.data).first()
+        userPhone_in_db = Customer.query.filter(Customer.Cphone == form.Cphone.data).first()
+        if userEmail_in_db is not None:
+            flash('Email has been registered!')
+            mes = 'Email has been registered!'
+            return redirect(url_for('signupCustomer'))
+        if userPhone_in_db is not None:
+            flash('Phone has been registered!')
+            return redirect(url_for('signupCustomer'))
+        passw_hash = generate_password_hash(form.Cpassword.data)
         # customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data, password_hash=passw_hash)
         customer = Customer(Cname=form.Cusername.data, Cphone=phone, Cemail=email,
                             Cgender=form.Cgender.data, Cpassword=passw_hash)

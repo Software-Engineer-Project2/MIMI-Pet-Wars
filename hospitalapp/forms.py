@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm, Form
 from wtforms import StringField, FileField, SubmitField, PasswordField, BooleanField, IntegerField, RadioField, \
     DateField, TextField, SelectField,TextAreaField,DateTimeField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length, Regexp, EqualTo
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from hospitalapp import photos, db
@@ -23,14 +23,15 @@ class LoginFormEmployee_chinese(FlaskForm):
 
 
 class SignupFormEmployee(FlaskForm):
-    Eusername = StringField('Username', validators=[DataRequired()])
+    Eusername = StringField('Username', validators=[DataRequired(),Regexp('^[a-zA-Z0-9]*$',
+message='The username should contain only a-z, A-Z and 0-9.')])
     Eidcard = StringField('ID Card Number', validators=[DataRequired()])
     Ephone = StringField('phone', validators=[DataRequired()])
     Egender = RadioField('Gender', choices=[('0', 'Male'), ('1', 'Female')], validators=[DataRequired()])
     Eemail = StringField('Email', validators=[DataRequired()])
     Ehiredate = DateField('Date of employment (format: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
-    Epassword = PasswordField('Password', validators=[DataRequired()])
-    Epassword2 = PasswordField('Repeat Password', validators=[DataRequired()])
+    Epassword = PasswordField('Password', validators=[DataRequired(),Length(8, 25), EqualTo('Epassword2')])
+    Epassword2 = PasswordField('Repeat Password', validators=[DataRequired(),Length(8, 25)])
     Esubmit = SubmitField('Register')
 
 
@@ -213,9 +214,10 @@ class LoginFormCustomer_chinese(FlaskForm):
 
 
 class SignupCustomer(FlaskForm):
-    Cusername = StringField('Username', validators=[DataRequired()])
-    Cpassword = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
-    Cpassword2 = PasswordField('Repeat Your Password', validators=[DataRequired(), Length(8, 128)])
+    Cusername = StringField('Username', validators=[DataRequired(),Length(8, 30), Regexp('^[a-zA-Z0-9]*$',
+message='The username should contain only a-z, A-Z and 0-9.')])
+    Cpassword = PasswordField('Password', validators=[DataRequired(), Length(8, 25), EqualTo('Cpassword2')])
+    Cpassword2 = PasswordField('Repeat Your Password', validators=[DataRequired(), Length(8, 25)])
     Cgender = RadioField('Gender', choices=[('1', 'Male'), ('2', 'Female')], default=1, validators=[DataRequired()])
     Cphone = StringField('Phone', validators=[DataRequired()])
     Cemail = StringField('Email', validators=[DataRequired()])
@@ -315,10 +317,12 @@ class MakeAppointment_chinese(FlaskForm):
 
 
 class Addpetinformation(FlaskForm):
-    Pname = StringField('Pet Name', validators=[DataRequired()])
+    Pname = StringField('Pet Name', validators=[DataRequired(),Regexp('^[0-9]*$',
+message='The pet age should contain be a number.')])
     Page = IntegerField('Pet age',validators=[DataRequired()])
     Psex = RadioField('Gender', choices=[('1', 'Male'), ('2', 'Female')], default=1, validators=[DataRequired()])
-    Pspecies = StringField('Pet Type', validators=[DataRequired()])
+    Pspecies = StringField('Pet Type', validators=[DataRequired(),Regexp('^[a-zA-Z]*$',
+message='The pet types should contain fill out a text（a-z to A-Z）.')])
     Pinfo = TextAreaField('Pet Information', validators=[DataRequired()])
     submit = SubmitField('Save')
 
