@@ -1,31 +1,56 @@
-{% extends 'loggedin_index.html' %}
+{% extends "senior_loggedin_base.html" %}
+
 {% block title %}
     <title>Modify Appointment</title>
 {% endblock %}
 {% block content %}
 <form action="/loggedin_home_senior/edit_appoint/{{appoint.id}}" method="POST">
 
-    <label data-lang="appointmenttype0foremergency1forstandard"> </label>
-    <input type="text" name="type" value="{{appoint.Atype}}"><br>
-    <label data-lang="appointmentdatetimeformatYYYY-MM-DD-HH-MM"></label>
-    <input type="text" name="date" value="{{appoint.Adate}}"><br>
-       <label data-lang="apointmentlocation"></label>
-    <input list="locationlist" name="location" value="{{appoint.Alocation}}">
-		<datalist id="locationlist">
-		    <option value="Shanghai">
-            <option value="Beijing">
-            <option value="Chengdu">
-		</datalist><br>
-    <label data-lang="apointmentDoctor"></label>
-    <input list="doctorlist" name="doctor" value="{{doc.Dname}}">
-		<datalist id="doctorlist">
-            {% for d in doctors%}
-		    <option value={{d.Dname}}>
-            {% endfor %}
-		</datalist><br>
+  <label data-lang="appointmenttype0foremergency1forstandard"></label><br>
+  {% if appoint.Atype=="0" %}
+  <input type="radio" name="type" value="0" checked="checked" checked="checked">Emergency<br>
+  <input type="radio" name="type" value="1" checked="checked" >Standard<br>
 
-        <label data-lang="otherdescription"></label>
-    <input type="text" name="information" value="{{appoint.Ainfo}}"><br>
-    <input type="submit" value="Submit">
+  {% else %}
+  <input type="radio" name="type" value="0" checked="checked" >Emergency<br>
+
+  <input type="radio" name="type" value="1" checked="checked" checked="checked" >Standard<br>
+
+  {% endif %}
+
+  <label data-lang="appointmentdatetimeformatYYYY-MM-DD-HH-MM"></label>
+
+  <input type="date" name="date" ><br>
+     <label data-lang="apointmentlocation"></label><br>
+
+     {% if appoint.Alocation =='Beijing' %}
+     <input type="radio" value="Beijing" name="location"  checked="checked" >Beijing<br>
+    <input type="radio" value="Shanghai" name="location" >Shanghai<br>
+    <input type="radio" value="Chengdu" name="location" >Chengdu<br>
+     {% elif appoint.Alocation =='Shanghai' %}
+     <input type="radio" value="Beijing" name="location"  >Beijing<br>
+     <input type="radio" value="Shanghai" name="location" checked="checked" >Shanghai<br>
+     <input type="radio" value="Chengdu" name="location" >Chengdu<br>
+     {% else %}
+     <input type="radio" value="Beijing" name="location"  >Beijing<br>
+     <input type="radio" value="Shanghai" name="location" >Shanghai<br>
+     <input type="radio" value="Chengdu" name="location" checked="checked">Chengdu<br>
+     {% endif %}
+
+
+
+  
+  <label data-lang="apointmentdoctor"></label><br>
+  {% for d in doctors%}
+  {% if d.id==appoint.Adoc %}
+  <input type="radio" name="doctor" value="{{d.Dname}}" checked="checked">{{d.Dname}}<br>
+  {% else %}
+  <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
+  {% endif %}
+  {% endfor %}<br>
+
+      <label data-lang="otherdescription"></label>
+  <input type="text" name="information" value="{{appoint.Ainfo}}"><br>
+  <input type="submit" value="Submit">
    </form>
 {% endblock %}

@@ -317,12 +317,11 @@ class MakeAppointment_chinese(FlaskForm):
 
 
 class Addpetinformation(FlaskForm):
-    Pname = StringField('Pet Name', validators=[DataRequired(),Regexp('^[0-9]*$',
+    Pname = StringField('Pet Name', validators=[DataRequired()])
+    Page = IntegerField('Pet age',validators=[DataRequired(),Regexp('^[0-9]*$',
 message='The pet age should contain be a number.')])
-    Page = IntegerField('Pet age',validators=[DataRequired()])
     Psex = RadioField('Gender', choices=[('1', 'Male'), ('2', 'Female')], default=1, validators=[DataRequired()])
-    Pspecies = StringField('Pet Type', validators=[DataRequired(),Regexp('^[a-zA-Z]*$',
-message='The pet types should contain fill out a text（a-z to A-Z）.')])
+    Pspecies = RadioField('Pet Type', choices=[('cat', 'Cat'), ('dog', 'Dog')], default=1, validators=[DataRequired()])
     Pinfo = TextAreaField('Pet Information', validators=[DataRequired()])
     submit = SubmitField('Save')
 

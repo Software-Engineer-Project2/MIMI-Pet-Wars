@@ -1,9 +1,14 @@
-{% extends 'loggedin_index.html' %}
+{% extends "senior_loggedin_base.html" %}
 {% block title %}
     <title>{{title}}</title>
 {% endblock %}
 {% block content %}
-
+<span data-lang="appointmentid"></span>: {{appoint.id}}<br>
+<span data-lang="operationid"></span>: {{operation.id}}<br>
+<span data-lang="operationdoctor"></span>: {{doc.Dname}}<br>
+<span data-lang="operationdate"></span>: {{operation.Odate}}<br>
+<span data-lang="operationinformation"></span>: {{operation.Oinf}}<br>
+<span data-lang="operationcost"></span>: {{operation.Ocost}}<br>
 <form action="/loggedin_home_senior/operation/{{appoint.id}}" method="POST">
     <input type="submit" value="Allow">
 </form>

@@ -13,10 +13,21 @@
        <label data-lang="petage">: </label>
     <input type="text" name="age" value="{{pet.Page}}" pattern="[0-9]{2}"><br>
     <label data-lang="petgender1formale2forfemale"></label>
-    <input type="text" name="gender" value="{{pet.Psex}}" pattern="[0-9]{1}"><br>
-       <label data-lang="petspecies">: </label><br>
-     <input type="radio" name="species" value="cat" data-lang="cat">
+   {% if pet.Psex=='1'%}
+   <input type="radio" name="gender" value="1" data-lang="Male" checked="checked">
+   <input type="radio"  name="gender" value="2" data-lang="Female"><br>
+   {% else %}
+   <input type="radio" name="gender" value="1" data-lang="Male" >
+   <input type="radio"  name="gender" value="2" data-lang="Female" checked="checked"><br>
+   {% endif %}
+   {% if pet.Pspecies =='cat'%}
+
+     <input type="radio" name="species" value="cat" data-lang="cat" checked="checked">
             <input type="radio"  name="species" value="dog" data-lang="dog"><br>
+            {% else %}
+            <input type="radio" name="species" value="cat" data-lang="cat">
+            <input type="radio"  name="species" value="dog" data-lang="dog"checked="checked"><br>
+            {% endif %}
 
     <label data-lang="petinformation"> </label>
     <input type="text" name="information" value="{{pet.Pinfo}}"><br>

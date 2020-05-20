@@ -158,6 +158,12 @@ def senior_edit_pet(id):
         else:
             user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
             pet = Pet.query.filter(Pet.Powner == user_in_db.id).first()
+            if not request.form['name'] :
+                flash("Please enter petname")
+                return redirect(url_for("loggedin_home_senior"))
+            if not request.form['age'] :
+                flash("Please enter pet age")
+                return redirect(url_for("loggedin_home_senior"))
             pet.Pname = request.form['name']
             pet.Page = request.form['age']
             pet.Psex = request.form['gender']
@@ -185,7 +191,14 @@ def senior_appo_operation(id):
     if not session.get("USERNAME") is None:
         if request.method == 'GET':
             appoint = Appointment.query.filter(Appointment.id == id).first()
-            return render_template('senior_appo_operation.html', appoint=appoint)
+            operation = Operation.query.filter(Operation.Oappiiontment == id).first()
+            if operation and appoint.Ostatus == '1':
+                print(operation)
+                doc = Doctor.query.filter(Doctor.id == operation.Odoc).first()
+                return render_template('senior_appo_operation.html', appoint=appoint, operation=operation, doc=doc)
+            else:
+                flash("No surgical approval is required for this appointment")
+                return redirect(url_for('loggedin_home_senior'))
         else:
             appoint = Appointment.query.filter(Appointment.id == id).first()
             if appoint.Ostatus == '1':
@@ -205,7 +218,15 @@ def senior_appo_inpatient(id):
     if not session.get("USERNAME") is None:
         if request.method == 'GET':
             appoint = Appointment.query.filter(Appointment.id == id).first()
-            return render_template('senior_appo_inpatient.html', title="Allows operation", appoint=appoint)
+            inpatient = Hospitalization.query.filter(Hospitalization.Sappointment == id).first()
+            if inpatient and appoint.Hstatus == '1':
+                doc = Doctor.query.filter(Doctor.id == inpatient.Sdoc).first()
+                return render_template('senior_appo_inpatient.html', title="Allows operation", appoint=appoint,
+                                       inpatient=inpatient, doc=doc)
+            else:
+                flash("No in-patient approval is required for this appointment")
+                return redirect(url_for('loggedin_home_senior'))
+
         else:
             appoint = Appointment.query.filter(Appointment.id == id).first()
             if appoint.Hstatus == '1':
@@ -292,7 +313,14 @@ def senior_appo_release(id):
     if not session.get("USERNAME") is None:
         if request.method == 'GET':
             appoint = Appointment.query.filter(Appointment.id == id).first()
-            return render_template('senior_appo_release.html', title="Allows release", appoint=appoint)
+            inpatient = Hospitalization.query.filter(Hospitalization.Sappointment == id).first()
+            if inpatient and appoint.Hstatus == '3':
+                doc = Doctor.query.filter(Doctor.id == inpatient.Sdoc).first()
+                return render_template('senior_appo_release.html', title="Allows release", appoint=appoint,
+                                       inpatient=inpatient, doc=doc)
+            else:
+                flash("No in-patient release approval is required for this appointment")
+                return redirect(url_for('loggedin_home_senior'))
         else:
             appoint = Appointment.query.filter(Appointment.id == id).first()
             if appoint.Hstatus == '3':
@@ -1394,8 +1422,8 @@ def make_appointment():
         else:
             pet = Pet.query.filter(Pet.Pname == pet_name).first()
 
-        date_str = request.form['date']
-        date_str = date_str + ':59'
+        date_str = request.form["date"]
+        date_str = date_str+" 00:00:00"
         date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
         type = request.form['type']
         docname = request.form['doctor']
@@ -1461,13 +1489,16 @@ def add_pet_information():
         user = session.get("USERNAME")
         user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
         mes = 'Hello, %s ! , you can add your pet information here' % user
-        if form.validate_on_submit():
-            pet = Pet(Pname=form.Pname.data, Page=form.Page.data, Psex=form.Psex.data, Pspecies=form.Pspecies.data,
-                      Pinfo=form.Pinfo.data, owner=user_in_db)
-            db.session.add(pet)
-            db.session.commit()
-            flash('Save Pet Information Successfully !!!')
-            return redirect(url_for('customer_my_pets'))
+        if request.method=="POST":
+            if is_number(request.form["age"]):
+                pet = Pet(Pname=form.Pname.data, Page=request.form["age"], Psex=form.Psex.data, Pspecies=form.Pspecies.data,
+                        Pinfo=form.Pinfo.data, owner=user_in_db)
+                db.session.add(pet)
+                db.session.commit()
+                flash('Save Pet Information Successfully !!!')
+                return redirect(url_for('customer_my_pets'))
+            else:
+                flash("Please enter number in age ")
         return render_template('add_pet_information.html', title='Add Pet Information', warn='New pet', form=form,
                                mes=mes)
     else:
@@ -1529,8 +1560,11 @@ def customer_edit_pet(id):
         else:
             user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
             pet = Pet.query.filter(Pet.Powner == user_in_db.id).first()
-            if not request.form['age'] :
+            if not request.form['name'] :
                 flash("Please enter petname")
+                return redirect(url_for("customer_my_pets"))
+            if not request.form['age'] :
+                flash("Please enter age")
                 return redirect(url_for("customer_my_pets"))
             pet.Pname = request.form['name']
             pet.Page = request.form['age']
@@ -1628,7 +1662,10 @@ def customer_edit_appointments(id):
         else:
             appoint = Appointment.query.filter(Appointment.id == id).first()
             appoint.Atype = request.form['type']
-            appoint.Adate = datetime.now()
+            date_str = request.form["date"]
+            date_str = date_str+" 00:00:00"
+            date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+            appoint.Adate = date
             appoint.Alocation = request.form['location']
             docname = request.form['doctor']
             doctor = Doctor.query.filter(Doctor.Dname == docname).first()

@@ -88,29 +88,44 @@
                         <fieldset id="abc">
                             <legend data-lang="emergencyappointment"></legend>
                                 <form action="/loggedin_home_senior/emergency_appointment" method="POST">
-                                    <label data-lang="pet"> </label>
-                                    <input list="epetlist" name="appoint_name" >
-                                        <datalist id="epetlist">
-                                            {% for pet in pets%}
-                                            <option value="{{pet.Pname}}">
-                                            {% endfor%}
-                                        </datalist><br>
-                                    <label  data-lang="location"> </label>
-                                    <input list="elocationlist" name="location" >
-                                        <datalist id="elocationlist">
-                                            <option value="Shanghai">
-                                            <option value="Beijing">
-                                            <option value="Chengdu">
-                                        </datalist><br>
-                                    <label  data-lang="appointmentdatetimeformatYYYY-MM-DD-HH-MM"></label>
-                                    <input type="text" name="date" ><br>
-                                    <label  data-lang="doctor"> </label>
-                                    <input list="edoclist" name="doc" >
-                                        <datalist id="edoclist">
-                                            {% for doc in doctors%}
-                                            <option value="{{doc.Dname}}">
-                                            {% endfor%}
-                                        </datalist><br>
+                                    <p>
+                                        <div id="pet">
+                                    <label data-lang="petname">(Please double-click the blank to select one from your pet): </label><br>
+                                    <input list="petname" name="pet name" >
+                                    <datalist id="petname">
+                                        {% for pet in pets %}
+                                        <option value="{{pet.Pname}}"><br>
+                                        {% endfor %}<br>
+                                    </datalist><br></div>
+                                    </p>
+                            
+                                    <p>
+                                        <div id="chooseposition">
+                                        <label data-lang="chooseposition">: </label><br>
+                                    <input type="radio" value="Beijing" name="location" checked="checked" >Beijing
+                                    <input type="radio" value="Shanghai" name="location" >Shanghai
+                                    <input type="radio" value="Chengdu" name="location" >Chengdu<br>
+</div>
+                                    </p>
+                                    <p>
+                                        <div id="datetime">
+                                        <label data-lang="inputdatetime">: </label><br>
+                                    <input type="date" name="date"></div>
+                                    </p>
+                                    <p>
+                                        <div id="doctor">
+                                        <label  data-lang="choosedoctor">: </label><br>
+                                        {% for d in doctors%}
+                                        <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}
+                                        {% endfor %}
+                                  <br></div>
+
+                                    </p>
+                                    <p>
+                                        <div id="otherdescription">
+                                        <label data-lang="otherdescription">: </label><br>
+                                    <input type="text" name="information"><br></div>
+                                    </p>
                                     <button type="submit" data-lang="eappsub"></button>
 
                                 </form>
@@ -118,31 +133,44 @@
                         <fieldset>
                             <legend data-lang="standardappointment"></legend>
                                 <form action="/loggedin_home_senior/standard_appointment" method="POST">
-                                        <label data-lang="pet"> </label>
-                                    <input list="spetlist" name="appoint_name" >
-                                        <datalist id="spetlist">
-                                            {% for pet in pets%}
-                                            <option value="{{pet.Pname}}">
-                                            {% endfor%}
-                                        </datalist><br>
-                                    <label data-lang="location"> </label>
-                                    <input list="slocationlist" name="location" >
-                                        <datalist id="slocationlist">
-                                            <option value="Shanghai">
-                                            <option value="Beijing">
-                                            <option value="Chengdu">
-                                        </datalist><br>
-                                    <label data-lang="appointmentdatetimeformatYYYY-MM-DD-HH-MM"></label>
-                                    <input type="text" name="date" ><br>
-                                    <label data-lang="doctor"> </label>
-                                    <input list="sdoclist" name="doc" >
-                                        <datalist id="sdoclist">
-                                            {% for doc in doctors%}
-                                            <option value="{{doc.Dname}}">
-                                            {% endfor%}
-                                        </datalist><br>
-                                    <label data-lang="appointmentinformation"></label>
-                                    <input type="text" name="info" ><br>
+                                    <p>
+                                        <div id="pet">
+                                    <label data-lang="petname">(Please double-click the blank to select one from your pet): </label><br>
+                                    <input list="petname" name="pet name" >
+                                    <datalist id="petname">
+                                        {% for pet in pets %}
+                                        <option value="{{pet.Pname}}"><br>
+                                        {% endfor %}<br>
+                                    </datalist><br></div>
+                                    </p>
+                            
+                                    <p>
+                                        <div id="chooseposition">
+                                        <label data-lang="chooseposition">: </label><br>
+                                    <input type="radio" value="Beijing" name="location" checked="checked" >Beijing
+                                    <input type="radio" value="Shanghai" name="location" >Shanghai
+                                    <input type="radio" value="Chengdu" name="location" >Chengdu<br>
+</div>
+                                    </p>
+                                    <p>
+                                        <div id="datetime">
+                                        <label data-lang="inputdatetime">: </label><br>
+                                    <input type="date" name="date"></div>
+                                    </p>
+                                    <p>
+                                        <div id="doctor">
+                                        <label  data-lang="choosedoctor">: </label><br>
+                                        {% for d in doctors%}
+                                        <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}
+                                        {% endfor %}
+                                  <br></div>
+
+                                    </p>
+                                    <p>
+                                        <div id="otherdescription">
+                                        <label data-lang="otherdescription">: </label><br>
+                                    <input type="text" name="information"><br></div>
+                                    </p>
                                     <button type="submit" data-lang="sappsub"></button>
 
 

@@ -20,7 +20,8 @@
                             <h2 align="center">{{ mes }}</h2>
                         
                             
-                            <form class="form-valide" action="" method="post" novalidate>
+                            <form action='/Add Pet information' method="POST">
+
                                 {{ form.hidden_tag() }}
                             <p>
                                     <div id="Pname">
@@ -34,22 +35,15 @@
                                     <div id="Page">
                                         <span data-lang="petage">{{ form.Page.label }}</span>
                                     <br>
-                                    {{ form.Page(size=32) }}
+                                    <input type="text" name = age ></div>
                                     
-                                </div>
-                                    {% for error in form.Page.errors %}
-                                    <span style="color: red;">[{{ error }}]</span>
-                                    {% endfor %}<br>
                             </p>
                             <p>
                                     <div id="Psex ">
                                         <span data-lang="petsex">{{ form.Psex .label }}</span>
                                     <br>
                                     {{ form.Psex (size=32) }}
-                                    
-                        <!-- <input type="radio" name="pet_gender" id="pet_gender1" value="1"  ><label for="pet_gender1" data-lang="male"></label>
-                        <input type="radio" name="pet_gender" id="pet_gender2" value="2"  ><label for="pet_gender2" data-lang="female"></label><br />
-                         -->
+
                                 </div>
                                     {% for error in form.Psex .errors %}
                                     <span style="color: red;">[{{ error }}]</span>
@@ -67,7 +61,6 @@
                                     <div id="Pinfo">
                                         <span data-lang="petinfor">{{ form.Pinfo.label }}</span>
                                     <br>{{ form.Pinfo(size=32) }}</div>
-                                    </div>
                                     {% for error in form.Pinfo.errors %}
                                     <span style="color: red;">[{{ error }}]</span>
                                     {% endfor %}<br>
