@@ -170,6 +170,7 @@ def senior_edit_pet(id):
             pet.Pspecies = request.form['species']
             pet.Pinfo = request.form['information']
             db.session.commit()
+            print("edit successfully")
             return redirect(url_for('loggedin_home_senior'))
     else:
         return redirect(url_for('senior_login'))
@@ -1245,7 +1246,6 @@ def signupCustomer():
         userPhone_in_db = Customer.query.filter(Customer.Cphone == form.Cphone.data).first()
         if userEmail_in_db is not None:
             flash('Email has been registered!')
-            mes = 'Email has been registered!'
             return redirect(url_for('signupCustomer'))
         if userPhone_in_db is not None:
             flash('Phone has been registered!')
