@@ -42,7 +42,7 @@
                                     <p>
                                         <div id="type">
                                         <label data-lang="type">: </label><br>
-                                    <input type="radio" name="type" value="0" data-lang="emergency"><br>
+                                    <input type="radio" name="type" value="0" data-lang="emergency" checked='checked'><br>
                                     <input type="radio" name="type" value="1" data-lang="standard"><br></div>
 
                                     </p>
@@ -63,6 +63,7 @@
                                     <p>
                                         <div id="doctor">
                                         <label  data-lang="choosedoctor">: </label><br>
+                                        
                                         {% for d in doctors%}
                                         <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
                                         {% endfor %}

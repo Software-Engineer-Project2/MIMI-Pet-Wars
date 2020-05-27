@@ -1414,19 +1414,23 @@ def make_appointment():
     if request.method == "GET":
         return render_template('make_appointment_customer.html', title='Make Appointment', pets=pets, doctors=doctors)
     else:
-
+        
         pet_name = request.form["pet name"]
         if pet_name not in petnames:
             flash("Please select correct pet name")
             return redirect(url_for("make_appointment"))
         else:
             pet = Pet.query.filter(Pet.Pname == pet_name).first()
-
         date_str = request.form["date"]
         date_str = date_str+" 00:00:00"
         date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
         type = request.form['type']
-        docname = request.form['doctor']
+        try:
+            docname = request.form['doctor']
+        except KeyError as e:
+            flash("Please select correct doctor")
+            return redirect(url_for("make_appointment"))
+            raise exceptions.BadRequestKeyError(str(e))
         if docname not in docnames:
             flash("Please select correct doctor name")
             return redirect(url_for("make_appointment"))

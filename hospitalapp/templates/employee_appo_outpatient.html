@@ -1,5 +1,17 @@
 {% extends 'employee_loggedin_base.html' %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                {% if message %}
+                    <div class="alert alert-warning" role="alert">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+        {% if form and form.errors %}
+            {% for key, error in form.errors.items() %}
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
    <div class="container-fluid">
       <div class="row">
           <div class="col-12">
