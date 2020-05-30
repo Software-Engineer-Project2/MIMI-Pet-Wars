@@ -14,7 +14,9 @@
     
 </head>
 
-<body class="h-100">
+
+
+<body class="h-100" >
     
     <!--*******************
         Preloader start
@@ -73,15 +75,15 @@
         {% endif %}
                                         {{ form.hidden_tag() }}
                                         <span class="form-group"  data-lang="username">{{ form.Cusername.label }}</span><br/>
-                                        <span type="password" class="form-control" placeholder="Password">{{ form.Cusername }}</span>    
+                                        <span type="password"  placeholder="Password">{{ form.Cusername(class="form-control") }}</span>    
                                             
                                             {% for error in form.Cusername.errors %}
                                             <span style="color: red;">[{{ error }}]</span>
                                             {% endfor %}
                                             
-                                      
+                                            <br>
                                             <span class="form-group"  data-lang="password">{{ form.Cpassword.label }}</span><br/>
-                                            <span class="form-control">{{ form.Cpassword }}</span>    
+                                            {{ form.Cpassword(class="form-control") }} 
                                             
                                            
                                             
@@ -89,14 +91,27 @@
                                             <span style="color: red;">[{{ error }}]</span>
                                             {% endfor %}
                                             
-                                    
+                                            <br><br><br>
+<!--                                     
                                         <p class="form-group">{{ form.Cremember_me() }} 
-                                            <span data-lang="rememberme">{{ form.Cremember_me.label }}</span></p>
+                                            <span data-lang="rememberme">{{ form.Cremember_me.label }}</span></p> -->
                                         <button class="btn login-form__btn submit w-100" data-lang="login">{{ form.Csubmit() }}</button>
                                     </form>
                                 
 
-                                <p class="mt-5 login-form__footer"><span data-lang="haveaccount"></span><a href="{{ url_for('signupCustomer') }}" class="text-primary"><span data-lang="signup"></span></a> <span data-lang="now"></span></p>
+                                <p class="mt-5 login-form__footer"><span data-lang="haveaccount"></span>
+                                    <a href="{{ url_for('signupCustomer') }}" class="text-primary"><span data-lang="signup"></span></a>
+                                     <span data-lang="now"></span></p>
+
+                                     <div class="row">
+                                        <div class="col">
+                                     <button style="width: 100%;" type="button" onclick="window.location.href='/'"  class="btn mb-1 btn-flat btn-outline-primary" data-lang="home2"></button>
+                                    </div>
+                                     <div class="col">
+                                     <button style="width: 100%;" type="button" id="J_lang_switch" class="btn mb-1 btn-flat btn-outline-secondary" data-lang="change"></button>
+                                         </div>
+                                         
+                                     </div>
                             </div>
                         </div>
                     </div>

@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Pet Information</title>
-</head>
-<body>
+
     {% extends "customer_loggedin_base.html" %}
 
  {% block content %}
@@ -15,63 +9,89 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-validation">
-                        <h2 >{{ information }}</h2>
-                            {% from 'macros.html' import form_field %}
-                            <h2 align="center">{{ mes }}</h2>
-                        
+                      
                             
                             <form action='/Add Pet information' method="POST">
 
                                 {{ form.hidden_tag() }}
                             <p>
-                                    <div id="Pname">
-                                    <span data-lang="petname">{{ form.Pname.label }}</span>
-                                    <br>{{ form.Pname(size=32) }}</div>
+                                <div class="form-group row">
+                                    <span class="col-lg-4 col-form-label" data-lang="petname">{{ form.Pname.label }}</span>
+                                    <span class="text-danger">*</span>
+                                    <br>
+                                    <div class="col-lg-6">
+                                    {{ form.Pname(class="form-control") }}</div>
                                     {% for error in form.Pname.errors %}
                                     <span style="color: red;">[{{ error }}]</span>
                                     {% endfor %}<br>
-                            </p>
-                            <p>
-                                    <div id="Page">
-                                        <span data-lang="petage">{{ form.Page.label }}</span>
-                                    <br>
-                                    <input type="text" name = age ></div>
-                                    
-                            </p>
-                            <p>
-                                    <div id="Psex ">
-                                        <span data-lang="petsex">{{ form.Psex .label }}</span>
-                                    <br>
-                                    {{ form.Psex (size=32) }}
-
                                 </div>
-                                    {% for error in form.Psex .errors %}
-                                    <span style="color: red;">[{{ error }}]</span>
-                                    {% endfor %}<br>
-                            </p>
-                            <p>
-                                    <div id="Pspecies ">
-                                        <span data-lang="pettype">{{ form.Pspecies.label }}</span>
-                                    <br>{{ form.Pspecies(size=32) }}</div>
-                                    {% for error in form.Pspecies.errors %}
-                                    <span style="color: red;">[{{ error }}]</span>
-                                    {% endfor %}<br>
-                            </p>
-                            <p>
-                                    <div id="Pinfo">
-                                        <span data-lang="petinfor">{{ form.Pinfo.label }}</span>
-                                    <br>{{ form.Pinfo(size=32) }}</div>
-                                    {% for error in form.Pinfo.errors %}
-                                    <span style="color: red;">[{{ error }}]</span>
-                                    {% endfor %}<br>
                             </p>
                             <br>
+                            <p>
+                                <div class="form-group row">
+                                        <span class="col-lg-4 col-form-label" data-lang="petage"></span>
+                                        <span class="text-danger">*</span>
+                                    <br>
+                                    <div class="col-lg-6">
+                                    <input class="form-control" type="text" name = "age" ></div></div>
+                                    
+                            </p>
+                            <br>
+                            <p>
+                                <div class="form-group row">
+                                        <span class="col-lg-4 col-form-label" data-lang="petsex">{{ form.Psex .label }}</span>
+                                        <span class="text-danger">*</span>
+                                    <br>
+                                    <div class="col-lg-6">
+                                    
+                                    <input type="radio" name="sex" id="male" value="1" ><label for="male" data-lang="male"></label> <br>
+                                    <input type="radio" name="sex" id="female" value="2" ><label for="female" data-lang="female"></label> <br></div></div>
+                                      
+                                   
+
+                               
+                                    {% for error in form.Psex .errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+                            </p>
+                            <br>
+                            <p>
+                                <div class="form-group row">
+                                        <span class="col-lg-4 col-form-label" data-lang="pettype">{{ form.Pspecies.label }}</span>
+                                        <span class="text-danger">*</span>
+                                    <br>
+                                    <div class="col-lg-6">
+                                    
+                                    <input type="radio" name="species" id="cat" value="1" ><label for="cat" data-lang="cat"></label> <br>
+                                    <input type="radio" name="species" id="dog" value="2" ><label for="dog" data-lang="dog"></label> <br></div></div>
+                                      
+                               
+
+                                    {% for error in form.Pspecies.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+                            </p>
+                            <br>
+                            <p>
+                                <div class="form-group row">
+                                        <span class="col-lg-4 col-form-label" data-lang="petinfor">{{ form.Pinfo.label }}</span>
+                                        <span class="text-danger">*</span>
+                                    <br>
+                                    <div class="col-lg-6">
+                                    {{ form.Pinfo(class="form-control") }}</div>
+                                    {% for error in form.Pinfo.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}<br></div>
+                            </p>
+                            <br><br><br>
                            
                             <!-- {{ form.submit(class="btn btn-primary", id="s") }}
                              -->
-
-                            <button data-lang="submit" type="submit" class="btn btn-primary">
-                            
+                             <div class="form-group row">
+                                <div class="col-lg-8 ml-auto">
+                                    <button class="btn btn-primary" type="submit" data-lang='submit'></button>
+                                    </div>
+                            </div>
                             <br>
                             </form>
                         

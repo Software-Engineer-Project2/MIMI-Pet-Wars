@@ -3,13 +3,13 @@
     <title>{{title}}</title>
 {% endblock %}
 {% block content %}
-{% with messages = get_flashed_messages() %}
+<!-- {% with messages = get_flashed_messages() %}
             {% for message in messages %}
                 {% if message %}
                     <div class="alert alert-warning" role="alert">{{ message }}</div>
                 {% endif %}
             {% endfor %}
-        {% endwith %}
+        {% endwith %} -->
         {% if form and form.errors %}
             {% for key, error in form.errors.items() %}
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
@@ -33,7 +33,7 @@
                                     <th data-lang="location"> </th>
                                     <th data-lang="date"> </th>
                                     <th data-lang="information"> </th>
-                                    <th data-lang="operationstatus"></th>
+                                    
                                     <th data-lang="inpatientstatus"></th>
                                     <th data-lang="release"></th>
                                 </tr>
@@ -52,8 +52,22 @@
                         <td align="center">{{a.Alocation}}</td>
                         <td align="center">{{a.Adate}}</td>
                         <td align="center">{{ a.Ainfo }}</td>
-                        <td align="center">{{a.OperationStatus}}</td>
-                        <td align="center">{{ a.HospitalizationStatus }}</td>
+                        
+                       
+
+                        {% if a.HospitalizationStatus == "Ready to inpatient" %}
+                        <td class="label gradient-1 rounded" align="center" data-lang="rti"></td>
+                        {% elif a.HospitalizationStatus == "Ready to release" %}
+                        <td class="label gradient-2 rounded" align="center" data-lang="rtr"></td>
+                        {% elif a.HospitalizationStatus == "Inform customer inpatient" %}
+                        <td class="label gradient-4 rounded" align="center" data-lang="ici"></td>
+                        {% elif a.HospitalizationStatus == "Inform customer of release" %}
+                        <td class="label gradient-9 rounded" align="center" data-lang="icr"></td>
+                        {% elif a.HospitalizationStatus == "Released" %}
+                        <td class="label gradient-3 rounded" align="center" data-lang="released"></td>
+                        {% else %}
+                        <td align="center" data-lang="none"></td>
+                        {% endif %}
                         <td align="center"><a href="{{ url_for('employee_inpatient_release', id=a.id) }}"  data-lang="informrelease">
                           </a>
                         </td>
@@ -81,6 +95,76 @@
          <div class="col-12">
              <div class="card">
                  <div class="card-body">
+                    {% if Wappointments %}
+                     <h4 class="card-title"  data-lang="inpatientappointmentswaitingforpermission">:</h4>
+                     <div class="table-responsive">
+                         <table class="table table-striped table-bordered zero-configuration">
+                             <thead>
+                              <tr>
+                                 <th data-lang="appointmentid"></th>
+                                 <th data-lang="owner"></th>
+                                 <th data-lang="pet"> </th>
+                                 <th data-lang="location"> </th>
+                                 <th data-lang="date"> </th>
+                                 <th data-lang="information"> </th>
+                                 
+                                 <th data-lang="inpatientstatus"></th>
+                             </tr>
+                             </thead>
+                             <tbody>
+                              
+                          {% for a in Wappointments%}
+                             {% for pet in pets%}
+                                {%  if a.Apet==pet.id %}
+                                   {% for customer in customers%}
+                                      {%  if pet.Powner==customer.id %}
+                                   <tr>
+              
+                                      <td align="center">{{a.id}}</td>
+                                      <td align="center">{{customer.Cname}}</td>
+                                      <td align="center">{{pet.Pname}}</td>
+                                      <td align="center">{{a.Alocation}}</td>
+                                      <td align="center">{{a.Adate}}</td>
+                                      <td align="center">{{ a.Ainfo }}</td>
+                                      
+                                     
+   
+                                      {% if a.HospitalizationStatus == "Ready to inpatient" %}
+                                      <td class="label gradient-1 rounded" align="center" data-lang="rti"></td>
+                                      {% elif a.HospitalizationStatus == "Ready to release" %}
+                                      <td class="label gradient-2 rounded" align="center" data-lang="rtr"></td>
+                                      {% elif a.HospitalizationStatus == "Inform customer inpatient" %}
+                                      <td class="label gradient-4 rounded" align="center" data-lang="ici"></td>
+                                      {% elif a.HospitalizationStatus == "Inform customer of release" %}
+                                      <td class="label gradient-9 rounded" align="center" data-lang="icr"></td>
+                                      {% elif a.HospitalizationStatus == "Released" %}
+                                      <td class="label gradient-3 rounded" align="center" data-lang="released"></td>
+                                      {% else %}
+                                      <td align="center" data-lang="none"></td>
+                                      {% endif %}
+                                   </tr>
+                                      {% endif %}
+                                   {% endfor %}
+                                {% endif %}
+                             {% endfor %}
+                          {% endfor %}
+                              </tbody>
+                            
+                         </table>
+                     </div>
+                     {% else %}
+                     <h4 class="card-title" data-lang="noappointmentswaitingforpermission"></h4>
+                      {% endif %}
+                     
+                 </div>
+             </div>
+         </div>
+     </div>
+
+      <div class="row">
+         <div class="col-12">
+             <div class="card">
+                 <div class="card-body">
                     {% if Rappointments %}
                      <h4 class="card-title"  data-lang="inpatientappointments">:</h4>
                      <div class="table-responsive">
@@ -93,7 +177,7 @@
                                  <th data-lang="location"> </th>
                                  <th data-lang="date"> </th>
                                  <th data-lang="information"> </th>
-                                 <th data-lang="operationstatus"></th>
+                                 
                                  <th data-lang="inpatientstatus"></th>
                                  <th data-lang="finish"> </th>
                                  <th data-lang="release"></th>
@@ -114,8 +198,21 @@
                                       <td align="center">{{a.Alocation}}</td>
                                       <td align="center">{{a.Adate}}</td>
                                       <td align="center">{{ a.Ainfo }}</td>
-                                      <td align="center">{{a.OperationStatus}}</td>
-                                      <td align="center">{{ a.HospitalizationStatus }}</td>
+                                      
+
+                                      {% if a.HospitalizationStatus == "Ready to inpatient" %}
+                                      <td class="label gradient-1 rounded" align="center" data-lang="rti"></td>
+                                      {% elif a.HospitalizationStatus == "Ready to release" %}
+                                      <td class="label gradient-2 rounded" align="center" data-lang="rtr"></td>
+                                      {% elif a.HospitalizationStatus == "Inform customer inpatient" %}
+                                      <td class="label gradient-4 rounded" align="center" data-lang="ici"></td>
+                                      {% elif a.HospitalizationStatus == "Inform customer of release" %}
+                                      <td class="label gradient-9 rounded" align="center" data-lang="icr"></td>
+                                      {% elif a.HospitalizationStatus == "Released" %}
+                                      <td class="label gradient-3 rounded" align="center" data-lang="released"></td>
+                                      {% else %}
+                                      <td align="center" data-lang="none"></td>
+                                      {% endif %}
                                        <td align="center">
                <a href="{{ url_for('employee_inpatient_releasecomplete', id=a.id) }}"  data-lang="complete">
                            
@@ -141,61 +238,7 @@
          </div>
      </div>
 
-     <div class="row">
-      <div class="col-12">
-          <div class="card">
-              <div class="card-body">
-                 {% if Wappointments %}
-                  <h4 class="card-title"  data-lang="inpatientappointmentswaitingforpermission">:</h4>
-                  <div class="table-responsive">
-                      <table class="table table-striped table-bordered zero-configuration">
-                          <thead>
-                           <tr>
-                              <th data-lang="appointmentid"></th>
-                              <th data-lang="owner"></th>
-                              <th data-lang="pet"> </th>
-                              <th data-lang="location"> </th>
-                              <th data-lang="date"> </th>
-                              <th data-lang="information"> </th>
-                              <th data-lang="operationstatus"></th>
-                              <th data-lang="inpatientstatus"></th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                           
-                       {% for a in Wappointments%}
-                          {% for pet in pets%}
-                             {%  if a.Apet==pet.id %}
-                                {% for customer in customers%}
-                                   {%  if pet.Powner==customer.id %}
-                                <tr>
-           
-                                   <td align="center">{{a.id}}</td>
-                                   <td align="center">{{customer.Cname}}</td>
-                                   <td align="center">{{pet.Pname}}</td>
-                                   <td align="center">{{a.Alocation}}</td>
-                                   <td align="center">{{a.Adate}}</td>
-                                   <td align="center">{{ a.Ainfo }}</td>
-                                   <td align="center">{{a.OperationStatus}}</td>
-                                   <td align="center">{{ a.HospitalizationStatus }}</td>
-                                </tr>
-                                   {% endif %}
-                                {% endfor %}
-                             {% endif %}
-                          {% endfor %}
-                       {% endfor %}
-                           </tbody>
-                         
-                      </table>
-                  </div>
-                  {% else %}
-                  <h4 class="card-title" data-lang="noappointmentswaitingforpermission"></h4>
-                   {% endif %}
-                  
-              </div>
-          </div>
-      </div>
-  </div>
+     
   </div>
 
 {% endblock %}

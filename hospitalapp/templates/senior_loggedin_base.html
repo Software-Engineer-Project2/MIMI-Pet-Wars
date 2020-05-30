@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.png">
-    <!-- Custom Stylesheet -->
-    <link href="../static/css/style.css" rel="stylesheet">
-
+    <title>Senior</title>
+     <!-- Favicon icon -->
+     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.png') }}">
+     <!-- Custom Stylesheet -->
+     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='plugins/summernote/dist/summernote.css') }}" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -41,10 +42,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="/">
-                    <b class="logo-abbr"><img src="../static/images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="../static/./images/logo-compact.png" alt="" width="80%"></span>
+                    <b class="logo-abbr"><img src="{{ url_for('static', filename='images/logo.png') }}" alt=""> </b>
+                    <span class="logo-compact"><img src="{{ url_for('static', filename='images/logo-compact.png') }}" alt="" width="80%"></span>
                     <span class="brand-title">
-                        <img src="../static/images/logo-text.png" alt="" width="80%">
+                        <img src="{{ url_for('static', filename='images/logo-text.png') }}" alt="" width="80%">
                     </span>
                 </a>
             </div>
@@ -70,25 +71,12 @@
 
 
                     <ul class="clearfix">
-                        <li class="icons dropdown d-none d-md-flex">
-                            <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
-                                <span data-lang="language"></span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
-                            </a>
-                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li><a href="javascript:void()" data-lang="english"></a></li>
-                                        <li><a href="javascript:void()" data-lang="chinese"></a></li>
-                                        <li><button id="J_lang_switch" data-lang="change"></button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                        
                         
                         <li class="icons dropdown">
                             <div    data-toggle="dropdown">
                                 <!-- <i class="icon-badge menu-icon"></i> -->
-                                <img src="../static/images/user/1.png" height="40" width="40" alt="">
+                                <img src="{{ url_for('static', filename='images/user/1.png') }}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -98,9 +86,9 @@
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span data-lang="lockscreen"></span></a>
+                                            <a href="{{url_for('senior_login')}}"><i class="icon-lock"></i> <span data-lang="lockscreen"></span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span data-lang="logout"></span></a></li>
+                                        <li><a href="{{url_for('start')}}"><i class="icon-key"></i> <span data-lang="logout"></span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -124,14 +112,13 @@
                     <li class="nav-label"  data-lang="senior"></li>
                     
                 
+                    <li ><a  href="javascript:void()" aria-expanded="false"   >
+                        <i class="icon-screen-tablet menu-icon"></i><span  class="nav-text" data-lang="help"></span></a></li>
                     
-                    <br><br><br>
-                    <br><br><br>
-                    <li>
-                        <button type="button" onclick="location.href='{{url_for('loggedin_home_senior')}}'" class="btn mb-1 btn-outline-success" data-lang="home"></button>
-                        <button type="button" onclick="location.href='#abc'" class="btn mb-1 btn-outline-warning" data-lang="emergency"></button>
-                        <button type="button" onclick="location.href='{{url_for('senior_login')}}'" class="btn mb-1 btn-outline-primary" data-lang="logout"></button>
-                    </li>
+                    <li class="nav-label" data-lang="setting"></li>
+                    <li ><a  href="javascript:void()" aria-expanded="false"  id="J_lang_switch" >
+                        <i class="icon-speedometer menu-icon"></i><span  class="nav-text" data-lang="change"></span></a></li>
+                    
                 </ul>
             </div>
         </div>
@@ -153,7 +140,7 @@
                 {% if messages %}
                 <ul>
                     {% for message in messages %}
-                    <li>{{ message }}</li>
+                    <li class="alert alert-primary">{{ message }}</li>
                     {% endfor %}
                 </ul>
                 {% endif %}
@@ -200,7 +187,14 @@
      <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
      <script src="{{ url_for('static', filename='js/jquery.i18n.properties-1.0.9.js') }}"></script>
      <script src="{{ url_for('static', filename='js/i18.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='plugins/tables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/tables/js/datatable-init/datatable-basic.min.js') }}"></script>
      
+    <script src="{{ url_for('static', filename='plugins/summernote/dist/summernote.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/summernote/dist/summernote-init.js') }}"></script>
+
 </body>
 
 </html>

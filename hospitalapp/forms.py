@@ -29,22 +29,11 @@ message='The username should contain only a-z, A-Z and 0-9.')])
     Ephone = StringField('phone', validators=[DataRequired()])
     Egender = RadioField('Gender', choices=[('0', 'Male'), ('1', 'Female')], validators=[DataRequired()])
     Eemail = StringField('Email', validators=[DataRequired()])
-    Ehiredate = DateField('Date of employment (format: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
+    Ehiredate = DateField('Date of employment (format: YYYY/MM/DD)', format='%Y/%m/%d', validators=[DataRequired()])
     Epassword = PasswordField('Password', validators=[DataRequired(),Length(8, 25), EqualTo('Epassword2')])
     Epassword2 = PasswordField('Repeat Password', validators=[DataRequired(),Length(8, 25)])
     Esubmit = SubmitField('Register')
 
-
-class SignupFormEmployee_chinese(FlaskForm):
-    Eusername = StringField('用户名', validators=[DataRequired()])
-    Eidcard = StringField('身份证号', validators=[DataRequired()])
-    Ephone = StringField('电话', validators=[DataRequired()])
-    Egender = RadioField('性别', choices=[('0', '男'), ('1', '女')], validators=[DataRequired()])
-    Eemail = StringField('邮箱', validators=[DataRequired()])
-    Ehiredate = DateField('入职日期 (格式: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
-    Epassword = PasswordField('密码', validators=[DataRequired()])
-    Epassword2 = PasswordField('重复密码', validators=[DataRequired()])
-    Esubmit = SubmitField('注册')
 
 
 class ArrangeAppointmentFormEmployee(FlaskForm):
@@ -53,7 +42,7 @@ class ArrangeAppointmentFormEmployee(FlaskForm):
     Edoc = StringField('Doctor', validators=[DataRequired()])
     Ecomplete = RadioField('Complete', choices=[('0', 'Complete'), ('1', 'Not Complete')], validators=[DataRequired()])
     Einf = StringField('Information', validators=[DataRequired()])
-    Edate = DateField('Date of appointment (format: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
+    Edate = DateField('Date of appointment (format: YYYY/MM/DD)', format='%Y/%m/%d', validators=[DataRequired()])
     Ecost = StringField('Cost', validators=[DataRequired()])
     Esubmit = SubmitField('Submit')
 
@@ -79,7 +68,7 @@ class ModyAppointmentFormEmployee(FlaskForm):
         'class': "form-control",
         'placeholder': 'Please enter the information'
     }, validators=[DataRequired()])
-    Edate = DateField(label='Date of appointment (format: YYYY-MM-DD)', format='%Y-%m-%d', render_kw={
+    Edate = DateField(label='Date of appointment (format: YYYY/MM/DD)', format='%Y/%m/%d', render_kw={
         'class': "form-control",
         'placeholder': 'Please enter date'
     }, validators=[DataRequired()])
@@ -91,7 +80,7 @@ class ModyAppointmentFormEmployee(FlaskForm):
 
 
 class AddOperationForm(FlaskForm):
-    Odate = DateField(label='Date of appointment (format: YYYY-MM-DD)', format='%Y-%m-%d', render_kw={
+    Odate = DateField(label='Date of appointment (format: YYYY/MM/DD)', format='%Y/%m/%d', render_kw={
         'class': "form-control",
         'placeholder': 'Please enter date'
     }, validators=[DataRequired()])
@@ -183,8 +172,8 @@ class HospitalizationForm(FlaskForm):
     appointment = StringField('Appointment', validators=[DataRequired()])
     doc = StringField('Doctor', validators=[DataRequired()])
     room = StringField('Room', validators=[DataRequired()])
-    startdate = DateField('Start Date (format: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
-    enddate = DateField('End Date (format: YYYY-MM-DD)', format='%Y-%m-%d', validators=[DataRequired()])
+    startdate = DateField('Start Date (format: YYYY/MM/DD)', format='%Y/%m/%d', validators=[DataRequired()])
+    enddate = DateField('End Date (format: YYYY/MM/DD)', format='%Y/%m/%d', validators=[DataRequired()])
     cost = StringField('Cost', validators=[DataRequired()])
     submit = SubmitField('Manage Hospitalization')
 
@@ -298,21 +287,8 @@ class MakeAppointment(FlaskForm):
     chooseposition = SelectField('Choose Position',choices=[('Beijing', 'Beijing'), ('Shanghai', 'Shanghai'),('Chengdu', 'Chengdu')], default=0, validators=[DataRequired()])
     doctors = [('%d' % r.id, r.Dname) for r in Doctor.query.all()]
     doctor = SelectField(label='Choose doctor you want', choices=doctors, validators=[DataRequired()])
-    datetime = DateTimeField('Input Datetime(format: YYYY-MM-DD-HH-MM)', format='%Y-%m-%d-%H-%M',validators=[DataRequired()])
+    datetime = DateTimeField('Input Datetime(format: YYYY/MM/DD)', format='%Y/%m/%d',validators=[DataRequired()])
     submit = SubmitField('Submit')
-
-
-class MakeAppointment_chinese(FlaskForm):
-    pets = [('%d'% r.id, r.Pname) for r in Pet.query.all()]
-    pet = SelectField(label='选择宠物', choices= pets,validators=[DataRequired()])
-    ownerphone = StringField('主人电话', validators=[DataRequired()])
-    type = RadioField('类型', choices=[('0', '紧急'), ('1', '标准')], validators=[DataRequired()])
-    otherdescription = StringField('其他描述', validators=[DataRequired()])
-    chooseposition = SelectField('选择位置',choices=[('Beijing', '北京'), ('Shanghai', '上海'),('Chengdu', '成都')], default=0, validators=[DataRequired()])
-    doctors = [('%d' % r.id, r.Dname) for r in Doctor.query.all()]
-    doctor = SelectField(label='选择你预约的医生', choices=doctors, validators=[DataRequired()])
-    datetime = DateTimeField('输入时间(format: YYYY-MM-DD-HH-MM)', format='%Y-%m-%d-%H-%M',validators=[DataRequired()])
-    submit = SubmitField('提交')
 
 
 

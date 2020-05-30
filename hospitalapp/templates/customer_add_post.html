@@ -10,12 +10,34 @@
                     <div class="form-validation">
                         
                             
-                            
-                                <strong data-lang="doyouhaveanypost?"></strong>
 
                                 <h3 data-lang="yourpost"></h3>
                             
-                            <form class="form-valide" action="{{ url_for('customer_add_post') }}" method="post" novalidate role="form" enctype="multipart/form-data">
+                                <fieldset>
+                                    <legend data-lang="addapost"></legend>
+                                    <br><br>
+                                        <form action="{{ url_for('customer_add_post') }}" method="POST">
+                                        
+                                            <label data-lang="topic"> </label> 
+                                        <input type="text" name="topic" class="form-control input-flat">
+                                        
+                                        <br>
+                    
+                                        <label data-lang="content"></label> 
+                                        <!-- <input type="text" name="content" > -->
+                                        <textarea class="form-control h-150px" rows="6" name="content"></textarea>
+                                        <br><br><br>
+                                        <div class="form-group row">
+                                            <div class="col-lg-8 ml-auto">
+                                        <button class="btn btn-primary" type="submit" data-lang="submitpost"></button>
+                                                </div>
+                                                </div>
+                                                <br>
+                                                
+                                        </form>
+                                </fieldset>
+
+                            <!-- <form class="form-valide" action="{{ url_for('customer_add_post') }}" method="post" novalidate role="form" enctype="multipart/form-data">
                                 {{ form.hidden_tag() }}
                                 <p>
                                     <div class="form-group">
@@ -44,7 +66,7 @@
                             
                             
                             </form>
-                        
+                         -->
                     </div>
                 </div>
             </div>

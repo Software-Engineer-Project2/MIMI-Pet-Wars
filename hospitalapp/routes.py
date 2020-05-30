@@ -247,8 +247,8 @@ def senior_emergency_appoint():
     if request.method == "POST":
         pet_name = request.form["appoint_name"]
         date_str = request.form['date']
-        date_str = date_str + ':59'
-        date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+        date_str = date_str 
+        date = datetime.strptime(date_str, '%Y/%m/%d')
         pet = Pet.query.filter(Pet.Pname == pet_name).first()
         appointment = Appointment(apppetter=pet, Atype='0',
                                   Adoc=request.form["doc"], Alocation=request.form["location"], Adate=date,
@@ -263,8 +263,8 @@ def senior_standard_appoint():
     if request.method == "POST":
         pet_name = request.form["appoint_name"]
         date_str = request.form['date']
-        date_str = date_str + ':59'
-        date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+        date_str = date_str 
+        date = datetime.strptime(date_str, '%Y/%m/%d')
         pet = Pet.query.filter(Pet.Pname == pet_name).first()
         appointment = Appointment(apppetter=pet, Atype='1',
                                   Adoc=request.form["doc"], Alocation=request.form["location"], Adate=date,
@@ -626,8 +626,8 @@ def employee_outpatient_operation(id):
             if request.method == 'POST':
                 if is_number(form.Ocost.data):
                     date_str = request.form["date"]
-                    date_str = date_str+" 00:00:00"
-                    date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+                    date_str = date_str
+                    date = datetime.strptime(date_str, '%Y/%m/%d')
                     operation = Operation(oappointment=appoint, odoctor=doctor, Odate=date, Oinf=form.Oinf.data,
                                         Ocost=form.Ocost.data)
                     appoint.OperationStatus = "Inform customer operation"
@@ -660,17 +660,17 @@ def employee_outpatient_inpatient(id):
                 if is_number(form.cost.data):
                     startdate_str = request.form["startdate"]
                     enddate_str = request.form["enddate"]
-                    startdate_str = startdate_str+" 00:00:00"
-                    enddate_str = enddate_str+" 00:00:00"
-                    if startdate_str==" 00:00:00":
+                    startdate_str = startdate_str
+                    enddate_str = enddate_str
+                    if startdate_str=="":
                         flash("Please enter start date ")
                         redirect(url_for("employee_outpatient_inpatient", id=id))
-                    elif enddate_str==" 00:00:00":
+                    elif enddate_str=="":
                         flash("Please enter end date ")
                         redirect(url_for("employee_outpatient_inpatient", id=id))
                     else:
-                        startdate = datetime.strptime(startdate_str, '%Y-%m-%d %H:%M:%S')
-                        enddate = datetime.strptime(enddate_str, '%Y-%m-%d %H:%M:%S')
+                        startdate = datetime.strptime(startdate_str, '%Y/%m/%d')
+                        enddate = datetime.strptime(enddate_str, '%Y/%m/%d')
                         if startdate >= enddate:
                             flash("Please enter an end date later than the start date ")
                             redirect(url_for("employee_outpatient_inpatient", id=id))
@@ -1322,45 +1322,14 @@ def customer_add_post():
     form = PostForm()
     if not session.get("USERNAME") is None:
         customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-        if form.validate_on_submit():
-            post = Post(Ptopic=form.topic.data, Pcontent=form.content.data, poster=customer_in_db)
+        if request.method == "POST":
+            post = Post(Ptopic=request.form['topic'], Pcontent=request.form['content'], poster=customer_in_db)
             db.session.add(post)
             db.session.commit()
             return redirect(url_for('customer_posts'))
         return render_template('customer_add_post.html', user=customer_in_db, form=form)
     else:
         return redirect(url_for('loginCustomer'))
-
-@app.route('/customer_add_post_chinese', methods=['GET', 'POST'])
-def customer_add_post_chinese():
-    form = PostForm()
-    if not session.get("USERNAME") is None:
-        customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-        if form.validate_on_submit():
-            post = Post(Ptopic=form.topic.data, Pcontent=form.content.data, poster=customer_in_db)
-            db.session.add(post)
-            db.session.commit()
-            return redirect(url_for('customer_posts_chinese'))
-        return render_template('customer_add_post_chinese.html', user=customer_in_db, form=form)
-    else:
-        return redirect(url_for('loginCustomer'))
-
-
-@app.route('/customer_posts_chinese')
-def customer_posts_chinese():
-    if not session.get("USERNAME") is None:
-        customer_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-        posts = customer_in_db.Cpost.all()
-        read_posts = set()
-        for p in posts:
-            if p.Panswer.all():
-                read_posts.add(p)
-        unread_posts = customer_in_db.Cpost.filter(Post.Panswer == None).all()
-        return render_template('customer_posts_chinese.html', user=customer_in_db, unread_posts=unread_posts,
-                               read_posts=read_posts)
-    else:
-        return redirect(url_for('loginCustomer_chinese'))
-
 
 @app.route('/customer_posts')
 def customer_posts():
@@ -1422,8 +1391,8 @@ def make_appointment():
         else:
             pet = Pet.query.filter(Pet.Pname == pet_name).first()
         date_str = request.form["date"]
-        date_str = date_str+" 00:00:00"
-        date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+        date_str = date_str
+        date = datetime.strptime(date_str, '%Y/%m/%d ')
         type = request.form['type']
         try:
             docname = request.form['doctor']
@@ -1445,46 +1414,6 @@ def make_appointment():
 
 
 
-@app.route('/Make Appointment_chinese', methods=['GET', 'POST'])
-def make_appointment_chinese():
-    user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-    pets = Pet.query.filter(Pet.Powner == user_in_db.id).all()
-    doctors = Doctor.query.all()
-    petnames = []
-    docnames = []
-    for p in pets:
-        petnames.append(p.Pname)
-    for d in doctors:
-        docnames.append(d.Dname)
-    if request.method == "GET":
-        return render_template('make_appointment_customer_chinese.html', title='Make Appointment', pets=pets, doctors=doctors)
-    else:
-
-        pet_name = request.form["pet name"]
-        if pet_name not in petnames:
-            flash("请选择正确宠物")
-            return redirect(url_for("make_appointment_chinese"))
-        else:
-            pet = Pet.query.filter(Pet.Pname == pet_name).first()
-
-        date_str = request.form['date']
-        date_str = date_str + ':59'
-        date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
-        type = request.form['type']
-        docname = request.form['doctor']
-        if docname not in docnames:
-            flash(" 请选择正确医生名")
-            return redirect(url_for("make_appointment_chinese"))
-        else:
-            doctor = Doctor.query.filter(Doctor.Dname == docname).first()
-        appointment = Appointment(apppetter=pet, Atype=type,
-                                  adoctor=doctor, Alocation=request.form["location"], Adate=date,
-                                  Ainfo=request.form["information"], Acomplete='0', Astart='0', Ostatus="0",
-                                  Hstatus='0')
-        db.session.add(appointment)
-        db.session.commit()
-        return redirect(url_for('customer_my_appointments_chinese'))
-
 
 @app.route('/Add Pet information', methods=['GET', 'POST'])
 def add_pet_information():
@@ -1495,7 +1424,7 @@ def add_pet_information():
         mes = 'Hello, %s ! , you can add your pet information here' % user
         if request.method=="POST":
             if is_number(request.form["age"]):
-                pet = Pet(Pname=form.Pname.data, Page=request.form["age"], Psex=form.Psex.data, Pspecies=form.Pspecies.data,
+                pet = Pet(Pname=form.Pname.data, Page=request.form["age"], Psex=request.form["sex"], Pspecies=request.form["species"],
                         Pinfo=form.Pinfo.data, owner=user_in_db)
                 db.session.add(pet)
                 db.session.commit()
@@ -1508,26 +1437,6 @@ def add_pet_information():
     else:
         return redirect(url_for('loginCustomer'))
 
-
-@app.route('/Add Pet information_chinese', methods=['GET', 'POST'])
-def add_pet_information_chinese():
-    form = Addpetinformation_chinese()
-    if not session.get("USERNAME") is None:
-        user = session.get("USERNAME")
-        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-        mes = '您好, %s ! , 您能在此添加您的宠物信息' % user
-        if form.validate_on_submit():
-            pet = Pet(Pname=form.Pname.data, Page=form.Page.data, Psex=form.Psex.data, Pspecies=form.Pspecies.data,
-                      Pinfo=form.Pinfo.data, owner=user_in_db)
-            db.session.add(pet)
-            db.session.commit()
-            flash('保存宠物信息成功 !!!')
-            return redirect(url_for('customer_my_pets_chinese'))
-        return render_template('add_pet_information_chinese.html', title='Add Pet Information', warn='New pet',
-                               form=form,
-                               mes=mes)
-    else:
-        return redirect(url_for('loginCustomer_chinese'))
 
 
 @app.route('/My Pets', methods=['GET', 'POST'])
@@ -1667,8 +1576,8 @@ def customer_edit_appointments(id):
             appoint = Appointment.query.filter(Appointment.id == id).first()
             appoint.Atype = request.form['type']
             date_str = request.form["date"]
-            date_str = date_str+" 00:00:00"
-            date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+            date_str = date_str
+            date = datetime.strptime(date_str, '%Y/%m/%d')
             appoint.Adate = date
             appoint.Alocation = request.form['location']
             docname = request.form['doctor']

@@ -1,68 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Pets</title>
-</head>
-<body>
+
 {% extends "customer_loggedin_base.html" %}
 {% block content %}
-
-     
-
-
-
-
-
-                        <div class="container-fluid">
-                            <h2 >{{ mes }}</h2>
+                <div class="container-fluid">
+                           
                             <!-- <div class="col-lg-6"> -->
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="card-title">
-                                            <h4 data-lang="pets">{{ pets|length}} :</h4>
-                                        </div>
+                                        
                                         <div class="table-responsive">
-                                            <!-- <table class="table table-striped">
+                                            <table class="table table-striped table-bordered zero-configuration">
                                                 <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Name</th>
-                                                        <th>Status</th>
-                                                        <th>Date</th>
-                                                        <th>Price</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>1</th>
-                                                        <td>Kolor Tea Shirt For Man</td>
-                                                        <td><span class="badge badge-primary px-2">Sale</span>
-                                                        </td>
-                                                        <td>January 22</td>
-                                                        <td class="color-primary">$21.56</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>2</th>
-                                                        <td>Kolor Tea Shirt For Women</td>
-                                                        <td><span class="badge badge-danger px-2">Tax</span>
-                                                        </td>
-                                                        <td>January 30</td>
-                                                        <td class="color-success">$55.32</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>3</th>
-                                                        <td>Blue Backpack For Baby</td>
-                                                        <td><span class="badge badge-success px-2">Extended</span>
-                                                        </td>
-                                                        <td>January 25</td>
-                                                        <td class="color-danger">$14.85</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table> -->
-                                            <table class="table table-striped">
-                                                <tbody>
-                    
                                                     <tr>
                                                         <th data-lang="petid"></th>
                                                         <th data-lang="petname"></th>
@@ -74,24 +21,43 @@
                                                     </tr>
                     
                     
+                                                </thead>
+                                                <tbody>
+                    
+                                    
+                    
                                                     {% for pet in pets%}
                                                     <tr>
                                                         <td align="center">{{pet.id}}</td>
                                                         <td align="center">{{pet.Pname}}</td>
+
                                                          {% if pet.Psex == '1' %}
                                                         <td align="center" data-lang="male"></td>
                                                         {% elif pet.Psex == '2' %}
                                                         <td align="center" data-lang="female"></td>
                                                         {% endif %}
-                                                        <td align="center">{{pet.Pspecies}}</td>
+                                                        
+                                                        
+                                                        {% if pet.Pspecies == '1' %}
+                                                        <td align="center" data-lang="cat"></td>
+                                                        {% elif pet.Pspecies == '2' %}
+                                                        <td align="center" data-lang="dog"></td>
+                                                        {% endif %}
+
+                                                        
+                                                        {% if pet.Pinfo != None %}
                                                         <td align="center">{{pet.Pinfo}}</td>
+                                                        
+                                                        {% else %}
+                                                        <td align="center" data-lang="none"></td>
+                                                        {% endif %}
+
                                                         <td align="center">
                                                             <a href="{{ url_for('customer_edit_pet', id=pet.id) }}"><button  data-lang="edit"></button></a>
                                                         </td>
                                                         <td align="center">
-                     <a href="{{ url_for('customer_delete_pet', id=pet.id) }}"><button data-lang="delete"></button>
-                    
-                                </a>
+                                                            <a href="{{ url_for('customer_delete_pet', id=pet.id) }}"><button data-lang="delete"></button>
+                                                            </a>
                                                         </td>
                     
                                                     </tr>
@@ -104,19 +70,6 @@
                                 </div>
                             <!-- </div> -->
                             </div>
-
+                            
 {% endblock %}
-</body>
-<script>
 
-function delete_pet(id){
-		alert("delete Successfully");
-		form=document.getElementById("Delete");
-		form.action="/My Pets/delete_pet/"+id;
-		form.method="post";
-		form.submit();
-
-	}
-
-</script>
-</html>

@@ -35,7 +35,7 @@
 
     <div class="login-form-bg h-100">
         <div class="container h-100">
-            <div class="row justify-content-center h-100">
+            <div class="row justify-content-center ">
                 <div class="col-xl-6">
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
@@ -73,92 +73,151 @@
             {% endfor %}
         {% endif %}
                                     {{ form.csrf_token}} <!-- render hidden token -->
+                                    <div class="form-group row">
+
                                     
-                                            <div id="Cusername" class="form-group">
+                                            <div id="Cusername" class="col-lg-4 col-form-label" data-lang="username">
                                             {{ form.Cusername.label }}
-                                            <span class="form-control">{{ form.Cusername }}
-                                            </span>
+                                        </div>
+
+                                            
+                                            {{ form.Cusername(class="form-control") }}
+                                            
+                                            
                                             {% for error in form.Cusername.errors %}
                                             <span style="color: red;">[{{ error }}]</span>
                                             {% endfor %}
-                                        </div>
-                                            <br>
                                         
+                                        </div>    
+                                        <br>
+                                        <div class="form-group row">
+
+                                    
                                 
-                                            <div id="Cphone" class="form-group">
+                                            <div id="Cphone" class="col-lg-4 col-form-label" data-lang="phone">
                                                 {{ form.Cphone.label }} 
-                                                <span class="form-control">{{ form.Cphone }}</span>
+                                                 
+                                            </div>
+                                            
+                                                {{ form.Cphone(class="form-control") }}
+                                                
                                                 {% for error in form.Cphone.errors %}
                                                 <span style="color: red;">[{{ error }}]</span>
                                                 {% endfor %}
-                                            </div>
-                                                <br>
+                                            
+                                            </div>    
+                                            <br>
                                         
                                 
-                                   
-                                        <div id="Cgender" class="form-group">
+                                            <div class="form-group row">
+
+                                    
+                                        <div id="Cgender" class="col-lg-4 col-form-label" data-lang="gender">
                                             {{ form.Cgender.label }}
+                                        </div>
+                                            <br>
+                                            
                                                 {% for choice in form.Cgender %}
-                                                    <tr>
-                                                        <td>{{ choice }}</td>
-                                                        <td>{{ choice.label }}</td>
-                                                    </tr>
+                                                    {{ choice }}<br>
+                                                    {{ choice.label }}<br>
+                                                    
                                                 {% endfor %}
-                                        
+                                            
                                                 {% for error in form.Cgender.errors %}
                                                 <span style="color: red;">[{{ error }}]</span>
                                                 {% endfor %}
+                                           
                                             </div>
                                                 <br>
+                                                <div class="form-group row">
+
+                                    
                                 
-                                            <div id="Cemail" class="form-group">
+                                            <div id="Cemail" class="col-lg-4 col-form-label" data-lang="email">
                                                 {{ form.Cemail.label}}
-                                                <span class="form-control"> {{ form.Cemail }}</span>
+                                            </div>
+
+                                            
+                                                 {{ form.Cemail(class="form-control") }}
+                                                
                                                 {% for error in form.Cemail.errors %}
                                                 <span style="color: red;">[{{ error }}]</span>
                                                 {% endfor %}
+                                            
                                             </div>
                                                 <br>
-                                    
-                                    
-                                            <div id="Cpassword" class="form-group">
+                                    <div class="form-group row">
+
+                                            <div id="Cpassword" class="col-lg-4 col-form-label" data-lang="password">
                                                 {{ form.Cpassword.label}}
-                                                <span class="form-control">{{ form.Cpassword }}</span>
+                                                 
+                                            </div>
+                                            
+                                                {{ form.Cpassword(class="form-control") }}
+                                               
                                                 {% for error in form.Cpassword.errors %}
                                                 <span style="color: red;">[{{ error }}]</span>
                                                 {% endfor %}
+                                            
                                             </div>
                                                 <br>
                                     
+                                                <div class="form-group row">
+
                                     
-                                            <div id="Cpassword2" class="form-group">
+                                            <div id="Cpassword2" data-lang="repeatpassword">
                                                 {{ form.Cpassword2.label}} 
-                                                <span class="form-control">{{ form.Cpassword2 }}</span>
+                                                 
+                                            </div>
+                                            
+                                                {{ form.Cpassword2(class="form-control") }}
+                                               
                                                 {% for error in form.Cpassword2.errors %}
                                                 <span style="color: red;">[{{ error }}]</span>
                                                 {% endfor %}
-                                            </div>
-                                                <br>
+                                            
+                                               
+                                            </div><br>
+                                            <div class="form-group row">
+
+                                    
                                       
                                     <div class="form-group">
                                         {{ form.Caccept_rules }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span style="color: rgb(136, 56, 3);">{{ form.Caccept_rules.label }}</span>
+                                        <span data-lang="accept" style="color: rgb(136, 56, 3);">{{ form.Caccept_rules.label }}</span>
                                 
                                     </div>
+                                    </div>
                                      <br>
-                                
-                                
-                                    <div class="btn login-form__btn submit w-100">
+                                   
+
                                     
-                                    <button id="sub">{{ form.Csubmit }}
-                                        </button>
-                                        </div>
                                 
-                                        <br><br><br><br>
+     
+                                    
+                                    <button class="btn login-form__btn submit w-100" id="sub" data-lang="signup">{{ form.Csubmit }}
+                                        </button>
+                                        
+                                      
+                                
+                                        <br><br>
                                 
                                 </form>
-                                <p class="mt-5 login-form__footer">Have account? <a href="{{ url_for('loginCustomer') }}" class="text-primary">Log in </a> now</p>
+                                <p class="mt-5 login-form__footer">
+                                    
+                                    <span data-lang="hadaccount"></span>
+                                    <a href="{{ url_for('loginCustomer') }}" class="text-primary">
+                                        <span data-lang="login"></span></a> 
                                     </p>
+                                    <div class="row">
+                                        <div class="col">
+                                     <button style="width: 100%;" type="button" onclick="window.location.href='/'"  class="btn mb-1 btn-flat btn-outline-primary" data-lang="home2"></button>
+                                    </div>
+                                     <div class="col">
+                                     <button style="width: 100%;" type="button" id="J_lang_switch" class="btn mb-1 btn-flat btn-outline-secondary" data-lang="change"></button>
+                                         </div>
+                                         
+                                     </div>
                             </div>
                         </div>
                     </div>
