@@ -6,10 +6,14 @@
     <h1 data-lang="editproduct">Editproduct</h1>
     <form method="post" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
+ 		<p>Please do not change ID</p>
  		<p>
  			{{ form.Gid.label }}<br>
  			{{ form.Gid }}
  		</p>
+ 		{% for err in form.Gid.errors %}
+            <span style="color: red">[{{ err }}]</span>
+        {% endfor %}
  		<p>
  			{{ form.Gname.label }}<br>
  			{{ form.Gname }}

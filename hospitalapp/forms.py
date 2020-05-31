@@ -147,13 +147,28 @@ class CompleteOperationConfirmForm(FlaskForm):
 
 
 class AddProductForm(FlaskForm):
-    Gid = IntegerField('Good id', validators=[DataRequired()])
-    Gname = StringField('Good name', validators=[DataRequired()])
-    Ginfo = StringField('Information', validators=[DataRequired()])
-    photo = FileField('File', validators=[FileRequired(),
+    Gid = IntegerField(label='Good id',
+                       render_kw={'class': "form-control",
+                                  'placeholder': "Please enter id in integers"},
+                       validators=[DataRequired("This part is required")])
+    Gname = StringField(label='Good name',
+                        render_kw={'class': "form-control",
+                                   'placeholder': "Please enter name"},
+                        validators=[DataRequired("This part is required")])
+    Ginfo = StringField(label='Information',
+                        render_kw={'class': "form-control",
+                                   'placeholder': "Please enter information"},
+                        validators=[DataRequired("This part is required")])
+    photo = FileField('File', validators=[FileRequired("This part is required"),
                                           FileAllowed(photos, "images only")])
-    Gprice = IntegerField('Good price', validators=[DataRequired()])
-    Gadddate = DateField('AddDate', validators=[DataRequired()])
+    Gprice = IntegerField(label='Good price',
+                          render_kw={'class': "form-control",
+                                     'placeholder': "Please enter price in numbers"},
+                          validators=[DataRequired("This part is required")])
+    Gadddate = DateField(label='AddDate',
+                         render_kw={'class': "form-control",
+                                    'placeholder': "Please enter date in the form of YYYY-MM-DD"},
+                         validators=[DataRequired("This part is required")])
     submit = SubmitField('submit')
 
 
