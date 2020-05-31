@@ -6,62 +6,29 @@
                         <!-- <div class="col-lg-6"> -->
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="card-title">
-                                        <h4 data-lang="appointments"></h4>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <!-- <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Status</th>
-                                                    <th>Date</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>1</th>
-                                                    <td>Kolor Tea Shirt For Man</td>
-                                                    <td><span class="badge badge-primary px-2">Sale</span>
-                                                    </td>
-                                                    <td>January 22</td>
-                                                    <td class="color-primary">$21.56</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>2</th>
-                                                    <td>Kolor Tea Shirt For Women</td>
-                                                    <td><span class="badge badge-danger px-2">Tax</span>
-                                                    </td>
-                                                    <td>January 30</td>
-                                                    <td class="color-success">$55.32</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>3</th>
-                                                    <td>Blue Backpack For Baby</td>
-                                                    <td><span class="badge badge-success px-2">Extended</span>
-                                                    </td>
-                                                    <td>January 25</td>
-                                                    <td class="color-danger">$14.85</td>
-                                                </tr>
-                                            </tbody>
-                                        </table> -->
-                                        <table  class="table table-striped">
+                                    
+                                    
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered zero-configuration">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-lang="appointmentid"></th>
+                                                        <th data-lang="date"></th>
+                                                        <th data-lang="petname"></th>
+                                                        <th data-lang="type"></th>
+                                                        <th data-lang="doc"></th>
+                                                        <th data-lang="appointmentsinformation"></th>
+                                                        <th data-lang="operationstatus"></th>
+                                                        <th data-lang="hospitalizationstatus"></th>
+                                                        <th data-lang="complete"></th>
+                                                        <th data-lang="modify"></th>
+                                                        <th data-lang="permission"></th>
+                                                    </tr>
+                    
+                                                </thead>
                                             <tbody>
                 
-                                                <tr>
-                                                    <th data-lang="appointmentid"></th>
-                                                    <th data-lang="date"></th>
-                                                    <th data-lang="petname"></th>
-                                                    <th data-lang="type"></th>
-                                                    <th data-lang="doc"></th>
-                                                    <th data-lang="appointmentsinformation"></th>
-                                                    <th data-lang="operationstatus"></th>
-                                                    <th data-lang="hospitalizationstatus"></th>
-                                                    <th data-lang="change"></th>
-                                                    <th data-lang="permission"></th>
-                                                </tr>
+                                                
                 
                                                 {% for a in appoints%}
                                                 {% for pet in pets%}
@@ -77,18 +44,50 @@
                                                     {% endif %}
                                                     <td align="center">{{a.Acost}}</td>
                                                     <td align="center">{{a.Ainfo}}</td>
-                                                    <td align="center">{{ a.OperationStatus }}</td>
-                                                    <td align="center">{{a.HospitalizationStatus}}</td>
-                                                    <td align="center">
-                                                        <button  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'">Edit</button>
-                                                        <button  onclick="window.location.href='/customer_my_appointments/delete_appo/{{a.id}}'" >Delete</button>
-                                                    </td>
-                                                    <td align="center">
-                                                        <button  onclick="window.location.href='/customer_my_appointments/operation/{{a.id}}'">Surgery</button>
-                                                        <button  onclick="window.location.href='/customer_my_appointments/inpatient/{{a.id}}'" >In Hospital</button>
-                                                        <button  onclick="window.location.href='/customer_my_appointments/release/{{a.id}}'" >Release</button>
-                
-                                                    </td>
+                                                    {% if a.OperationStatus == "Ready to surgery" %}
+                                                    <td class="label gradient-2 rounded" align="center" data-lang="2ready"></td>
+                                                    {% elif a.OperationStatus == "Inform customer operation" %}
+                                                    <td class="label gradient-4 rounded" align="center" data-lang="1inform"></td>
+                                                    {% elif a.OperationStatus == "Operation Completed" %}
+                                                    <td class="label gradient-3 rounded" align="center" data-lang="3complete"></td>
+                                                    {% else %}
+                                                    <td align="center" data-lang="none"></td>
+                                                    {% endif %}
+            
+                                                    {% if a.HospitalizationStatus == "Ready to inpatient" %}
+                                                    <td class="label gradient-1 rounded" align="center" data-lang="rti"></td>
+                                                    {% elif a.HospitalizationStatus == "Ready to release" %}
+                                                    <td class="label gradient-2 rounded" align="center" data-lang="rtr"></td>
+                                                    {% elif a.HospitalizationStatus == "Inform customer inpatient" %}
+                                                    <td class="label gradient-4 rounded" align="center" data-lang="ici"></td>
+                                                    {% elif a.HospitalizationStatus == "Inform customer of release" %}
+                                                    <td class="label gradient-9 rounded" align="center" data-lang="icr"></td>
+                                                    {% elif a.HospitalizationStatus == "Released" %}
+                                                    <td class="label gradient-3 rounded" align="center" data-lang="released"></td>
+                                                    {% else %}
+                                                    <td align="center" data-lang="none"></td>
+                                                    {% endif %}
+                                                    
+                                                    {% if a.Acomplete == '0' %}
+                                        <td style="color: indianred;" align="center" data-lang="uncompleted"></td>
+                                        {% elif a.Acomplete == '1' %}
+                                        <td style="color:seagreen;" align="center" data-lang="completed"></td>
+                                        {% endif %}
+                                        <td align="center">
+                                            <button class="btn mb-1 btn-rounded btn-outline-primary"  onclick="window.location.href='/customer_my_appointments/edit_appo/{{a.id}}'" data-lang="edit"></button>
+                                            <button class="btn mb-1 btn-rounded btn-outline-primary"  onclick="window.location.href='/customer_my_appointments/delete_appo/{{a.id}}'"  data-lang="delete"></button>
+                                        </td>
+                                        <td align="center">
+                                            <div class="btn-group" role="group">
+                                            
+                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  data-lang="givepermission"></button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/customer_my_appointments/operation/{{a.id}}"  data-lang="surgery"></a> 
+                                            <a class="dropdown-item" href="/customer_my_appointments/inpatient/{{a.id}}" data-lang="inhospital"></a>
+                                            <a class="dropdown-item" href="/customer_my_appointments/release/{{a.id}}"  data-lang="release"></a>
+                                        </div>
+                                        </div>
+                                        </td>
                 
                                                 </tr>
                                                 {% endif %}
@@ -97,6 +96,7 @@
                 
                                             </tbody>
                                         </table>
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -1,12 +1,14 @@
 {% extends 'employee_loggedin_base.html' %}
 {% block content %}
-{% with messages = get_flashed_messages() %}
+
+<!-- {% with messages = get_flashed_messages() %}
             {% for message in messages %}
                 {% if message %}
                     <div class="alert alert-warning" role="alert">{{ message }}</div>
                 {% endif %}
             {% endfor %}
         {% endwith %}
+         -->
         {% if form and form.errors %}
             {% for key, error in form.errors.items() %}
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
@@ -50,8 +52,30 @@
                         <td align="center">{{a.Alocation}}</td>
                         <td align="center">{{a.Adate}}</td>
                         <td align="center">{{ a.Ainfo }}</td>
-                        <td align="center">{{a.OperationStatus}}</td>
-                        <td align="center">{{ a.HospitalizationStatus }}</td>
+                        
+                        {% if a.OperationStatus == "Ready to surgery" %}
+                        <td class="label gradient-2 rounded" align="center" data-lang="2ready"></td>
+                        {% elif a.OperationStatus == "Inform customer operation" %}
+                        <td class="label gradient-4 rounded" align="center" data-lang="1inform"></td>
+                        {% elif a.OperationStatus == "Operation Completed" %}
+                        <td class="label gradient-3 rounded" align="center" data-lang="3complete"></td>
+                        {% else %}
+                        <td align="center" data-lang="none"></td>
+                        {% endif %}
+
+                        {% if a.HospitalizationStatus == "Ready to inpatient" %}
+                        <td class="label gradient-1 rounded" align="center" data-lang="rti"></td>
+                        {% elif a.HospitalizationStatus == "Ready to release" %}
+                        <td class="label gradient-2 rounded" align="center" data-lang="rtr"></td>
+                        {% elif a.HospitalizationStatus == "Inform customer inpatient" %}
+                        <td class="label gradient-4 rounded" align="center" data-lang="ici"></td>
+                        {% elif a.HospitalizationStatus == "Inform customer of release" %}
+                        <td class="label gradient-9 rounded" align="center" data-lang="icr"></td>
+                        {% elif a.HospitalizationStatus == "Released" %}
+                        <td class="label gradient-3 rounded" align="center" data-lang="released"></td>
+                        {% else %}
+                        <td align="center" data-lang="none"></td>
+                        {% endif %}
                          <td align="center"><a href="{{ url_for('employee_outpatient_finish', id=a.id) }}" data-lang="complete"></a>
                         </td>
                         <td align="center">

@@ -72,7 +72,7 @@
                                         {{ form.hidden_tag() }}
                                         <p class="form-group">
                                             <span data-lang="username">{{ form.Eusername.label }}</span><br>
-                                            {{ form.Eusername(size=32) }}
+                                            {{ form.Eusername(class="form-control") }}
                                             
                                             {% for error in form.Eusername.errors %}
                                             <span style="color: red;">[{{ error }}]</span>
@@ -81,21 +81,35 @@
                                         </p>
                                         <p class="form-group">
                                             <span data-lang="password">{{ form.Epassword.label }}</span><br>
-                                            {{ form.Epassword(size=32) }}
+                                            {{ form.Epassword(class="form-control") }}
                                             
                                             {% for error in form.Epassword.errors %}
                                             <span style="color: red;">[{{ error }}]</span>
                                             {% endfor %}
                                             
                                         </p>
-                                        <p>{{ form.Eremember_me() }} 
+                                        <!-- <p>{{ form.Eremember_me() }} 
                                             <span data-lang="rememberme">{{ form.Eremember_me.label }}</span></p>
-                                        
+                                         -->
                                         <button class="btn login-form__btn submit w-100" data-lang="login">{{ form.Esubmit() }}</button>
                                     </form>
                                 
 
-                                <p class="mt-5 login-form__footer"><span data-lang="haveaccount"><span data-lang="haveaccount"></span> <a href="{{ url_for('signupEmployee') }}" class="text-primary"><span data-lang="signup"></span></a> <span data-lang="now"></span></p>
+                                <p class="mt-5 login-form__footer"><span data-lang="haveaccount"></span>
+                                
+                                    <a href="{{ url_for('signupEmployee') }}" class="text-primary"><span data-lang="signup"></span></a>
+                                     <span data-lang="now"></span></p>
+                                     
+                                     <div class="row">
+                                        <div class="col">
+                                     <button style="width: 100%;" type="button" onclick="window.location.href='/'"  class="btn mb-1 btn-flat btn-outline-primary" data-lang="home2"></button>
+                                    </div>
+                                     <div class="col">
+                                     <button style="width: 100%;" type="button" id="J_lang_switch" class="btn mb-1 btn-flat btn-outline-secondary" data-lang="change"></button>
+                                         </div>
+                                         
+                                     </div>
+                                     
                             </div>
                         </div>
                     </div>

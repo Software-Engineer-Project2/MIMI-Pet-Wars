@@ -18,64 +18,86 @@
                      
                                 
                                  
-                                <h1 align="center">Please Fill Out Some Information</h1>
+                                
 
                                 <form action='/Make Appointment' method="POST">
                                     <p>
-                                        <div id="pet">
-                                    <label data-lang="petname">(Please double-click the blank to select one from your pet): </label><br>
-                                    <input list="petname" name="pet name" >
+                                        <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" data-lang="petname">(Please double-click the blank to select one from your pet): </label>
+                                    <span class="text-danger">*</span>
+                                    <div class="col-lg-6">
+                                    <input class="form-control" list="petname" name="pet name" >
                                     <datalist id="petname">
                                         {% for pet in pets %}
                                         <option value="{{pet.Pname}}"><br>
                                         {% endfor %}<br>
-                                    </datalist><br></div>
+                                    </datalist>
+                                    </div>
+                                    </div>
                                     </p>
-                            
+                                    <br>
                                     <p>
-                                        <div id="ownerphone">
-                                        <label data-lang="ownerphone">: </label><br>
-                                    <input type="text" name="phone"><br></div>
+                                        <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" data-lang="ownerphone">: </label> <span class="text-danger">*</span>
+                                        <div class="col-lg-6">
+                                    <input class="form-control" type="text" name="phone">
+                                    </div>
+                                        </div>
 
                                     </p>
-                            
-                                    <p>
-                                        <div id="type">
-                                        <label data-lang="type">: </label><br>
-                                    <input type="radio" name="type" value="0" data-lang="emergency" checked='checked'><br>
-                                    <input type="radio" name="type" value="1" data-lang="standard"><br></div>
-
+                                    <br>
+                                    <p><div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" data-lang="type">: </label> <span class="text-danger">*</span>
+                                        <div class="col-lg-6">
+                                    <input type="radio" name="type" id="emergent" value="0" ><label for="emergent" data-lang="emergent"></label> <br>
+                                    <input type="radio" name="type" id="standard" value="1" ><label for="standard" data-lang="standard"></label> <br></div></div>
+                                          
                                     </p>
-                            
+                                    <br>
                                     <p>
-                                        <div id="chooseposition">
-                                        <label data-lang="chooseposition">: </label><br>
-                                    <input type="radio" value="Beijing" name="location" checked="checked" >Beijing<br>
+                                        <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" data-lang="chooseposition">: </label> <span class="text-danger">*</span>
+                                        <div class="col-lg-6">
+                                    <input type="radio" value="Beijing" name="location"  >Beijing<br>
                                     <input type="radio" value="Shanghai" name="location" >Shanghai<br>
                                     <input type="radio" value="Chengdu" name="location" >Chengdu<br>
-</div>
+                                    </div>
+                                    </div>
                                     </p>
+                                    <br>
                                     <p>
-                                        <div id="datetime">
-                                        <label data-lang="inputdatetime">: </label><br>
-                                    <input type="date" name="date"></div>
+                                        <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" data-lang="inputdatetime">: </label> <span class="text-danger">*</span>
+                                        <div class="col-lg-6">
+                                    <input type="date" name="date"></div></div>
                                     </p>
+                                    <br>
                                     <p>
-                                        <div id="doctor">
-                                        <label  data-lang="choosedoctor">: </label><br>
+                                        <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label"  data-lang="choosedoctor">: </label> <span class="text-danger">*</span>
+                                        <div class="col-lg-6">
                                         
                                         {% for d in doctors%}
                                         <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
                                         {% endfor %}
-                                  <br></div>
+                                  </div></div>
 
                                     </p>
+                                    <br>
                                     <p>
-                                        <div id="otherdescription">
-                                        <label data-lang="otherdescription">: </label><br>
-                                    <input type="text" name="information"><br></div>
+                                        <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" data-lang="otherdescription">: </label> <span class="text-danger">*</span>
+                                        <div class="col-lg-6">
+                                    <input class="form-control" type="text" name="information"><br></div></div>
                                     </p>
-                                    <input type="submit" value="Submit">}<br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="form-group row">
+                                        <div class="col-lg-8 ml-auto">
+                                            <button class="btn btn-primary" type="submit" data-lang='submit'></button>
+                                            </div>
+                                    </div>
                                 </form>    
                             
                         </div>

@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <title>Employee</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="../static/css/style.css" rel="stylesheet">
-
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='plugins/summernote/dist/summernote.css') }}" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -70,20 +71,7 @@
 
 
                     <ul class="clearfix">
-                        <li class="icons dropdown d-none d-md-flex">
-                            <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
-                                <span data-lang="language"></span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
-                            </a>
-                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li><a href="javascript:void()" data-lang="english"></a></li>
-                                        <li><a href="javascript:void()" data-lang="chinese"></a></li>
-                                        <li><button id="J_lang_switch" data-lang="change"></button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                       
                         
                         <li class="icons dropdown">
                             <div    data-toggle="dropdown">
@@ -98,9 +86,9 @@
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span data-lang="lockscreen"></span></a>
+                                            <a href="{{url_for('loginEmployee')}}"><i class="icon-lock"></i> <span data-lang="lockscreen"></span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span data-lang="logout"></span></a></li>
+                                        <li><a href="{{url_for('start')}}"><i class="icon-key"></i> <span data-lang="logout"></span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -169,9 +157,10 @@
 
                     <br><br><br>
                     <br><br><br>
-                    <li>
-                        <a href="{{url_for('logoutEmployee')}}" class="btn mb-1 btn-outline-primary" data-lang="logout"></a>
-                    </li>
+                    <li class="nav-label" data-lang="setting"></li>
+                    <li ><a  href="javascript:void()" aria-expanded="false"  id="J_lang_switch" >
+                        <i class="icon-speedometer menu-icon"></i><span  class="nav-text" data-lang="change"></span></a></li>
+                    
                 </ul>
             </div>
         </div>
@@ -193,7 +182,7 @@
                 {% if messages %}
                 <ul>
                     {% for message in messages %}
-                    <li>{{ message }}</li>
+                    <li class="alert alert-primary">{{ message }}</li>
                     {% endfor %}
                 </ul>
                 {% endif %}
@@ -240,7 +229,17 @@
      <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
      <script src="{{ url_for('static', filename='js/jquery.i18n.properties-1.0.9.js') }}"></script>
      <script src="{{ url_for('static', filename='js/i18.js') }}"></script>
+
+
+    <script src="{{ url_for('static', filename='plugins/tables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/tables/js/datatable-init/datatable-basic.min.js') }}"></script>
      
+    <script src="{{ url_for('static', filename='plugins/summernote/dist/summernote.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/summernote/dist/summernote-init.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='js/dashboard/dashboard-2.js') }}"></script>  
+
 </body>
 
 </html>
