@@ -26,12 +26,11 @@
                                     <label class="col-lg-4 col-form-label" data-lang="petname">(Please double-click the blank to select one from your pet): </label>
                                     <span class="text-danger">*</span>
                                     <div class="col-lg-6">
-                                    <input class="form-control" list="petname" name="pet name" >
-                                    <datalist id="petname">
+                                    
                                         {% for pet in pets %}
-                                        <option value="{{pet.Pname}}"><br>
+                                        <input type="radio" id="petname" name="pet name"  value="{{pet.Pname}}"> {{pet.Pname}}<br>
                                         {% endfor %}<br>
-                                    </datalist>
+                                    
                                     </div>
                                     </div>
                                     </p>
@@ -49,7 +48,7 @@
                                     <p><div class="form-group row">
                                         <label class="col-lg-4 col-form-label" data-lang="type">: </label> <span class="text-danger">*</span>
                                         <div class="col-lg-6">
-                                    <input type="radio" name="type" id="emergent" value="0" ><label for="emergent" data-lang="emergent"></label> <br>
+                                    <input type="radio" name="type" id="emergent" value="0" checked='checked' ><label for="emergent" data-lang="emergent"></label> <br>
                                     <input type="radio" name="type" id="standard" value="1" ><label for="standard" data-lang="standard"></label> <br></div></div>
                                           
                                     </p>
@@ -58,7 +57,7 @@
                                         <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" data-lang="chooseposition">: </label> <span class="text-danger">*</span>
                                         <div class="col-lg-6">
-                                    <input type="radio" value="Beijing" name="location"  >Beijing<br>
+                                    <input type="radio" value="Beijing" name="location"  checked='checked' >Beijing<br>
                                     <input type="radio" value="Shanghai" name="location" >Shanghai<br>
                                     <input type="radio" value="Chengdu" name="location" >Chengdu<br>
                                     </div>

@@ -21,12 +21,9 @@
                                     <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" data-lang="pet"> </label> <span class="text-danger">*</span>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" list="epetlist" name="appoint_name" >
-                                        <datalist id="epetlist">
-                                            {% for pet in pets%}
-                                            <option value="{{pet.Pname}}">
-                                            {% endfor%}
-                                        </datalist>
+                                        {% for pet in pets %}
+                                        <input type="radio" id="petname" name="appoint_name"  value="{{pet.Pname}}"> {{pet.Pname}}<br>
+                                        {% endfor %}<br>
                                         <br>
                                         </div>
                                     </div>
@@ -34,12 +31,9 @@
                                     <div class="form-group row">
                                     <label class="col-lg-4 col-form-label"  data-lang="location"> </label> <span class="text-danger">*</span>
                                     <div class="col-lg-6">
-                                    <input class="form-control" list="elocationlist" name="location" >
-                                        <datalist id="elocationlist">
-                                            <option value="Shanghai">
-                                            <option value="Beijing">
-                                            <option value="Chengdu">
-                                        </datalist><br>
+                                        <input type="radio" value="Beijing" name="location"  checked='checked'>Beijing<br>
+                                        <input type="radio" value="Shanghai" name="location" >Shanghai<br>
+                                        <input type="radio" value="Chengdu" name="location" >Chengdu<br><br>
                                         </div>
                                     </div>
 
@@ -53,12 +47,9 @@
                                     <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" data-lang="doctor"> </label> <span class="text-danger">*</span>
                                     <div class="col-lg-6">
-                                    <input class="form-control" list="edoclist" name="doc" >
-                                        <datalist id="edoclist">
-                                            {% for doc in doctors%}
-                                            <option value="{{doc.Dname}}">
-                                            {% endfor%}
-                                        </datalist><br>
+                                    {% for d in doctors%}
+                                    <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
+                                    {% endfor %}<br>
                                         </div>
 
                                     </div>
@@ -78,12 +69,9 @@
                                     <label class="col-lg-4 col-form-label" data-lang="pet"> </label> <span class="text-danger">*</span>
                                     <div class="col-lg-6">
                                         
-                                    <input class="form-control" list="spetlist" name="appoint_name" >
-                                        <datalist id="spetlist">
-                                            {% for pet in pets%}
-                                            <option value="{{pet.Pname}}">
-                                            {% endfor%}
-                                        </datalist><br>
+                                        {% for pet in pets %}
+                                        <input type="radio" id="petname" name="appoint_name"  value="{{pet.Pname}}"> {{pet.Pname}}<br>
+                                        {% endfor %}<br><br>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -95,7 +83,7 @@
                                             <option value="Beijing">
                                             <option value="Chengdu">
                                         </datalist><br> -->
-                                        <input type="radio" value="Beijing" name="location"  >Beijing<br>
+                                        <input type="radio" value="Beijing" name="location"  checked='checked'>Beijing<br>
                                         <input type="radio" value="Shanghai" name="location" >Shanghai<br>
                                         <input type="radio" value="Chengdu" name="location" >Chengdu<br>
                                         </div>
@@ -109,12 +97,9 @@
                                     <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" data-lang="doctor"> </label> <span class="text-danger">*</span>
                                     <div class="col-lg-6">
-                                    <input class="form-control" list="sdoclist" name="doc" >
-                                        <datalist id="sdoclist">
-                                            {% for doc in doctors%}
-                                            <option value="{{doc.Dname}}">
-                                            {% endfor%}
-                                        </datalist><br>
+                                        {% for d in doctors%}
+                                        <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
+                                        {% endfor %}<br>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -263,7 +248,7 @@
                         <div class="form-group row">
                         <label class="col-lg-4 col-form-label" data-lang="petgender"></label> <span class="text-danger">*</span>
                         <div class="col-lg-6">
-                        <input type="radio" name="pet_gender" id="pet_gender1" value="1"  ><label for="pet_gender1" data-lang="male"></label> 
+                        <input type="radio" name="pet_gender" id="pet_gender1" value="1"   checked='checked'><label for="pet_gender1" data-lang="male"></label> 
                         <br>
                         <input type="radio" name="pet_gender" id="pet_gender2" value="2"  ><label for="pet_gender2" data-lang="female"></label><br />
                         </div>
@@ -271,7 +256,7 @@
                         <div class="form-group row">
                         <label class="col-lg-4 col-form-label" data-lang="pettype"></label> <span class="text-danger">*</span>
                         <div class="col-lg-6">
-                        <input type="radio" name="pet_species" id="pet_species1" value="dog"  ><label for="pet_species1" data-lang="dog"></label> 
+                        <input type="radio" name="pet_species" id="pet_species1" value="dog"  checked='checked'><label for="pet_species1" data-lang="dog"></label> 
                         <br>
                         <input type="radio" name="pet_species" id="pet_species2" value="cat"  ><label for="pet_species2" data-lang="cat"></label> <br />
                         </div>
@@ -389,6 +374,8 @@
                                             <th align="center" data-lang="date"></th>
                                             <th align="center" data-lang="posttopic"></th>
                                             <th align="center" data-lang="postcontent"> </th>
+                                            <th align="center" data-lang="delete"> </th>
+
                                         </tr>
         
                                     </thead>
@@ -403,6 +390,10 @@
                                                     <td align="center">{{unread_post.Pdate}}</td>
                                                     <td align="center">{{unread_post.Ptopic}}</td>
                                                     <td align="center">{{unread_post.Pcontent}} </td>
+                                                    <td>
+                                                        <button class="btn mb-1 btn-rounded btn-outline-primary"  onclick="window.location.href='/senior_posts/delete_post/{{unread_post.id}}'"  data-lang="delete"></button>
+
+                                                    </td>
                                                 </tr>
                                                 {% endfor %}
 
@@ -427,6 +418,8 @@
                                             <th data-lang="date"></th>
                                             <th data-lang="posttopic"></th>
                                             <th data-lang="postcontent"> </th>
+                                            <th data-lang="delete"> </th>
+
                                         </tr>
         
                                     </thead>
@@ -440,6 +433,10 @@
                                                         <td>{{read_post.Pdate}}</td>
                                                         <td>{{read_post.Ptopic}}</td>
                                                         <td>{{read_post.Pcontent}} </td>
+                                                        <td>
+                                                            <button class="btn mb-1 btn-rounded btn-outline-primary"  onclick="window.location.href='/senior_posts/delete_post/{{read_post.id}}'"  data-lang="delete"></button>
+
+                                                        </td>
                                                     </tr>
                                                     {% endfor %}
 

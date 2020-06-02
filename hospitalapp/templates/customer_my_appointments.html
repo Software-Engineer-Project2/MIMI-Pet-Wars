@@ -42,7 +42,13 @@
                                                     {% elif a.Atype == '0' %}
                                                     <td align="center">Emergent</td>
                                                     {% endif %}
-                                                    <td align="center">{{a.Acost}}</td>
+                                                    {% for d in doctors%}
+                                                        {% if d.id==a.Adoc %}
+                                                        <td align="center">{{d.Dname}}</td>
+                                                        {% endif %}
+                                                    {% endfor %}
+
+                                                    
                                                     <td align="center">{{a.Ainfo}}</td>
                                                     {% if a.OperationStatus == "Ready to surgery" %}
                                                     <td class="label gradient-2 rounded" align="center" data-lang="2ready"></td>

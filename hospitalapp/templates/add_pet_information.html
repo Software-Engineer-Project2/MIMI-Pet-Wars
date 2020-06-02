@@ -1,15 +1,15 @@
 
-    {% extends "customer_loggedin_base.html" %}
+{% extends "customer_loggedin_base.html" %}
 
- {% block content %}
+{% block content %}
     
- <div class="container-fluid">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <div class="form-validation">
-                      
+                        
                             
                             <form action='/Add Pet information' method="POST">
 
@@ -44,12 +44,12 @@
                                     <br>
                                     <div class="col-lg-6">
                                     
-                                    <input type="radio" name="sex" id="male" value="1" ><label for="male" data-lang="male"></label> <br>
+                                    <input type="radio" name="sex" id="male" value="1" checked='checked'><label for="male" data-lang="male"></label> <br>
                                     <input type="radio" name="sex" id="female" value="2" ><label for="female" data-lang="female"></label> <br></div></div>
-                                      
-                                   
+                                        
+                                    
 
-                               
+                                
                                     {% for error in form.Psex .errors %}
                                     <span style="color: red;">[{{ error }}]</span>
                                     {% endfor %}
@@ -62,10 +62,10 @@
                                     <br>
                                     <div class="col-lg-6">
                                     
-                                    <input type="radio" name="species" id="cat" value="1" ><label for="cat" data-lang="cat"></label> <br>
+                                    <input type="radio" name="species" id="cat" value="1" checked='checked'><label for="cat" data-lang="cat"></label> <br>
                                     <input type="radio" name="species" id="dog" value="2" ><label for="dog" data-lang="dog"></label> <br></div></div>
-                                      
-                               
+                                        
+                                
 
                                     {% for error in form.Pspecies.errors %}
                                     <span style="color: red;">[{{ error }}]</span>
@@ -84,10 +84,10 @@
                                     {% endfor %}<br></div>
                             </p>
                             <br><br><br>
-                           
+                            
                             <!-- {{ form.submit(class="btn btn-primary", id="s") }}
-                             -->
-                             <div class="form-group row">
+                            -->
+                            <div class="form-group row">
                                 <div class="col-lg-8 ml-auto">
                                     <button class="btn btn-primary" type="submit" data-lang='submit'></button>
                                     </div>

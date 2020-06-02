@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Pets</title>
+</head>
+<body>
+{% extends "customer_loggedin_base.html" %}
+{% block content %}
+<h2 >{{ mes }}</h2>
+      <button  onclick="window.location.href='{{url_for('add_pet_information')}}'" data-lang="addapet">.</button>
+
+<h4>{{ pets|length}} pets:</h4>
+    {% for pet in pets %}
+        <div class="pets">
+            <p>--------------------------------------------------------------</p>
+            <p data-lang="petname"> :         {{ pet.Pname }}</p>
+            <p data-lang="petgender"> :         {{ pet.Psex }}</p>
+            <p data-lang="petage"> :         {{ pet.Page }}</p>
+            <p data-lang="petspecies"> :         {{ pet.Pspecies }}</p>
+            <p data-lang="petinformation"> :         {{ pet.Pinfo }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+</body>
+</html>

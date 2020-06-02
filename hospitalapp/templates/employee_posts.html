@@ -20,7 +20,7 @@
                         <tr>
                             <th data-lang="topic"></th>
                             <th data-lang="date"></th>
-                            
+                            <th data-lang="viewandanwer"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,8 @@
                         <tr onclick="location.href='/employee_post_detail/{{unread_post.id}}'">
                             <td>{{unread_post.Ptopic}}</td>
                             <td>{{unread_post.Pdate}}</td>
-                            
+                            <td><a onclick="location.href='/employee_post_detail/{{unread_post.id}}'"><span class="label gradient-1 btn-rounded" data-lang="viewandanwer"></span></a></td>
+
                         </tr>
                         {% endfor %}
                     </tbody>

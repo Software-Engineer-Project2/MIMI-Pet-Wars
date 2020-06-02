@@ -36,7 +36,12 @@
                         <td align="center">{{d.Dname}}</td>
                          <td align="center">{{d.Dphone}}</td>
                         <td align="center">{{d.Dlevel}}</td>
-                        <td align="center">{{d.Dhospital}}</td>
+                        {% for h in hospital %}
+                            {% if h.id==d.Dhospital %}
+                        <td align="center">{{h.Hname}}</td>
+                            {% endif %}
+                        {% endfor %}
+                        
                          <td align="center">{{d.Dinf}}</td>>
                          <td align="center"><button  onclick="window.location.href='/employee_doctorss/edit_doctor/{{d.id}}'" data-lang="edit"></button></td>
 

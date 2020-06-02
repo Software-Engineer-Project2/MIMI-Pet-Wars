@@ -3,7 +3,7 @@ import time
 import re
 from datetime import datetime
 
-from flask import render_template, flash, redirect, url_for, session, request, abort # jsonify
+from flask import render_template, flash, redirect, url_for, session, request, abort #, jsonify
 #from sqlalchemy.testing.pickleable import User
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
@@ -62,23 +62,6 @@ def senior_login():
         flash('Incorrect Password')
         return redirect(url_for('senior_login'))
     return render_template('senior_login.html', title='Login In', form=form)
-
-
-@app.route('/senior_login_chinese', methods=['GET', 'POST'])
-def senior_login_chinese():
-    form = LoginFormCustomer_chinese()
-    if request.method == "POST":
-        user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
-        if not user_in_db:
-            flash('No user found with username: {}'.format(form.Cusername.data))
-            return redirect(url_for('senior_login_chinese'))
-        if check_password_hash(user_in_db.Cpassword, form.Cpassword.data):
-            flash('登陆成功!')
-            session["USERNAME"] = user_in_db.Cname
-            return redirect(url_for('loggedin_home_senior'))
-        flash('Incorrect Password')
-        return redirect(url_for('senior_login_chinese'))
-    return render_template('senior_login_chinese.html', title='Login In', form=form)
 
 
 @app.route('/signupSenior', methods=['GET', 'POST'])
@@ -245,13 +228,32 @@ def senior_appo_inpatient(id):
 @app.route('/loggedin_home_senior/emergency_appointment', methods=['GET', 'POST'])
 def senior_emergency_appoint():
     if request.method == "POST":
-        pet_name = request.form["appoint_name"]
-        date_str = request.form['date']
-        date_str = date_str 
-        date = datetime.strptime(date_str, '%Y/%m/%d')
+        
+        try:
+            pet_name = request.form["appoint_name"]
+        except:
+            flash("Please select petname")
+            return redirect(url_for("senior_emergency_appoint"))
+            raise exceptions.BadRequestKeyError(str(e))
+        try:
+            print('date--------',request.form["date"])
+            date_str = request.form["date"]
+            date_str = date_str+" 00:00:00"
+            date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+        except:
+            flash("Please enter date")
+            return redirect(url_for("senior_emergency_appoint"))
+            raise exceptions.BadRequestKeyError(str(e))
+        try:
+            docname = request.form['doctor']
+        except KeyError as e:
+            flash("Please select correct doctor")
+            return redirect(url_for("senior_emergency_appoint"))
+            raise exceptions.BadRequestKeyError(str(e))
         pet = Pet.query.filter(Pet.Pname == pet_name).first()
+        flash("Make an appointment successfully")
         appointment = Appointment(apppetter=pet, Atype='0',
-                                  Adoc=request.form["doc"], Alocation=request.form["location"], Adate=date,
+                                  Adoc=docname, Alocation=request.form["location"], Adate=date,
                                   Ainfo='', Acomplete='0', Astart='0')
         db.session.add(appointment)
         db.session.commit()
@@ -261,13 +263,31 @@ def senior_emergency_appoint():
 @app.route('/loggedin_home_senior/standard_appointment', methods=['GET', 'POST'])
 def senior_standard_appoint():
     if request.method == "POST":
-        pet_name = request.form["appoint_name"]
-        date_str = request.form['date']
-        date_str = date_str 
-        date = datetime.strptime(date_str, '%Y/%m/%d')
+        try:
+            pet_name = request.form["appoint_name"]
+        except:
+            flash("Please select petname")
+            return redirect(url_for("senior_standard_appoint"))
+            raise exceptions.BadRequestKeyError(str(e))
+        try:
+            print('date--------',request.form["date"])
+            date_str = request.form["date"]
+            date_str = date_str+" 00:00:00"
+            date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+        except:
+            flash("Please enter date")
+            return redirect(url_for("senior_standard_appoint"))
+            raise exceptions.BadRequestKeyError(str(e))
+        try:
+            docname = request.form['doctor']
+        except KeyError as e:
+            flash("Please select correct doctor")
+            return redirect(url_for("senior_standard_appoint"))
+            raise exceptions.BadRequestKeyError(str(e))
         pet = Pet.query.filter(Pet.Pname == pet_name).first()
+        flash("Make an appointment successfully")
         appointment = Appointment(apppetter=pet, Atype='1',
-                                  Adoc=request.form["doc"], Alocation=request.form["location"], Adate=date,
+                                  Adoc=docname, Alocation=request.form["location"], Adate=date,
                                   Ainfo=request.form["info"], Acomplete='0', Astart='0')
         db.session.add(appointment)
         db.session.commit()
@@ -366,14 +386,6 @@ def loggedin_home_employee():
         return redirect(url_for('loginEmployee'))
 
 
-@app.route('/loggedin_home_employee_chinese')
-def loggedin_home_employee_chinese():
-    if not session.get("USERNAME") is None:
-        user_in_db = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
-        return render_template('loggedin_home_employee_chinese.html', Eusername=user_in_db.Ename)
-    else:
-        flash("雇员需要登录或者注册首先")
-        return redirect(url_for('loginEmployee_chinese'))
 
 
 @app.route('/loginEmployee', methods=['GET', 'POST'])
@@ -437,25 +449,6 @@ def customer_profile():
     else:
         return redirect(url_for('loginCustomer'))
 
-
-
-@app.route('/loginEmployee_chinese', methods=['GET', 'POST'])
-def loginEmployee_chinese():
-    form = LoginFormEmployee_chinese()
-    if form.validate_on_submit():
-        user_in_db = Employee.query.filter(Employee.Ename == form.Eusername.data).first()
-        if not user_in_db:
-            flash('没有发现用户: {}'.format(form.Eusername.data))
-            return redirect(url_for('loginEmployee'))
-        if check_password_hash(user_in_db.Epassword, form.Epassword.data):
-            flash('登录成功!')
-            session["USERNAME"] = user_in_db.Ename
-            return redirect(url_for('loggedin_home_employee_chinese'))
-        flash('密码不正确')
-        return redirect(url_for('loginEmployee'))
-    return render_template('login_employee_chinese.html', title='Sign In', form=form)
-
-
 @app.route('/signupEmployee', methods=['GET', 'POST'])
 def signupEmployee():
     form = SignupFormEmployee()
@@ -486,25 +479,6 @@ def signupEmployee():
     return render_template('signup_employee.html', title='Register a new user', form=form)
 
 
-@app.route('/signupEmployee_chinese', methods=['GET', 'POST'])
-def signupEmployee_chinese():
-    form = SignupFormEmployee_chinese()
-    if form.validate_on_submit():
-        if form.Epassword.data != form.Epassword2.data:
-            flash('密码不匹配!')
-            return redirect(url_for('signupEmployee_chinese'))
-
-        passw_hash = generate_password_hash(form.Epassword.data)
-        employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=form.Ephone.data,
-                            Egender=form.Egender.data, Eemail=form.Eemail.data, Ehiredate=form.Ehiredate.data,
-                            Epassword=passw_hash)
-        db.session.add(employee)
-        db.session.commit()
-        session["USERNAME"] = employee.Ename
-        return redirect(url_for("loginEmployee_chinese"))
-    return render_template('signup_employee_chinese.html', title='Register a new user', form=form)
-
-
 @app.route('/employee_appointment')
 def employee_appointment():
     if not session.get("USERNAME") is None:
@@ -512,15 +486,6 @@ def employee_appointment():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
-
-
-@app.route('/employee_appointment_chinese')
-def employee_appointment_chinese():
-    if not session.get("USERNAME") is None:
-        return render_template('employee_appointment_chinese.html', title='Home')
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('loginEmployee_chinese'))
 
 
 @app.route('/employee_appo_checkin', methods=['GET', 'POST'])
@@ -543,29 +508,6 @@ def employee_appo_checkin():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
-
-
-@app.route('/employee_appo_checkin_chinese', methods=['GET', 'POST'])
-def employee_appo_checkin_chinese():
-    if not session.get("USERNAME") is None:
-
-        pets = Pet.query.filter().all()
-        customers = Customer.query.filter().all()
-        s_appointments = Appointment.query.filter(Appointment.Atype == '1',
-                                                  Appointment.Astart == '0',
-                                                  Appointment.Acomplete == '0').all()  # type-1 complete-0 - Standard Appointments not checkin
-        print(s_appointments)
-        e_appointments = Appointment.query.filter(Appointment.Atype == '0',
-                                                  Appointment.Astart == '0', Appointment.Acomplete == '0').all()
-        # type-1 complete-0 - Standard Appointments not checkin
-        print(e_appointments)
-        return render_template('employee_appo_checkin_chinese.html', title='Display appointment not checkin yet',
-                               s_appointments=s_appointments,
-                               e_appointments=e_appointments, pets=pets, customers=customers)
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('loginEmployee'))
-
 
 @app.route('/employee_appo_checkin/view_appo/<id>', methods=['GET', 'POST'])
 def employee_checkin_view(id):
@@ -615,7 +557,6 @@ def employee_outpatient_finish(id):
     db.session.commit()
     return redirect(url_for('employee_appo_outpatient'))
 
-
 @app.route('/employee_appo_outpatient/operation/<id>', methods=['GET', 'POST'])
 def employee_outpatient_operation(id):
     if not session.get("USERNAME") is None:
@@ -625,9 +566,15 @@ def employee_outpatient_operation(id):
         if appoint.Ostatus == '0':
             if request.method == 'POST':
                 if is_number(form.Ocost.data):
-                    date_str = request.form["date"]
-                    date_str = date_str
-                    date = datetime.strptime(date_str, '%Y/%m/%d')
+                    try:
+                        print('date--------',request.form["date"])
+                        date_str = request.form["date"]
+                        date_str = date_str+" 00:00:00"
+                        date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+                    except:
+                        flash("Please enter date")
+                        return redirect(url_for("employee_outpatient_operation",id=id))
+                        raise exceptions.BadRequestKeyError(str(e))
                     operation = Operation(oappointment=appoint, odoctor=doctor, Odate=date, Oinf=form.Oinf.data,
                                         Ocost=form.Ocost.data)
                     appoint.OperationStatus = "Inform customer operation"
@@ -648,7 +595,6 @@ def employee_outpatient_operation(id):
         flash("User needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
 
-
 @app.route('/employee_appo_outpatient/inpatient/<id>', methods=['GET', 'POST'])
 def employee_outpatient_inpatient(id):
     if not session.get("USERNAME") is None:
@@ -660,17 +606,17 @@ def employee_outpatient_inpatient(id):
                 if is_number(form.cost.data):
                     startdate_str = request.form["startdate"]
                     enddate_str = request.form["enddate"]
-                    startdate_str = startdate_str
-                    enddate_str = enddate_str
-                    if startdate_str=="":
+                    startdate_str = startdate_str+" 00:00:00"
+                    enddate_str = enddate_str+" 00:00:00"
+                    if startdate_str==" 00:00:00":
                         flash("Please enter start date ")
                         redirect(url_for("employee_outpatient_inpatient", id=id))
-                    elif enddate_str=="":
+                    elif enddate_str==" 00:00:00":
                         flash("Please enter end date ")
                         redirect(url_for("employee_outpatient_inpatient", id=id))
                     else:
-                        startdate = datetime.strptime(startdate_str, '%Y/%m/%d')
-                        enddate = datetime.strptime(enddate_str, '%Y/%m/%d')
+                        startdate = datetime.strptime(startdate_str, '%Y-%m-%d %H:%M:%S')
+                        enddate = datetime.strptime(enddate_str, '%Y-%m-%d %H:%M:%S')
                         if startdate >= enddate:
                             flash("Please enter an end date later than the start date ")
                             redirect(url_for("employee_outpatient_inpatient", id=id))
@@ -714,7 +660,6 @@ def employee_appo_inpatient():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
-
 
 @app.route('/employee_appo_inpatient/release/<id>', methods=['GET', 'POST'])
 def employee_inpatient_release(id):
@@ -818,18 +763,6 @@ def employee_pets_delete(id):
     return redirect(url_for('employee_pets'))
 
 
-@app.route('/employee_pets_chinese', methods=['GET', 'POST'])
-def employee_pets_chinese():
-    if not session.get("USERNAME") is None:
-        pets = Pet.query.filter().all()
-        customers = Customer.query.filter().all()
-        return render_template('employee_pets_chinese.html', title='Display In-patient appointments', pets=pets,
-                               customers=customers)
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('loginEmployee_chinese'))
-
-
 @app.route('/employee_customers', methods=['GET', 'POST'])
 def employee_customers():
     if not session.get("USERNAME") is None:
@@ -839,32 +772,12 @@ def employee_customers():
         flash("User needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
 
-@app.route('/employee_customers_chinese', methods=['GET', 'POST'])
-def employee_customers_chinese():
-    if not session.get("USERNAME") is None:
-        customers = Customer.query.filter().all()
-        return render_template('employee_customers_chinese.html', title='Display In-patient appointments', customers=customers)
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('loginEmployee'))
-
-
 @app.route('/employee_doctors', methods=['GET', 'POST'])
 def employee_doctors():
     if not session.get("USERNAME") is None:
         doctors = Doctor.query.filter().all()
-        return render_template('employee_doctors.html', title='Display In-patient appointments', doctors=doctors)
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('employee_mainpage'))
-
-
-@app.route('/employee_doctors_chinese', methods=['GET', 'POST'])
-def employee_doctors_chinese():
-    if not session.get("USERNAME") is None:
-        doctors = Doctor.query.filter().all()
-        return render_template('employee_doctors_chinese.html', title='Display In-patient appointments',
-                               doctors=doctors)
+        hospital = Hospital.query.filter().all()
+        return render_template('employee_doctors.html', title='Display In-patient appointments', doctors=doctors,hospital=hospital)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
@@ -900,7 +813,6 @@ def employee_doctor_edit(id):
                 flash("Please enter correct level")
                 return redirect(url_for('employee_doctor_edit',id=id))
             else:
-                doc.Dname = request.form['name']
                 doc.department = request.form['department']
                 doc.Dphone= request.form['phone']
                 doc.Dlevel= request.form['level']
@@ -940,12 +852,6 @@ def listproduct():
     return render_template('adminproduct.html', title='Shop', goods=goods)
 
 
-@app.route('/listproduct_chinese', methods=['GET', 'POST'])
-def listproduct_chinese():
-    goods = Good.query.all()
-    return render_template('adminproduct_chinese.html', title='Shop', goods=goods)
-
-
 @app.route('/employee_posts')
 def employee_posts():
     if not session.get("USERNAME") is None:
@@ -962,24 +868,6 @@ def employee_posts():
     else:
         return redirect(url_for('loginEmployee'))
 
-
-@app.route('/employee_posts_chinese')
-def employee_posts_chinese():
-    if not session.get("USERNAME") is None:
-        posts = Post.query.all()
-        read_posts = set()
-        for post in posts:
-            if post.Panswer.all():
-                read_posts.add(post)
-
-        unread_posts = Post.query.filter(Post.Panswer == None).all()
-
-        print('unread posts', unread_posts)
-        return render_template('employee_posts_chinese.html', unread_posts=unread_posts, read_posts=read_posts)
-    else:
-        return redirect(url_for('loginEmployee'))
-
-
 @app.route('/employee_post_detail/<id>', methods=['GET', 'POST'])
 def employee_post_detail(id):
     if not session.get("USERNAME") is None:
@@ -990,6 +878,31 @@ def employee_post_detail(id):
     else:
         return redirect(url_for('loginEmployee'))
 
+@app.route('/customer_posts/delete_post/<id>', methods=['GET', 'POST'])
+def customer_delete_post(id):
+    if not session.get('USERNAME') is None:
+        post = Post.query.get_or_404(id)
+        answer = Answer.query.filter(Answer.Apost==post.id).first()
+    if answer:
+        db.session.delete(answer)
+        db.session.delete(post)
+        db.session.commit()
+        return redirect(url_for('customer_posts'))
+    else:
+        return redirect(url_for('loginCustomer'))
+
+@app.route('/senior_posts/delete_post/<id>', methods=['GET', 'POST'])
+def senior_delete_post(id):
+    if not session.get('USERNAME') is None:
+        post = Post.query.get_or_404(id)
+        answer = Answer.query.filter(Answer.Apost==post.id).first()
+    if answer:
+        db.session.delete(answer)
+        db.session.delete(post)
+        db.session.commit()
+        return redirect(url_for('loggedin_home_senior'))
+    else:
+        return redirect(url_for('loggedin_home_senior'))
 
 @app.route('/employee_posts/employee_answer_post/<id>', methods=['GET', 'POST'])
 def employee_answer_post(id):
@@ -1116,29 +1029,6 @@ def addproduct():
         return redirect(url_for('loginEmployee'))
 
 
-@app.route('/addproduct_chinese', methods=['GET', 'POST'])
-def addproduct_chinese():
-    form = AddProductForm_chinese()
-    if not session.get("USERNAME") is None:
-        if form.validate_on_submit():
-            if request.method == 'POST' and 'photo' in request.files:
-                filename = photos.save(request.files['photo'])
-                file_url = photos.get_basename(filename)
-                id = form.Gid.data
-                name = form.Gname.data
-                info = form.Ginfo.data
-                price = form.Gprice.data
-                adddate = form.Gadddate.data
-                good = Good(id=id, Gname=name, Ginfo=info, Gimage=file_url, Gprice=price, Gadddate=adddate)
-                db.session.add(good)
-                db.session.commit()
-                # flash("Add product successfully")
-            return redirect(url_for('listproduct_chinese'))
-        return render_template('addproduct_chinese.html', title='addproduct', form=form)
-    else:
-        flash("User needs to either login or signup first")
-        return redirect(url_for('loginEmployee'))
-
 
 @app.route('/deleteproduct/<id>', methods=['GET', 'POST'])
 def deleteproduct(id):
@@ -1177,36 +1067,11 @@ def editproduct(id):
     return render_template('editproduct.html', form=form)
 
 
-@app.route('/editproduct_chinese/<id>', methods=['GET', 'POST'])
-def editproduct_chinese(id):
-    form = AddProductForm()
-    good = Good.query.get_or_404(id)
-    form.Gid.data = good.id
-    if form.validate_on_submit():
-        if request.method == 'POST' and 'photo' in request.files:
-            filename = photos.save(request.files['photo'])
-            file_url = photos.get_basename(filename)
-            good.Gname = form.Gname.data
-            good.Ginfo = form.Ginfo.data
-            good.Gprice = form.Gprice.data
-            good.Gadddate = form.Gadddate.data
-            good.Gimage = file_url
-            db.session.commit()
-            # flash("Add product successfully")
-        return redirect(url_for('listproduct_chinese'))
-    return render_template('editproduct_chinese.html', form=form)
-
 
 @app.route('/shoppage', methods=['GET', 'POST'])
 def shoppage():
     goods = Good.query.all()
     return render_template('shoppage.html', goods=goods)
-
-
-@app.route('/shoppage_chinese', methods=['GET', 'POST'])
-def shoppage_chinese():
-    goods = Good.query.all()
-    return render_template('shoppage_chinese.html', goods=goods)
 
 
 @app.route('/order', methods=['GET', 'POST'])
@@ -1263,26 +1128,6 @@ def signupCustomer():
     return render_template('signup_customer.html', title='Register a new user', form=form)
 
 
-@app.route('/signupCustomer_chinese', methods=['GET', 'POST'])
-def signupCustomer_chinese():
-    form = SignupCustomer_chinese()
-    if form.validate_on_submit():
-        print("888888")
-        if form.Cpassword.data != form.Cpassword2.data:
-            flash('密码不匹配!')
-            return redirect(url_for('signupCustomer_chinese'))
-        passw_hash = generate_password_hash(form.Cpassword.data)
-        # customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data, password_hash=passw_hash)
-        customer = Customer(Cname=form.Cusername.data, Cphone=form.Cphone.data, Cemail=form.Cemail.data,
-                            Cgender=form.Cgender.data, Cpassword=passw_hash)
-        db.session.add(customer)
-        db.session.commit()
-        session["USERNAME"] = customer.Cname
-        flash('欢迎你, %s ! , 你已经注册成功' % customer.Cname)
-        return redirect(url_for('loginCustomer_chinese'))
-    return render_template('signup_customer_chinese.html', title='Register a new user', form=form)
-
-
 @app.route('/loginCustomer', methods=['GET', 'POST'])
 def loginCustomer():
     form = LoginFormCustomer()
@@ -1298,23 +1143,6 @@ def loginCustomer():
         flash('Incorrect Password')
         return redirect(url_for('loginCustomer'))
     return render_template('login_customer.html', title='Login In', form=form)
-
-
-@app.route('/loginCustomer_chinese', methods=['GET', 'POST'])
-def loginCustomer_chinese():
-    form = LoginFormCustomer_chinese()
-    if form.validate_on_submit():
-        user_in_db = Customer.query.filter(Customer.Cname == form.Cusername.data).first()
-        if not user_in_db:
-            flash('没有发现用户名 {}'.format(form.Cusername.data))
-            return redirect(url_for('loginCustomer_chinese'))
-        if check_password_hash(user_in_db.Cpassword, form.Cpassword.data):
-            flash('登录成功!')
-            session["USERNAME"] = user_in_db.Cname
-            return redirect(url_for('loggedin_home_customer_chinese'))
-        flash('密码不正确')
-        return redirect(url_for('loginCustomer_chinese'))
-    return render_template('login_customer_chinese.html', title='Login In', form=form)
 
 
 @app.route('/customer_add_post', methods=['GET', 'POST'])
@@ -1347,7 +1175,7 @@ def customer_posts():
         return redirect(url_for('loginCustomer'))
 
 
-@app.route('/customer_posts/<id>', methods=['GET', 'POST'])
+@app.route('/customer_posts_detail/<id>', methods=['GET', 'POST'])
 def customer_post_detail(id):
     if not session.get("USERNAME") is None:
         customer = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
@@ -1384,16 +1212,28 @@ def make_appointment():
         return render_template('make_appointment_customer.html', title='Make Appointment', pets=pets, doctors=doctors)
     else:
         
-        pet_name = request.form["pet name"]
+        
+        try:
+            pet_name = request.form["pet name"]
+        except:
+            flash("Please select petname")
+            return redirect(url_for("make_appointment"))
+            raise exceptions.BadRequestKeyError(str(e))
         if pet_name not in petnames:
             flash("Please select correct pet name")
             return redirect(url_for("make_appointment"))
         else:
             pet = Pet.query.filter(Pet.Pname == pet_name).first()
-        date_str = request.form["date"]
-        date_str = date_str
-        date = datetime.strptime(date_str, '%Y/%m/%d ')
-        type = request.form['type']
+        try:
+            print('date--------',request.form["date"])
+            date_str = request.form["date"]
+            date_str = date_str+" 00:00:00"
+            date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+            type = request.form['type']
+        except:
+            flash("Please enter date")
+            return redirect(url_for("make_appointment"))
+            raise exceptions.BadRequestKeyError(str(e))
         try:
             docname = request.form['doctor']
         except KeyError as e:
@@ -1451,18 +1291,6 @@ def customer_my_pets():
         return redirect(url_for('loginCustomer'))
 
 
-@app.route('/My Pets_chinese', methods=['GET', 'POST'])
-def customer_my_pets_chinese():
-    if not session.get("USERNAME") is None:
-        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-        pets = user_in_db.Cpet.all()
-        user = session["USERNAME"]
-        mes = '你好, %s ! , 这是你的宠物信息' % user
-        return render_template('customer_my_pets_chinese.html', pets=pets, mes=mes)
-    else:
-        return redirect(url_for('loginCustomer_chinese'))
-
-
 @app.route('/My Pets/edit_pet/<id>', methods=['GET', 'POST'])
 def customer_edit_pet(id):
     if not session.get("USERNAME") is None:
@@ -1490,29 +1318,6 @@ def customer_edit_pet(id):
         return redirect(url_for('loginCustomer'))
 
 
-@app.route('/My Pets/edit_pet_chinese/<id>', methods=['GET', 'POST'])
-def customer_edit_pet_chinese(id):
-    if not session.get("USERNAME") is None:
-        if request.method == 'GET':
-            user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-            pet = Pet.query.filter(Pet.id==id).first()
-            return render_template('customer_edit_pet_chinese.html', pet=pet)
-        else:
-            user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-            pet = Pet.query.filter(Pet.Powner == user_in_db.id).first()
-            if not request.form['age'] :
-                flash("请输入宠物名")
-                return redirect(url_for("customer_my_pets_chinese"))
-            pet.Pname = request.form['name']
-            pet.Page = request.form['age']
-            pet.Psex = request.form['gender']
-            pet.Pspecies = request.form['species']
-            pet.Pinfo = request.form['information']
-            db.session.commit()
-            return redirect(url_for('customer_my_pets_chinese'))
-    else:
-        return redirect(url_for('loginCustomer_chinese'))
-
 
 @app.route('/My Pets/delete_pet/<id>', methods=['GET', 'POST'])
 def customer_delete_pet(id):
@@ -1525,21 +1330,12 @@ def customer_delete_pet(id):
         return redirect(url_for('loginCustomer'))
 
 
-@app.route('/My Pets/delete_pet_chinese/<id>', methods=['GET', 'POST'])
-def customer_delete_pet_chinese(id):
-    if not session.get("USERNAME") is None:
-        pet = Pet.query.get_or_404(id)
-        db.session.delete(pet)
-        db.session.commit()
-        return redirect(url_for('customer_my_pets_chinese'))
-    else:
-        return redirect(url_for('loginCustomer_chinese'))
-
 
 @app.route('/customer_my_appointments', methods=['GET', 'POST'])
 def customer_my_appointments():
     user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
     pets = Pet.query.filter(Pet.Powner == user_in_db.id).all()
+    doctors =Doctor.query.filter().all()
     if not session.get("USERNAME") is None:
         if request.method == 'GET':
             appoints = []
@@ -1547,20 +1343,8 @@ def customer_my_appointments():
                 a = Appointment.query.filter(Appointment.Apet == pet.id).all()
                 print(a)
                 appoints.extend(a)
-    return render_template('customer_my_appointments.html', pets=pets, appoints=appoints)
+    return render_template('customer_my_appointments.html', pets=pets, appoints=appoints,doctors=doctors)
     
-
-@app.route('/customer_my_appointments_chinese', methods=['GET', 'POST'])
-def customer_my_appointments_chinese():
-    user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-    pets = Pet.query.filter(Pet.Powner == user_in_db.id).all()
-    if not session.get("USERNAME") is None:
-        if request.method == 'GET':
-            appoints = []
-            for pet in pets:
-                a = Appointment.query.filter(Appointment.Apet == pet.id).all()
-                appoints.extend(a)
-    return render_template('customer_my_appointments_chinese.html', pets=pets, appoints=appoints)
 
 
 @app.route('/customer_my_appointments/edit_appo/<id>', methods=['GET', 'POST'])
@@ -1575,9 +1359,15 @@ def customer_edit_appointments(id):
         else:
             appoint = Appointment.query.filter(Appointment.id == id).first()
             appoint.Atype = request.form['type']
-            date_str = request.form["date"]
-            date_str = date_str
-            date = datetime.strptime(date_str, '%Y/%m/%d')
+            try:
+                print('date--------',request.form["date"])
+                date_str = request.form["date"]
+                date_str = date_str+" 00:00:00"
+                date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+            except:
+                flash("Please enter date")
+                return redirect(url_for("customer_edit_appointments",id=id))
+                raise exceptions.BadRequestKeyError(str(e))
             appoint.Adate = date
             appoint.Alocation = request.form['location']
             docname = request.form['doctor']
@@ -1603,7 +1393,6 @@ def customer_delete_appointments(id):
             return redirect(url_for('customer_my_appointments'))
     else:
         return redirect(url_for('loginCustomer'))
-
 
 @app.route('/customer_my_appointments/operation/<id>', methods=['GET', 'POST'])
 def customer_appo_operation(id):
@@ -1685,8 +1474,8 @@ def customer_appo_release(id):
             return redirect(url_for('customer_my_appointments'))
     else:
         return redirect(url_for('loginCustomer'))
-    
-    
+
+
     
 @app.route('/checkuser', methods=['POST'])
 def check_username():
@@ -1698,6 +1487,7 @@ def check_username():
 	else:
 		return jsonify({'text': 'Sorry! Username is already taken',
 						'returvalue': 1})    
+
     
     
 

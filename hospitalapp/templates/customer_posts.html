@@ -24,6 +24,11 @@
                         <th align="center" data-lang="date"></th>
                         <th align="center" data-lang="posttopic"></th>
                         <th align="center" data-lang="postcontent"> </th>
+                        <th align="center" data-lang="view"> </th>
+
+                        <th align="center" data-lang="delete"> </th>
+                        
+
                     </tr>
 
                 </thead>
@@ -38,6 +43,14 @@
                                 <td align="center">{{unread_post.Pdate}}</td>
                                 <td align="center">{{unread_post.Ptopic}}</td>
                                 <td align="center">{{unread_post.Pcontent}} </td>
+                                <td>
+                                    <a href="{{ url_for('customer_delete_post', id=unread_post.id) }}" data-lang="delete"></a>
+
+                                </td>
+                                <td>
+                                    <td><a onclick="location.href='/customer_posts_detail/{{unread_post.id}}'"><span class="label gradient-1 btn-rounded" data-lang="view"></span></a></td>
+
+                                </td>
                             </tr>
                             {% endfor %}
 
@@ -62,6 +75,10 @@
                         <th data-lang="date"></th>
                         <th data-lang="posttopic"></th>
                         <th data-lang="postcontent"> </th>
+                        <th data-lang="view"> </th>
+
+                        <th data-lang="delete"> </th>
+
                     </tr>
 
                 </thead>
@@ -75,6 +92,15 @@
                                     <td>{{read_post.Pdate}}</td>
                                     <td>{{read_post.Ptopic}}</td>
                                     <td>{{read_post.Pcontent}} </td>
+                                    <td>
+                                    <a onclick="location.href='/customer_posts_detail/{{read_post.id}}'"><span class="label gradient-1 btn-rounded" data-lang="view"></span></a>
+    
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('customer_delete_post', id=read_post.id) }}" data-lang="delete"></a>
+
+
+                                    </td>
                                 </tr>
                                 {% endfor %}
 
