@@ -3,7 +3,7 @@ import time
 import re
 from datetime import datetime
 
-from flask import render_template, flash, redirect, url_for, session, request, abort #, jsonify
+from flask import render_template, flash, redirect, url_for, session, request, abort # jsonify
 #from sqlalchemy.testing.pickleable import User
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
