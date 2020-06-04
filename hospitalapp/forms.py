@@ -29,7 +29,7 @@ message='The username should contain only a-z, A-Z and 0-9.')])
     Ephone = StringField('phone', validators=[DataRequired()])
     Egender = RadioField('Gender', choices=[('0', 'Male'), ('1', 'Female')], validators=[DataRequired()])
     Eemail = StringField('Email', validators=[DataRequired()])
-    Ehiredate = DateField('Date of employment (format: YYYY/MM/DD)', format='%Y/%m/%d', validators=[DataRequired()])
+    Ehiredate = DateField('Date of employment ', format='%Y/%m/%d', validators=[DataRequired()])
     Epassword = PasswordField('Password', validators=[DataRequired(),Length(8, 25), EqualTo('Epassword2')])
     Epassword2 = PasswordField('Repeat Password', validators=[DataRequired(),Length(8, 25)])
     Esubmit = SubmitField('Register')
@@ -42,7 +42,7 @@ class ArrangeAppointmentFormEmployee(FlaskForm):
     Edoc = StringField('Doctor', validators=[DataRequired()])
     Ecomplete = RadioField('Complete', choices=[('0', 'Complete'), ('1', 'Not Complete')], validators=[DataRequired()])
     Einf = StringField('Information', validators=[DataRequired()])
-    Edate = DateField('Date of appointment (format: YYYY/MM/DD)', format='%Y/%m/%d', validators=[DataRequired()])
+    Edate = DateField('Date of appointment ', format='%Y/%m/%d', validators=[DataRequired()])
     Ecost = StringField('Cost', validators=[DataRequired()])
     Esubmit = SubmitField('Submit')
 
@@ -50,11 +50,11 @@ class ArrangeAppointmentFormEmployee(FlaskForm):
 class ModyAppointmentFormEmployee(FlaskForm):
     Epet = IntegerField(label='Pet id', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter pet number'
+        # 'placeholder': 'Please enter pet number'
     }, validators=[DataRequired()])
     Etype = RadioField(label='Type', choices=[('0', 'Emergency'), ('1', 'Standard')], render_kw={
         'class': "form-control",
-        'placeholder': 'Please choose the type'
+        # 'placeholder': 'Please choose the type'
     }, validators=[DataRequired()])
     Edoc = StringField(label='Doctor', render_kw={
         'class': "form-control",
@@ -68,7 +68,7 @@ class ModyAppointmentFormEmployee(FlaskForm):
         'class': "form-control",
         'placeholder': 'Please enter the information'
     }, validators=[DataRequired()])
-    Edate = DateField(label='Date of appointment (format: YYYY/MM/DD)', format='%Y/%m/%d', render_kw={
+    Edate = DateField(label='Date of appointment', format='%Y/%m/%d', render_kw={
         'class': "form-control",
         'placeholder': 'Please enter date'
     }, validators=[DataRequired()])
@@ -80,17 +80,17 @@ class ModyAppointmentFormEmployee(FlaskForm):
 
 
 class AddOperationForm(FlaskForm):
-    Odate = DateField(label='Date of appointment (format: YYYY/MM/DD)', format='%Y/%m/%d', render_kw={
+    Odate = DateField(label='Date of appointment ', format='%Y/%m/%d', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter date'
+        # 'placeholder': 'Please enter date'
     }, validators=[DataRequired()])
     Oinf = StringField(label='Information', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter the information'
+        # 'placeholder': 'Please enter the information'
     }, validators=[DataRequired()])
     Ocost = StringField(label='Cost(Please enter number)', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter the Cost'
+        # 'placeholder': 'Please enter the Cost'
     }, validators=[DataRequired()])
     Osubmit = SubmitField('Inform Customer of Operation')
 
@@ -98,19 +98,19 @@ class AddOperationForm(FlaskForm):
 class AddHospitalizationForm(FlaskForm):
     room = StringField(label='Room', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter the Room'
+        # 'placeholder': 'Please enter the Room'
     }, validators=[DataRequired()])
     startdate = DateField(label='Start date ', format='%Y-%m-%d', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter start date'
+        # 'placeholder': 'Please enter start date'
     }, validators=[DataRequired()])
     enddate = DateField(label='End date ', format='%Y-%m-%d', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter end date'
+        # 'placeholder': 'Please enter end date'
     }, validators=[DataRequired()])
     cost = StringField(label='Cost (Please enter number)', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter the Cost'
+        # 'placeholder': 'Please enter the Cost'
     }, validators=[DataRequired()])
     submit = SubmitField('Inform customer of inpatient')
 
@@ -118,11 +118,11 @@ class AddHospitalizationForm(FlaskForm):
 class AddPrescriptionForm(FlaskForm):
     medicine = StringField(label='Medicine', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter the Medicine'
+        # 'placeholder': 'Please enter the Medicine'
     }, validators=[DataRequired()])
     number = StringField(label='Number', render_kw={
         'class': "form-control",
-        'placeholder': 'Please enter the Number'
+        # 'placeholder': 'Please enter the Number'
     }, validators=[DataRequired()])
     submit = SubmitField('Confirm')
 
@@ -130,7 +130,7 @@ class AddPrescriptionForm(FlaskForm):
 class CompleteOperationConfirmForm(FlaskForm):
     complete = RadioField(label='Complete', choices=[('0', 'Complete'), ('1', 'Not Complete')], render_kw={
         'class': "form-control",
-        'placeholder': 'Please choose complete status'
+        # 'placeholder': 'Please choose complete status'
     }, validators=[DataRequired()])
     submit = SubmitField('Confirm')
 
@@ -187,8 +187,8 @@ class HospitalizationForm(FlaskForm):
     appointment = StringField('Appointment', validators=[DataRequired()])
     doc = StringField('Doctor', validators=[DataRequired()])
     room = StringField('Room', validators=[DataRequired()])
-    startdate = DateField('Start Date (format: YYYY/MM/DD)', format='%Y/%m/%d', validators=[DataRequired()])
-    enddate = DateField('End Date (format: YYYY/MM/DD)', format='%Y/%m/%d', validators=[DataRequired()])
+    startdate = DateField('Start Date (', format='%Y/%m/%d', validators=[DataRequired()])
+    enddate = DateField('End Date ', format='%Y/%m/%d', validators=[DataRequired()])
     cost = StringField('Cost', validators=[DataRequired()])
     submit = SubmitField('Manage Hospitalization')
 
@@ -302,7 +302,7 @@ class MakeAppointment(FlaskForm):
     chooseposition = SelectField('Choose Position',choices=[('Beijing', 'Beijing'), ('Shanghai', 'Shanghai'),('Chengdu', 'Chengdu')], default=0, validators=[DataRequired()])
     doctors = [('%d' % r.id, r.Dname) for r in Doctor.query.all()]
     doctor = SelectField(label='Choose doctor you want', choices=doctors, validators=[DataRequired()])
-    datetime = DateTimeField('Input Datetime(format: YYYY/MM/DD)', format='%Y/%m/%d',validators=[DataRequired()])
+    datetime = DateTimeField('Choose a date', format='%Y/%m/%d',validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
@@ -317,12 +317,5 @@ message='The pet age should contain be a number.')])
     submit = SubmitField('Save')
 
 
-class Addpetinformation_chinese(FlaskForm):
-    Pname = StringField('用户名', validators=[DataRequired()])
-    Page = IntegerField('宠物年纪',validators=[DataRequired()])
-    Psex = RadioField('性别', choices=[('1', '雄'), ('2', '雌')], default=1, validators=[DataRequired()])
-    Pspecies = StringField('宠物类型', validators=[DataRequired()])
-    Pinfo = TextAreaField('宠物信息', validators=[DataRequired()])
-    submit = SubmitField('保存')
 
 

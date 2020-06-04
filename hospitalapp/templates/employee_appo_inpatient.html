@@ -68,7 +68,7 @@
                         {% else %}
                         <td align="center" data-lang="none"></td>
                         {% endif %}
-                        <td align="center"><a href="{{ url_for('employee_inpatient_release', id=a.id) }}"  data-lang="informrelease">
+                        <td align="center"><a class="btn mb-1 btn-rounded btn-outline-primary" href="{{ url_for('employee_inpatient_release', id=a.id) }}"  data-lang="informrelease">
                           </a>
                         </td>
 
@@ -166,7 +166,7 @@
              <div class="card">
                  <div class="card-body">
                     {% if Rappointments %}
-                     <h4 class="card-title"  data-lang="inpatientappointments">:</h4>
+                     <h4 class="card-title"  data-lang="inpatientappointmentsrelease">:</h4>
                      <div class="table-responsive">
                          <table class="table table-striped table-bordered zero-configuration">
                              <thead>

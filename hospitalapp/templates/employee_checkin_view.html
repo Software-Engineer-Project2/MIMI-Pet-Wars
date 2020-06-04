@@ -1,31 +1,79 @@
 {% extends "employee_loggedin_base.html" %}
 {% block content %}
-<h1 data-lang="viewthedetailofthisappointment"></h1>
-<h3 data-lang="appointmentid">: {{appoint.id}}<br>
+<div class="container-fluid">
+    <div class="row">
+       
+            <div class="card">
+                <div class="card-body">
 
-        <span data-lang="appointmenttype">:</span>
+<b data-lang="appointmentid"></b>&nbsp;&nbsp;&nbsp;{{appoint.id}}<br>
+
+        <b data-lang="appointmenttype">:</b>
         {% if appoint.Atype=='1'%}
             <span data-lang="standard">:</span>
         {% elif appoint.Atype == '0' %}
             <span data-lang="emergent">:</span>
         {% endif %}<br>
-<span data-lang="appointmentlocation">: {{appoint.Alocation}}</span><br>
-    <b data-lang="appointmentpet">: {{pet.Pname}}</b><br>
-    <b data-lang="appointmentcustomer">: </b>{{customer.Cname}}<br>
-
-    <b data-lang="appointmentdoctor">: </b>{{doc.Dname}}<br>
-    <b data-lang="appointmentinformation">:  </b>{{appoint.Ainfo}}<br>
-    <b data-lang="appointmentdate">: </b>{{appoint.Adate}}<br>
+<b data-lang="appointmentlocation">: </b>&nbsp;&nbsp;&nbsp;{{appoint.Alocation}}<br>
+    <b data-lang="appointmentpet">: </b>&nbsp;&nbsp;&nbsp;{{pet.Pname}}<br>
+    <b data-lang="appointmentcustomer">: </b>&nbsp;&nbsp;&nbsp;{{customer.Cname}}<br>
+    {% for d in doctors%}
+    {% if appoint.Adoc==d.id%}
+    <b data-lang="appointmentdoctor">: </b>&nbsp;&nbsp;&nbsp;{{d.Dname}}<br>
+    {% endif %}
+    {% endfor %}<br>
+    <b data-lang="appointmentinformation">:  </b>&nbsp;&nbsp;&nbsp;{{appoint.Ainfo}}<br>
+    <b data-lang="appointmentdate">: </b>&nbsp;&nbsp;&nbsp;{{appoint.Adate}}<br>
     <b data-lang="appointmentout-patientsatus">:</b>
         {% if appoint.Astart=='1'%}
-            <span data-lang="checkedin"></span>
+         <span>&nbsp;&nbsp;&nbsp;</span>   
+        <span data-lang="checkedin"></span>
         {% elif appoint.Astart == '0' %}
+        <span>&nbsp;&nbsp;&nbsp;</span>  
             <span data-lang="uncheckin"></span>
         {% endif %}<br>
-    <b data-lang="appointmentoperationsatus">: </b> {{appoint.OperationStatus}}<br>
-    <b data-lang="appointmentin-patientsatus">: </b>{{appoint.HospitalizationStatus}}<br>
+    <b data-lang="appointmentoperationsatus">: </b> 
+    {% if appoint.OperationStatus == "Ready to surgery" %}
+    <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span class="label gradient-2 rounded" align="center" data-lang="2ready"></span>
+                        {% elif appoint.OperationStatus == "Inform customer operation" %}
+                        <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span class="label gradient-4 rounded" align="center" data-lang="1inform"></span>
+                        {% elif appoint.OperationStatus == "Operation Completed" %}
+                        <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span class="label gradient-3 rounded" align="center" data-lang="3complete"></span>
+                        {% else %}
+                        <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span align="center" data-lang="none"></span>
+                        {% endif %}<br>
+    <b data-lang="appointmentin-patientsatus">: </b>
+    {% if appoint.HospitalizationStatus == "Ready to inpatient" %}
+    <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span class="label gradient-1 rounded" align="center" data-lang="rti"></span>
+                        {% elif appoint.HospitalizationStatus == "Ready to release" %}
+                        <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span class="label gradient-2 rounded" align="center" data-lang="rtr"></span>
+                        {% elif appoint.HospitalizationStatus == "Inform customer inpatient" %}
+                        <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span class="label gradient-4 rounded" align="center" data-lang="ici"></span>
+                        {% elif appoint.HospitalizationStatus == "Inform customer of release" %}
+                        <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span class="label gradient-9 rounded" align="center" data-lang="icr"></span>
+                        {% elif appoint.HospitalizationStatus == "Released" %}
+                        <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span class="label gradient-3 rounded" align="center" data-lang="released"></span>
+                        {% else %}
+                        <span>&nbsp;&nbsp;&nbsp;</span>  
+                        <span align="center" data-lang="none"></span>
+                        {% endif %}<br>
 
-</h3>
+</div>
+</div>
+</div>
+
+<div class="row"></div>
+</div>
+
 
 {% endblock %}
 

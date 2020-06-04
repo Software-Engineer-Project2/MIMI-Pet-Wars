@@ -44,12 +44,12 @@
                                 <td align="center">{{unread_post.Ptopic}}</td>
                                 <td align="center">{{unread_post.Pcontent}} </td>
                                 <td>
-                                    <a href="{{ url_for('customer_delete_post', id=unread_post.id) }}" data-lang="delete"></a>
+                            <a onclick="location.href='/customer_posts_detail/{{unread_post.id}}'"><span class="label gradient-1 btn-rounded" data-lang="view"></span></a>
+
 
                                 </td>
                                 <td>
-                                    <td><a onclick="location.href='/customer_posts_detail/{{unread_post.id}}'"><span class="label gradient-1 btn-rounded" data-lang="view"></span></a></td>
-
+<a href="{{ url_for('customer_delete_post', id=unread_post.id) }}" data-lang="delete"></a>
                                 </td>
                             </tr>
                             {% endfor %}

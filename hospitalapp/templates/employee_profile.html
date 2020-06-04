@@ -16,14 +16,14 @@
  <form action='/employee_profile' method="POST">
     <label data-lang="phone">Phone : </label>
     <input type="text" name="phone" value="{{emp.Ephone}}"><br>
-       <label data-lang="gender"> Gender : </label><br>
-     {% if emp.Egender=='0' %}
-    <input type="radio" name="gender" value="0" checked="checked" data-lang="male"><br>
-    <input type="radio" name="gender" value="1" data-lang="female"><br>
-     {% else %}
-     <input type="radio" name="gender" value="0" data-lang="male"><br>
-    <input type="radio" name="gender" value="1"  checked="checked" data-lang="female"><br>
-     {% endif %}
+    <label data-lang="gender"> Gender : </label><br>
+    {% if emp.Egender=='0' %}
+    <input type="radio" name="gender" value="0" checked="checked" data-lang="male"><label for="male" data-lang="male"></label><br>
+    <input type="radio" name="gender" value="1" data-lang="female"><label for="female" data-lang="female"></label><br>
+    {% else %}
+    <input type="radio" name="gender" value="0" data-lang="male"><label for="male" data-lang="male"></label><br>
+    <input type="radio" name="gender" value="1"  checked="checked" data-lang="female"><label for="female" data-lang="female"></label><br>
+    {% endif %}
 
     <label data-lang="email">Email : </label>
      <input type="text" name="email" value="{{emp.Eemail}}"><br>

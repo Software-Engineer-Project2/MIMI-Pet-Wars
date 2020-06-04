@@ -3,10 +3,22 @@
     <title>Release</title>
 {% endblock %}
 {% block content %}
-
+<div class="container-fluid">
+    <div class="row">
+       
+            <div class="card">
+                <div class="card-body">
 <form action="/customer_my_appointments/release/{{appoint.id}}" method="POST">
-    <input type="submit" value="Allow">
-</form>
+    <h4 data-lang="saysay"></h4> 
+    <br><br>
 
+    <button class="btn btn-primary" type="submit" data-lang='comehome'></button>
+    
+</form>
+</div>
+</div>
+</div>
+<div class="row"></div>
+</div>
 
 {% endblock %}

@@ -3,7 +3,7 @@
 
                         
                         <div class="container-fluid">
-                        <!-- <div class="col-lg-6"> -->
+                        
                             <div class="card">
                                 <div class="card-body">
                                     
@@ -16,8 +16,8 @@
                                                         <th data-lang="date"></th>
                                                         <th data-lang="petname"></th>
                                                         <th data-lang="type"></th>
-                                                        <th data-lang="doc"></th>
-                                                        <th data-lang="appointmentsinformation"></th>
+                                                       
+                                                        
                                                         <th data-lang="operationstatus"></th>
                                                         <th data-lang="hospitalizationstatus"></th>
                                                         <th data-lang="complete"></th>
@@ -38,18 +38,15 @@
                                                     <td align="center">{{a.Adate}}</td>
                                                     <td align="center">{{pet.Pname}}</td>
                                                     {% if a.Atype == '1' %}
-                                                    <td align="center">Standard</td>
+                                                    <td align="center" data-lang="standard"></td>
                                                     {% elif a.Atype == '0' %}
-                                                    <td align="center">Emergent</td>
+                                                    <td align="center" data-lang="emergent"></td>
                                                     {% endif %}
-                                                    {% for d in doctors%}
-                                                        {% if d.id==a.Adoc %}
-                                                        <td align="center">{{d.Dname}}</td>
-                                                        {% endif %}
-                                                    {% endfor %}
+
+                                                   
 
                                                     
-                                                    <td align="center">{{a.Ainfo}}</td>
+                                                   
                                                     {% if a.OperationStatus == "Ready to surgery" %}
                                                     <td class="label gradient-2 rounded" align="center" data-lang="2ready"></td>
                                                     {% elif a.OperationStatus == "Inform customer operation" %}

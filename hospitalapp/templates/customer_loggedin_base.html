@@ -82,7 +82,7 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span data-lang="profile"></span></a>
+                                            <a href="{{ url_for('customer_profile')}}"><i class="icon-user"></i> <span data-lang="profile"></span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li>
@@ -222,6 +222,8 @@
 
      <!-- I18N -->
      <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+     <script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
      <script src="{{ url_for('static', filename='js/jquery.i18n.properties-1.0.9.js') }}"></script>
      <script src="{{ url_for('static', filename='js/i18.js') }}"></script>
 

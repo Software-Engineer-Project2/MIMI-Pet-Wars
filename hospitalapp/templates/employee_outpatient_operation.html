@@ -1,5 +1,10 @@
 {% extends 'employee_loggedin_base.html' %}
 {% block content %}
+<div class="container-fluid">
+    <div class="row">
+       
+            <div class="card">
+                <div class="card-body">
 {% with messages = get_flashed_messages() %}
             {% for message in messages %}
                 {% if message %}
@@ -19,7 +24,7 @@
          {{ form.hidden_tag() }}
       <p>
          <div class="form-group">
-            {{ form.Odate.label }}<br>
+            <span data-lang="date"> form.Odate.label }}</span><br>
     <input name="date" type="date" />
          </div>
 			{% for error in form.Odate.errors %}
@@ -30,7 +35,7 @@
 
       <p>
          <div class="form-group">
-                {{ form.Oinf.label }}<br>
+            <span data-lang="information">{{ form.Oinf.label }}</span><br>
                 {{ form.Oinf }}
          </div>
                 {% for error in form.Oinf.errors %}
@@ -42,7 +47,7 @@
 
       <p>
          <div class="form-group">
-                {{ form.Ocost.label}}<br>
+            <span data-lang="cost">{{ form.Ocost.label}}</span><br>
                 {{ form.Ocost }}
          </div>
                 {% for error in form.Ocost.errors %}
@@ -50,10 +55,16 @@
                 {% endfor %}
       </p>
 
+<br><br>
 
-    {{ form.Osubmit.label }}<br>{{ form.Osubmit }}<br>
+    <button class="btn btn-primary" type="submit" data-lang='informcustomer'></button>
     </form>
 
+</div>
+</div>
+</div>
+<div class="row"></div>
+</div>
 
 
 {% endblock %}

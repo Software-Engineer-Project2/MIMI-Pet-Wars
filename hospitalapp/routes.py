@@ -56,7 +56,7 @@ def senior_login():
             flash('No user found with username: {}'.format(form.Cusername.data))
             return redirect(url_for('senior_login'))
         if check_password_hash(user_in_db.Cpassword, form.Cpassword.data):
-            flash('Login success!')
+            flash('login success !')
             session["USERNAME"] = user_in_db.Cname
             return redirect(url_for('loggedin_home_senior'))
         flash('Incorrect Password')
@@ -147,6 +147,9 @@ def senior_edit_pet(id):
             if not request.form['age'] :
                 flash("Please enter pet age")
                 return redirect(url_for("loggedin_home_senior"))
+            if is_number(request.form['age'])==False:
+                flash("Please fill in the Numbers in the age")
+                return redirect(url_for("loggedin_home_senior"))
             pet.Pname = request.form['name']
             pet.Page = request.form['age']
             pet.Psex = request.form['gender']
@@ -217,7 +220,7 @@ def senior_appo_inpatient(id):
                 appoint.Hstatus = '2'
                 appoint.HospitalizationStatus = "Ready to inpatient"
                 db.session.commit()
-                flash("Ready to sugery")
+                flash("Ready to inpatient")
             else:
                 flash("No inpatient approval is required")
             return redirect(url_for('loggedin_home_senior'))
@@ -254,7 +257,7 @@ def senior_emergency_appoint():
         flash("Make an appointment successfully")
         appointment = Appointment(apppetter=pet, Atype='0',
                                   Adoc=docname, Alocation=request.form["location"], Adate=date,
-                                  Ainfo='', Acomplete='0', Astart='0')
+                                  Ainfo='senior emergency appointment', Acomplete='0',Astart='0', Ostatus="0", Hstatus='0')
         db.session.add(appointment)
         db.session.commit()
     return redirect(url_for('loggedin_home_senior'))
@@ -288,7 +291,7 @@ def senior_standard_appoint():
         flash("Make an appointment successfully")
         appointment = Appointment(apppetter=pet, Atype='1',
                                   Adoc=docname, Alocation=request.form["location"], Adate=date,
-                                  Ainfo=request.form["info"], Acomplete='0', Astart='0')
+                                  Ainfo=request.form["info"], Acomplete='0',Astart='0', Ostatus="0", Hstatus='0')
         db.session.add(appointment)
         db.session.commit()
     return redirect(url_for('loggedin_home_senior'))
@@ -366,20 +369,11 @@ def loggedin_home_customer():
         return redirect(url_for('loginCustomer'))
 
 
-@app.route('/loggedin_home_customer_chinese', methods=['GET', 'POST'])
-def loggedin_home_customer_chinese():
-    if not session.get("USERNAME") is None:
-        user_in_db = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
-        return render_template('loggedin_home_customer_chinese.html', Cusername=user_in_db.Cname)
-    else:
-        flash("Customer needs to either login or signup first")
-        return redirect(url_for('loginCustomer_chinese'))
-
 
 @app.route('/loggedin_home_employee')
 def loggedin_home_employee():
-    if not session.get("USERNAME") is None:
-        user_in_db = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
+    if not session.get("EMPLOYEE") is None:
+        user_in_db = Employee.query.filter(Employee.Ename == session.get("EMPLOYEE")).first()
         return render_template('loggedin_home_employee.html', Eusername=user_in_db.Ename)
     else:
         flash("Employee needs to either login or signup first")
@@ -398,7 +392,7 @@ def loginEmployee():
             return redirect(url_for('loginEmployee'))
         if check_password_hash(user_in_db.Epassword, form.Epassword.data):
             flash('Login success!')
-            session["USERNAME"] = user_in_db.Ename
+            session["EMPLOYEE"] = user_in_db.Ename
             return redirect(url_for('loggedin_home_employee'))
         flash('Incorrect Password')
         return redirect(url_for('loginEmployee'))
@@ -406,7 +400,7 @@ def loginEmployee():
 
 @app.route('/employee_profile', methods=['GET', 'POST'])
 def employee_profile():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         emp = Employee.query.filter(Employee.Ename == session.get("USERNAME")).first()
         if request.method == 'GET':
             return render_template('employee_profile.html', emp=emp)
@@ -449,6 +443,30 @@ def customer_profile():
     else:
         return redirect(url_for('loginCustomer'))
 
+@app.route('/senior_profile', methods=['GET', 'POST'])
+def senior_profile():
+    if not session.get("USERNAME") is None:
+        customer = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
+        if request.method == 'GET':
+            return render_template('senior_profile.html', customer=customer)
+        else:
+            if validatePhone(request.form['phone'])==1:
+                customer.Cphone = request.form['phone']
+            else:
+                flash("Please enter an 11-digit mobile phone number starting with 1")
+                return redirect(url_for("senior_profile"))
+            if validateEmail(request.form['email'])==1:
+                customer.Cemail = request.form['email']
+            else:
+                flash("Please enter the correct email")
+                return redirect(url_for("senior_profile"))
+            customer.Cgender = request.form['gender']
+            db.session.commit()
+            return redirect(url_for('loggedin_home_senior'))
+    else:
+        return redirect(url_for('senior_login'))
+        
+
 @app.route('/signupEmployee', methods=['GET', 'POST'])
 def signupEmployee():
     form = SignupFormEmployee()
@@ -470,18 +488,18 @@ def signupEmployee():
             flash("Please enter the correct email")
             return redirect(url_for("signupEmployee"))
         employee = Employee(Ename=form.Eusername.data, EIDcard=form.Eidcard.data, Ephone=phone,
-                            Egender=form.Egender.data, Eemail=email, Ehiredate=form.Ehiredate.data,
+                            Egender=form.Egender.data, Eemail=email, Ehiredate=datetime.now(),
                             Epassword=passw_hash)
         db.session.add(employee)
         db.session.commit()
-        session["USERNAME"] = employee.Ename
+        session["EMPLOYEE"] = employee.Ename
         return redirect(url_for("loginEmployee"))
     return render_template('signup_employee.html', title='Register a new user', form=form)
 
 
 @app.route('/employee_appointment')
 def employee_appointment():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         return render_template('employee_appointment.html', title='Home')
     else:
         flash("User needs to either login or signup first")
@@ -490,7 +508,7 @@ def employee_appointment():
 
 @app.route('/employee_appo_checkin', methods=['GET', 'POST'])
 def employee_appo_checkin():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
 
         pets = Pet.query.filter().all()
         customers = Customer.query.filter().all()
@@ -511,12 +529,12 @@ def employee_appo_checkin():
 
 @app.route('/employee_appo_checkin/view_appo/<id>', methods=['GET', 'POST'])
 def employee_checkin_view(id):
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         customer = Customer.query.filter(Customer.Cname == session.get("USERNAME")).first()
         appoint = Appointment.query.filter(Appointment.id == id).first()
         pet = Pet.query.filter(Pet.id == appoint.Apet).first()
-        doc = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
-        return render_template('employee_checkin_view.html', appoint=appoint, customer=customer, pet=pet, doc=doc)
+        doctors = Doctor.query.filter().all()
+        return render_template('employee_checkin_view.html', appoint=appoint, customer=customer, pet=pet, doctors=doctors)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('loginEmployee'))
@@ -532,7 +550,7 @@ def employee_checkin(id):
 
 @app.route('/employee_appo_outpatient', methods=['GET', 'POST'])
 def employee_appo_outpatient():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         pets = Pet.query.filter().all()
         customers = Customer.query.filter().all()
         appointments = Appointment.query.filter(Appointment.Astart == '1',
@@ -559,7 +577,7 @@ def employee_outpatient_finish(id):
 
 @app.route('/employee_appo_outpatient/operation/<id>', methods=['GET', 'POST'])
 def employee_outpatient_operation(id):
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         form = AddOperationForm()
         appoint = Appointment.query.filter(Appointment.id == id).first()
         doctor = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
@@ -597,7 +615,7 @@ def employee_outpatient_operation(id):
 
 @app.route('/employee_appo_outpatient/inpatient/<id>', methods=['GET', 'POST'])
 def employee_outpatient_inpatient(id):
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         form = AddHospitalizationForm()
         appoint = Appointment.query.filter(Appointment.id == id).first()
         doctor = Doctor.query.filter(Doctor.id == appoint.Adoc).first()
@@ -644,7 +662,7 @@ def employee_outpatient_inpatient(id):
 
 @app.route('/employee_appo_inpatient', methods=['GET', 'POST'])
 def employee_appo_inpatient():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         pets = Pet.query.filter().all()
         customers = Customer.query.filter().all()
         Iappointments = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
@@ -663,7 +681,7 @@ def employee_appo_inpatient():
 
 @app.route('/employee_appo_inpatient/release/<id>', methods=['GET', 'POST'])
 def employee_inpatient_release(id):
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         appoint = Appointment.query.get_or_404(id)
         appoint.Hstatus = '3'
         appoint.HospitalizationStatus = "Inform customer of release"
@@ -676,7 +694,7 @@ def employee_inpatient_release(id):
 
 @app.route('/employee_appo_inpatient/release_complete/<id>', methods=['GET', 'POST'])
 def employee_inpatient_releasecomplete(id):
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         appoint = Appointment.query.get_or_404(id)
         appoint.Hstatus = '5'
         appoint.HospitalizationStatus = "Released"
@@ -689,7 +707,7 @@ def employee_inpatient_releasecomplete(id):
 
 @app.route('/employee_appo_operation', methods=['GET', 'POST'])
 def employee_appo_operation():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         pets = Pet.query.filter().all()
         customers = Customer.query.filter().all()
         appoints = Appointment.query.filter(Appointment.Astart == '1', Appointment.Acomplete == '0',
@@ -707,7 +725,7 @@ def employee_appo_operation():
 
 @app.route('/employee_appo_operation/complete operation/<id>', methods=['GET', 'POST'])
 def employee_operation_complete(id):
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         appoint = Appointment.query.get_or_404(id)
         appoint.Ostatus = '3'
         appoint.OperationStatus = "Operation Completed"
@@ -720,7 +738,7 @@ def employee_operation_complete(id):
 
 @app.route('/employee_appo_completed', methods=['GET', 'POST'])
 def employee_appo_completed():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         pets = Pet.query.filter().all()
         customers = Customer.query.filter().all()
         appointments = Appointment.query.filter(
@@ -734,7 +752,7 @@ def employee_appo_completed():
 
 @app.route('/employee_pets', methods=['GET', 'POST'])
 def employee_pets():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         pets = Pet.query.filter().all()
         customers = Customer.query.filter().all()
         return render_template('employee_pets.html', title='Display In-patient appointments', pets=pets,
@@ -765,7 +783,7 @@ def employee_pets_delete(id):
 
 @app.route('/employee_customers', methods=['GET', 'POST'])
 def employee_customers():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         customers = Customer.query.filter().all()
         return render_template('employee_customers.html', title='Display In-patient appointments', customers=customers)
     else:
@@ -774,7 +792,7 @@ def employee_customers():
 
 @app.route('/employee_doctors', methods=['GET', 'POST'])
 def employee_doctors():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         doctors = Doctor.query.filter().all()
         hospital = Hospital.query.filter().all()
         return render_template('employee_doctors.html', title='Display In-patient appointments', doctors=doctors,hospital=hospital)
@@ -800,7 +818,7 @@ def employee_doctorss_delete(id):
 
 @app.route('/employee_doctorss/edit_doctor/<id>', methods=['GET', 'POST'])
 def employee_doctor_edit(id):
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         doc = Doctor.query.filter(Doctor.id == id).first()
         if request.method == 'GET':
             hospitals = Hospital.query.all()
@@ -825,7 +843,7 @@ def employee_doctor_edit(id):
 
 @app.route('/employee_doctorss/add_doctor', methods=['GET', 'POST'])
 def employee_add_doctor():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         if request.method == 'GET':
             hospitals = Hospital.query.all()
             return render_template('employee_add_doctor.html', hospitals=hospitals)
@@ -854,7 +872,7 @@ def listproduct():
 
 @app.route('/employee_posts')
 def employee_posts():
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         posts = Post.query.all()
         read_posts = set()
         for post in posts:
@@ -870,7 +888,7 @@ def employee_posts():
 
 @app.route('/employee_post_detail/<id>', methods=['GET', 'POST'])
 def employee_post_detail(id):
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         post = Post.query.filter_by(id=id).first()
         answer = post.Panswer.all()
 
@@ -896,8 +914,8 @@ def senior_delete_post(id):
     if not session.get('USERNAME') is None:
         post = Post.query.get_or_404(id)
         answer = Answer.query.filter(Answer.Apost==post.id).first()
-    if answer:
-        db.session.delete(answer)
+        if answer:
+            db.session.delete(answer)
         db.session.delete(post)
         db.session.commit()
         return redirect(url_for('loggedin_home_senior'))
@@ -907,7 +925,7 @@ def senior_delete_post(id):
 @app.route('/employee_posts/employee_answer_post/<id>', methods=['GET', 'POST'])
 def employee_answer_post(id):
     form = AnswerForm()
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         post = Post.query.filter_by(id=id).first()
         if form.validate_on_submit():
             answer = Answer(Acontent=form.content.data, Apost=post.id)
@@ -1008,7 +1026,7 @@ def paidorders():
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():
     form = AddProductForm()
-    if not session.get("USERNAME") is None:
+    if not session.get("EMPLOYEE") is None:
         if form.validate_on_submit():
             if request.method == 'POST' and 'photo' in request.files:
                 filename = photos.save(request.files['photo'])
@@ -1303,10 +1321,13 @@ def customer_edit_pet(id):
             pet = Pet.query.filter(Pet.Powner == user_in_db.id).first()
             if not request.form['name'] :
                 flash("Please enter petname")
-                return redirect(url_for("customer_my_pets"))
+                return redirect(url_for("customer_edit_pet", id = id))
             if not request.form['age'] :
                 flash("Please enter age")
-                return redirect(url_for("customer_my_pets"))
+                return redirect(url_for("customer_edit_pet", id = id))
+            if is_number(request.form['age'])==False:
+                flash("Please fill in the Numbers in the age")
+                return redirect(url_for("customer_edit_pet", id=id))
             pet.Pname = request.form['name']
             pet.Page = request.form['age']
             pet.Psex = request.form['gender']

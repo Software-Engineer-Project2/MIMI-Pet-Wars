@@ -31,9 +31,9 @@
                                     <div class="form-group row">
                                     <label class="col-lg-4 col-form-label"  data-lang="location"> </label> <span class="text-danger">*</span>
                                     <div class="col-lg-6">
-                                        <input type="radio" value="Beijing" name="location"  checked='checked'>Beijing<br>
-                                        <input type="radio" value="Shanghai" name="location" >Shanghai<br>
-                                        <input type="radio" value="Chengdu" name="location" >Chengdu<br><br>
+                                        <input type="radio" value="Beijing" name="location"  checked='checked'><label data-lang="Beijing"></label><br>
+                                        <input type="radio" value="Shanghai" name="location" ><label data-lang="Shanghai"></label><br>
+                                        <input type="radio" value="Chengdu" name="location" ><label data-lang="Chengdu"></label><br><br>
                                         </div>
                                     </div>
 
@@ -48,7 +48,7 @@
                                     <label class="col-lg-4 col-form-label" data-lang="doctor"> </label> <span class="text-danger">*</span>
                                     <div class="col-lg-6">
                                     {% for d in doctors%}
-                                    <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
+                                    <input type="radio" name="doctor" value="{{d.id}}">{{d.Dname}}<br>
                                     {% endfor %}<br>
                                         </div>
 
@@ -83,9 +83,9 @@
                                             <option value="Beijing">
                                             <option value="Chengdu">
                                         </datalist><br> -->
-                                        <input type="radio" value="Beijing" name="location"  checked='checked'>Beijing<br>
-                                        <input type="radio" value="Shanghai" name="location" >Shanghai<br>
-                                        <input type="radio" value="Chengdu" name="location" >Chengdu<br>
+                                        <input type="radio" value="Beijing" name="location"  checked='checked'><label data-lang="Beijing"></label><br>
+                                        <input type="radio" value="Shanghai" name="location" ><label data-lang="Shanghai"></label><br>
+                                        <input type="radio" value="Chengdu" name="location" ><label data-lang="Chengdu"></label><br>
                                         </div>
                                         </div>
                                         <div class="form-group row">
@@ -98,7 +98,7 @@
                                     <label class="col-lg-4 col-form-label" data-lang="doctor"> </label> <span class="text-danger">*</span>
                                     <div class="col-lg-6">
                                         {% for d in doctors%}
-                                        <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
+                                        <input type="radio" name="doctor" value="{{d.id}}">{{d.Dname}}<br>
                                         {% endfor %}<br>
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@
                                     <th data-lang="date"></th>
                                     <th data-lang="petname"></th>
                                     <th data-lang="type"> </th>
-                                    <th data-lang="appointmentsinformation"></th>
+                                    
                                     <th data-lang="operationstatus"></th>
                                     <th data-lang="hospitalizationstatus"> </th>
                                     <th data-lang="complete"></th>
@@ -156,7 +156,7 @@
                                         <td align="center" data-lang="emergent"></td>
                                         {% endif %}
 
-                                        <td align="center">{{a.Ainfo}}</td>
+                                       
 
                                         {% if a.OperationStatus == "Ready to surgery" %}
                                         <td class="label gradient-2 rounded" align="center" data-lang="2ready"></td>

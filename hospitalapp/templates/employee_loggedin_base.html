@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Employee</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.png') }}">
     <!-- Custom Stylesheet -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='plugins/summernote/dist/summernote.css') }}" rel="stylesheet">
@@ -42,10 +42,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="/">
-                    <b class="logo-abbr"><img src="../static/images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="../static/./images/logo-compact.png" alt="" width="80%"></span>
+                    <b class="logo-abbr"><img src="{{ url_for('static', filename='images/logo.png')}}" alt=""> </b>
+                    <span class="logo-compact"><img src="{{ url_for('static', filename='images/logo-compact.png') }}" alt="" width="80%"></span>
                     <span class="brand-title">
-                        <img src="../static/images/logo-text.png" alt="" width="80%">
+                        <img src="{{ url_for('static', filename='images/logo-text.png') }}" alt="" width="80%">
                     </span>
                 </a>
             </div>
@@ -76,13 +76,13 @@
                         <li class="icons dropdown">
                             <div    data-toggle="dropdown">
                                 <!-- <i class="icon-badge menu-icon"></i> -->
-                                <img src="../static/images/user/1.png" height="40" width="40" alt="">
+                                <img src="{{ url_for('static', filename='images/user/1.png') }}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span data-lang="profile"></span></a>
+                                            <a href="{{ url_for('employee_profile')}}"><i class="icon-user"></i> <span data-lang="profile"></span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li>
@@ -227,6 +227,8 @@
 
      <!-- I18N -->
      <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+     <script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
      <script src="{{ url_for('static', filename='js/jquery.i18n.properties-1.0.9.js') }}"></script>
      <script src="{{ url_for('static', filename='js/i18.js') }}"></script>
 

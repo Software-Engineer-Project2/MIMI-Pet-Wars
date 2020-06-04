@@ -3,9 +3,13 @@
     <title>Modify Appointment</title>
 {% endblock %}
 {% block content %}
+<div class="container-fluid">
+    <div class="row">
+<div class="card">
+<div class="card-body">
 <form action="/customer_my_appointments/edit_appo/{{appoint.id}}" method="POST">
 
-    <label data-lang="appointmenttype0foremergency1forstandard"></label><br>
+    <b data-lang="appointmenttype0foremergency1forstandard"></b><br>
     {% if appoint.Atype=="0" %}
     <input type="radio" name="type" value="0" checked="checked" checked="checked">Emergency<br>
     <input type="radio" name="type" value="1" checked="checked" >Standard<br>
@@ -16,11 +20,14 @@
     <input type="radio" name="type" value="1" checked="checked" checked="checked" >Standard<br>
 
     {% endif %}
+<br>
+    <b data-lang="appointmentdatetimeformatYYYY-MM-DD-HH-MM"></b>
+    <br>
+    
+    <input type="date" name="date" ><br><br>
+    
 
-    <label data-lang="appointmentdatetimeformatYYYY-MM-DD-HH-MM"></label>
-
-    <input type="date" name="date" ><br>
-       <label data-lang="apointmentlocation"></label><br>
+       <b data-lang="apointmentlocation"></b><br>
 
        {% if appoint.Alocation =='Beijing' %}
        <input type="radio" value="Beijing" name="location"  checked="checked" >Beijing<br>
@@ -38,8 +45,8 @@
 
 
 
-    
-    <label data-lang="apointmentdoctor"></label><br>
+       <br>
+    <b data-lang="apointmentdoctor"></b><br>
     {% for d in doctors%}
     {% if d.id==appoint.Adoc %}
     <input type="radio" name="doctor" value="{{d.Dname}}" checked="checked">{{d.Dname}}<br>
@@ -47,11 +54,18 @@
     <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
     {% endif %}
     {% endfor %}<br>
-
-        <label data-lang="otherdescription"></label>
+    <br>
+        <b data-lang="otherdescription"></b>
     <input type="text" name="information" value="{{appoint.Ainfo}}"><br>
-    <input type="submit" value="Submit">
+    <br><br>
+        <button class="btn btn-primary" type="submit" data-lang='submit'></button>
+        
    </form>
+</div>
+</div>
+</div>
+<div class="row"></div>
+</div>
 
    
 {% endblock %}

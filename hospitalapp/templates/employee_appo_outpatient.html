@@ -76,14 +76,14 @@
                         {% else %}
                         <td align="center" data-lang="none"></td>
                         {% endif %}
-                         <td align="center"><a href="{{ url_for('employee_outpatient_finish', id=a.id) }}" data-lang="complete"></a>
+                         <td align="center"><a class="btn mb-1 btn-rounded btn-primary"  href="{{ url_for('employee_outpatient_finish', id=a.id) }}" data-lang="complete"></a>
                         </td>
                         <td align="center">
-                            <button  onclick="window.location.href='/employee_appo_outpatient/operation/{{a.id}}'"  data-lang="operation"></button>
+                            <button class="btn mb-1 btn-rounded btn-outline-primary" onclick="window.location.href='/employee_appo_outpatient/operation/{{a.id}}'"  data-lang="operation"></button>
 
                         </td>
                         <td align="center">
-                            <button  onclick="window.location.href='/employee_appo_outpatient/inpatient/{{a.id}}'"  data-lang="inpatient"></button>
+                            <button class="btn mb-1 btn-rounded btn-outline-primary" onclick="window.location.href='/employee_appo_outpatient/inpatient/{{a.id}}'"  data-lang="inpatient"></button>
 
                         </td>
 

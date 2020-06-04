@@ -3,6 +3,11 @@
     <title>Modify Appointment</title>
 {% endblock %}
 {% block content %}
+<div class="container-fluid">
+    <div class="row">
+       
+            <div class="card">
+                <div class="card-body">
 <span data-lang="appointmentid"></span>: {{appoint.id}}<br>
 <span data-lang="inpatientid"></span>: {{inpatient.id}}<br>
 <span data-lang="inpatientdoctor"></span>: {{doc.Dname}}<br>
@@ -11,8 +16,15 @@
 <span data-lang="inpatientroom"></span>: {{inpatient.Sroom}}<br>
 <span data-lang="inpatientcost"></span>: {{inpatient.Scost}}<br>
 <form action="/customer_my_appointments/inpatient/{{appoint.id}}" method="POST">
-    <input type="submit" value="Allow">
-</form>
+    <br><br>
 
+    <button class="btn btn-primary" type="submit" data-lang='allow'></button>
+    
+</form>
+</div>
+</div>
+</div>
+<div class="row"></div>
+</div>
 
 {% endblock %}

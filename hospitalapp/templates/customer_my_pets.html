@@ -38,25 +38,23 @@
                                                         {% endif %}
                                                         
                                                         
-                                                        {% if pet.Pspecies == '1' %}
+                                                        {% if pet.Pspecies == 'cat' %}
                                                         <td align="center" data-lang="cat"></td>
-                                                        {% elif pet.Pspecies == '2' %}
+                                                        {% elif pet.Pspecies == 'dog' %}
                                                         <td align="center" data-lang="dog"></td>
                                                         {% endif %}
 
                                                         
-                                                        {% if pet.Pinfo != None %}
+                                                        
                                                         <td align="center">{{pet.Pinfo}}</td>
                                                         
-                                                        {% else %}
-                                                        <td align="center" data-lang="none"></td>
-                                                        {% endif %}
+                                                        
 
                                                         <td align="center">
-                                                            <a href="{{ url_for('customer_edit_pet', id=pet.id) }}"><button  data-lang="edit"></button></a>
+                                                            <a class="btn mb-1 btn-rounded btn-outline-primary" href="{{ url_for('customer_edit_pet', id=pet.id) }} "data-lang="edit"></a>
                                                         </td>
                                                         <td align="center">
-                                                            <a href="{{ url_for('customer_delete_pet', id=pet.id) }}"><button data-lang="delete"></button>
+                                                            <a class="btn mb-1 btn-rounded btn-outline-primary" href="{{ url_for('customer_delete_pet', id=pet.id) }}" data-lang="delete">
                                                             </a>
                                                         </td>
                     

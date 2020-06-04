@@ -57,9 +57,9 @@
                                         <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" data-lang="chooseposition">: </label> <span class="text-danger">*</span>
                                         <div class="col-lg-6">
-                                    <input type="radio" value="Beijing" name="location"  checked='checked' >Beijing<br>
-                                    <input type="radio" value="Shanghai" name="location" >Shanghai<br>
-                                    <input type="radio" value="Chengdu" name="location" >Chengdu<br>
+                                    <input type="radio" value="Beijing" name="location"  checked='checked'><label data-lang="Beijing"></label><br>
+                                    <input type="radio" value="Shanghai" name="location" ><label data-lang="Shanghai"></label><br>
+                                    <input type="radio" value="Chengdu" name="location" ><label data-lang="Chengdu"></label><br>
                                     </div>
                                     </div>
                                     </p>
@@ -77,7 +77,7 @@
                                         <div class="col-lg-6">
                                         
                                         {% for d in doctors%}
-                                        <input type="radio" name="doctor" value="{{d.Dname}}">{{d.Dname}}<br>
+                                        <input type="radio" name="doctor" value="{{d.id}}">{{d.Dname}}<br>
                                         {% endfor %}
                                   </div></div>
 

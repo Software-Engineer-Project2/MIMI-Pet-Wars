@@ -1,7 +1,6 @@
-{% extends 'customer_loggedin_base.html' %}
+{% extends 'senior_loggedin_base.html' %}
 {% block content %}
 <h1>&nbsp</h1>
-
 {% with messages = get_flashed_messages() %}
             {% for message in messages %}
                 {% if message %}
@@ -14,7 +13,7 @@
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
- <form action='/customer_profile' method="POST">
+ <form action='/senior_profile' method="POST">
     <label data-lang="phone">Phone : </label>
     <input type="text" name="phone" value="{{customer.Cphone}}"><br>
        <label data-lang="gender"> Gender: </label><br>

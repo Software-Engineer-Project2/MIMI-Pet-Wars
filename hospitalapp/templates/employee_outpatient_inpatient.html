@@ -12,12 +12,17 @@
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
+        <div class="container-fluid">
+              <div class="row">
+                 
+                      <div class="card">
+                          <div class="card-body">
 <form action="/employee_appo_outpatient/inpatient/{{appoint.id}}" method="POST">
 {{ form.csrf_token }}
 {{ form.hidden_tag() }}
 <p>
        <div class="form-group">
-       {{ form.room.label }}<br>
+       <span data-lang="room>">{{ form.room.label }}</span><br> 
        <table>
               <tbody>
                      <tr>
@@ -52,9 +57,9 @@
 </p>
 
 
-      <p>
+      <p> 
          <div class="form-group">
-                {{ form.startdate.label }}<br>
+              <span data-lang="startdate>">{{ form.startdate.label }}</span><br>
                 <input name="startdate" type="date" />
               </div>
                 {% for error in form.startdate.errors %}
@@ -64,7 +69,7 @@
 
  <p>
          <div class="form-group">
-                {{ form.enddate.label }}<br>
+              <span data-lang="enddate>">{{ form.enddate.label }}</span><br>
                 <input name="enddate" type="date" />
               </div>
                 {% for error in form.enddate.errors %}
@@ -75,7 +80,7 @@
 
       <p>
          <div class="form-group">
-                {{ form.cost.label}}<br>
+              <span data-lang="cost>">{{ form.cost.label}}</span><br>
                 {{ form.cost }}
          </div>
                 {% for error in form.cost.errors %}
@@ -83,7 +88,17 @@
                 {% endfor %}
       </p>
 
+      <br><br>
+    {{ form.submit.label }}
+   
+<br>
 
-    {{ form.submit.label }}<br>{{ form.submit }}<br>
+<button class="btn btn-primary" type="submit" data-lang='informcustomer'></button>
+<br>
     </form>
+    </div>
+    </div>
+    </div>
+    <div class="row"></div>
+    </div>
 {% endblock %}

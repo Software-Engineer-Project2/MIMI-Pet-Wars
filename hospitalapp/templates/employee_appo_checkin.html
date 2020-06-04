@@ -42,11 +42,11 @@
                                           <td align="center">{{ea.Adate}}</td>
                                           <td align="center">{{ ea.Ainfo }}</td>
                                           <td align="center">
-                                              <button  onclick="window.location.href='/employee_appo_checkin/view_appo/{{ea.id}}'" >View</button>
+                                              <button class="btn mb-1 btn-rounded btn-outline-primary"  onclick="window.location.href='/employee_appo_checkin/view_appo/{{ea.id}}'" data-lang="view" ></button>
                   
                                           </td>
                                           <td align="center">
-                                              <a href="{{ url_for('employee_checkin', id=ea.id) }}" data-lang="check_in">
+                                              <a class="btn mb-1 btn-rounded btn-outline-primary" href="{{ url_for('employee_checkin', id=ea.id) }}" data-lang="check_in">
                                         </a>
                   
                                           </td>
@@ -107,11 +107,11 @@
                                        <td align="center">{{sa.Adate}}</td>
                                        <td align="center">{{ sa.Ainfo }}</td>
                                        <td align="center">
-                                           <button  onclick="window.location.href='/employee_appo_checkin/view_appo/{{sa.id}}'" >View</button>
+                                           <button class="btn mb-1 btn-rounded btn-outline-primary"  onclick="window.location.href='/employee_appo_checkin/view_appo/{{sa.id}}'" data-lang="view">View</button>
                
                                        </td>
                                        <td align="center">
-                                           <a href="{{ url_for('employee_checkin', id=sa.id) }}" data-lang="check_in"></a></td>
+                                           <a class="btn mb-1 btn-rounded btn-outline-primary" href="{{ url_for('employee_checkin', id=sa.id) }}" data-lang="check_in"></a></td>
 
                                        </form>
                                     </tr>
