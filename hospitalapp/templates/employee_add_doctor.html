@@ -17,7 +17,7 @@
     <input type="text" name="name"><br>
        <label data-lang="doctordepartment"> : </label>
    
-   <input type="radio" name="department" value="dermatology department" >dermatology department<br>
+   <input type="radio" name="department" value="dermatology department" checked = "checked">dermatology department<br>
    
    <input type="radio" name="department" value="internal medicine department" >internal medicine department<br>
    
@@ -34,9 +34,11 @@
      <label data-lang="doctorinformation">: </label>
      <input type="text" name="info"><br>
      <label data-lang="doctorhospital">: </label>
-     {% for hospital in hospitals %}
-     <input type="radio" name="hospital" value="{{hospital.id}}">{{hospital.Hname}}<br>
-     {% endfor %}
+          <input type="radio" name="hospital" value="2" checked="checked"><label data-lang="Beijing"></label><br>
+     <input type="radio" name="hospital" value="1" ><label data-lang="Shanghai"></label><br>
+
+     <input type="radio" name="hospital" value="3" ><label data-lang="Chengdu"></label><br>
+
 
   <input type="submit" value="Submit">
    </form>

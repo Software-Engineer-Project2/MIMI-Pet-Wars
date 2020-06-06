@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Healing Paw</title>
+    <title>Healing Paws</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -40,25 +40,26 @@
                     <div class="row align-items-center no-gutters">
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo-img">
-                                    <img src="../static/icons/startup/logo.png" alt="">
-                                
+                                <a href="{{ url_for('start') }}">
+                                    <img src="../static/still/img/logo.png" alt="">
+                                </a>
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-8">
                             <div class="main-menu  d-none d-lg-block text-center">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="/senior_login">Senior</a></li>
-                                        <li><a href="/loginEmployee">Employeee</a></li>
+                                        <li><a href="/senior_login" data-lang="forseniors"></a></li>
+                                        <li><a href="/loginEmployee" data-lang="foremployees"></a></li>
 
-                                        <li><a href="/loginCustomer">Customer</a></li>
+                                        <li><a href="/loginCustomer" data-lang="forcustomers"></a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                         <div class="col-lg-2 d-none d-lg-block">
                             <div class="log_chat_area d-flex align-items-end">
-                                <a href="{{ url_for('index') }}" data-scroll-nav="0" class="say_hi">Some help?</a>
+                                <a data-scroll-nav="0" class="say_hi" id="J_lang_switch" data-lang="change"></a>
                             </div>
                         </div>
                         <div class="col-12">
@@ -78,11 +79,13 @@
                 <div class="row align-items-center justify-content-start">
                     <div class="col-lg-10 col-md-10">
                         <div class="slider_text">
-                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">
-                                Exceptional veterinary services<br>
-                                Long-term health and well-being of your animal companion
+                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s" data-lang="s1">
+                               
                             </h3>
-                            <a class="boxed-btn3 wow fadeInLeft"  data-wow-duration="1s" data-wow-delay=".2s" href="{{ url_for('index') }}">Get started!</a>
+                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s" data-lang="s2">
+                               
+                            </h3>
+                            <a class="boxed-btn3 wow fadeInLeft"  data-wow-duration="1s" data-wow-delay=".3s" href="{{ url_for('index') }}" data-lang="getstarted"></a>
                         </div>
                     </div>
                 </div>
@@ -97,8 +100,61 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title text-center mb-70">
-                        <span class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s" >Services</span>
-                        <h3 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">We have hospitals in three districts</h3>
+                        <span class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s" data-lang="portals"></span>
+                        <h3 data-lang="p1" class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                            </h3>
+                            <h3 data-lang="p2" class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".3s">
+                            </h3>
+                            <h3 data-lang="p3" class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".4s">
+                            </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-4">
+                    <div class="single_service text-center wow fadeInLeft" data-wow-duration="1.2s" data-wow-delay=".4s">
+                        <div class="icon">
+                            <img src="../static/still/img/svg_icon/1.svg" alt="">
+                        </div>
+                        <h3 data-lang="forseniors"></h3>
+                        <p data-lang="t1"></p>
+                        <p data-lang="t2"></p>
+                        <p data-lang="t3"></p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <div class="single_service text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                        <div class="icon">
+                            <img src="../static/still/img/svg_icon/2.svg" alt="">
+                        </div>
+                        <h3 data-lang="forcustomers"></h3>
+                        <p data-lang="t4"></p>
+                        <p data-lang="t5"></p>
+                        <p data-lang="t6"></p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4">
+                    <div class="single_service text-center wow fadeInRight" data-wow-duration="1.2s" data-wow-delay=".4s">
+                        <div class="icon">
+                            <img src="../static/still/img/svg_icon/3.svg" alt="">
+                        </div>
+                        <h3 data-lang="foremployees"></h3>
+                        <p data-lang="t7"></p>
+                        <p data-lang="t8"></p>
+                        <p data-lang="t9"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="service_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb-70">
+                        <span class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s" data-lang="portals"></span>
+                        <h3 data-lang="p4" class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                            
                     </div>
                 </div>
             </div>
@@ -108,8 +164,7 @@
                         <div class="icon">
                             <img src="../static/icons/startup/Beijing.jpg" alt="">
                         </div>
-                        <h3>Beijing</h3>
-                        <p>Pet hospitals in Beijing focus on skin diseases</p>
+                        <h3 data-lang="Beijing"></h3>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-4">
@@ -117,8 +172,7 @@
                         <div class="icon">
                             <img src="../static/icons/startup/Shanghai.jpg" alt="">
                         </div>
-                        <h3>Shanghai</h3>
-                        <p>Hospitals in Shanghai focus on the department of endocrinology</p>
+                        <h3 data-lang="Shanghai"></h3>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-4">
@@ -126,8 +180,7 @@
                         <div class="icon">
                             <img src="../static/icons/startup/chengdu.jpg" alt="">
                         </div>
-                        <h3>Chengdu</h3>
-                        <p>Hospitals in chengdu focus on surgery</p>
+                        <h3 data-lang="Chengdu"></h3>
                     </div>
                 </div>
             </div>
@@ -141,12 +194,11 @@
                 <div class="col-lg-5 offset-lg-1">
                     <div class="about_info">
                         <div class="section_title white_text">
-                                                        <img src="../static/icons/startup/1.jpg" alt="">
-
-                            <span class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">About Us</span>
-                            <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">Multiple service </h3>
-                            <p class="mid_text wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">The main business covers pet health care, laboratory diagnosis, pet grooming and styling, pet commodity trade, pet supply chain, pet medical equipment, remote Internet diagnosis, medical information platform, pet continuing education, pet culture communication</p>
-                            <a href="#" class="boxed-btn3 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".7s">About Us</a>
+                            <span class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s" data-lang="aboutus"></span>
+                            <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s" data-lang="b1title"> </h3>
+                            <p class="mid_text wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" data-lang="b11"></p>
+                            <p class="last_text wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s" data-lang="b12"></p>
+                            
                         </div>
                     </div>
                 </div>
@@ -155,94 +207,25 @@
     </div>
 
     <!-- portfolio_image_area  -->
-    <div class="portfolio_image_area">
+    
+    <!--/ portfolio_image_area  -->
+
+    <div class="how_we_work_area">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section_title text-center mb-90">
-                        <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">The specific work</h3>
-                        <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
-The main business covers pet health care, laboratory diagnosis, pet grooming and styling, pet commodity trade, pet supply chain, pet medical equipment, remote Internet diagnosis, medical information platform, pet continuing education, pet culture communication</p>
-                    </div>
-                </div>
-            </div>
             <div class="row">
-                <div class="col-lg-8 col-md-12">
-                    <div class="single_Portfolio wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
-                        <div class="portfolio_thumb">
-                            <img src="../static/icons/startup/1.jpg" alt="">
+                <div class="col-lg-5">
+                    <div class="work_info">
+                        <div class="section_title">
+                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s" data-lang="b2title"></h3>
+                            <p class="mid_text wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s" data-lang="b21"></p>
+                            <p class="last_p wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s" data-lang="b22"></p>
                         </div>
-                        <div class="portfolio_hover">
-                            <div class="title">
-                                <span> pet health care</span>
-                                    <h3> pet health care</h3>
-                                    <a class="boxed-btn3" href="/">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_Portfolio wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
-                        <div class="portfolio_thumb">
-                            <img src="../static/icons/startup/2.jpg" alt="">
-                        </div>
-                        <div class="portfolio_hover">
-                            <div class="title">
-                                <span>laboratory diagnosis</span>
-                                    <h3>laboratory diagnosis</h3>
-                                    <a class="boxed-btn3" href="/">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-lg-4">
-                    <div class="single_Portfolio wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
-                        <div class="portfolio_thumb">
-                            <img src="../static/icons/startup/3.jpg" alt="">
-                        </div>
-                        <div class="portfolio_hover">
-                            <div class="title">
-                                <span> pet grooming and styling</span>
-                                    <h3> pet grooming and styling</h3>
-                                    <a class="boxed-btn3" href="/">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-lg-4">
-                    <div class="single_Portfolio wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-                        <div class="portfolio_thumb">
-                            <img src="../static/icons/startup/4.jpg" alt="">
-                        </div>
-                        <div class="portfolio_hover">
-                            <div class="title">
-                                <span>pet commodity trade</span>
-                                    <h3>pet commodity trade</h3>
-                                    <a class="boxed-btn3" href="/">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-lg-4">
-                    <div class="single_Portfolio wow fadeInUp" data-wow-duration="1s" data-wow-delay=".7s">
-                        <div class="portfolio_thumb">
-                            <img src="../static/icons/startup/5.jpg" alt="">
-                        </div>
-                        <div class="portfolio_hover">
-                            <div class="title">
-                                <span>pet commodity trade</span>
-                                    <h3>pet commodity tradepp</h3>
-                                    <a class="boxed-btn3" href="/">View</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--/ portfolio_image_area  -->
-
-
 
     <!-- team_member_start -->
     <div class="team_area ">
@@ -250,8 +233,7 @@ The main business covers pet health care, laboratory diagnosis, pet grooming and
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title text-center mb-90">
-                        <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">Our  Team</h3>
-                        <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">We have five professional doctors.</p>
+                        <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s" data-lang="ourteam"></h3>
                     </div>
                 </div>
             </div>
@@ -271,7 +253,7 @@ The main business covers pet health care, laboratory diagnosis, pet grooming and
                             </div>
                         </div>
                         <div class="team_title text-center">
-                            <h3>Yu Jie</h3>
+                            <h3 data-lang="yj"></h3>
                         </div>
                     </div>
                 </div>
@@ -290,7 +272,7 @@ The main business covers pet health care, laboratory diagnosis, pet grooming and
                             </div>
                         </div>
                         <div class="team_title text-center">
-                            <h3>Li hensheng</h3>
+                            <h3 data-lang="lzs"></h3>
                         </div>
                     </div>
                 </div>
@@ -309,7 +291,7 @@ The main business covers pet health care, laboratory diagnosis, pet grooming and
                             </div>
                         </div>
                         <div class="team_title text-center">
-                            <h3>Fu Tong</h3>
+                            <h3 data-lang="ft"></h3>
                         </div>
                     </div>
                 </div>
@@ -328,7 +310,7 @@ The main business covers pet health care, laboratory diagnosis, pet grooming and
                             </div>
                         </div>
                         <div class="team_title text-center">
-                            <h3>Long Shirui</h3>
+                            <h3 data-lang="lsr"></h3>
                         </div>
                     </div>
                 </div>
@@ -347,7 +329,7 @@ The main business covers pet health care, laboratory diagnosis, pet grooming and
                             </div>
                         </div>
                         <div class="team_title text-center">
-                            <h3>Zhang Mingkun</h3>
+                            <h3 data-lang="zmk"></h3>
                         </div>
                     </div>
                 </div>
@@ -356,119 +338,7 @@ The main business covers pet health care, laboratory diagnosis, pet grooming and
     </div>
     <!--/ team_member_end -->
 
-    <!-- testimonial_area  -->
-    <div class="testimonial_area ">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="testmonial_active owl-carousel">
-                        <div class="single_carousel">
-                                <div class="single_testmonial text-center">
-                                        <div class="quote">
-                                            <img src="../static/still/img/testmonial/quote.svg" alt="">
-                                        </div>
-                                        <p>Donec imperdiet congue orci consequat mattis. Donec rutrum porttitor <br> 
-                                                sollicitudin. Pellentesque id dolor tempor sapien feugiat ultrices nec sed neque.  <br>
-                                                Fusce ac mattis nulla. Morbi eget ornare dui. </p>
-                                        <div class="testmonial_author">
-                                            <div class="thumb">
-                                                    <img src="../static/icons/startup/1.jpg" alt="">
-                                            </div>
-                                            <h3>Robert Thomson</h3>
-                                            <span>Business Owner</span>
-                                        </div>
-                                    </div>
-                        </div>
-                        <div class="single_carousel">
-                                <div class="single_testmonial text-center">
-                                        <div class="quote">
-                                            <img src="../static/still/img/testmonial/quote.svg" alt="">
-                                        </div>
-                                        <p>Donec imperdiet congue orci consequat mattis. Donec rutrum porttitor <br> 
-                                                sollicitudin. Pellentesque id dolor tempor sapien feugiat ultrices nec sed neque.  <br>
-                                                Fusce ac mattis nulla. Morbi eget ornare dui. </p>
-                                        <div class="testmonial_author">
-                                            <div class="thumb">
-                            <img src="../static/icons/startup/1.jpg" alt="">
-                                            </div>
-                                            <h3>Robert Thomson</h3>
-                                            <span>Business Owner</span>
-                                        </div>
-                                    </div>
-                        </div>
-                        <div class="single_carousel">
-                                <div class="single_testmonial text-center">
-                                        <div class="quote">
-                                            <img src="../static/still/img/testmonial/quote.svg" alt="">
-                                        </div>
-                                        <p>Donec imperdiet congue orci consequat mattis. Donec rutrum porttitor <br> 
-                                                sollicitudin. Pellentesque id dolor tempor sapien feugiat ultrices nec sed neque.  <br>
-                                                Fusce ac mattis nulla. Morbi eget ornare dui. </p>
-                                        <div class="testmonial_author">
-                                            <div class="thumb">
-                            <img src="../static/icons/startup/1.jpg" alt="">
-                                            </div>
-                                            <h3>Robert Thomson</h3>
-                                            <span>Business Owner</span>
-                                        </div>
-                                    </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /testimonial_area  -->
-
-    <div data-scroll-index="0" class="get_in_tauch_area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section_title text-center mb-90">
-                        <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">Get in Touch</h3>
-                        <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">Tour function information without cross action media value quickly maximize timely deliverables.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="touch_form">
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
-                                        <input type="text" placeholder="Your Name" >
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
-                                        <input type="email" placeholder="Email" >
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
-                                        <input type="email" placeholder="Subject" >
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="single_input wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-                                       <textarea name="" id="" cols="30" placeholder="Message" rows="10"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="submit_btn wow fadeInUp" data-wow-duration="1s" data-wow-delay=".7s">
-                                        <button class="boxed-btn3" type="submit">Send Message</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+  
     <!-- footer start -->
     <footer class="footer">
         <div class="footer_top">
@@ -476,33 +346,13 @@ The main business covers pet health care, laboratory diagnosis, pet grooming and
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-md-3">
                         <div class="footer_logo wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">
-                            <a href="index.html">
-                                    <img src="../static/icons/startup/logo.png" alt="">
+                            <a href="{{ url_for('start') }}">
+                                <img src="../static/still/img/logo.png" alt="">
                             </a>
                         </div>
                     </div>
-                    <div class="col-xl-7 col-lg-7 col-md-9">
-                        <div class="menu_links">
-                            <ul>
-                                <li><a class="wow fadeInDown" data-wow-duration="1s" data-wow-delay=".2s" href="#">About</a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s"></li>
-                                <li><a class="wow fadeInDown" data-wow-duration="1s" data-wow-delay=".4s" href="#">Services</a></li>
-                                <li><a class="wow fadeInDown" data-wow-duration="1s" data-wow-delay=".6s" href="#">Senior</a></li>
-                                <li><a class="wow fadeInDown" data-wow-duration="1s" data-wow-delay=".8s" href="#">Customer</a></li>
-                                 <li><a class="wow fadeInDown" data-wow-duration="1s" data-wow-delay=".8s" href="#">Employee</a></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="socail_links">
-                            <ul>
-                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s" href="#"> <i class="fa fa-facebook"></i> </a></li>
-                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s" href="#"> <i class="fa fa-twitter"></i> </a></li>
-                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" href="#"> <i class="fa fa-instagram"></i> </a></li>
-                                <li><a class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s" href="#"> <i class="fa fa-google-plus"></i> </a></li>
-                            </ul>
-                        </div>
-                    </div>
+                   
+                   
                 </div>
             </div>
         </div>
@@ -513,7 +363,7 @@ The main business covers pet health care, laboratory diagnosis, pet grooming and
                     <div class="col-xl-12">
                         <p class="copy_right text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.3s">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved 
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
@@ -543,61 +393,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="../static/still/js/plugins.js"></script>
     <script src="../static/still/js/gijgo.min.js"></script>
 
-    <!--contact js-->
-    <script src="../static/still/js/contact.js"></script>
-    <script src="../static/still/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../static/still/js/jquery.form.js"></script>
-    <script src="../static/still/js/jquery.validate.min.js"></script>
-    <script src="../static/still/js/mail-script.js"></script>
-
     <script src="../static/still/js/main.js"></script>
 
-     <!-- I18N -->
-     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-     <script src="../static/js/jquery.i18n.properties-1.0.9.js"></script>
-     <script>
-     var language_pack = {
-         now_lang : 0, // 0:ch,1:en
-         loadProperties : function(new_lang){
-             var self = this;
-             var tmp_lang = '';
-             if(new_lang == 0){
-                 tmp_lang = 'zh';
-                 $('body').removeClass('en').addClass('zh');
-             }else{
-                 tmp_lang = 'en';
-                 $('body').removeClass('zh').addClass('en');
-             }
-             jQuery.i18n.properties({//加载资浏览器语言对应的资源文件
-                 name: 'strings', //资源文件名称
-                 path:'../static/i18n/', //资源文件路径
-                 language: tmp_lang,
-                 cache: false,
-                 mode:'map', //用Map的方式使用资源文件中的值
-                 callback: function() {//加载成功后设置显示内容
-                     for(var i in $.i18n.map){
-                         $('[data-lang="'+i+'"]').text($.i18n.map[i]);
-                     }
-                     // document.title = $.i18n.map['string_title'];
-                 }
-             });
-             self.now_lang = new_lang;
-         }
-     }
-     $(document).ready(function(){
-         language_pack.loadProperties(0);
-         
-         $('#J_lang_switch').click(function(){
-             var new_lang;
-             if(language_pack.now_lang == 0){
-                 new_lang = 1;
-             }else{
-                 new_lang = 0;
-             }
-             language_pack.loadProperties(new_lang);
-         });
-     });
-     </script>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.i18n.properties-1.0.9.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/i18.js') }}"></script>
+
 </body>
 
 </html>

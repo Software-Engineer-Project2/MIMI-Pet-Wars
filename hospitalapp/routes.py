@@ -44,7 +44,9 @@ def about():
     return render_template('about_us.html', title='about')
 
 
-
+@app.route('/about')
+def procedure():
+    return render_template('about_us.html', title='about')
 
 
 @app.route('/senior_login', methods=['GET', 'POST'])
@@ -800,19 +802,22 @@ def employee_doctors():
         flash("User needs to either login or signup first")
         return redirect(url_for('employee_mainpage'))
 
-@app.route('/employee_doctorss/delete_doctor/<id>', methods=['GET', 'POST'])
+@app.route('/employee_doctors/delete_doctor/<id>', methods=['GET', 'POST'])
 def employee_doctorss_delete(id):
     doctor = Doctor.query.get_or_404(id)
-    db.session.delete(doctor)
     appoints = Appointment.query.filter(Appointment.Adoc == id).all()
     operations = Operation.query.filter(Operation.Odoc == id).all()
     inpatients = Hospitalization.query.filter(Hospitalization.Sdoc==id).all()
-    for operation in operations:
-        db.session.delete(operation)
-    for inpatient in inpatients:
-        db.session.delete(inpatient)
-    for appoint in appoints:
-        db.session.delete(appoint)
+    if operations:
+        for operation in operations:
+            db.session.delete(operation)
+    if inpatients:
+        for inpatient in inpatients:
+            db.session.delete(inpatient)
+    if appoints:
+        for appoint in appoints:
+            db.session.delete(appoint)
+    db.session.delete(doctor)
     db.session.commit()
     return redirect(url_for('employee_doctors'))
 
