@@ -1,23 +1,51 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
 
-<h1 data-lang="orderdetail"></h1>
-<div data-lang="name"></div>
-<div>{{ order.Oname }}</div>
-<div data-lang="status"></div>
-<div>{{ order.Ostate }}</div>
-<div data-lang="price"></div>
-<div>{{ order.Oprice }}</div>
-<div data-lang="address"></div>
-<div>{{ order.Oaddress }}</div>
-<div data-lang="phonenumber"></div>
-<div>{{ order.Ophonenumber }}</div>
-<table style="width: 30%; margin-left: 400px; font-size: larger; color: teal; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+<div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-lg-12">
+		    <div class="card">
+			  <div class="card-body">
+				<div class="form-validation">
+
+<h1 class="card-title" data-lang="orderdetail"></h1>
+
+<div class="form-group row">
+<label class="col-lg-4 col-form-label" data-lang="name"></label>
+<div class="col-lg-6">{{ order.Oname }}</div>
+</div>
+<div class="form-group row">
+<label class="col-lg-4 col-form-label" data-lang="status"></label>
+<div class="col-lg-6">
+	{% if order.Ostate == 'not pay' %}
+		<span data-lang="notpaid"></span>
+		{% elif order.Ostate == 'paid' %}
+		<span data-lang="paid" ></span>
+		{% endif %}
+</div>
+</div>
+<div class="form-group row">
+<label class="col-lg-4 col-form-label" data-lang="price"></label>
+<div class="col-lg-6">{{ order.Oprice }}</div>
+</div>
+<div class="form-group row">
+<label class="col-lg-4 col-form-label" data-lang="address"></label>
+<div class="col-lg-6">{{ order.Oaddress }}</div>
+</div>
+<div class="form-group row">
+<label class="col-lg-4 col-form-label" data-lang="phonenumber"></label>
+<div class="col-lg-6">{{ order.Ophonenumber }}</div>
+</div>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
 	<tr>
 		<th data-lang="goodid"></th>
 		<th data-lang="number"></th>
 	</tr>
-	<br><br><br><br>
+</thead>
+<tbody>
 	{% for GORelation in relationships %}
 	<tr>
 		<td>
@@ -25,7 +53,17 @@
 		</td>
 		<td>{{ GORelation.number }}</td>
 	</tr>
-	{% endfor %}	
+	{% endfor %}
+</tbody>	
 </table>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
 
 {% endblock %}

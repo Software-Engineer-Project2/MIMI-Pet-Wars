@@ -12,24 +12,34 @@
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-<br><br><br><br><br><br><br>
-<button  onclick="window.location.href='/employee_doctorss/add_doctor'" data-lang="addadoctor"></button><br>
 
-    {% if doctors %}
-		<span data-lang="outpatientappointments">:</span><br><hr>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if doctors %}
+                            <h4 data-lang="doctors">:</h4><br><hr>
+                            <button class="btn btn-outline-primary" onclick="window.location.href='/employee_doctorss/add_doctor'" data-lang="addadoctor"></button><br>
 
-            <table class="table">
+                            
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered zero-configuration">
+                                    <thead>
+                                        <tr>
+                                            <th data-lang="doctoeid"></th>
+                                            <th data-lang="name"></th>
+                                            <th data-lang="phone"> </th>
+                                            <th data-lang="level"> </th>
+                                            <th data-lang="hospital"> </th>
+                                            <th data-lang="information"> </th>
+                                            <th data-lang="edit"></th>
+                                            <th data-lang="delete"></th>
+                                        </tr>
+                                    </thead>
+
                 <tbody>
-                <tr>
-                    <th data-lang="doctoeid"></th>
-                    <th data-lang="name"></th>
-                    <th data-lang="phone"> </th>
-                    <th data-lang="level"> </th>
-                    <th data-lang="hospital"> </th>
-                    <th data-lang="information"> </th>
-                    <th data-lang="edit"></th>
-                    <th data-lang="delete"></th>
-                </tr>
+               
                {% for d in doctors %}
                      <tr>
                         <td align="center">{{d.id}}</td>
@@ -42,18 +52,24 @@
                             {% endif %}
                         {% endfor %}
                         
-                         <td align="center">{{d.Dinf}}</td>>
-                         <td align="center"><button  onclick="window.location.href='/employee_doctorss/edit_doctor/{{d.id}}'" data-lang="edit"></button></td>
+                         <td align="center">{{d.Dinf}}</td>
+                         <td align="center"><button class="btn btn-primary" onclick="window.location.href='/employee_doctorss/edit_doctor/{{d.id}}'" data-lang="edit"></button></td>
 
-                         <td align="center"><button  onclick="window.location.href='/employee_doctors/delete_doctor/{{d.id}}'" data-lang="delete"></button></td>
+                         <td align="center"><button class="btn btn-primary" onclick="window.location.href='/employee_doctors/delete_doctor/{{d.id}}'" data-lang="delete"></button></td>
 
                      </tr>
                {% endfor %}
                 </tbody>
             </table>
+            </div>
     {% else %}
 		<p data-lang="nodoctors"></p>
 	{% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 {% endblock %}

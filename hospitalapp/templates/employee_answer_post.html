@@ -12,22 +12,33 @@
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <h3>{{post.title}}</h3>
 
-    <div>
-        {{post.content}}
-    </div>
-<form style="margin-left: 500px;" action="{{ url_for('employee_answer_post',id = id) }}" method="post" novalidate role="form" enctype="multipart/form-data">
+        <div class="container-fluid">
+            <!-- End Row -->
+       
+               
+                <div class="card">
+                          <div class="card-body">
+                            <div class="form-validation">
+<form  action="{{ url_for('employee_answer_post',id = id) }}" method="post" novalidate role="form" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
-    <div class="form-group">
-        {{ form.content.label  }}
+    
+        <span data-lang="content">{{ form.content.label  }}</span><br>
         {{ form.content }}
         {% for error in form.content.errors %}
         <span style="color: red;">{{ error }}</span>
         {% endfor %}
-    </div>
-    <div class="form-group">
-        {{ form.submit }}
-    </div>
+    
+    
+        <br><br>
+        <button class="btn btn-primary" type="submit" data-lang='submit'></button>
+        
+   
 </form>
+</div>
+</div>
+</div>
+
+</div>
+
 {% endblock %}

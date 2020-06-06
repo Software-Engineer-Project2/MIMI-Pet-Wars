@@ -1,9 +1,37 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
 
-<h1 data-lang="order"></h1>
 
-<a href="{{ url_for('notpayorders') }}" data-lang="notpayorders"></a><br>
-<a href="{{ url_for('paidorders') }}" data-lang="paidorders"></a>
+
+      <div class="container-fluid mt-3">
+            
+            <br><br>
+          <div class="row">
+              <div class="col-lg-3 col-sm-6">
+                  <div class="card gradient-1">
+                      <div class="card-body">
+                          <h3 class="card-title text-white" data-lang="notpayorders"></h3>
+                          <div class="d-inline-block">
+                              <h4 ><a class="btn mb-1 btn-light" class="text-white" data-lang="detail" href="{{ url_for('notpayorders') }}" ></a></h4>
+                              
+                          </div>
+                          <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                      </div>
+                  </div>
+              </div>
+<div class="col-lg-3 col-sm-6">
+      <div class="card gradient-2">
+          <div class="card-body">
+              <h3 class="card-title text-white" data-lang="paidorders"></h3>
+              <div class="d-inline-block">
+                     <h4 ><a class="btn mb-1 btn-light" class="text-white" data-lang="detail" href="{{ url_for('paidorders') }}" ></a></h4>
+                   </div>
+              <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
+          </div>
+      </div>
+  </div>
+  </div>
+  </div>
+  
 
 {% endblock %}

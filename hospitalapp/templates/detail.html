@@ -1,20 +1,38 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
+<div class="container-fluid">
 
-<h1 data-lang="detail"></h1>
-<img src="{{ url_for('static', filename= './img/photos/' + good.Gimage) }}" width="240" height="240">
-<div data-lang="name"></div>
-<div>{{ good.Gname }}</div>
-<div data-lang="information"></div>
-<div>{{ good.Ginfo }}</div>
-<div data-lang="price"></div>
-<div>{{ good.Gprice }}</div>
-<div data-lang="adddate"></div>
-<div>{{ good.Gadddate }}</div>
-<form method="post" enctype="multipart/form-data">
+	
+		    <div class="row">
+			  <div class="col-md-6 col-lg-3">
+				<div class="card">
+				    <img   src="{{ url_for('static', filename= './img/photos/' + good.Gimage) }}" alt="" width="240" height="240">
+				    <div class="card-body">
+					  
+
+					<h4 data-lang="name"></h4>
+					<div>{{ good.Gname }}</div><br>
+					<h4 data-lang="information"></h4>
+					<div>{{ good.Ginfo }}</div><br>
+					<h4 data-lang="price"></h4>
+					<div>{{ good.Gprice }}</div><br>
+					<h4 data-lang="adddate"></h4>
+					<div>{{ good.Gadddate }}</div>
+
+
+</div>
+<div class="card-footer">
+    
+    <form method="post" enctype="multipart/form-data">
 	{{ form.hidden_tag() }}
-	<p>{{ form.number }}</p><br>
-	{{ form.submit() }}
+	<p><span data-lang="number">&nbsp;&nbsp;</span>{{ form.number }}</p><br>
+	<button class="btn btn-primary" type="submit" data-lang='submit'></button>
 </form>
+</div>
+</div>
+</div>
+</div>
+
+</div>
 
 {% endblock %}

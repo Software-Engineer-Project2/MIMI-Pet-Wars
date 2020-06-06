@@ -1,18 +1,41 @@
 {% extends 'customer_loggedin_base.html' %}
 {% block content %}
 
-<h1 data-lang="pay"></h1>
-<form method="post" enctype="multipart/form-data">
-	{{ form.hidden_tag() }}
-	<p>
-		{{ form.cardnumber.label }}
-		{{ form.cardnumber }}
-	</p>
-	<p>
-		{{ form.password.label }}
-		{{ form.password }}
-	</p>
-	{{ form.submit }}
-</form>
+<div class="container-fluid">
+	<!-- End Row -->
+	<div class="row">
+	    <div class="col-12 m-b-30">
+		  
+		  <div class="row">
+			<div class="col-md-6 col-lg-3">
+			    <div class="card">
+				  <img class="img-fluid" src="{{ url_for( 'static', filename='images/card.png') }}" alt="">
+				  <div class="card-body">
+					<h5 class="card-title"  data-lang="pay"></h5>
+					<form method="post" enctype="multipart/form-data">
+						{{ form.hidden_tag() }}
+						<br>
+						<p>
+							<span data-lang="cardnumber">{{ form.cardnumber.label }}</span>
+							{{ form.cardnumber }}
+						</p>
+						<p>
+							<span data-lang="password">{{ form.password.label }}</span>
+							{{ form.password }}
+						</p>
+						<br>
+						
+						<button class="btn btn-primary" type="submit" data-lang='submit'></button>
+					</form>
+				  </div>
+			    </div>
+			</div>
+
+
+
+</div>
+</div>
+</div>
+</div>
 
 {% endblock %}

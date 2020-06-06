@@ -28,25 +28,15 @@ def start():
 def choose_language():
     return render_template('choose_language.html', title='Home')
 
+@app.route('/procedure')
+def procedure():
+    return render_template('portfolio_details.html') 
 
 @app.route('/index')
 def index():
     return render_template('index.html')
 
 
-@app.route('/index_chinese')
-def index_chinese():
-    return render_template('index_chinese.html', title='Home')
-
-
-@app.route('/about')
-def about():
-    return render_template('about_us.html', title='about')
-
-
-@app.route('/about')
-def procedure():
-    return render_template('about_us.html', title='about')
 
 
 @app.route('/senior_login', methods=['GET', 'POST'])
@@ -906,8 +896,8 @@ def customer_delete_post(id):
     if not session.get('USERNAME') is None:
         post = Post.query.get_or_404(id)
         answer = Answer.query.filter(Answer.Apost==post.id).first()
-    if answer:
-        db.session.delete(answer)
+        if answer:
+            db.session.delete(answer)
         db.session.delete(post)
         db.session.commit()
         return redirect(url_for('customer_posts'))
@@ -1551,3 +1541,12 @@ def is_number(s):
         pass
 
     return False
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('page-error-404.html'), 404
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('page-error-500.html'), 500

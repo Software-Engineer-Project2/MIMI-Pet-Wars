@@ -1,45 +1,50 @@
 {% extends 'employee_loggedin_base.html' %}
 {% block content %}
-<h1>&nbsp</h1>
-<h1>&nbsp</h1>
+<div class="container-fluid">
 
-    <h1 data-lang="editproduct">Editproduct</h1>
+	<div class="row justify-content-center" >
+	    <div class="col-lg-12"></div>
+		  <div class="card">
+			<div class="card-body" >
+			    <div class="form-validation">
     <form method="post" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
- 		<p>Please do not change ID</p>
  		<p>
- 			{{ form.Gid.label }}<br>
+			<span data-lang="goodid">{{ form.Gid.label }}</span><br>
  			{{ form.Gid }}
  		</p>
- 		{% for err in form.Gid.errors %}
-            <span style="color: red">[{{ err }}]</span>
-        {% endfor %}
  		<p>
- 			{{ form.Gname.label }}<br>
+			<span data-lang="goodname">{{ form.Gname.label }}</span><br>
  			{{ form.Gname }}
  		</p>
  		<p>
- 			{{ form.Ginfo.label }}<br>
+			<span data-lang="information">{{ form.Ginfo.label }}</span><br>
  			{{ form.Ginfo }}
  		</p>
  		<p>
- 			{{ form.photo.label }}<br>
+			<span data-lang="file">{{ form.photo.label }}</span><br>
  			{{ form.photo() }}
         	{% for error in form.photo.errors %}
             <span style="color: red;">{{ error }}</span>
         	{% endfor %}
  		</p>
  		<p>
- 			{{ form.Gprice.label }}<br>
+			<span data-lang="goodp">{{ form.Gprice.label }}</span><br>
  			{{ form.Gprice }}
  		</p>
         <p>
- 			{{ form.Gadddate.label }}<br>
+	<span data-lang="date">{{ form.Gadddate.label }}</span><br>
  			{{ form.Gadddate }}
  		</p>
-        {{ form.submit() }}
+		 <button class="btn btn-primary" type="submit" data-lang='submit'></button>
     </form>
     {% if img_url %}
         <img src="{{ img_url }}" />
     {% endif %}
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
 {% endblock %}
